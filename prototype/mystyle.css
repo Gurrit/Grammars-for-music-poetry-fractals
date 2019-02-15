@@ -57,3 +57,15 @@ form {
   font-size: 16px;
   margin: 4px 2px;
 }
+
+.iterations {
+  background-color: #868e89;
+  border: none;
+  color: white;
+  padding: 16px 2px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 6px;
+}
