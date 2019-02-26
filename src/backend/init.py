@@ -23,3 +23,8 @@ class init:
 
     def set_turtle(self, turtle):
         self._turtle = turtle
+        self.turtle_setup()
+
+
+    def turtle_setup(self):
+        pass
