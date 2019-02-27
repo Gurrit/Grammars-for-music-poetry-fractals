@@ -20,6 +20,7 @@ class Parser:
 
         for command in commands:
             # Command form: Forward 'f', right 'r:angle', left 'l:angle'
+            print(command)
             if command is "f":
                 self._turtle_map.get(command)(config.step)
             else:
