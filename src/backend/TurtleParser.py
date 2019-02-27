@@ -1,4 +1,5 @@
 from init import *
+from GFFileReader import *
 
 
 class TurtleParser:
@@ -7,11 +8,13 @@ class TurtleParser:
         self._turtle = turtle
         self._turtle_map = {}
 
-    def setup(self):
+    def parse(self):
         init.get_instance().set_turtle(self._turtle)
         self._turtle_map = init.get_instance().get_visualization_map()
 
-        # Read file
+        file_reader = GFFileReader()
+
+        commands = file_reader.read_gf_file()
 
         # Separate commands from each other
 

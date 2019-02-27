@@ -13,7 +13,10 @@ class init:
     def get_visualization_map(self):
         if self._turtle is None:
             raise ValueError("No Turtle given")
-        return {"f" : self._forward, "r" : self._right, "l" : self._left }
+        return {"f" : self._forward,
+                "r" : self._right,
+                "l" : self._left
+                }
 
     @staticmethod
     def get_instance():
@@ -25,6 +28,12 @@ class init:
         self._turtle = turtle
         self.turtle_setup()
 
-
     def turtle_setup(self):
-        pass
+        self._turtle.speed(0)
+        self._turtle.penup()
+        self._turtle.goto(0, 0)
+        self._turtle.pendown()
+        self._turtle.hideturtle()
+        self._turtle.color("red")
+        self._turtle.tracer(0, 0)
+
