@@ -1,3 +1,4 @@
+from config import *
 
 
 class init:
@@ -6,7 +7,7 @@ class init:
 
     def __init__(self):
         self._turtle = None
-        self._forward = lambda step : self._turtle.forward(step)
+        self._forward = lambda step : self._turtle.forward(config.step)
         self._right = lambda angle : self._turtle.right(angle)
         self._left = lambda angle : self._turtle.left(angle)
 
