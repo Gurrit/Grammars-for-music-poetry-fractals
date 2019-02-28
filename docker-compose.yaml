@@ -1,0 +1,12 @@
+version: "2"
+
+services: 
+  gf:
+    build:
+      context: .
+      dockerfile: gf.Dockerfile
+    ports:
+      - 4000:4000
+    volumes: 
+      - .:/app/gf
+
