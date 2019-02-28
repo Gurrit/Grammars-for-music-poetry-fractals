@@ -1,0 +1,22 @@
+version: "2"
+
+services: 
+  gf:
+    build:
+      context: ./src/backend
+      dockerfile: Dockerfile
+    ports:
+      - 8765:8765
+    volumes: 
+      - ./src/backend:/app/gf
+  frontend:
+    build:
+      context: ./src/frontend
+      dockerfile: Dockerfile
+    ports: 
+      - 80:80
+    volumes: 
+      - ./src/frontend:/usr/share/nginx/html
+
+      
+
