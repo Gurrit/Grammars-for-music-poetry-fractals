@@ -12,8 +12,8 @@ class Parser:
         self._turtle_map = {}
 
     def parse(self):
-        self.parse_for_turtle()
         self.parser_for_midi()
+        self.parse_for_turtle()
 
     def parser_for_midi(self):
         generator = MIDIGenerator()
