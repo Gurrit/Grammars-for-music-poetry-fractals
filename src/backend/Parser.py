@@ -4,7 +4,6 @@ from config import *
 from MIDIGenerator import *
 import turtle
 
-
 class Parser:
 
     def __init__(self, turtle):

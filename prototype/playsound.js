@@ -1,8 +1,11 @@
+export function value() {
+  return idList
+}
+var idList = [];
+
 window.addEventListener("keydown", function(e) {
   console.log("test");
 });
-
-var idList = [];
 
 function play(id) {
   console.log("Funkar att trycka iaf :" + id);
