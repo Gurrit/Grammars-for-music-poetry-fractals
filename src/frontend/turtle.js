@@ -18,7 +18,7 @@ function CreateTurtle(canvas) {
     self.penUp = function() { isPenDown = false;
     };
     self.penDown = function() {
-        isPenDown = true; 
+        isPenDown = true;
     };
     self.forward = function(pixels) {
         let origX = position.x, origY = position.y;

@@ -1,5 +1,4 @@
-from init import *
-
+from src.backend.init import init
 
 class TurtleParser:
 

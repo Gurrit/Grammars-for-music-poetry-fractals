@@ -1,6 +1,12 @@
-var draw = new CreateTurtle(document.querySelector('canvas'));
+const settings = {
+    url:"ws://localhost:8765"
+};
 
-draw.penStyle = 'purple';
-draw.forward(50);
-draw.right(50);
-draw.forward(50);
+function connectToServer() {
+    let url = settings.url;
+    console.log(url);
+    let socket = new WebSocket(url);
+    socket.send("please connect me :)");
+}
+
+connectToServer(settings.url);
