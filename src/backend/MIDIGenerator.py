@@ -49,8 +49,8 @@ class MIDIGenerator:
                 self.track = self.track + 1
                 self.MyMIDI.addTempo(self.track, self.time, self.tempo)
             self.duration = math.pow(2, random.randint(-2, 2))  # Randomise notelength
-            #self.to_minor_harmonic()
-            self.to_major()
+            self.to_minor_harmonic()
+            #self.to_major()
             #self.to_minor()
             self.MyMIDI.addNote(self.track, self.channel, self.pitch, self.time, self.duration, self.volume)
             self.time = self.time + self.duration
