@@ -1,7 +1,3 @@
-// tiny-tiny-draw.js/ 2013-10-11
-// Public Domain.
-// For more information, see http://github.com/toolness/tiny-turtle.
-
 function CreateTurtle(canvas) {
     let self = this;
     let rotation = 90;
@@ -39,14 +35,14 @@ function CreateTurtle(canvas) {
         context.lineTo(position.x, position.y);
         context.stroke();
     };
-    self.left = self.lt = function(deg) {
+    self.left = function(deg) {
         rotate(deg);
     };
-    self.right = self.rt = function(deg) {
+    self.right = function(deg) {
         rotate(-deg);
     };
     self.goto = function (position) {
 
-    }
+    };
     return self;
 }
