@@ -14,7 +14,7 @@ class MIDIGenerator:
         self.volume = 100  # 0-127, as per the MIDI standard
         self.key = 0  # c=0, c#=1, d=2 etc.
         self.pitch = 60 + self.key
-        self.MyMIDI = MIDIFile(20)  # 20 tracks are allowed
+        self.MyMIDI = MIDIFile(80)  # 20 tracks are allowed
         self.MyMIDI.addTempo(self.track, self.time, self.tempo)
         self.direction = 0
 
@@ -26,7 +26,6 @@ class MIDIGenerator:
     def add_to_track(self, command):
 
         command_split = command.split(":")
-
 
         if command == "f":
             if self.direction == 1:  # Raise the pitch
