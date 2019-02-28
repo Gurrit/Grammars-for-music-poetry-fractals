@@ -1,12 +1,17 @@
 const settings = {
-    url:"ws://localhost:8765"
+    url:"ws://localhost:8765/",
+    socket: null
 };
 
 function connectToServer() {
     let url = settings.url;
-    console.log(url);
-    let socket = new WebSocket(url);
-    socket.send("please connect me :)");
+    var socket = new WebSocket(url);
+    console.log("Connected to server at " + url);
+    return socket;
 }
 
-connectToServer(settings.url);
+function sendMessage(message) {
+    settings.socket.send("hello");
+}
+
+settings.socket = connectToServer();
