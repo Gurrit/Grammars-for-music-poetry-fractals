@@ -1,14 +1,20 @@
 <!DOCTYPE html>
-<meta charset="utf-8">
-<title>Grammatical Fractal</title>
-<link href="lab.css" rel="stylesheet">
-<h1>Mr. Fractal</h1>
-<script id="sample" type="javascript/sample-code"></script>
-<div id="turtle">
-    <canvas id="canvas" width="1000" height="1000"></canvas> <!-- This should be taking screen size into account.-->
-</div>
-<div>
-    <button id="send command" onclick="sendMessage()" title="click me"></button>
-</div>
-<script src="turtle.js"></script>
-<script src="draw.js"></script>
+<head>
+    <meta charset="utf-8">
+    <title>Grammatical Fractal</title>
+    <link href="styles.css" rel="stylesheet">
+</head>
+<body>
+    <h1>Mr. Fractal</h1>
+    <script id="sample" type="javascript/sample-code"></script>
+    <div style="text-align: center">
+        <div>
+            <button id="send command" onclick="sendMessage()" title="click me">
+                Click to draw
+            </button>
+        </div>
+        <canvas id="canvas" width="1000" height="1000"></canvas> <!-- This should be taking screen size into account.-->
+    </div>
+    <script src="turtle.js"></script>
+    <script src="draw.js"></script>
+</body>
