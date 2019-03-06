@@ -15,6 +15,7 @@ class MIDIGenerator:
         self.key = 0  # c=0, c#=1, d=2 etc.
         self.reference = 72 + self.key
         self.pitch = self.reference
+        self.intervalAngle = 0 # Used to determine how much the note will change
         self.MyMIDI = MIDIFile(80)  # 20 tracks are allowed
         self.MyMIDI.addTempo(self.track, self.time, self.tempo)
 
@@ -49,12 +50,15 @@ class MIDIGenerator:
                 self.track = self.track + 1
                 self.MyMIDI.addTempo(self.track, self.time, self.tempo)
             self.duration = math.pow(2, random.randint(-2, 2))  # Randomise notelength
-            self.to_minor_harmonic()
+            self.pitch = self.pitch + self.intervalAngle/30 # 30 degrees = 1 semitone
+            # Make the note fit into the selected scale, uncomment to choose
+            #self.to_minor_harmonic()
             #self.to_major()
-            #self.to_minor()
+            self.to_minor()
+            # Add the note
             self.MyMIDI.addNote(self.track, self.channel, self.pitch, self.time, self.duration, self.volume)
-            self.time = self.time + self.duration
+            self.time = self.time + self.duration # Move position in the track to the end of the note just added
         elif command_split[0] == "r":
-            self.pitch = (self.pitch - int(command_split[1])/30)
+            self.intervalAngle = (self.intervalAngle - int(command_split[1]))
         elif command_split[0] == "l":
-            self.pitch = (self.pitch + int(command_split[1])/30)
+            self.intervalAngle = (self.intervalAngle + int(command_split[1]))
