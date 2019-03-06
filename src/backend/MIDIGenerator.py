@@ -58,6 +58,7 @@ class MIDIGenerator:
             # Add the note
             self.MyMIDI.addNote(self.track, self.channel, self.pitch, self.time, self.duration, self.volume)
             self.time = self.time + self.duration # Move position in the track to the end of the note just added
+            self.intervalAngle = 0
         elif command_split[0] == "r":
             self.intervalAngle = (self.intervalAngle - int(command_split[1]))
         elif command_split[0] == "l":
