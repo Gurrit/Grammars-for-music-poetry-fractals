@@ -7,7 +7,7 @@ import turtle
 class Parser:
 
     def __init__(self, turtle):
-        self._turtle = turtle
+        #self._turtle = turtle
         self._turtle_map = {}
 
     def parse(self):
@@ -43,6 +43,23 @@ class Parser:
 
         turtle.done()
 
+#parser = Parser(turtle.Turtle())
+#parser.parse()
 
-parser = Parser(turtle.Turtle())
-parser.parse()
+
+def parse_for_web():
+    init.get_instance()
+    turtle_map = init.get_instance().get_web_map()
+
+    file_reader = GFFileReader()
+    commands = file_reader.read_gf_file()
+    web_commands = []
+    for command in commands:
+        # Command form: Forward 'f', right 'r:angle', left 'l:angle'
+        if command is "f":
+            web_commands.append(turtle_map.get(command)(config.step))
+        else:
+            command_split = command.split(":")
+            angle = command_split[1]
+            web_commands.append(turtle_map.get(command_split[0])(int(angle)))
+    return web_commands
