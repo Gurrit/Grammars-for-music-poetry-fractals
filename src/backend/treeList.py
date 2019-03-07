@@ -5,7 +5,7 @@ class TreeList:
         self.__depth = 0
 
     def add_new_iteration(self):
-        layer = TreeListInternal()
+        layer = Layer()
         self.__treeLists.append(layer)
         self.__depth += 1
         return layer
@@ -18,8 +18,14 @@ class TreeList:
     def get_depth(self):
         return self.__depth
 
+    def remove_structure(self):
+        for list in self.__treeLists:
+            list.remove_all_nodes()
+        self.__treeLists = []
+        self.__depth = 0
 
-class TreeListInternal:
+
+class Layer:
 
     def __init__(self):
         self.__nodes = []  # Better name?
@@ -29,6 +35,17 @@ class TreeListInternal:
 
     def get_nodes(self):
         return self.__nodes
+
+    def remove_all_nodes(self):
+        for n in self.__nodes:
+            self.remove_node(n)
+        self.__nodes = []
+
+    def remove_node(self, node):
+        list.remove(self.__nodes, node)
+        node.remove_parrent()
+        node.remove_all_children()
+
 
 
 class Node:
@@ -51,4 +68,16 @@ class Node:
 
     def get_children(self):
         return self.__children
+
+    def remove_parent(self):
+        self.__parent.remove_child(self)
+        self.__parent = None
+
+    def remove_child(self, child):
+        self.__children.remove(child)
+
+    def remove_all_children(self):
+        for child in self.__children:
+            child.remove_parrent()
+        self.__children = []
 
