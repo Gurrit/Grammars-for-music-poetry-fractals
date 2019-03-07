@@ -4,11 +4,11 @@ class TreeList:
         self.treeLists = []
         self.depth = 0
 
-    def add_new_iteration(self):
-        layer = Layer()
-        self.treeLists.append(layer)
-        self.depth += 1
-        return layer
+    def add_new_iteration(self, amount=1):
+        for i in range(amount):
+            layer = Layer()
+            self.treeLists.append(layer)
+            self.depth += 1
 
     def get_layer(self, layer):
         if layer > self.depth:

@@ -3,6 +3,7 @@ from GFFileReader import *
 from config import *
 from MIDIGenerator import *
 from treeList import *
+from lineSegment import *
 import turtle
 
 class Parser:
@@ -10,6 +11,8 @@ class Parser:
     def __init__(self, turtle):
         #self._turtle = turtle
         self._turtle_map = {}
+        self.tree = TreeList()
+        self.angle = 0
 
     def parse(self):
         self.parser_for_midi()
@@ -43,6 +46,24 @@ class Parser:
                 self._turtle_map.get(command_split[0])(int(angle))
 
         turtle.done()
+
+    def fill_tree(self):
+
+        file_reader = GFFileReader()
+        filler = treeFiller()
+        commands = file_reader.read_gf_file()
+
+        for command in commands:
+            if command is "f":
+            
+
+            if "ang" is in command:
+                self.angle = command.split(":")[1]
+
+            
+
+
+
 
 #parser = Parser(turtle.Turtle())
 #parser.parse()
