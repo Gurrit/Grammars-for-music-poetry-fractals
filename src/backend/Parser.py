@@ -2,6 +2,7 @@ from init import *
 from GFFileReader import *
 from config import *
 from MIDIGenerator import *
+from treeList import *
 import turtle
 
 class Parser:
