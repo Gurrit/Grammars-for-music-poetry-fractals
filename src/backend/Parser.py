@@ -4,7 +4,9 @@ from config import *
 from MIDIGenerator import *
 from treeList import *
 from lineSegment import *
+from treeFiller import *
 import turtle
+import HiddenTurtle
 
 class Parser:
 
@@ -48,17 +50,24 @@ class Parser:
         turtle.done()
 
     def fill_tree(self):
-
+        turtle = HiddenTurtle()
         file_reader = GFFileReader()
         filler = treeFiller()
         commands = file_reader.read_gf_file()
-
+        distance = config.step
+        childs = []
         for command in commands:
-            if command is "f":
-            
 
-            if "ang" is in command:
+            if "ang" in command:
                 self.angle = command.split(":")[1]
+            if "(N" in command:
+                filler.coordinate_stack.append(turtle.coordinate)
+
+            if "F" in command:
+                turtle.forward(distance)
+                filler.objectStack.append(Node(lineSegment(turtle.coordinate, filler.coordinate_stack.pop()), None))
+                continue
+            if ")"
 
             
 

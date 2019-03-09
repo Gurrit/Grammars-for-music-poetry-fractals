@@ -45,13 +45,14 @@ class Layer:
 
 class Node:
 
-    def __init__(self, value, parent):
+    def __init__(self, value, children=None):
+        if children is None:
+            children = []
         self.value = value
-        self.parent = parent
-        self.children = []
-        if parent is not None:
-            parent.add_child(self)
-
+        self.parent = None
+        self.children = children
+        for child in children:
+            child.add_parent(self)
 
     def add_child(self, child):
         self.children.append(child)
@@ -59,6 +60,9 @@ class Node:
     def remove_parent(self):
         self.parent.remove_child(self)
         self.parent = None
+
+    def add_parent(self, parent):
+        self.parent = parent
 
     def remove_child(self, child):
         self.children.remove(child)

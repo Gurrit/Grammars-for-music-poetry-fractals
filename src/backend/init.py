@@ -27,8 +27,8 @@ class init:
                 }
 
     def get_filler_map(self):
-        return {"(S" : self._filler_layer
-                "(N" : self._filler_append
+        return {"(S" : self._filler_layer,
+                "(N" : self._filler_append,
                 "F)" : self._filler_pop
                 }
 
