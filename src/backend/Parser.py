@@ -6,19 +6,17 @@ from treeList import *
 from lineSegment import *
 from treeFiller import *
 import turtle
-import HiddenTurtle
-
+from HiddenTurtle import *
 class Parser:
 
-    def __init__(self, turtle):
-        #self._turtle = turtle
+    def __init__(self):
         self._turtle_map = {}
         self.tree = TreeList()
         self.angle = 0
 
     def parse(self):
         self.parser_for_midi()
-        self.parse_for_turtle()
+#        self.parse_for_turtle()
 
     def parser_for_midi(self):
         generator = MIDIGenerator()
@@ -31,47 +29,54 @@ class Parser:
 
         generator.create_midi_file()
 
-    def parse_for_turtle(self):
-        init.get_instance().set_turtle(self._turtle)
-        self._turtle_map = init.get_instance().get_visualization_map()
+#    def parse_for_turtle(self):
+#        init.get_instance().set_turtle(self._turtle)
+#        self._turtle_map = init.get_instance().get_visualization_map()
 
-        file_reader = GFFileReader()
-        commands = file_reader.read_gf_file()
+#        file_reader = GFFileReader()
+#        commands = file_reader.read_gf_file()
 
-        for command in commands:
+#        for command in commands:
             # Command form: Forward 'f', right 'r:angle', left 'l:angle'
-            if command is "f":
-                self._turtle_map.get(command)(config.step)
-            else:
-                command_split = command.split(":")
-                angle = command_split[1]
-                self._turtle_map.get(command_split[0])(int(angle))
+#            if command is "f":
+#                self._turtle_map.get(command)(config.step)
+#            else:
+#                command_split = command.split(":")
+#                angle = command_split[1]
+#                self._turtle_map.get(command_split[0])(int(angle))
 
-        turtle.done()
+#        turtle.done()
 
     def fill_tree(self):
         turtle = HiddenTurtle()
         file_reader = GFFileReader()
-        filler = treeFiller()
         commands = file_reader.read_gf_file()
+        filler = treeFiller()
+        while "(N" not in commands:
+            if "ang" in commands[0]:
+                self.angle = commands[0].split(":")[1]
+        self.generate_nodes(commands, turtle, filler, commands[0].split(":")[1])
+
+    def generate_nodes(self, commands, turtle, filler, iteration):
+        nodes = []
+        map = init.get_instance().get_filler_map()
         distance = config.step
-        childs = []
-        for command in commands:
-
-            if "ang" in command:
-                self.angle = command.split(":")[1]
-            if "(N" in command:
-                filler.coordinate_stack.append(turtle.coordinate)
-
-            if "F" in command:
+        while ")" not in commands[0]:       # This should be reversed, and taken from the end of the list, for likely
+            # performance reasons
+            if "F" in commands[0]:
                 turtle.forward(distance)
-                filler.objectStack.append(Node(lineSegment(turtle.coordinate, filler.coordinate_stack.pop()), None))
-                continue
-            if ")"
+                nodes.append(Node(lineSegment(turtle.coordinate, filler.coordinate_stack.pop()), None))
+            elif "r" in commands[0]:
+                turtle.right(self.angle)
+            elif "l" in commands[0]:
+                turtle.left(self.angle)
+            elif "(N" in commands[0]:
+                iteration = commands.split(":", 1)[1]
+                (remaining, layer_below) = self.generate_nodes(commands, turtle, filler, iteration)
+                commands = remaining
 
-            
-
-
+            commands = commands.pop(0)
+        return commands, nodes
 
 
 #parser = Parser(turtle.Turtle())
