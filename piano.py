@@ -75,7 +75,7 @@ def interprete_notes(noteArray):
             colorArray.append("#FF007F") #magenta
 
 def go_turtle(grammarArrayen):
-    print("doing the turtle")
+    #print("doing the turtle")
  
     brad = turtle.Turtle()
     brad.hideturtle()
@@ -97,10 +97,13 @@ def go_turtle(grammarArrayen):
     rightAngleIndex = 0
     leftAngleIndex = 0
 
+    brad.fill(True)
     for i in range(0, len(gf_commands), 1):
         if i%colorSteps==0:
+            brad.fill(False)
             brad.color(colorArray[colorIndex])
             colorIndex += 1
+            brad.fill(True)
         if i%rightAngleSteps==0:
             rightAngle = rightAngleArray[rightAngleIndex]
             rightAngleIndex += 1
@@ -116,6 +119,8 @@ def go_turtle(grammarArrayen):
             brad.right(rightAngle)
         elif gf_commands[i] == "l":
             brad.left(leftAngle)
+
+    brad.fill(False)     
  
     turtle.done()
  
