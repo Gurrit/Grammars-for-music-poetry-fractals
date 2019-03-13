@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<meta charset="utf-8" />
+<head>
+  <link href="style.css" rel="stylesheet" />
+  <link
+    rel="stylesheet"
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"
+  />
+</head>
+
+<script src="coord.js"></script>
+<script src="turtle.js"></script>
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="index.html">Grammar for music and poetry</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="page1.html">Translate fractals</a></li>
+      <li><a href="page2.html">Experimental</a></li>
+      <li><a href="info.html">Info</a></li>
+    </ul>
+  </div>
+</nav>
+
+<body>
+  <h1>Choose a fractal</h1>
+  <div class="row">
+    <div class="column">
+      <select id="select1">
+        <option value="serpiensky">Serpinsky Triangle</option>
+        <option value="koch">Koch Snowflake</option>
+        <option value="koch_square">Square Koch Curve</option>
+        <option value="dragon">Dragon Curve</option>
+      </select>
+    </div>
+    <div class="column">
+      <select id="select2">
+        <option value="serpiensky">Serpinsky Triangle</option>
+        <option value="koch">Koch Snowflake</option>
+        <option value="koch_square">Square Koch Curve</option>
+        <option value="dragon">Dragon Curve</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column">
+      <canvas
+        class="canvasStyle"
+        id="canvas1"
+        onclick="getCursorPosition(canvas1, event)"
+      ></canvas>
+    </div>
+    <div class="column">
+      <canvas
+        class="canvasStyle"
+        id="canvas2"
+        onclick="getCursorPosition(canvas2, event)"
+      ></canvas>
+    </div>
+  </div>
+  <button type="button" id="send command" onclick="drawTurtle()">
+    Get next command
+  </button>
+</body>

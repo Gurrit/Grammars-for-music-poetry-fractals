@@ -1,20 +1,42 @@
 <!DOCTYPE html>
+<meta charset="utf-8" />
+<title>Grammar for music and poetry</title>
 <head>
-    <meta charset="utf-8">
-    <title>Grammatical Fractal</title>
-    <link href="styles.css" rel="stylesheet">
+  <link href="style.css" rel="stylesheet" />
+  <link
+    rel="stylesheet"
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"
+  />
 </head>
 <body>
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="index.html"
+          >Grammar for music and poetry</a
+        >
+      </div>
+      <ul class="nav navbar-nav">
+        <li><a href="page1.html">Translate fractals</a></li>
+        <li><a href="page2.html">Experimental</a></li>
+        <li><a href="info.html">Info</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="centerdiv">
     <h1>Mr. Fractal</h1>
     <script id="sample" type="javascript/sample-code"></script>
-    <div style="text-align: center">
-        <div>
-            <button id="send command" onclick="sendMessage()" title="click me">
-                Click to draw
-            </button>
-        </div>
-        <canvas id="canvas" width="1000" height="1000"></canvas> <!-- This should be taking screen size into account.-->
+    <div id="turtle">
+      <canvas id="canvas" width="1000" height="1000"></canvas>
+      <!-- This should be taking screen size into account.-->
     </div>
-    <script src="turtle.js"></script>
-    <script src="draw.js"></script>
+    <div>
+      <button type="button" id="send command" onclick="sendMessage()">
+        Get next command
+      </button>
+    </div>
+  </div>
 </body>
+<script src="turtle.js"></script>
+<script src="draw.js"></script>
