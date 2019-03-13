@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e07a29c2-1875-425d-a781-4bcf0b5c0c43" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/prototype/Works_Real.html" beforeDir="false" afterPath="$PROJECT_DIR$/prototype/Works_Real.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/piano.py" beforeDir="false" afterPath="$PROJECT_DIR$/piano.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -12,24 +13,16 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/Grammars_for_music_poetry_fractals$Parser.coverage" NAME="Parser Coverage Results" MODIFIED="1551359815592" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src/backend" />
-    <SUITE FILE_PATH="coverage/Grammars_for_music_poetry_fractals$PianoTest.coverage" NAME="PianoTest Coverage Results" MODIFIED="1552055053593" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/prototype" />
+    <SUITE FILE_PATH="coverage/Grammars_for_music_poetry_fractals$piano.coverage" NAME="piano Coverage Results" MODIFIED="1552488812904" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Grammars_for_music_poetry_fractals$PianoTest.coverage" NAME="PianoTest Coverage Results" MODIFIED="1552482347292" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/prototype" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/prototype/Works_Real.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="401" column="19" lean-forward="true" selection-start-line="282" selection-start-column="4" selection-end-line="401" selection-end-column="19" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/prototype/PianoTest.py">
+        <entry file="file://$PROJECT_DIR$/piano.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="106">
-              <caret line="51" column="34" selection-start-line="51" selection-start-column="34" selection-end-line="51" selection-end-column="34" />
+            <state relative-caret-position="230">
+              <caret line="120" column="20" lean-forward="true" selection-start-line="120" selection-start-column="20" selection-end-line="120" selection-end-column="20" />
             </state>
           </provider>
         </entry>
@@ -63,6 +56,7 @@
         <option value="$PROJECT_DIR$/src/backend/Parser.py" />
         <option value="$PROJECT_DIR$/prototype/Works_Real.html" />
         <option value="$PROJECT_DIR$/prototype/PianoTest.py" />
+        <option value="$PROJECT_DIR$/piano.py" />
       </list>
     </option>
   </component>
@@ -83,22 +77,6 @@
             <path>
               <item name="Grammars-for-music-poetry-fractals" type="b2602c69:ProjectViewProjectNode" />
               <item name="Grammars-for-music-poetry-fractals" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Grammars-for-music-poetry-fractals" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Grammars-for-music-poetry-fractals" type="462c0819:PsiDirectoryNode" />
-              <item name="prototype" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Grammars-for-music-poetry-fractals" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Grammars-for-music-poetry-fractals" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Grammars-for-music-poetry-fractals" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Grammars-for-music-poetry-fractals" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="backend" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -125,7 +103,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.PianoTest">
+  <component name="RunManager" selected="Python.piano">
     <configuration name="Parser" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Grammars-for-music-poetry-fractals" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -170,8 +148,31 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="piano" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="Grammars-for-music-poetry-fractals" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/piano.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.piano" />
         <item itemvalue="Python.PianoTest" />
         <item itemvalue="Python.Parser" />
       </list>
@@ -196,23 +197,25 @@
       <workItem from="1551356869573" duration="1683000" />
       <workItem from="1551866906767" duration="637000" />
       <workItem from="1551972897247" duration="748000" />
-      <workItem from="1552047445392" duration="3355000" />
+      <workItem from="1552047445392" duration="3658000" />
+      <workItem from="1552383216374" duration="635000" />
+      <workItem from="1552481079270" duration="5258000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="23772000" />
+    <option name="totallyTimeSpent" value="29968000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.28255033" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16040269" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3286119" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.17705382" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -247,15 +250,22 @@
     <entry file="file://$PROJECT_DIR$/src/backend/turtle.mid" />
     <entry file="file://$PROJECT_DIR$/prototype/Works_Real.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="401" column="19" lean-forward="true" selection-start-line="282" selection-start-column="4" selection-end-line="401" selection-end-column="19" />
+        <state>
+          <caret line="401" column="19" selection-start-line="282" selection-start-column="4" selection-end-line="401" selection-end-column="19" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/prototype/PianoTest.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="106">
-          <caret line="51" column="34" selection-start-line="51" selection-start-column="34" selection-end-line="51" selection-end-column="34" />
+        <state relative-caret-position="221">
+          <caret line="25" column="21" lean-forward="true" selection-start-line="25" selection-start-column="21" selection-end-line="25" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/piano.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="230">
+          <caret line="120" column="20" lean-forward="true" selection-start-line="120" selection-start-column="20" selection-end-line="120" selection-end-column="20" />
         </state>
       </provider>
     </entry>
