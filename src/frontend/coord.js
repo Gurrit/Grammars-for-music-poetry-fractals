@@ -5,6 +5,13 @@ function getCursorPosition(canvas, event) {
   console.log("x: " + x + " y: " + y);
 }
 
+function getOption(dropdown) {
+  var e = document.getElementById(dropdown);
+  var selected = e.options[e.selectedIndex].text;
+
+  return selected;
+}
+
 function setCanvasSize() {
   drawCanvas1 = document.getElementById("canvas1");
   drawCanvas1.width = 500;
@@ -16,14 +23,24 @@ function setCanvasSize() {
 }
 
 function drawTurtle() {
-  drawCanvas = document.getElementById("canvas1");
+  var option1 = getOption("select1");
+  var option2 = getOption("select2");
 
-  let turtle = new CreateTurtle(drawCanvas);
+  if (option1 != "None") {
+    console.log("kommer vi hit?" + option1.toString());
+    drawCanvas = document.getElementById("canvas1");
+    fractal = option1;
+    let turtle = new CreateTurtle(drawCanvas);
 
-  console.log("Before X,Y" + turtle.position().toString());
-  turtle.forward(50);
-  console.log("After X,Y" + turtle.position().toString());
-  canvas = turtle.canvas();
+    console.log("Before X,Y" + turtle.position().toString());
+    turtle.forward(50);
+    console.log("After X,Y" + turtle.position().toString());
+    canvas = turtle.canvas();
 
-  console.log(canvas.width.toString());
+    console.log(canvas.width.toString());
+  }
+
+  if (option2 != "None") {
+    //Translate from option1 to option2 via server and draw the desired fractal here
+  }
 }
