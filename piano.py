@@ -50,7 +50,7 @@ def interprete_notes(noteArray):
         elif (note == "b"):
             colorArray.append("#00FF80") #turqouise
         if (note == "highc"):
-            rightAngleArray.append(rightAngle + 29)
+            rightAngleArray.append(rightAngle + 2)
         elif (note == "highc#"):
             colorArray.append("#00FFFF") #baby blue
         elif (note == "highd"):
@@ -58,11 +58,11 @@ def interprete_notes(noteArray):
         elif (note == "highd#"):
             colorArray.append("#0080FF") #bright blue
         elif (note == "highe"):
-            rightAngleArray.append(rightAngle - 20)
+            rightAngleArray.append(rightAngle - 3)
         elif (note == "highf"):
             colorArray.append("#0000FF") #blue
         elif (note == "highf#"):
-            leftAngleArray.append(leftAngle - 20)
+            leftAngleArray.append(leftAngle - 3)
         elif (note == "highg"):
             colorArray.append("#7F00FF") #purple
         elif (note == "highg#"):
@@ -84,8 +84,11 @@ def go_turtle(grammarArrayen):
     gf_commands_length = len(gf_commands)
 
     numberOfColors = len(colorArray)
+    print("Number of colors:" + str(numberOfColors))
     numberOfRightAngles = len(rightAngleArray)
+    print("Number of right angles:" + str(numberOfRightAngles))
     numberOfLeftAngles = len(leftAngleArray)
+    print("Number of left angles:" + str(numberOfLeftAngles))
 
     colorSteps = gf_commands_length
     rightAngleSteps = gf_commands_length
@@ -93,43 +96,53 @@ def go_turtle(grammarArrayen):
 
     if numberOfColors != 0:
         colorSteps = gf_commands_length/numberOfColors + gf_commands_length % numberOfColors
+        print("Color steps:" + str(colorSteps))
 
     if numberOfRightAngles != 0:
         rightAngleSteps = gf_commands_length/numberOfRightAngles + gf_commands_length % numberOfRightAngles
+        print("Right angle steps:" + str(rightAngleSteps))
     if numberOfLeftAngles != 0:
         leftAngleSteps = gf_commands_length/numberOfLeftAngles + gf_commands_length % numberOfLeftAngles
+        print("Left angle steps:" + str(leftAngleSteps))
 
     colorIndex = 0
     rightAngleIndex = 0
     leftAngleIndex = 0
 
-    right = 90
-    left = 90
+    print("Color array:" + str(colorArray))
+    print("Right angle array:" + str(rightAngleArray))
+    print("Left angle array:" + str(leftAngleArray))
 
     brad.fill(True)
     for i in range(0, gf_commands_length, 1):
-        if (i % colorSteps == 0) and (colorSteps != gf_commands_length):
+        if (i % colorSteps == 0) and (len(colorArray) != 0):
             brad.fill(False)
             brad.color(colorArray[colorIndex])
             colorIndex += 1
             brad.fill(True)
-        if (i % rightAngleSteps == 0) and (rightAngleSteps != gf_commands_length):
-            print("HHELLO")
-            right = rightAngleArray[rightAngleIndex]
+            print("Color index:" + str(colorIndex))
+        if (i % rightAngleSteps == 0) and (len(rightAngleArray) != 0):
+            rightAngle = rightAngleArray[rightAngleIndex]
             rightAngleIndex += 1
-        if (i % leftAngleSteps == 0) and (leftAngleSteps != gf_commands_length):
-            left = leftAngleArray[leftAngleIndex]
+            print("Right angle index:" + str(rightAngleIndex))
+        elif len(rightAngleArray) == 0:
+            rightAngle = 90
+        if (i % leftAngleSteps == 0) and (len(leftAngleArray) != 0): 
+            leftAngle = leftAngleArray[leftAngleIndex]
             leftAngleIndex += 1
+            print("Left angle index:" + str(leftAngleIndex))
+        elif len(leftAngleArray) == 0:
+            leftAngle = 90
 
         if (gf_commands[i] == "A") or (gf_commands[i] == "B") or (gf_commands[i] == "F"):
             brad.forward(3)
         elif gf_commands[i] == "r":
-            brad.right(right)
+            brad.right(rightAngle)
         elif gf_commands[i] == "l":
-            brad.left(left)
+            brad.left(leftAngle)
 
     brad.fill(False)
 
     turtle.done()
  
-main("c#,d#,g,highe,highf#, highc")
+main("c#,d#,g,highc,highf#")
