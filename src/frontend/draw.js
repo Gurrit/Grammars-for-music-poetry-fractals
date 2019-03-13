@@ -14,7 +14,7 @@ function connectToServer() {
 }
 
 function sendMessage(message) {
-    settings.socket.send("{\"type\":\"gosper\"}");
+    settings.socket.send("{\"type\":\"Gosper\"}");
 }
 
 settings.socket = connectToServer();
