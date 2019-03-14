@@ -17,53 +17,46 @@
       <a class="navbar-brand" href="index.html">Grammar for music and poetry</a>
     </div>
     <ul class="nav navbar-nav">
-      <li class="active"><a href="page1.html">Translate fractals</a></li>
-      <li><a href="page2.html">Experimental</a></li>
+      <li class="active"><a href="page1.html">Krasimir Mode</a></li>
+      <li><a href="page2.html">Art and music Mode</a></li>
       <li><a href="info.html">Info</a></li>
     </ul>
   </div>
 </nav>
 
-<body onload="setCanvasSize()">
-  <h1>Choose a fractal</h1>
-  <div class="row">
-    <div class="column">
-      <select id="select1">
-        <option value="none">None</option>
-        <option value="serpiensky">Serpinsky Triangle</option>
-        <option value="koch">Koch Snowflake</option>
-        <option value="koch_square">Square Koch Curve</option>
-        <option value="dragon">Dragon Curve</option>
-      </select>
-    </div>
-    <div class="column">
-      <select id="select2">
-        <option value="none">None</option>
-        <option value="serpiensky">Serpinsky Triangle</option>
-        <option value="koch">Koch Snowflake</option>
-        <option value="koch_square">Square Koch Curve</option>
-        <option value="dragon">Dragon Curve</option>
-      </select>
-    </div>
-  </div>
+<body onload="main()">
+  <h1>Translation between fractals</h1>
 
-  <div class="row">
-    <div class="column">
-      <canvas
-        class="canvasStyle"
-        id="canvas1"
-        onclick="getCursorPosition(canvas1, event)"
-      ></canvas>
-    </div>
-    <div class="column">
-      <canvas
-        class="canvasStyle"
-        id="canvas2"
-        onclick="getCursorPosition(canvas2, event)"
-      ></canvas>
-    </div>
-  </div>
-  <button type="button" id="send command" onclick="drawTurtle()">
-    Get next command
+  <select id="selectFractal">
+    <option value="None">None</option>
+    <option value="Sierpinski">Sierpinski Triangle</option>
+    <option value="Koch">Square Koch Snowflake</option>
+    <option value="Dragon">Dragon Curve</option>
+    <option value="Gosper">Gosper Curve</option>
+  </select>
+
+  <select id="selectFractal1"> </select>
+  <select id="selectIter1"> </select>
+  <button type="button" id="translateBtn" onclick="drawTurtle()">
+    Translate To
   </button>
+  <select id="selectFractal2"> </select>
+
+  <div id="container">
+    <canvas
+      class="canvasStyle"
+      id="canvas1"
+      onclick="sendCursorPosition(canvas1, event)"
+      height="600"
+      width="600"
+    ></canvas>
+
+    <canvas
+      class="canvasStyle"
+      id="canvas2"
+      onclick="sendCursorPosition(canvas2, event)"
+      height="600"
+      width="600"
+    ></canvas>
+  </div>
 </body>

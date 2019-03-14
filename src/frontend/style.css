@@ -5,6 +5,10 @@
   flex-direction: column;
 }
 
+h1 {
+  text-align: center;
+}
+
 button {
   width: 15vw;
   height: 4vw;
@@ -15,28 +19,23 @@ body {
   margin-right: auto;
 }
 
-.row {
-  display: flex;
-}
-
-.column {
-  flex: 33.33%;
-  padding: 5px;
-  text-align: center;
+#container {
+  position: relative;
 }
 
 .canvasStyle {
   display: inline-block;
-  width: 500px;
-  height: 500px;
+  position: absolute;
 }
 
 #canvas1 {
   border: 2px solid red;
   border-radius: 5px;
+  left: 0;
 }
 
 #canvas2 {
   border: 2px solid green;
   border-radius: 5px;
+  right: 0;
 }
