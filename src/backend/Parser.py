@@ -13,6 +13,7 @@ class Parser:
         self._turtle_map = {}
         self.tree = TreeList()
         self.angle = 0
+        self.kids = 0
 
     def parse(self):
         self.parser_for_midi()
@@ -53,30 +54,61 @@ class Parser:
         commands = file_reader.read_gf_file()
         filler = treeFiller()
         while "(N" not in commands:
-            if "ang" in commands[0]:
-                self.angle = commands[0].split(":")[1]
+            if "S" in commands[0]:
+                self.tree.add_new_iteration(commands[0].split(":")[1])
+            if "ang" in commands[1]:
+                self.angle = commands[1].split(":")[1]
+            if "kids" in commands [2]:
+                self.kids = commands[2].split(":")[1]
         self.generate_nodes(commands, turtle, filler, commands[0].split(":")[1])
 
+    
     def generate_nodes(self, commands, turtle, filler, iteration):
-        nodes = []
-        map = init.get_instance().get_filler_map()
-        distance = config.step
-        while ")" not in commands[0]:       # This should be reversed, and taken from the end of the list, for likely
-            # performance reasons
-            if "F" in commands[0]:
+        append(filler.coordinate_stack, turtle.coordinate)
+        for command in commands:
+            if "F" in command:
                 turtle.forward(distance)
-                nodes.append(Node(lineSegment(turtle.coordinate, filler.coordinate_stack.pop()), None))
-            elif "r" in commands[0]:
-                turtle.right(self.angle)
-            elif "l" in commands[0]:
+                self.tree.treeLists[0].append(Node(lineSegment(filler.coordinate_stack.pop(), turtle.coordinate), None))
+                filler.coordinate_stack.append(turtle.coordinate)
+            if "l" in command:
                 turtle.left(self.angle)
-            elif "(N" in commands[0]:
-                iteration = commands.split(":", 1)[1]
-                (remaining, layer_below) = self.generate_nodes(commands, turtle, filler, iteration)
-                commands = remaining
+            if "r" in command:
+                turtle.right(self.angle)
+        
+        for i in range(self.tree.depth):
+            if i != 0:
+                children = []
+                for node in self.tree.treeLists[i-1]:
+                    children.append[node]
+                    if len(children) == self.kids:
+                        self.tree.treeLists[i].append(Node(lineSegment(children[0].value.coordinate_1,children[kids].value.coordinate_2),children))
+                        children = []
+        
+        self.tree.treeLists.reverse()
 
-            commands = commands.pop(0)
-        return commands, nodes
+
+
+
+    
+    #def generate_nodes(self, commands, turtle, filler, iteration):
+    #    nodes = []
+    #    map = init.get_instance().get_filler_map()
+    #    distance = config.step
+    #    while ")" not in commands[0]:       # This should be reversed, and taken from the end of the list, for likely
+            # performance reasons
+    #        if "F" in commands[0]:
+    #            turtle.forward(distance)
+    #            nodes.append(Node(lineSegment(turtle.coordinate, filler.coordinate_stack.pop()), None))
+    #        elif "r" in commands[0]:
+    #            turtle.right(self.angle)
+    #        elif "l" in commands[0]:
+    #            turtle.left(self.angle)
+    #        elif "(N" in commands[0]:
+    #            iteration = commands.split(":", 1)[1]
+    #            (remaining, layer_below) = self.generate_nodes(commands, turtle, filler, iteration)
+    #            commands = remaining
+    #        commands = commands.pop(0)
+    #    return commands, nodes
 
 
 #parser = Parser(turtle.Turtle())
