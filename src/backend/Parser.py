@@ -55,12 +55,13 @@ class Parser:
         filler = treeFiller()
         while "(N" not in commands:
             if "S" in commands[0]:
-                self.tree.add_new_iteration(commands[0].split(":")[1])
+                self.tree.add_new_iteration(int(commands[0].split(":")[1]))
             if "ang" in commands[1]:
-                self.angle = commands[1].split(":")[1]
+                self.angle = int(commands[1].split(":")[1])
             if "kids" in commands [2]:
-                self.kids = commands[2].split(":")[1]
-        self.generate_nodes(commands, turtle, filler, commands[0].split(":")[1])
+                self.kids = int(commands[2].split(":")[1])
+        self.generate_nodes(commands, turtle, filler, int(commands[0].split(":")[1]))
+        return self.tree
 
     
     def generate_nodes(self, commands, turtle, filler, iteration):
