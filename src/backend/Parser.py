@@ -54,12 +54,12 @@ def parse_for_web(filename):
     file_reader = GFFileReader()
     commands = file_reader.read_gf_file(filename)
     web_commands = []
+    angle = 90
     for command in commands:
         # Command form: Forward 'f', right 'r:angle', left 'l:angle'
-        if command is "f":
-            web_commands.append(turtle_map.get(command)(config.step))
-        else:
-            command_split = command.split(":")
-            angle = command_split[1]
-            web_commands.append(turtle_map.get(command_split[0])(int(angle)))
+        if "ang" in command:
+            angle = command.split(":")[1]
+        if command in turtle_map:
+            web_commands.append(turtle_map.get(command)(angle))
+        print(command)
     return web_commands

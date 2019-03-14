@@ -14,11 +14,13 @@ async def message_receiver (websocket, path):
         map_to_function(data)
         web = parse_for_web(generate_file_name(data))
         for m in web:
+            print(m)
             await websocket.send(m)
 
 
 def map_to_function(data):
     if data['type'] in fractals:
+        config.step = data['step']
         if os.path.isfile(generate_file_name(data)):
             return
         else:
@@ -26,14 +28,13 @@ def map_to_function(data):
 
 
 def generate_new_fractal_file(data):
-    config.step = data['step']
     iteration = data['iteration']
     gf_file = config.gf_file_path + data['type']
-    gf_commands = "import " + gf_file + ".gf \n l s"
+    gf_commands = "import " + gf_file + ".gf \n l c(s "       # How should this look?
     start_iterations = ""
     for i in range(iteration):
-        start_iterations = start_iterations + " (s "
-    gf_commands = gf_commands + start_iterations + "z"
+        start_iterations = start_iterations + "(s"
+    gf_commands = gf_commands + start_iterations + " z)"
     end_iterations = ""
     for i in range(iteration):
         end_iterations = end_iterations + ")"
