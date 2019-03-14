@@ -47,12 +47,12 @@ class Parser:
 #parser.parse()
 
 
-def parse_for_web():
+def parse_for_web(filename):
     init.get_instance()
     turtle_map = init.get_instance().get_web_map()
 
     file_reader = GFFileReader()
-    commands = file_reader.read_gf_file()
+    commands = file_reader.read_gf_file(filename)
     web_commands = []
     for command in commands:
         # Command form: Forward 'f', right 'r:angle', left 'l:angle'
