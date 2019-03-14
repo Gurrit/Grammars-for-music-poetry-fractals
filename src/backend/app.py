@@ -1,11 +1,7 @@
 import asyncio
 import websockets
-from config import *
 import json
 from Parser import *
-from turtle import *
-import time
-import subprocess
 import os
 
 fractals = {"Sierpinski", "Dragon", "Koch", "Gosper"}
@@ -23,9 +19,16 @@ async def message_receiver (websocket, path):
 
 def map_to_function(data):
     if data['type'] in fractals:
+        iteration = data['iteration']
         gf_file = config.gf_file_path + data['type']
-        gf_commands = "import " + gf_file + ".gf \n" \
-                      "l s (s (s z)) | wf -file=" + config.gf_output_path + "\n"    # This should not be hardcoded.
+        gf_commands = "import " + gf_file + ".gf \n l s"
+        start_iterations = ""
+        for i in iteration:
+            start_iterations = start_iterations + " (s "
+        gf_commands = gf_commands + start_iterations + "z"
+        for i in iteration:
+            start_iterations = start_iterations + ")"
+        gf_commands = gf_commands + "| wf -file=" + config.gf_output_path + "\n"    # This should not be hardcoded.
         file = open(config.gf_script_path, 'w+')
         file.write(gf_commands)
         file.close()
