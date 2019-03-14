@@ -92,18 +92,23 @@ function drawTurtle() {
   var option2 = getOption("selectFractal2");
   console.log(option1.toString());
 
+  jsonStr =
+    "f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f";
+
+  msg = '{"type":"Sierpinski", "iteration":5, "step":5}';
+
   switch (option1) {
     case "None":
       break;
-    case "Sierpinski":
-      jsonStr =
-        "f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f";
+    case "Sierpinski Triangle":
+      console.log(msg);
+      sendMessage(msg);
       break;
-    case "Koch":
+    case "Square Koch Snowflake":
       break;
-    case "Gosper":
+    case "Gosper Curve":
       break;
-    case "Dragon":
+    case "Dragon Curve":
       break;
   }
 
@@ -111,7 +116,7 @@ function drawTurtle() {
   drawCanvas = document.getElementById("canvas1");
   let turtle = new CreateTurtle(drawCanvas);
   //TODO Send to server for utskrivning
-  console.log("Before X,Y" + turtle.position().toString());
+  //console.log("Before X,Y" + turtle.position().toString());
 
   for (var i = 0; i < jsonStr.length; i++) {
     if (jsonStr.charAt(i) == " ") {
@@ -137,10 +142,10 @@ function drawTurtle() {
     }
 
     //turtle.forward(50);
-    console.log("After X,Y" + turtle.position().toString());
+    //console.log("After X,Y" + turtle.position().toString());
     canvas = turtle.canvas();
 
-    console.log(canvas.width.toString());
+    //console.log(canvas.width.toString());
   }
 
   if (option2 != "None") {
