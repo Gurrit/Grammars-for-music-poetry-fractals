@@ -33,7 +33,7 @@ function addIterOptions(valueFractal, selectID) {
     console.log(fractalList[index].jsonFractal);
     if (fractalList[index].jsonFractal == valueFractal) {
       max = fractalList[index].maxIter;
-      for (i = 0; i < max; i++) {
+      for (i = 1; i < max + 1; i++) {
         select.options[select.options.length] = new Option(i);
         console.log(fractalList[index].text);
       }
