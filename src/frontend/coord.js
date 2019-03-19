@@ -1,4 +1,5 @@
 var fractalList = new Array();
+globalStep = 5;
 
 function getCursorPosition(canvas, event) {
   var rect = canvas.getBoundingClientRect();
@@ -21,21 +22,45 @@ function addFractalOptions(selectID) {
   var select = document.getElementById(selectID);
   for (index in fractalList) {
     select.options[select.options.length] = new Option(fractalList[index].text);
-    console.log(fractalList[index].text);
+    //console.log(fractalList[index].text);
+  }
+}
+
+function selected() {
+  var option1 = getOption("selectFractal1");
+  var option2 = getOption("selectFractal2");
+  console.log("HÄR??: " + option1.value.toString() + option2.value.toString());
+  switch (option1.value) {
+    case "None":
+      break;
+    case "Sierpinski Triangle":
+      addIterOptions("Sierpinski", "selectIter1");
+      break;
+    case "Square Koch Snowflake":
+      addIterOptions("Koch", "selectIter1");
+      break;
+    case "Gosper Curve":
+      console.log("HÄR GOSPEr");
+      addIterOptions("Gosper", "selectIter1");
+      break;
+    case "Dragon Curve":
+      addIterOptions("Dragon", "selectIter1");
+      break;
   }
 }
 
 function addIterOptions(valueFractal, selectID) {
   max = 0;
   var select = document.getElementById(selectID);
+  //console.log(select.options);
+  select.options.length = 0;
 
   for (index in fractalList) {
-    console.log(fractalList[index].jsonFractal);
     if (fractalList[index].jsonFractal == valueFractal) {
       max = fractalList[index].maxIter;
       for (i = 1; i < max + 1; i++) {
         select.options[select.options.length] = new Option(i);
-        console.log(fractalList[index].text);
+        //console.log(fractalList[index].text);
       }
       break;
     }
@@ -53,102 +78,76 @@ function main() {
   var koch = new optionValue("Square Koch Snowflake", "Koch", 7);
   fractalList.push(koch);
 
+  connectToServer();
+
   addFractalOptions("selectFractal1");
   addFractalOptions("selectFractal2");
-  addIterOptions("Sierpinski", "selectIter1");
+}
 
-  console.log(fractalList);
+function setCanvasSize(canvas, size) {
+  //verkar inte funka, varför????
+  drawCanvas = document.getElementById(canvas);
+  drawCanvas.width = size;
+  drawCanvas.height = size;
+}
+
+function getOption(dropdown) {
+  var e = document.getElementById(dropdown);
+  var selected = e.options[e.selectedIndex];
+  //console.log(selected);
+
+  return selected;
+}
+
+function toJson(type, iter, step) {
+  var string =
+    "{" +
+    '"type":' +
+    '"' +
+    type +
+    '",' +
+    " " +
+    '"iteration":' +
+    iter +
+    ", " +
+    '"step":' +
+    step +
+    "}";
+  return string;
+}
+
+function sendDrawMessage() {
+  var optionFrac1 = getOption("selectFractal1");
+  var optionIter1 = getOption("selectIter1");
+  var optionFrac2 = getOption("selectFractal2");
+  console.log(optionFrac1.toString());
+
+  if (optionFrac2.value == "None") {
+    console.log("härdå?");
+    var value = "";
+    for (index in fractalList) {
+      if (fractalList[index].text == optionFrac1.value) {
+        value = fractalList[index].jsonFractal;
+        console.log("Text: " + fractalList[index].text);
+        console.log("Value" + optionFrac1.value.toString());
+        console.log("Högra optionet:" + value);
+      }
+    }
+
+    //resetCanvas("canvas1");
+    msg = toJson(value, optionIter1.value, globalStep);
+    console.log("meddelandet: " + msg);
+    sendMessage(msg);
+  }
+}
+
+function resetCanvas(canvasValue) {
+  const context = canvas.getContext(canvasValue);
+  context.clearRect(0, 0, canvas.width, canvas.height);
 }
 
 function sendCursorPosition(canvas, event) {
   getCursorPosition(canvas, event);
 
   //TODO send coordinates to server
-}
-
-function setCanvasSize(canvas, size) {
-  //verkar inte funka, varför????
-  drawCanvas = document.getElementById(canvas);
-  console.log(drawCanvas);
-  drawCanvas.width = size;
-  drawCanvas.height = size;
-}
-
-//{"type":"Sierpinski",
-
-//"iteration":3,
-
-//"step":3 }
-
-function getOption(dropdown) {
-  var e = document.getElementById(dropdown);
-  var selected = e.options[e.selectedIndex].value;
-
-  return selected;
-}
-
-function drawTurtle() {
-  var option1 = getOption("selectFractal1");
-  var option2 = getOption("selectFractal2");
-  console.log(option1.toString());
-
-  jsonStr =
-    "f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f l:90 f r:90 f l:90 f l:90 f r:90 f r:90 f r:90 f l:90 f l:90 f r:90 f";
-
-  msg = '{"type":"Sierpinski", "iteration":5, "step":5}';
-
-  switch (option1) {
-    case "None":
-      break;
-    case "Sierpinski Triangle":
-      console.log(msg);
-      sendMessage(msg);
-      break;
-    case "Square Koch Snowflake":
-      break;
-    case "Gosper Curve":
-      break;
-    case "Dragon Curve":
-      break;
-  }
-
-  console.log("kommer vi hit?" + option1.toString());
-  drawCanvas = document.getElementById("canvas1");
-  let turtle = new CreateTurtle(drawCanvas);
-  //TODO Send to server for utskrivning
-  //console.log("Before X,Y" + turtle.position().toString());
-
-  for (var i = 0; i < jsonStr.length; i++) {
-    if (jsonStr.charAt(i) == " ") {
-      i++;
-    }
-    if (jsonStr.charAt(i) == "f") {
-      //savePos(start, end);
-      turtle.forward(5);
-    }
-    if (jsonStr.charAt(i) == "r") {
-      degree1 = "";
-      degree1 += jsonStr.charAt(i + 2);
-      degree1 += jsonStr.charAt(i + 3);
-
-      turtle.right(degree1);
-    }
-    if (jsonStr.charAt(i) == "l") {
-      degree2 = "";
-      degree2 += jsonStr.charAt(i + 2);
-      degree2 += jsonStr.charAt(i + 3);
-
-      turtle.left(degree2);
-    }
-
-    //turtle.forward(50);
-    //console.log("After X,Y" + turtle.position().toString());
-    canvas = turtle.canvas();
-
-    //console.log(canvas.width.toString());
-  }
-
-  if (option2 != "None") {
-    //TODO Translate from option1 to option2 via server and draw the desired fractal here
-  }
 }

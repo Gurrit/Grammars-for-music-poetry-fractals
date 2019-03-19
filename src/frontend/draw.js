@@ -5,20 +5,25 @@ const settings = {
 
 function connectToServer() {
   let url = settings.url;
-  var socket = new WebSocket(url); //kmr inte längre än såhär
-  console.log("kommer vi hit då?");
-  console.log("The socket: " + socket);
-  //let turtle = new CreateTurtle(document.getElementById("canvas1")); // Needed for eval to work
+  var socket = new WebSocket(url);
+
+  turtle = draw();
   socket.onmessage = function(event) {
     eval(event.data);
-    console.log("EVENTET:" + event);
+    console.log("EVENTDATA:" + event.data);
   };
-  return socket;
+
+  settings.socket = socket;
+}
+
+function draw() {
+  canvas = document.getElementById("canvas1");
+  let turtle = new CreateTurtle(canvas); // Needed for eval to work
+
+  return turtle;
 }
 
 function sendMessage(message) {
   // message1 = JSON.stringify(message);
   settings.socket.send(message);
 }
-
-settings.socket = connectToServer();

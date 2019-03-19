@@ -48,6 +48,13 @@ function CreateTurtle(canvas) {
     return array;
   };
 
+  self.position = function(x1, y1) {
+    let position = {
+      x: x1,
+      y: y1
+    };
+  };
+
   self.canvas = function() {
     return canvas;
   };
