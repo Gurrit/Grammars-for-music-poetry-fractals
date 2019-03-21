@@ -19,6 +19,13 @@ body {
   margin-right: auto;
 }
 
+.selectdiv {
+  display: table-cell;
+  width: 100%;
+  justify-content: center;
+  display: flex;
+}
+
 #container {
   position: relative;
 }

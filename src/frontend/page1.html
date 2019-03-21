@@ -28,16 +28,18 @@
 <body onload="main()">
   <h1>Translation between fractals</h1>
 
-  <select id="selectFractal1" onchange="selected()">
-    <option value="None">None</option>
-  </select>
-  <select id="selectIter1"> </select>
-  <button type="button" id="translateBtn" onclick="sendDrawMessage()">
-    Translate To
-  </button>
-  <select id="selectFractal2">
-    <option value="None">None</option></select
-  >
+  <div class="selectdiv">
+    <select id="selectFractal1" onchange="selected()">
+      <option value="None">None</option>
+    </select>
+    <select id="selectIter1"> </select>
+    <button type="button" id="translateBtn" onclick="sendDrawMessage()">
+      Translate To
+    </button>
+    <select id="selectFractal2">
+      <option value="None">None</option></select
+    >
+  </div>
 
   <div id="container">
     <canvas

@@ -13,6 +13,11 @@ function CreateTurtle(canvas) {
     rotation = (rotation + deg) % 360;
     if (rotation < 0) rotation += 360;
   };
+
+  let setpos = function(x1, y1) {
+    position.x = x1;
+    position.y = y1;
+  };
   self.penStyle = "black";
   self.penWidth = 1;
   self.penUp = function() {
@@ -48,16 +53,16 @@ function CreateTurtle(canvas) {
     return array;
   };
 
-  self.position = function(x1, y1) {
-    let position = {
-      x: x1,
-      y: y1
-    };
+  self.changepos = function(x1, y1) {
+    setpos(x1, y1);
+    return self;
   };
 
   self.canvas = function() {
     return canvas;
   };
+
+  self.color = function(color) {};
 
   self.goto = function(position) {};
   return self;
