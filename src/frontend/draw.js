@@ -11,7 +11,6 @@ function connectToServer() {
   turtle = getTurtle("canvas1");
 
   socket.onmessage = function(event) {
-    //turtle = draw();
     eval(event.data);
     //console.log("EVENTDATA:" + event.data);
     //console.log("TURTLE:" + turtle);
@@ -21,6 +20,5 @@ function connectToServer() {
 }
 
 function sendMessage(message) {
-  // message1 = JSON.stringify(message);
   settings.socket.send(message);
 }

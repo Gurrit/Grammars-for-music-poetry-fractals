@@ -35,7 +35,7 @@ function main() {
 }
 
 function getStartPos(canvas, startpos) {
-  //getting startposition for respective fractal
+  //getting startposition for corresponding fractal
   switch (startpos) {
     case "bottomleftcorner":
       x = 0;
@@ -124,6 +124,7 @@ function turtleCanvasobj(canvas) {
 }
 
 function getTurtle(canvas) {
+  //get the turtle corresponding to canvas
   for (index in canvasturtlelist) {
     console.log("canvasen:" + canvasturtlelist[index].canvasen);
     if (canvasturtlelist[index].canvasen == canvas.toString()) {
@@ -133,6 +134,7 @@ function getTurtle(canvas) {
 }
 
 function getOption(dropdown) {
+  //get the option from one of the select
   var e = document.getElementById(dropdown);
   var selected = e.options[e.selectedIndex];
   //console.log(selected);
@@ -158,6 +160,7 @@ function toJson(type, iter, step) {
 }
 
 function sendDrawMessage() {
+  //sends the actual message corresponding to what fractals and iterations are picked
   var optionFrac1 = getOption("selectFractal1");
   var optionIter1 = getOption("selectIter1");
   var optionFrac2 = getOption("selectFractal2");
