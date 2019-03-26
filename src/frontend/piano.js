@@ -140,6 +140,30 @@
   // Setup keyboard interaction
   //
 
+  var keyToCodes = {
+    /*a*/ 'a' : 65, // c
+    /*w*/ 'w' : 87, // c#
+    /*s*/ 's' : 83, // d
+    /*e*/ 'e' : 69, // d#
+    /*d*/ 'd' : 68, // e
+    /*f*/ 'f' : 70, // f
+    /*t*/ 't' : 84, // f#
+    /*g*/ 'g' : 71, // g
+    /*y*/ 'y' : 89, // g#
+    /*h*/ 'h' : 72, // a
+    /*u*/ 'u' : 85, // a#
+    /*j*/ 'j' : 74, // b
+    /*k*/ 'k' : 75, // c
+    /*o*/ 'o' : 79, // c#
+    /*l*/ 'l' : 76, // d
+    /*p*/ 'p' : 80, // d#
+    /*ö*/ '`' : 192, // e
+    // *ö 'ö' : 59, // e ... gotta figure out why it's sometimes 186 and sometimes 59
+    /*ä*/ "\'" : 222, // f
+    /*¨*/ ']' : 221, // f#
+    /*enter*/ 'enter' : 13 // g
+  };
+
   var keyNotes = {
     /*a*/ 65: 0, // c
     /*w*/ 87: 1, // c#
@@ -157,8 +181,8 @@
     /*o*/ 79: 13, // c#
     /*l*/ 76: 14, // d
     /*p*/ 80: 15, // d#
-    /*ö*/ 186: 16, // e
-    /*ö*/ 59: 16, // e ... gotta figure out why it's sometimes 186 and sometimes 59
+    /*ö*/ 192: 16, // e
+    // /*ö*/ 59: 16, // e ... gotta figure out why it's sometimes 186 and sometimes 59
     /*ä*/ 222: 17, // f
     /*¨*/ 221: 18, // f#
     /*enter*/ 13: 19 // g
@@ -168,10 +192,12 @@
   var keyCodes = {};
 
   $(window)
-    .keydown(function(evt) {
-      var keyCode = evt.keyCode;
+      .keydown(function(evt) {
+      var keyTone = evt.key;
+      var keyCode = keyToCodes[keyTone];
+      console.log(keyCode);
       // prevent repeating keys //var tvungen att ta bort keycode = if..., funkade ej annars
-      if (downKeys[keyCode]) {
+      if (!downKeys[keyCode]) {
         downKeys[keyCode] = 1;
         var key = keyNotes[keyCode];
         if (typeof key != "undefined") {
@@ -181,7 +207,9 @@
       }
     })
     .keyup(function(evt) {
-      delete downKeys[evt.keyCode];
+      var keyTone = evt.key;
+      var keyCode = keyToCodes[keyTone];
+      delete downKeys[keyCode];
     });
 
   //
@@ -213,7 +241,7 @@
   // prevent quick find...
   $(window).keydown(function(evt) {
     if (evt.target.nodeName != "INPUT" && evt.target.nodeName != "TEXTAREA") {
-      if (evt.keyCode == 222) {
+      if (evt.key == 'single quote') {
         evt.preventDefault();
         return false;
       }
