@@ -11,7 +11,7 @@ class TreeList:
             self.depth += 1
 
     def get_layer(self, layer):
-        if layer > self.depth:
+        if layer > self.depth-1:
             raise IndexError("the structure is not that deep")
         return self.treeLists[layer]
 
@@ -21,6 +21,11 @@ class TreeList:
             list.remove_all_nodes()
         self.treeLists = []
         self.depth = 0
+
+    def visualise(self):
+        for layer in self.treeLists:
+            print(layer.to_string())
+
 
 
 class Layer:
@@ -40,6 +45,13 @@ class Layer:
         list.remove(self.nodes, node)
         node.remove_parrent()
         node.remove_all_children()
+
+    def to_string(self):
+        s = "[(" + str(self.nodes[0].value.coordinate_1.x) + ", " + str(self.nodes[0].value.coordinate_1.y) + ")"
+        for node in self.nodes:
+            s += ", (" + str(node.value.coordinate_2.x) + ", " + str(node.value.coordinate_2.y) + ")"
+        s += "]"
+        return s
 
 
 

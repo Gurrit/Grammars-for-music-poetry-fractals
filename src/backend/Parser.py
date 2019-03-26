@@ -53,24 +53,26 @@ class Parser:
         file_reader = GFFileReader()
         commands = file_reader.read_gf_file()
         filler = treeFiller()
-        while "(N" not in commands:
-            if "S" in commands[0]:
-                self.tree.add_new_iteration(int(commands[0].split(":")[1]))
-            if "ang" in commands[1]:
-                self.angle = int(commands[1].split(":")[1])
-            if "kids" in commands [2]:
-                self.kids = int(commands[2].split(":")[1])
+        #while "(N" not in commands:
+        if "S" in commands[0]:
+            self.tree.add_new_iteration(int(commands[0].split(":")[1]))
+        if "ang" in commands[1]:
+            self.angle = int(commands[1].split(":")[1])
+        if "kids" in commands [2]:
+            self.kids = int(commands[2].split(":")[1])
         self.generate_nodes(commands, turtle, filler, int(commands[0].split(":")[1]))
         return self.tree
 
-    
+
     def generate_nodes(self, commands, turtle, filler, iteration):
-        append(filler.coordinate_stack, turtle.coordinate)
+        filler.coordinate_stack.append(turtle.coordinate.clone())
         for command in commands:
             if "F" in command:
-                turtle.forward(distance)
-                self.tree.treeLists[0].append(Node(lineSegment(filler.coordinate_stack.pop(), turtle.coordinate), None))
-                filler.coordinate_stack.append(turtle.coordinate)
+                turtle.forward(config.step)
+                v = lineSegment(filler.coordinate_stack.pop().clone(), turtle.coordinate.clone())
+                n = Node(v, None)
+                self.tree.treeLists[0].append(n)
+                filler.coordinate_stack.append(turtle.coordinate.clone())
             if "l" in command:
                 turtle.left(self.angle)
             if "r" in command:
@@ -79,10 +81,10 @@ class Parser:
         for i in range(self.tree.depth):
             if i != 0:
                 children = []
-                for node in self.tree.treeLists[i-1]:
-                    children.append[node]
+                for node in self.tree.treeLists[i-1].nodes:
+                    children.append(node)
                     if len(children) == self.kids:
-                        self.tree.treeLists[i].append(Node(lineSegment(children[0].value.coordinate_1,children[kids].value.coordinate_2),children))
+                        self.tree.treeLists[i].append(Node(lineSegment(children[0].value.coordinate_1.clone(),children[self.kids - 1].value.coordinate_2.clone()),children))
                         children = []
         
         self.tree.treeLists.reverse()

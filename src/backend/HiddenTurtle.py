@@ -8,8 +8,8 @@ class HiddenTurtle:
         self.angle = 0
 
     def forward(self, distance):
-        x = math.cos(self.angle) * distance
-        y = math.sin(self.angle) * distance
+        x = math.cos(self.angle * math.pi/180) * distance
+        y = math.sin(self.angle * math.pi/180) * distance
         self.coordinate.x += x
         self.coordinate.y += y
 

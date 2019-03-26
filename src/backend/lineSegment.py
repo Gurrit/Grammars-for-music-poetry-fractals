@@ -10,7 +10,12 @@ class lineSegment:
         self.y_length = coordinate_2.y - coordinate_1.y
 
         self.length = math.sqrt((self.x_length*self.x_length) + (self.y_length*self.y_length))
-        self.angle = math.atan(self.y_length / self.x_length)
+        if self.x_length != 0:
+            self.angle = math.atan(self.y_length / self.x_length)
+        elif self.y_length > 0:
+            self.angle = 90
+        else:
+            self.angle = -90
 
 
 
@@ -21,4 +26,5 @@ class coordinate:
         self.x = x
         self.y = y
 
-    
+    def clone(self):
+        return coordinate(self.x, self.y)
