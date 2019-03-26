@@ -34,7 +34,9 @@ class init:
 
     def get_web_map(self):
         return {
-            "f": self._web_forward,
+            "A": self._web_forward,
+            "B": self._web_forward,
+            "F": self._web_forward,
             "r": self._web_right,
             "l": self._web_left
         }
