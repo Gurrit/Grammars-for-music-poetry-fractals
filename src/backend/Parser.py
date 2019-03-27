@@ -47,7 +47,7 @@ class Parser:
 #parser.parse()
 
 
-def parse_for_web(filename):
+def parse_for_web(filename, index):
     init.get_instance()
     turtle_map = init.get_instance().get_web_map()
 
@@ -60,6 +60,5 @@ def parse_for_web(filename):
         if "ang" in command:
             angle = command.split(":")[1]
         if command in turtle_map:
-            web_commands.append(turtle_map.get(command)(angle))
-        print(command)
+            web_commands.append(turtle_map.get(command)(angle, index))
     return web_commands
