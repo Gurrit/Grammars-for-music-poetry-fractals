@@ -72,6 +72,7 @@
         class: "key" + blackKeyClass(i),
         "data-key": i,
         mousedown: function(evt) {
+          console.log("Key pressed by mouse, index: " + i)
           $keys.trigger("note-" + i + ".play");
         }
       }).appendTo($keys);
@@ -196,13 +197,20 @@
       var keyTone = evt.key;
       var keyCode = keyToCodes[keyTone];
       console.log(keyCode);
-      // prevent repeating keys //var tvungen att ta bort keycode = if..., funkade ej annars
       if (!downKeys[keyCode]) {
         downKeys[keyCode] = 1;
         var key = keyNotes[keyCode];
         if (typeof key != "undefined") {
-          $keys.trigger("note-" + key + notesShift + notesOffset + ".play");
+          console.log("TRIGGERED!!     key: " + key)
+          $keys.trigger("note-" + (key + notesShift + notesOffset) + ".play");
           evt.preventDefault();
+        } else if (keyCode == 188) {
+            notesShift = -12;
+        } else if (keyCode == 190) {
+            notesShift = 0;
+        } else if (keyCode == 37 || keyCode == 39) {
+            notesOffset += (keyCode == 37 ? -1 : 1) * 12;
+            buildPiano();
         }
       }
     })
