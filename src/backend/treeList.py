@@ -1,83 +1,86 @@
 class TreeList:
 
     def __init__(self):
-        self.__treeLists = []
-        self.__depth = 0
+        self.treeLists = []
+        self.depth = 0
 
-    def add_new_iteration(self):
-        layer = Layer()
-        self.__treeLists.append(layer)
-        self.__depth += 1
-        return layer
+    def add_new_iteration(self, amount=1):
+        for i in range(amount):
+            layer = Layer()
+            self.treeLists.append(layer)
+            self.depth += 1
 
     def get_layer(self, layer):
-        if layer > self.__depth:
+        if layer > self.depth-1:
             raise IndexError("the structure is not that deep")
-        return self.__treeLists[layer]
+        return self.treeLists[layer]
 
-    def get_depth(self):
-        return self.__depth
 
     def remove_structure(self):
-        for list in self.__treeLists:
+        for list in self.treeLists:
             list.remove_all_nodes()
-        self.__treeLists = []
-        self.__depth = 0
+        self.treeLists = []
+        self.depth = 0
+
+    def visualise(self):
+        for layer in self.treeLists:
+            print(layer.to_string())
+
 
 
 class Layer:
 
     def __init__(self):
-        self.__nodes = []  # Better name?
+        self.nodes = []  # Better name?
 
     def append(self, node):
-        list.append(self.__nodes, node)
-
-    def get_nodes(self):
-        return self.__nodes
+        list.append(self.nodes, node)
 
     def remove_all_nodes(self):
-        for n in self.__nodes:
+        for n in self.nodes:
             self.remove_node(n)
-        self.__nodes = []
+        self.nodes = []
 
     def remove_node(self, node):
-        list.remove(self.__nodes, node)
+        list.remove(self.nodes, node)
         node.remove_parrent()
         node.remove_all_children()
+
+    def to_string(self):
+        s = "[(" + str(self.nodes[0].value.coordinate_1.x) + ", " + str(self.nodes[0].value.coordinate_1.y) + ")"
+        for node in self.nodes:
+            s += ", (" + str(node.value.coordinate_2.x) + ", " + str(node.value.coordinate_2.y) + ")"
+        s += "]"
+        return s
 
 
 
 class Node:
 
-    def __init__(self, value, parent):
-        self.__value = value
-        self.__parent = parent
-        self.__children = []
-        if parent is not None:
-            parent.add_child(self)
-
-    def get_value(self):
-        return self.__value
-
-    def get_parent(self):
-        return self.__parent
+    def __init__(self, value, children=None):
+        if children is None:
+            children = []
+        self.value = value
+        self.parent = None
+        self.children = children
+        for child in children:
+            child.add_parent(self)
 
     def add_child(self, child):
-        self.__children.append(child)
-
-    def get_children(self):
-        return self.__children
+        self.children.append(child)
 
     def remove_parent(self):
-        self.__parent.remove_child(self)
-        self.__parent = None
+        self.parent.remove_child(self)
+        self.parent = None
+
+    def add_parent(self, parent):
+        self.parent = parent
 
     def remove_child(self, child):
-        self.__children.remove(child)
+        self.children.remove(child)
 
     def remove_all_children(self):
-        for child in self.__children:
+        for child in self.children:
             child.remove_parrent()
-        self.__children = []
+        self.children = []
 
