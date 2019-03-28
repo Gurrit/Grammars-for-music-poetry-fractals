@@ -288,3 +288,14 @@ body {
   text-align: center;
   z-index: 999;
 }
+
+#help_picture {
+  width: 30%;
+  margin-left: 33%;
+  alignment: center;
+  top: 100px;
+}
+
+#help_header {
+  margin-bottom: 50px;
+}

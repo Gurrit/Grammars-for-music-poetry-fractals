@@ -207,11 +207,10 @@
       .keydown(function(evt) {
       var keyTone = evt.key;
       var keyCode = keyToCodes[keyTone];
-      console.log(keyCode);
       if (!downKeys[keyCode]) {
         downKeys[keyCode] = 1;
         var key = keyNotes[keyCode];
-        console.log("Trigger     Keyboard: " + evt.key + "     Keycode: " + keyCode + "     key: " + key);
+        // console.log("Trigger     Keyboard: " + evt.key + "     Keycode: " + keyCode + "     key: " + key);
         if (typeof key != "undefined") {
           $keys.trigger("note-" + (key + notesShift + notesOffset) + ".play");
           evt.preventDefault();
