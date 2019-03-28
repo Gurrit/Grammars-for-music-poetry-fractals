@@ -52,7 +52,7 @@ body {
 
 #piano .keys {
   /*width: 1144px;*/
-  width: 790px;
+  width: 730px;
   padding: 2px 0 0 2px;
   overflow: hidden;
   background: #000;

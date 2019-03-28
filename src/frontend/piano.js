@@ -80,8 +80,9 @@
 
     // delayed for-loop to stop browser from crashing :'(
     // go slower on Chrome...
+
     var i = -12,
-      max = 14,
+      max = 12,
       addDelay = /Chrome/i.test(navigator.userAgent) ? 80 : 0;
     (function go() {
       addKey(i + notesOffset);
@@ -142,51 +143,61 @@
   //
 
   var keyToCodes = {
-    /*a*/ 'a' : 65, // c
-    /*w*/ 'w' : 87, // c#
-    /*s*/ 's' : 83, // d
-    /*e*/ 'e' : 69, // d#
-    /*d*/ 'd' : 68, // e
-    /*f*/ 'f' : 70, // f
-    /*t*/ 't' : 84, // f#
-    /*g*/ 'g' : 71, // g
-    /*y*/ 'y' : 89, // g#
-    /*h*/ 'h' : 72, // a
-    /*u*/ 'u' : 85, // a#
-    /*j*/ 'j' : 74, // b
-    /*k*/ 'k' : 75, // c
-    /*o*/ 'o' : 79, // c#
-    /*l*/ 'l' : 76, // d
-    /*p*/ 'p' : 80, // d#
-    /*ö*/ '`' : 192, // e
-    // *ö 'ö' : 59, // e ... gotta figure out why it's sometimes 186 and sometimes 59
-    /*ä*/ "\'" : 222, // f
-    /*¨*/ ']' : 221, // f#
-    /*enter*/ 'enter' : 13 // g
+    // Low octave
+    /*z*/ 'z' : 122, // c
+    /*s*/ 's' : 115, // c#
+    /*x*/ 'x' : 120, // d
+    /*d*/ 'd' : 100, // d#
+    /*c*/ 'c' : 99, // e
+    /*v*/ 'v' : 118, // f
+    /*g*/ 'g' : 103, // f#
+    /*b*/ 'b' : 98, // g
+    /*h*/ 'h' : 104, // g#
+    /*n*/ 'n' : 110, // a
+    /*j*/ 'j' : 106, // a#
+    /*m*/ 'm' : 109, // b
+    // High octave
+    /*r*/ 'r' : 114, // c
+    /*5*/ '5' : 53, // c#
+    /*t*/ 't' : 116, // d
+    /*6*/ '6' : 54, // d#
+    /*y*/ 'y' : 121, // e
+    /*u*/ 'u' : 117, // f
+    /*8*/ "8" : 56, // f#
+    /*i*/ 'i' : 105, // g
+    /*9*/ '9' : 57, // g#
+    /*o*/ 'o' : 111, // a
+    /*0*/ '0' : 48, // a#
+    /*p*/ 'p' : 112 // b
   };
 
   var keyNotes = {
-    /*a*/ 65: 0, // c
-    /*w*/ 87: 1, // c#
-    /*s*/ 83: 2, // d
-    /*e*/ 69: 3, // d#
-    /*d*/ 68: 4, // e
-    /*f*/ 70: 5, // f
-    /*t*/ 84: 6, // f#
-    /*g*/ 71: 7, // g
-    /*y*/ 89: 8, // g#
-    /*h*/ 72: 9, // a
-    /*u*/ 85: 10, // a#
-    /*j*/ 74: 11, // b
-    /*k*/ 75: 12, // c
-    /*o*/ 79: 13, // c#
-    /*l*/ 76: 14, // d
-    /*p*/ 80: 15, // d#
-    /*ö*/ 192: 16, // e
-    // /*ö*/ 59: 16, // e ... gotta figure out why it's sometimes 186 and sometimes 59
-    /*ä*/ 222: 17, // f
-    /*¨*/ 221: 18, // f#
-    /*enter*/ 13: 19 // g
+    // Low octave
+    /*z*/ 122 : 0, // c
+    /*s*/ 115 : 1, // c#
+    /*x*/ 120 : 2, // d
+    /*d*/ 100 : 3, // d#
+    /*c*/ 99 : 4, // e
+    /*v*/ 118 : 5, // f
+    /*g*/ 103 : 6, // f#
+    /*b*/ 98 : 7, // g
+    /*h*/ 104 : 8, // g#
+    /*n*/ 110 : 9, // a
+    /*j*/ 106 : 10, // a#
+    /*m*/ 109 : 11, // b
+    // High octave
+    /*r*/ 114 : 12, // c
+    /*5*/ 53 : 13, // c#
+    /*t*/ 116 : 14, // d
+    /*6*/ 54 : 15, // d#
+    /*y*/ 121 : 16, // e
+    /*u*/ 117 : 17, // f
+    /*8*/ 56 : 18, // f#
+    /*i*/ 105 : 19, // g
+    /*9*/ 57 : 20, // g#
+    /*o*/ 111 : 21, // a
+    /*0*/ 48 : 22, // a#
+    /*p*/ 112 : 23 // b
   };
   var notesShift = -12;
   var downKeys = {};
@@ -200,8 +211,8 @@
       if (!downKeys[keyCode]) {
         downKeys[keyCode] = 1;
         var key = keyNotes[keyCode];
+        console.log("Trigger     Keyboard: " + evt.key + "     Keycode: " + keyCode + "     key: " + key);
         if (typeof key != "undefined") {
-          console.log("TRIGGERED!!     key: " + key)
           $keys.trigger("note-" + (key + notesShift + notesOffset) + ".play");
           evt.preventDefault();
         } else if (keyCode == 188) {
