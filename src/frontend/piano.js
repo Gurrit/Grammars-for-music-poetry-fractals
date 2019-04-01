@@ -58,7 +58,6 @@
 
         var $k = $keys.find("[data-key=" + i + "]").addClass("pressed");
 
-        //TODO - it'd be nice to have a single event for triggering and reading
         $keys.trigger("played-note.piano", [i, $k]);
 
         // visual feedback

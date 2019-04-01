@@ -42,9 +42,10 @@ body {
 
 #piano {
   position: relative;
-  margin: 0 auto;
-  width: 782px;
+  /*width: 782px;*/
+  width: 60%;
   border-radius: 20px;
+  margin-left: 20%;
   z-index: 2;
 }
 
@@ -52,7 +53,8 @@ body {
 
 #piano .keys {
   /*width: 1144px;*/
-  width: 730px;
+  /*width: 730px;*/
+  width: 100%;
   padding: 2px 0 0 2px;
   overflow: hidden;
   background: #000;
@@ -62,7 +64,7 @@ body {
 .key {
   float: left;
   position: relative;
-  width: 50px;
+  width: 6.886%;
   height: 180px;
   margin: 0 2px 2px 0;
   background: #fff;
@@ -84,7 +86,7 @@ body {
   top: -2px;
   left: -16px;
   display: block;
-  width: 32px;
+  width: 28px;
   height: 117px;
   background: #000;
   border-radius: 0 0 4px 4px;
@@ -298,4 +300,20 @@ body {
 
 #help_header {
   margin-bottom: 50px;
+  font-family: Verdana;
+}
+
+.music_submit_button {
+  width: 30%;
+  height: 100px;
+  font-size: 16px;
+  font-family: Verdana;
+  color: #cccccc;
+  margin-left: 35%;
+  background-color: #3b3b3b;
+  margin-bottom: 50px;
+}
+
+.music_submit_button:active {
+  background-color: #5d5d5d;
 }
