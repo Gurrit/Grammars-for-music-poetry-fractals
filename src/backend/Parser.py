@@ -44,12 +44,12 @@ class Parser:
 
 #        turtle.done()
 
-    def fill_tree(self):
+    def fill_tree(self, filename):      # save a map of filled trees.
         turtle = HiddenTurtle()
         file_reader = GFFileReader()
-        commands = file_reader.read_gf_file("gf_output.txt")
-        #while "(N" not in commands:
-        if "S" in commands[0]:
+        commands = file_reader.read_gf_file(filename)
+       # while "(N" not in commands:
+        if "S" in commands[0]:  # Fix this.
             self.tree.add_new_iteration(int(commands[0].split(":")[1]))
         if "ang" in commands[1]:
             self.angle = int(commands[1].split(":")[1])
@@ -85,19 +85,12 @@ class Parser:
 #parser.parse()
 
 
-def parse_for_web(filename):
-    init.get_instance()
-    turtle_map = init.get_instance().get_web_map()
-
-    file_reader = GFFileReader()
-    commands = file_reader.read_gf_file(filename)
-    web_commands = []
-    angle = 90
-    for command in commands:
-        # Command form: Forward 'f', right 'r:angle', left 'l:angle'
-        if "ang" in command:
-            angle = command.split(":")[1]
-        if command in turtle_map:
-            web_commands.append(turtle_map.get(command)(angle))
-        print(command)
-    return web_commands
+    def parse_for_web(self, filename):      # This should use already created trees if they are available
+        init.get_instance()
+        turtle_map = init.get_instance().get_web_map()
+        self.fill_tree(filename)
+        print(self.tree.treeLists[len(self.tree.treeLists)-1].to_string)
+        l = []
+        for i in self.tree.treeLists[len(self.tree.treeLists)-1].nodes:
+            l.append(str(i.value.coordinate_1.x) + ", " + str(i.value.coordinate_1.y) + ";" + str(i.value.coordinate_2.x) + ", " + str(i.value.coordinate_2.x))
+        return l

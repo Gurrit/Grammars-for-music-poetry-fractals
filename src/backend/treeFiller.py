@@ -18,7 +18,7 @@ class treeFiller:
         self.coordinate_stack.append(turtle.coordinate.clone())
         duration_sum = 0
         for command in commands:
-            if "F" in command:
+            if "F" in command or "A" in command or "B" in command:
                 turtle.forward(config.step)
                 v = lineSegment(self.coordinate_stack.pop().clone(), turtle.coordinate.clone())
                 duration_sum += v.duration
@@ -32,7 +32,6 @@ class treeFiller:
                 turtle.left(self.angle)
             if "r" in command:
                 turtle.right(self.angle)
-        
         for i in range(self.tree.depth):
             if i != 0:
                 children = []
@@ -45,6 +44,6 @@ class treeFiller:
                             if child.value.new_track:
                                 parent.value.new_track = True
                         children = []
-        
         self.tree.treeLists.reverse()
+
 
