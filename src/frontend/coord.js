@@ -144,10 +144,10 @@ function getOption(dropdown) {
 function toJson(turtleN, type, iter, step) {
   var string =
     "{" +
-      '"turtle":' +
-      '"' +
-      turtleN +
-      '", ' +
+    '"turtle":' +
+    '"' +
+    turtleN +
+    '", ' +
     '"type":' +
     '"' +
     type +
@@ -165,26 +165,28 @@ function sendDrawMessage() {
   //sends the actual message corresponding to what fractals and iterations are picked
   let optionIter1 = getOption("selectIter1");
   let optionFracs = [getOption("selectFractal1"), getOption("selectFractal2")];
-  let canvases = [document.getElementById("canvas1"), document.getElementById("canvas2")];
-    var value = "";
-    for (canvas in canvases) {
-      for (index in fractalList) {
-        if (fractalList[index].text === optionFracs[canvas].value) {
-          value = fractalList[index].jsonFractal;
-          console.log(canvases[canvas]);
-          let turtle = getTurtle(canvases[canvas]);
-          console.log("Startpos: " + fractalList[index].startpos);
+  let canvases = [
+    document.getElementById("canvas1"),
+    document.getElementById("canvas2")
+  ];
+  var value = "";
+  for (canvas in canvases) {
+    for (index in fractalList) {
+      if (fractalList[index].text === optionFracs[canvas].value) {
+        value = fractalList[index].jsonFractal;
+        console.log(canvases[canvas]);
+        let turtle = getTurtle(canvases[canvas]);
+        console.log("Startpos: " + fractalList[index].startpos);
 
-          let array = getStartPos(canvases[canvas], fractalList[index].startpos);
+        let array = getStartPos(canvases[canvas], fractalList[index].startpos);
 
-          turtle.changepos(array[0], array[1]);
-          break;
-        }
+        turtle.changepos(array[0], array[1]);
+        break;
       }
-      //resetCanvas("canvas1"); //måste rensa canvas och flytta turtle till början igen innan ny fraktal ritas
-      let msg = toJson(canvas, value, optionIter1.value, globalStep);
-      console.log("meddelandet: " + msg);
-      sendMessage(msg);
     }
-
+    //resetCanvas("canvas1"); //måste rensa canvas och flytta turtle till början igen innan ny fraktal ritas
+    let msg = toJson(canvas, value, optionIter1.value, globalStep);
+    console.log("meddelandet: " + msg);
+    sendMessage(msg);
+  }
 }
