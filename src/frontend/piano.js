@@ -1,6 +1,7 @@
 /*! Copyright (c) 2013 - Peter Coles (mrcoles.com)
  *  Licensed under the MIT license: http://mrcoles.com/media/mit-license.txt
  */
+  var noteArray = [];
 
 (function() {
   //
@@ -36,7 +37,7 @@
       23 : "highb",
   };
 
-  var noteArray = [];
+
   var notesOffset = 0;
   var mouseOffset = 12;
 
@@ -231,9 +232,6 @@
     /*p*/ 112 : 23 // b
   };
 
-
-
-
   var notesShift = -12;
   var downKeys = {};
 
@@ -302,4 +300,13 @@
     }
     return true;
   });
+
 })();
+
+ function sendNotes() {
+    var notes = JSON.stringify(noteArray);
+    console.log(notes);
+    sendMessage(notes);
+  }
+
+
