@@ -16,12 +16,12 @@ class MIDIGenerator:
         self.reference = 72 + self.key
         self.pitch = self.reference
         self.intervalAngle = 0 # Used to determine how much the note will change
-        self.MyMIDI = MIDIFile(80)  # 20 tracks are allowed
+        self.MyMIDI = MIDIFile(80)  # 80 tracks are allowed
         self.MyMIDI.addTempo(self.track, self.time, self.tempo)
 
-    def create_midi_file(self):
+    def create_midi_file(self, file_name = "turtle.mid"):
         # Create the file
-        with open("turtle.mid", "wb") as output_file:
+        with open(file_name, "wb") as output_file:
             self.MyMIDI.writeFile(output_file)
 
     def to_minor_harmonic(self):
@@ -39,6 +39,28 @@ class MIDIGenerator:
             self.pitch = self.pitch - 1
             
 
+    def fill_track(self, tree, iteration):
+        self.MyMIDI = MIDIFile(80)
+        self.time = 0
+        self.track = 0
+        self.pitch = self.reference
+        old = tree.get_layer(iteration).nodes[0].value
+        for node in tree.get_layer(iteration).nodes:
+            new = node.value
+            self.pitch += (new.angle - old.angle)/30
+            self.to_major()
+            #self.to_minor()
+            #self.to_minor_harmonic()
+            if new.new_track:
+                self.pitch = self.reference
+                self.time = 0
+                self.track = self.track + 1
+                self.MyMIDI.addTempo(self.track, self.time, self.tempo)
+            self.MyMIDI.addNote(self.track, self.channel, self.pitch, self.time, new.duration, self.volume)
+            self.time = self.time + new.duration
+            old = node.value
+
+    
     def add_to_track(self, command):
 
         command_split = command.split(":")
