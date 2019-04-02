@@ -7,7 +7,38 @@
   // Setup keys!
   //
 
+  var intToNotes = {
+      // Low octave
+      0 : "c",
+      1 : "c#",
+      2 : "d",
+      3 : "d#",
+      4 : "e",
+      5 : "f",
+      6 : "f#",
+      7 : "g",
+      8 : "g#",
+      9 : "a",
+      10 : "a#",
+      11 : "b",
+      // High octave
+      12 : "highc",
+      13 : "highc#",
+      14 : "highd",
+      15 : "highd#",
+      16 : "highe",
+      17 : "highf",
+      18 : "highf#",
+      19 : "highg",
+      20 : "highg#",
+      21 : "higha",
+      22 : "higha#",
+      23 : "highb",
+  };
+
+  var noteArray = [];
   var notesOffset = 0;
+  var mouseOffset = 12;
 
   var blackKeys = {
     1: 1,
@@ -71,7 +102,8 @@
         class: "key" + blackKeyClass(i),
         "data-key": i,
         mousedown: function(evt) {
-          console.log("Key pressed by mouse, index: " + i)
+          console.log("Key pressed by mouse, index: " + i  + "NOTE: " + intToNotes[i + mouseOffset]);
+          noteArray.push(intToNotes[i + mouseOffset]);
           $keys.trigger("note-" + i + ".play");
         }
       }).appendTo($keys);
@@ -198,9 +230,12 @@
     /*0*/ 48 : 22, // a#
     /*p*/ 112 : 23 // b
   };
+
+
+
+
   var notesShift = -12;
   var downKeys = {};
-  var keyCodes = {};
 
   $(window)
       .keydown(function(evt) {
@@ -211,6 +246,8 @@
         var key = keyNotes[keyCode];
         // console.log("Trigger     Keyboard: " + evt.key + "     Keycode: " + keyCode + "     key: " + key);
         if (typeof key != "undefined") {
+          noteArray.push(intToNotes[key])
+          // console.log(noteArray)
           $keys.trigger("note-" + (key + notesShift + notesOffset) + ".play");
           evt.preventDefault();
         } else if (keyCode == 188) {

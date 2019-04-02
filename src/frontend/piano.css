@@ -301,6 +301,8 @@ body {
 #help_header {
   margin-bottom: 50px;
   font-family: Verdana;
+  float: left;
+
 }
 
 .music_submit_button {
@@ -309,9 +311,18 @@ body {
   font-size: 16px;
   font-family: Verdana;
   color: #cccccc;
-  margin-left: 35%;
+  margin-left: 5%;
   background-color: #3b3b3b;
   margin-bottom: 50px;
+  float: left;
+}
+
+.start_submit_margin {
+  margin-left: 15%;
+}
+
+.submit_margin {
+  margin-left: 10%;
 }
 
 .music_submit_button:active {
