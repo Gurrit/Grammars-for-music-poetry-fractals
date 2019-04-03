@@ -50,7 +50,7 @@ class Parser:
         if self.tree is None:
             self.fill_tree(filename)
         commands = []
-        for i in self.tree.treeLists[len(self.tree.treeLists) - 2].nodes:
+        for i in self.tree.treeLists[len(self.tree.treeLists) - 1].nodes:
             commands.append(str(i.value.coordinate_1.x) + ", " + str(i.value.coordinate_1.y)
                      + ";" + str(i.value.coordinate_2.x) + ", " + str(i.value.coordinate_2.y))
         return commands
