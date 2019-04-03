@@ -10,9 +10,9 @@ class init:
         self._right = lambda angle : self._turtle.right(angle)
         self._left = lambda angle : self._turtle.left(angle)
 
-        self._web_forward = lambda step : "turtle.forward(" + str(config.step) + ")"
-        self._web_right = lambda angle : "turtle.right(" + str(angle) + ")"
-        self._web_left = lambda angle : "turtle.left(" + str(angle) + ")"
+        self._web_forward = lambda step, turtle_index: "turtles[" + turtle_index + "].forward(" + str(config.step) + ")"
+        self._web_right = lambda angle, turtle_index: "turtles[" + turtle_index + "].right(" + str(angle) + ")"
+        self._web_left = lambda angle, turtle_index: "turtles[" + turtle_index + "].left(" + str(angle) + ")"
 
     def get_visualization_map(self):
         if self._turtle is None:

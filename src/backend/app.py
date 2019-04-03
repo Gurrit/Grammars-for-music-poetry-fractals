@@ -9,13 +9,14 @@ fractals = {"Sierpinski", "Dragon", "Koch", "Gosper"}
 
 async def message_receiver (websocket, path):
     async for message in websocket:
-        print(message)
         data = json.loads(message)
         map_to_function(data)
-        web = parse_for_web(generate_file_name(data))
+        web = parse_for_web(generate_file_name(data), data['turtle'])
+        message = ""
         for m in web:
-            print(m)
-            await websocket.send(m)
+            message = message + m + ","
+        message = message[:-1]
+        await websocket.send(message)
 
 
 def map_to_function(data):

@@ -31,7 +31,7 @@ function main() {
   addFractalOptions("selectFractal1");
   addFractalOptions("selectFractal2");
 
-  connectToServer();
+  connectToServer([turtcanv1, turtcanv2]);
 }
 
 function getStartPos(canvas, startpos) {
@@ -116,7 +116,7 @@ function addIterOptions(textFractal, selectID) {
 
 function turtleCanvasobj(canvas) {
   //creating objects sconsisting of a new turtle and the corresponding canvas
-  canvasen = document.getElementById(canvas);
+  let canvasen = document.getElementById(canvas);
   let turtlen = new CreateTurtle(canvasen);
 
   this.canvasen = canvasen;
@@ -126,8 +126,7 @@ function turtleCanvasobj(canvas) {
 function getTurtle(canvas) {
   //get the turtle corresponding to canvas
   for (index in canvasturtlelist) {
-    console.log("canvasen:" + canvasturtlelist[index].canvasen);
-    if (canvasturtlelist[index].canvasen == canvas.toString()) {
+    if (canvasturtlelist[index].canvasen === canvas) {
       return canvasturtlelist[index].turtlen;
     }
   }
@@ -142,14 +141,17 @@ function getOption(dropdown) {
   return selected;
 }
 
-function toJson(type, iter, step) {
+function toJson(turtleN, type, iter, step) {
   var string =
     "{" +
+    '"turtle":' +
+    '"' +
+    turtleN +
+    '", ' +
     '"type":' +
     '"' +
     type +
-    '",' +
-    " " +
+    '", ' +
     '"iteration":' +
     iter +
     ", " +
@@ -161,30 +163,29 @@ function toJson(type, iter, step) {
 
 function sendDrawMessage() {
   //sends the actual message corresponding to what fractals and iterations are picked
-  var optionFrac1 = getOption("selectFractal1");
-  var optionIter1 = getOption("selectIter1");
-  var optionFrac2 = getOption("selectFractal2");
-
-  canvas1 = document.getElementById("canvas1");
-  canvas2 = document.getElementById("cnvas2");
-
-  if (optionFrac2.value == "None") {
-    var value = "";
+  let optionIter1 = getOption("selectIter1");
+  let optionFracs = [getOption("selectFractal1"), getOption("selectFractal2")];
+  let canvases = [
+    document.getElementById("canvas1"),
+    document.getElementById("canvas2")
+  ];
+  var value = "";
+  for (canvas in canvases) {
     for (index in fractalList) {
-      if (fractalList[index].text == optionFrac1.value) {
+      if (fractalList[index].text === optionFracs[canvas].value) {
         value = fractalList[index].jsonFractal;
-        turtle = getTurtle(canvas1);
+        console.log(canvases[canvas]);
+        let turtle = getTurtle(canvases[canvas]);
         console.log("Startpos: " + fractalList[index].startpos);
 
-        array = getStartPos(canvas1, fractalList[index].startpos);
+        let array = getStartPos(canvases[canvas], fractalList[index].startpos);
 
         turtle.changepos(array[0], array[1]);
         break;
       }
     }
-
     //resetCanvas("canvas1"); //måste rensa canvas och flytta turtle till början igen innan ny fraktal ritas
-    msg = toJson(value, optionIter1.value, globalStep);
+    let msg = toJson(canvas, value, optionIter1.value, globalStep);
     console.log("meddelandet: " + msg);
     sendMessage(msg);
   }
