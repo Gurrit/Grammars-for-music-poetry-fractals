@@ -14,7 +14,6 @@ async def message_receiver (websocket, path):
         map_to_function(data)
         web = parser.parse_for_web(generate_file_name(data))
         for m in web:
-            print(m)
             await websocket.send(m)
 
 
