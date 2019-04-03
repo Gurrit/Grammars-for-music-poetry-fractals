@@ -50,6 +50,12 @@ def generate_file_name(data):
     return config.gf_output_path + data['type'] + str(data['iteration']) + ".txt"
 
 
+def get_information_from_list(data)
+    #TODO: check if data input is list
+    #TODO: send list to noteArray in piano.py
+    #TODO: receive information about how to draw the fractal
+
+
 asyncio.get_event_loop().run_until_complete(
     websockets.serve(message_receiver, '0.0.0.0', config.PORT))
 asyncio.get_event_loop().run_forever()
