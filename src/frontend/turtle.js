@@ -53,6 +53,11 @@ function CreateTurtle(canvas) {
     return array;
   };
 
+  self.rotates = function() {
+    rotate(90);
+    return self;
+  };
+
   self.changepos = function(x1, y1) {
     setpos(x1, y1);
     return self;

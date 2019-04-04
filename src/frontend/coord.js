@@ -161,6 +161,12 @@ function toJson(turtleN, type, iter, step) {
   return string;
 }
 
+function resetCanvas(canvas) {
+  const context = canvas.getContext("2d");
+
+  context.clearRect(0, 0, canvas.width, canvas.height);
+}
+
 function sendDrawMessage() {
   //sends the actual message corresponding to what fractals and iterations are picked
   let optionIter1 = getOption("selectIter1");
@@ -171,16 +177,17 @@ function sendDrawMessage() {
   ];
   var value = "";
   for (canvas in canvases) {
+    resetCanvas(canvases[canvas]);
     for (index in fractalList) {
       if (fractalList[index].text === optionFracs[canvas].value) {
         value = fractalList[index].jsonFractal;
-        console.log(canvases[canvas]);
         let turtle = getTurtle(canvases[canvas]);
         console.log("Startpos: " + fractalList[index].startpos);
 
         let array = getStartPos(canvases[canvas], fractalList[index].startpos);
 
         turtle.changepos(array[0], array[1]);
+        turtle.rotates();
         break;
       }
     }
