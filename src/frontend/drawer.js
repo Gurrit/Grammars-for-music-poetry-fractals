@@ -1,5 +1,6 @@
 function CreateDrawer(canvas) {
     let self = this;
+    self.drawings =[] ;
     self.penStyle = 'black';
     self.penWidth = 1;
     self.context = canvas.getContext('2d');
@@ -8,6 +9,7 @@ function CreateDrawer(canvas) {
     self.draw = function (coordinate1, coordinate2) {
         self.context.moveTo(coordinate1.x, coordinate1.y);
         self.context.lineTo(coordinate2.x, coordinate2.y);
+        self.drawings.push(new line(coordinate1, coordinate2));
         self.context.stroke();
     };
     self.extract = function(inputString) {
@@ -15,6 +17,17 @@ function CreateDrawer(canvas) {
         let xInt = Number(x) + (self.width / 2);
         let yInt = Number(y) + (self.height / 2);
         return new coordinate(xInt, yInt);
+    };
+    self.scale = function (factor) {
+        self.context.scale(factor, factor);
+        self.redraw();
+    };
+    self.redraw = function () {
+        for(let drawing in self.drawings) {
+            let c1 = drawing.c1;
+            let c2 = drawing.c2;
+            console.log(c1);
+        }
     };
     return self;
 }
@@ -25,5 +38,12 @@ class coordinate {
         self.x = x;
         self.y = y;
         return self;
+    }
+}
+class line {
+    constructor(c1, c2) {
+        let self = this;
+        self.c1 = c1;
+        self.c2 = c2;
     }
 }

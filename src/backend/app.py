@@ -13,6 +13,7 @@ async def message_receiver (websocket, path):
         data = json.loads(message)
         map_to_function(data)
         web = parser.parse_for_web(generate_file_name(data))
+        print("done, sending message")
         for m in web:
             await websocket.send(m)
 
