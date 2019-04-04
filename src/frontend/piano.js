@@ -303,10 +303,33 @@
 
 })();
 
+function toPianoJson(data,type,mode,iter,step) {
+  var string =
+    "{" +
+    '"data":' +
+    '"' +
+    data +
+    '", ' +
+    '"type":' +
+    '"' +
+    type +
+    '", ' +
+    '"mode":' +
+    '"' +
+    mode +
+    '", ' +
+    '"iteration":' +
+    iter +
+    ", " +
+    '"step":' +
+    step +
+    "}";
+  return string;
+}
+
  function sendNotes() {
     var notes = JSON.stringify(noteArray);
+    var pianoJson = toPianoJson(noteArray,"Sierpinski","piano","3","20"); //TODO: select fractal
     console.log(notes);
-    sendMessage(notes);
+    sendMessage(pianoJson);
   }
-
-
