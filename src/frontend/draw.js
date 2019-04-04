@@ -1,15 +1,16 @@
 const settings = {
-    url:"ws://localhost:8765/",
+    url: "ws://localhost:8765/",
     socket: null,
-    drawer: null
+    turtles: []
 };
 
-function connectToServer() {
+function connectToServer(canvases) {
     let url = settings.url;
-    var socket = new WebSocket(url);
-    settings.drawer = new CreateDrawer(document.getElementById("canvas"));       // Needed for eval to wor
-    let canvas = document.getElementById("canvas");// k
-    let context = canvas.getContext('2d');
+    let socket = new WebSocket(url);
+    //borde vara turtle baserad på vilken canvas den ska utritas till (en if-sats)
+    for (let canvas in canvases) {
+        settings.turtles[canvas] = getTurtle(canvases[canvas].canvasen);
+    }
     socket.onmessage = function (event) {
         let dataStr = event.data;
         let [from, to] = dataStr.split(";");
@@ -17,11 +18,13 @@ function connectToServer() {
         let coordinate2 = settings.drawer.extract(to);
         settings.drawer.draw(coordinate1, coordinate2);
     };
-    return socket;
+
+    settings.socket = socket;
 }
 
-function sendMessage() {
-    settings.socket.send("{\"type\":\"Sierpinski\", \n \"iteration\":7, \n \"step\":8 }");
+function sendMessage(message) {
+  console.log("sending messages")
+  settings.socket.send(message);
 }
 
 function scale(factor) {
