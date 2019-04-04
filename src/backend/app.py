@@ -3,6 +3,7 @@ import websockets
 import json
 from Parser import *
 import os
+from piano import *
 
 fractals = {"Sierpinski", "Dragon", "Koch", "Gosper"}
 
@@ -20,6 +21,15 @@ async def message_receiver (websocket, path):
 
 
 def map_to_function(data):
+    print(data)
+    if data['mode'] == "piano":
+        print(data['data'])
+        interprete_notes(data['data'])
+        print("COLOR" + str(colorArray))
+        #go to piano.py
+    if data['mode'] == "math":
+        pass
+        #draw fractal
     if data['type'] in fractals:
         config.step = data['step']
         if os.path.isfile(generate_file_name(data)):

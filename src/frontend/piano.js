@@ -1,13 +1,45 @@
 /*! Copyright (c) 2013 - Peter Coles (mrcoles.com)
  *  Licensed under the MIT license: http://mrcoles.com/media/mit-license.txt
  */
+  var noteArray = [];
 
 (function() {
   //
   // Setup keys!
   //
 
+  var intToNotes = {
+      // Low octave
+      0 : "c",
+      1 : "c#",
+      2 : "d",
+      3 : "d#",
+      4 : "e",
+      5 : "f",
+      6 : "f#",
+      7 : "g",
+      8 : "g#",
+      9 : "a",
+      10 : "a#",
+      11 : "b",
+      // High octave
+      12 : "highc",
+      13 : "highc#",
+      14 : "highd",
+      15 : "highd#",
+      16 : "highe",
+      17 : "highf",
+      18 : "highf#",
+      19 : "highg",
+      20 : "highg#",
+      21 : "higha",
+      22 : "higha#",
+      23 : "highb",
+  };
+
+
   var notesOffset = 0;
+  var mouseOffset = 12;
 
   var blackKeys = {
     1: 1,
@@ -58,7 +90,6 @@
 
         var $k = $keys.find("[data-key=" + i + "]").addClass("pressed");
 
-        //TODO - it'd be nice to have a single event for triggering and reading
         $keys.trigger("played-note.piano", [i, $k]);
 
         // visual feedback
@@ -72,6 +103,8 @@
         class: "key" + blackKeyClass(i),
         "data-key": i,
         mousedown: function(evt) {
+          console.log("Key pressed by mouse, index: " + i  + "NOTE: " + intToNotes[i + mouseOffset]);
+          noteArray.push(intToNotes[i + mouseOffset]);
           $keys.trigger("note-" + i + ".play");
         }
       }).appendTo($keys);
@@ -79,8 +112,9 @@
 
     // delayed for-loop to stop browser from crashing :'(
     // go slower on Chrome...
+
     var i = -12,
-      max = 14,
+      max = 12,
       addDelay = /Chrome/i.test(navigator.userAgent) ? 80 : 0;
     (function go() {
       addKey(i + notesOffset);
@@ -140,48 +174,94 @@
   // Setup keyboard interaction
   //
 
-  var keyNotes = {
-    /*a*/ 65: 0, // c
-    /*w*/ 87: 1, // c#
-    /*s*/ 83: 2, // d
-    /*e*/ 69: 3, // d#
-    /*d*/ 68: 4, // e
-    /*f*/ 70: 5, // f
-    /*t*/ 84: 6, // f#
-    /*g*/ 71: 7, // g
-    /*y*/ 89: 8, // g#
-    /*h*/ 72: 9, // a
-    /*u*/ 85: 10, // a#
-    /*j*/ 74: 11, // b
-    /*k*/ 75: 12, // c
-    /*o*/ 79: 13, // c#
-    /*l*/ 76: 14, // d
-    /*p*/ 80: 15, // d#
-    /*ö*/ 186: 16, // e
-    /*ö*/ 59: 16, // e ... gotta figure out why it's sometimes 186 and sometimes 59
-    /*ä*/ 222: 17, // f
-    /*¨*/ 221: 18, // f#
-    /*enter*/ 13: 19 // g
+  var keyToCodes = {
+    // Low octave
+    /*z*/ 'z' : 122, // c
+    /*s*/ 's' : 115, // c#
+    /*x*/ 'x' : 120, // d
+    /*d*/ 'd' : 100, // d#
+    /*c*/ 'c' : 99, // e
+    /*v*/ 'v' : 118, // f
+    /*g*/ 'g' : 103, // f#
+    /*b*/ 'b' : 98, // g
+    /*h*/ 'h' : 104, // g#
+    /*n*/ 'n' : 110, // a
+    /*j*/ 'j' : 106, // a#
+    /*m*/ 'm' : 109, // b
+    // High octave
+    /*r*/ 'r' : 114, // c
+    /*5*/ '5' : 53, // c#
+    /*t*/ 't' : 116, // d
+    /*6*/ '6' : 54, // d#
+    /*y*/ 'y' : 121, // e
+    /*u*/ 'u' : 117, // f
+    /*8*/ "8" : 56, // f#
+    /*i*/ 'i' : 105, // g
+    /*9*/ '9' : 57, // g#
+    /*o*/ 'o' : 111, // a
+    /*0*/ '0' : 48, // a#
+    /*p*/ 'p' : 112 // b
   };
+
+  var keyNotes = {
+    // Low octave
+    /*z*/ 122 : 0, // c
+    /*s*/ 115 : 1, // c#
+    /*x*/ 120 : 2, // d
+    /*d*/ 100 : 3, // d#
+    /*c*/ 99 : 4, // e
+    /*v*/ 118 : 5, // f
+    /*g*/ 103 : 6, // f#
+    /*b*/ 98 : 7, // g
+    /*h*/ 104 : 8, // g#
+    /*n*/ 110 : 9, // a
+    /*j*/ 106 : 10, // a#
+    /*m*/ 109 : 11, // b
+    // High octave
+    /*r*/ 114 : 12, // c
+    /*5*/ 53 : 13, // c#
+    /*t*/ 116 : 14, // d
+    /*6*/ 54 : 15, // d#
+    /*y*/ 121 : 16, // e
+    /*u*/ 117 : 17, // f
+    /*8*/ 56 : 18, // f#
+    /*i*/ 105 : 19, // g
+    /*9*/ 57 : 20, // g#
+    /*o*/ 111 : 21, // a
+    /*0*/ 48 : 22, // a#
+    /*p*/ 112 : 23 // b
+  };
+
   var notesShift = -12;
   var downKeys = {};
-  var keyCodes = {};
 
   $(window)
-    .keydown(function(evt) {
-      var keyCode = evt.keyCode;
-      // prevent repeating keys //var tvungen att ta bort keycode = if..., funkade ej annars
-      if (downKeys[keyCode]) {
+      .keydown(function(evt) {
+      var keyTone = evt.key;
+      var keyCode = keyToCodes[keyTone];
+      if (!downKeys[keyCode]) {
         downKeys[keyCode] = 1;
         var key = keyNotes[keyCode];
+        // console.log("Trigger     Keyboard: " + evt.key + "     Keycode: " + keyCode + "     key: " + key);
         if (typeof key != "undefined") {
-          $keys.trigger("note-" + key + notesShift + notesOffset + ".play");
+          noteArray.push(intToNotes[key])
+          // console.log(noteArray)
+          $keys.trigger("note-" + (key + notesShift + notesOffset) + ".play");
           evt.preventDefault();
+        } else if (keyCode == 188) {
+            notesShift = -12;
+        } else if (keyCode == 190) {
+            notesShift = 0;
+        } else if (keyCode == 37 || keyCode == 39) {
+            notesOffset += (keyCode == 37 ? -1 : 1) * 12;
+            buildPiano();
         }
       }
     })
     .keyup(function(evt) {
-      delete downKeys[evt.keyCode];
+      var keyTone = evt.key;
+      var keyCode = keyToCodes[keyTone];
+      delete downKeys[keyCode];
     });
 
   //
@@ -213,11 +293,43 @@
   // prevent quick find...
   $(window).keydown(function(evt) {
     if (evt.target.nodeName != "INPUT" && evt.target.nodeName != "TEXTAREA") {
-      if (evt.keyCode == 222) {
+      if (evt.key == 'single quote') {
         evt.preventDefault();
         return false;
       }
     }
     return true;
   });
+
 })();
+
+function toPianoJson(data,type,mode,iter,step) {
+  var string =
+    "{" +
+    '"data":' +
+    '"' +
+    data +
+    '", ' +
+    '"type":' +
+    '"' +
+    type +
+    '", ' +
+    '"mode":' +
+    '"' +
+    mode +
+    '", ' +
+    '"iteration":' +
+    iter +
+    ", " +
+    '"step":' +
+    step +
+    "}";
+  return string;
+}
+
+ function sendNotes() {
+    var notes = JSON.stringify(noteArray);
+    var pianoJson = toPianoJson(noteArray,"Sierpinski","piano","3","20"); //TODO: select fractal
+    console.log(notes);
+    sendMessage(pianoJson);
+  }

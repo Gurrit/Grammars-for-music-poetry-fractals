@@ -76,11 +76,11 @@ def interprete_notes(noteArray):
 
 #def go_turtle(grammarArrayen):
 
- #   brad = turtle.Turtle()
-  #  brad.hideturtle()
-   # brad.speed(0)
+#    brad = turtle.Turtle()
+ #   brad.hideturtle()
+  #  brad.speed(0)
 
-    #gf_commands = gf_string.split(" ")
+   # gf_commands = gf_string.split(" ")
     #gf_commands_length = len(gf_commands)
 
     #numberOfColors = len(colorArray)
