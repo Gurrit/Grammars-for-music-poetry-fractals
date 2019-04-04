@@ -22,13 +22,9 @@ class Parser:
     def parser_for_midi(self):
         generator = MIDIGenerator()
 
-        file_reader = GFFileReader()
-        commands = file_reader.read_gf_file()
-
-        for command in commands:
-            generator.add_to_track(command)
-
-        generator.create_midi_file()
+        for i in range(self.tree.depth):
+            generator.fill_track(self.tree, i)
+            generator.create_midi_file("fractal_" + str(i) +".mid")
 
 #    def parse_for_turtle(self):
 #        init.get_instance().set_turtle(self._turtle)
@@ -51,7 +47,7 @@ class Parser:
     def fill_tree(self):
         turtle = HiddenTurtle()
         file_reader = GFFileReader()
-        commands = file_reader.read_gf_file()
+        commands = file_reader.read_gf_file("gf_output.txt")
         #while "(N" not in commands:
         if "S" in commands[0]:
             self.tree.add_new_iteration(int(commands[0].split(":")[1]))

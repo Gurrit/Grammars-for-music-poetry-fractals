@@ -1,4 +1,5 @@
 import math
+import random
 
 class lineSegment:
 
@@ -8,10 +9,12 @@ class lineSegment:
         self.color = color
         self.x_length = coordinate_2.x - coordinate_1.x
         self.y_length = coordinate_2.y - coordinate_1.y
+        self.duration = math.pow(2, random.randint(-2,2))
+        self.new_track = False
 
         self.length = math.sqrt((self.x_length*self.x_length) + (self.y_length*self.y_length))
         if self.x_length != 0:
-            self.angle = math.atan(self.y_length / self.x_length)
+            self.angle = math.atan(self.y_length / self.x_length) * 180 / math.pi
         elif self.y_length > 0:
             self.angle = 90
         else:
