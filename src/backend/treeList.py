@@ -47,11 +47,13 @@ class Layer:
         node.remove_all_children()
 
     def to_string(self):
-        s = "[(" + str(self.nodes[0].value.coordinate_1.x) + ", " + str(self.nodes[0].value.coordinate_1.y) + ")"
-        for node in self.nodes:
-            s += ", (" + str(node.value.coordinate_2.x) + ", " + str(node.value.coordinate_2.y) + ")"
-        s += "]"
-        return s
+        if len(self.nodes) != 0:
+            s = "[(" + str(self.nodes[0].value.coordinate_1.x) + ", " + str(self.nodes[0].value.coordinate_1.y) + ")"
+            for node in self.nodes:
+                s += ", (" + str(node.value.coordinate_2.x) + ", " + str(node.value.coordinate_2.y) + ")"
+            s += "]"
+            return s
+        return None
 
 
 
@@ -83,4 +85,3 @@ class Node:
         for child in self.children:
             child.remove_parrent()
         self.children = []
-

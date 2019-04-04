@@ -11,16 +11,11 @@ fractals = {"Sierpinski", "Dragon", "Koch", "Gosper"}
 async def message_receiver (websocket, path):
     async for message in websocket:
         data = json.loads(message)
-        map_to_function(data)
-        web = parse_for_web(generate_file_name(data), data['turtle'])
-        message = ""
-        for m in web:
-            message = message + m + ","
-        message = message[:-1]
-        await websocket.send(message)
+        await map_to_function(websocket, data)
 
 
-def map_to_function(data):
+
+async def map_to_function(websocket, data):
     print(data)
     if data['mode'] == "piano":
         print(data['data'])
@@ -30,18 +25,24 @@ def map_to_function(data):
     if data['mode'] == "math":
         pass
         #draw fractal
-    if data['type'] in fractals:
-        config.step = data['step']
-        if os.path.isfile(generate_file_name(data)):
-            return
-        else:
-            generate_new_fractal_file(data)
+    if data['mode'] == "draw":
+        if data['type'] in fractals:
+            config.step = data['step']
+            print(config.step)
+            if not os.path.isfile(generate_file_name(data)):
+                generate_new_fractal_file(data)
+            print("done, sending message")
+            web = parser.parse_for_web(generate_file_name(data))
+            for m in web:
+                m = data['index'] + ";" + m
+                print(m)
+                await websocket.send(m)
 
 
 def generate_new_fractal_file(data):
     iteration = data['iteration']
     gf_file = config.gf_file_path + data['type']
-    gf_commands = "import " + gf_file + ".gf \n l c(s "       # How should this look?
+    gf_commands = "import " + gf_file + ".gf \n l -bracket c(s "       # How should this look?
     start_iterations = ""
     for i in range(iteration):
         start_iterations = start_iterations + "(s"
@@ -53,6 +54,7 @@ def generate_new_fractal_file(data):
     file = open(config.gf_script_path, 'w+')
     file.write(gf_commands)
     file.close()
+    print(gf_commands)
     os.system("gf < " + config.gf_script_path)
 
 
@@ -60,6 +62,7 @@ def generate_file_name(data):
     return config.gf_output_path + data['type'] + str(data['iteration']) + ".txt"
 
 
+parser = Parser()
 asyncio.get_event_loop().run_until_complete(
     websockets.serve(message_receiver, '0.0.0.0', config.PORT))
 asyncio.get_event_loop().run_forever()
