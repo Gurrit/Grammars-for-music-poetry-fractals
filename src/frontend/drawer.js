@@ -22,6 +22,11 @@ function CreateDrawer(canvas) {
         self.context.scale(factor, factor);
         self.redraw();
     };
+    self.reset = function() {
+        const context = canvas.getContext("2d");
+        console.log("reseting ");
+        context.clearRect(0, 0, canvas.width, canvas.height);
+    };
     self.redraw = function () {
         for(let drawing in self.drawings) {
             let c1 = drawing.c1;
