@@ -1,2 +1,2 @@
-importgosper.gf 
-l s (s (s z)) | wf -file=gf_output.txt
+import ./app/te/Sierpinski.gf 
+ l -bracket c(s (s z)) | wf -file=fractals/Sierpinski1.txt
