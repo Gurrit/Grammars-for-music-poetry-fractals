@@ -26,7 +26,6 @@ function CreateDrawer(canvas) {
         for(let drawing in self.drawings) {
             let c1 = drawing.c1;
             let c2 = drawing.c2;
-            console.log(c1);
         }
     };
     return self;

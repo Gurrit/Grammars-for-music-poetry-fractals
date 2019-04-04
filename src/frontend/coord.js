@@ -1,6 +1,6 @@
-var fractalList = new Array();
-canvasturtlelist = new Array();
-globalStep = 5;
+const fractalList = [];
+canvasturtlelist = [];
+globalStep = 8;
 
 function main() {
   //skapar elementen till listorna och turtlecanvasobjekten
@@ -23,11 +23,10 @@ function main() {
   );
   fractalList.push(koch);
 
-  var turtcanv1 = new turtleCanvasobj("canvas1");
-  var turtcanv2 = new turtleCanvasobj("canvas2");
+  let turtcanv1 = new TurtleCanvasobj("canvas1");
+  let turtcanv2 = new TurtleCanvasobj("canvas2");
   canvasturtlelist.push(turtcanv1);
   canvasturtlelist.push(turtcanv2);
-
   addFractalOptions("selectFractal1");
   addFractalOptions("selectFractal2");
 
@@ -114,17 +113,19 @@ function addIterOptions(textFractal, selectID) {
   maxIter = fractalList[index].text;
 }
 
-function turtleCanvasobj(canvas) {
+function TurtleCanvasobj(canvas) {
   //creating objects sconsisting of a new turtle and the corresponding canvas
   let canvasen = document.getElementById(canvas);
-  let turtlen = new CreateTurtle(canvasen);
-
+  let drawer = new CreateDrawer(canvasen);
+  let self = this;
   this.canvasen = canvasen;
-  this.turtlen = turtlen;
+  this.turtlen = drawer;
+  return self;
 }
 
 function getTurtle(canvas) {
   //get the turtle corresponding to canvas
+   console.log(canvasturtlelist);
   for (index in canvasturtlelist) {
     if (canvasturtlelist[index].canvasen === canvas) {
       return canvasturtlelist[index].turtlen;
@@ -144,7 +145,9 @@ function getOption(dropdown) {
 function toJson(turtleN, type, iter, step) {
   var string =
     "{" +
-    '"turtle":' +
+    '"mode":' +
+    '"draw", ' +
+    '"index":' +
     '"' +
     turtleN +
     '", ' +
@@ -185,9 +188,6 @@ function sendDrawMessage() {
         console.log("Startpos: " + fractalList[index].startpos);
 
         let array = getStartPos(canvases[canvas], fractalList[index].startpos);
-
-        turtle.changepos(array[0], array[1]);
-        turtle.rotates();
         break;
       }
     }
