@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<meta charset="utf-8" />
+<head>
+  <link href="style.css" rel="stylesheet" />
+  <link
+    rel="stylesheet"
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"
+  />
+</head>
+
+<script src="coord.js"></script>
+<script src="turtle.js"></script>
+<script src="draw.js"></script>
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="index.html">Grammar for music and poetry</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="page1.html">Krasimir Mode</a></li>
+      <li><a href="page2.html">Art and music Mode</a></li>
+      <li><a href="info.html">Info</a></li>
+    </ul>
+  </div>
+</nav>
+
+<body onload="main()">
+  <h1>Translation between fractals</h1>
+
+  <div class="selectdiv">
+    <select id="selectFractal1" onchange="selected()">
+      <option value="None">None</option>
+    </select>
+    <select id="selectIter1"> </select>
+    <button type="button" id="translateBtn" onclick="sendDrawMessage()">
+      Translate To
+    </button>
+    <select id="selectFractal2">
+      <option value="None">None</option></select
+    >
+  </div>
+
+  <div id="container">
+    <canvas
+      class="canvasStyle"
+      id="canvas1"
+      onclick="sendCursorPosition(canvas1, event)"
+      height="600vw"
+      width="600vw"
+    ></canvas>
+
+    <canvas
+      class="canvasStyle"
+      id="canvas2"
+      onclick="sendCursorPosition(canvas2, event)"
+      height="600vw"
+      width="600vw"
+    ></canvas>
+  </div>
+</body>
