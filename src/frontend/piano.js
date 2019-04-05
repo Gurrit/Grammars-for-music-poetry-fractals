@@ -303,7 +303,7 @@
 
 })();
 
-function toPianoJson(data,type,mode,iter,step) {
+function toPianoJson(data,type,mode,draw,iter,step) { //TODO: listen
   var string =
     "{" +
     '"data":' +
@@ -318,6 +318,10 @@ function toPianoJson(data,type,mode,iter,step) {
     '"' +
     mode +
     '", ' +
+    '"draw":' +
+    '"' +
+    draw +
+    '", ' +
     '"iteration":' +
     iter +
     ", " +
@@ -329,8 +333,11 @@ function toPianoJson(data,type,mode,iter,step) {
 
  function sendNotes() {
     var notes = JSON.stringify(noteArray);
-    var pianoJson = toPianoJson(noteArray,"Sierpinski","piano","3","20"); //TODO: select fractal
+    var pianoJson = toPianoJson(noteArray,"Sierpinski","piano","true","3","20"); //TODO: select fractal
     console.log(notes);
     sendMessage(pianoJson);
+  }
+
+  function resetPiano() {
     noteArray = [];
   }

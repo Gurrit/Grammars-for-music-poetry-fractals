@@ -18,20 +18,12 @@ class treeFiller:
         self.coordinate_stack.append(turtle.coordinate.clone())
         duration_sum = 0
         for command in commands:
-            if "F" in command or "A" in command or "B" in command:
-                turtle.forward(config.step)
-                v = lineSegment(self.coordinate_stack.pop().clone(), turtle.coordinate.clone())
-                duration_sum += v.duration
-                if duration_sum > self.max_duration * 4:
-                    duration_sum = 0
-                    v.new_track = True
-                n = Node(v, None)
-                self.tree.treeLists[0].append(n)
-                self.coordinate_stack.append(turtle.coordinate.clone())
+            if "F" in command or "A" in command or "B" in command:          #TODO Make more general
+                self.create_node()
             if "l" in command:
-                turtle.left(self.angle)
+                self.turn_left()
             if "r" in command:
-                turtle.right(self.angle)
+                self.turn_right()
         for i in range(self.tree.depth):
             if i != 0:
                 children = []
@@ -46,4 +38,19 @@ class treeFiller:
                         children = []
         self.tree.treeLists.reverse()
 
+    def create_node():
+        turtle.forward(config.step)
+                v = lineSegment(self.coordinate_stack.pop().clone(), turtle.coordinate.clone())
+                duration_sum += v.duration
+                if duration_sum > self.max_duration * 4:
+                    duration_sum = 0
+                    v.new_track = True
+                n = Node(v, None)
+                self.tree.treeLists[0].append(n)
+                self.coordinate_stack.append(turtle.coordinate.clone())
 
+    def turn_left():
+        turtle.left(self.angle)     #TODO read from leftAngleArray
+
+    def turn_right():
+        turtle.right(self.angle)    #TODO read from leftAngleArray

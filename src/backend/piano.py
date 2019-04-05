@@ -77,9 +77,9 @@ def interprete_notes(noteArray):
     noteArray = []
 
 def reset_drawing_arrays():
-    colorArray = []
-    rightAngleArray = []
-    leftAngleArray = []
+    del colorArray[:]
+    del rightAngleArray[:]
+    del leftAngleArray[:]
 
 #def go_turtle(grammarArrayen):
 
@@ -115,10 +115,6 @@ def reset_drawing_arrays():
     #colorIndex = 0
     #rightAngleIndex = 0
     #leftAngleIndex = 0
-
-    #print("Color array:" + str(colorArray))
-    #print("Right angle array:" + str(rightAngleArray))
-    #print("Left angle array:" + str(leftAngleArray))
 
     #brad.fill(True)
     #for i in range(0, gf_commands_length, 1):

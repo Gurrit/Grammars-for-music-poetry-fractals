@@ -13,7 +13,13 @@ async def message_receiver (websocket, path):
         data = json.loads(message)
         await map_to_function(websocket, data)
 
-
+def generate_gf_string(data)
+    if data['type'] in fractals:
+        config.step = data['step']
+        print(config.step)
+        if not os.path.isfile(generate_file_name(data)):
+            generate_new_fractal_file(data)
+        print("done, sending message")
 
 async def map_to_function(websocket, data):
     print(data)
@@ -24,22 +30,15 @@ async def map_to_function(websocket, data):
         print("RIGHT ANGLE" + str(rightAngleArray))
         print("LEFT ANGLE" + str(leftAngleArray))
         reset_drawing_arrays()
-        #go to piano.py
+        web = parser.parse_for_web(generate_file_name(data))
+        #call draw_piano_fractal()
     if data['mode'] == "math":
         pass
-        #draw fractal
-    if data['mode'] == "draw":
-        if data['type'] in fractals:
-            config.step = data['step']
-            print(config.step)
-            if not os.path.isfile(generate_file_name(data)):
-                generate_new_fractal_file(data)
-            print("done, sending message")
-            web = parser.parse_for_web(generate_file_name(data))
-            for m in web:
-                m = data['index'] + ";" + m
-                print(m)
-                await websocket.send(m)
+        web = parser.parse_for_web(generate_file_name(data))
+        #call "draw_regular_fractal()" or equiv
+
+def draw_piano_fractal():
+    
 
 def generate_new_fractal_file(data):
     iteration = data['iteration']

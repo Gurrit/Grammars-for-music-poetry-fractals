@@ -3,7 +3,7 @@ import random
 
 class lineSegment:
 
-    def __init__(self,coordinate_1,coordinate_2,color="#000000"):
+    def __init__(self,coordinate_1,coordinate_2,color="#000000"):       #TODO add color fill
         self.coordinate_1 = coordinate_1
         self.coordinate_2 = coordinate_2
         self.color = color
