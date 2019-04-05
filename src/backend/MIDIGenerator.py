@@ -50,22 +50,20 @@ class MIDIGenerator:
             delta = new.angle - old.angle
             if abs(delta) > 180:
                 delta -= 360 * delta / abs(delta)
-            #print("Iteration " + str(iteration) + ": " + str(new.angle) + " - " + str(old.angle) + " = " + str(delta))
-            self.pitch += (delta)/30
+            self.pitch += int((delta)/30)
             if abs(self.pitch - self.reference) > 24:
                 self.pitch -= 24 * delta/abs(delta)
-            self.to_major()
-            #self.to_minor()
-            #self.to_minor_harmonic()
             if new.new_track:
                 self.pitch = self.reference
                 self.time = 0
                 self.track = self.track + 1
                 self.MyMIDI.addTempo(self.track, self.time, self.tempo)
+            #self.to_major()
+            self.to_minor()
+            #self.to_minor_harmonic()
             self.MyMIDI.addNote(self.track, self.channel, self.pitch, self.time, new.duration, self.volume)
             self.time = self.time + new.duration
             old = node.value
-        #print("--------------------------------------------------")
 
     
     def add_to_track(self, command):
