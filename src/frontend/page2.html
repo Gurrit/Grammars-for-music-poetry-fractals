@@ -17,8 +17,10 @@
   <link rel="image_src" href="http://mrcoles.com/media/img/piano-visual-mode.png" />
 </head>
 
-<script src="coord.js"></script>
+<script src="fractalIterSelect.js"></script>
 <script src="pag2.js"></script>
+<script src="drawer.js"></script>
+<script src="turtlecanvas.js"></script>
 
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
@@ -35,9 +37,9 @@
 
 <div class="centerdiv">EXPERIMENTAL</div>
 
-<body onload="main()">
+<body onload="startPianoUI()">
 
-  <select id="selectFractal3" onchange="selected()">
+  <select id="selectFractal3" onchange="selected(id)">
     <option value="None">None</option>
   </select>
   <select id="selectIter3"> </select>

@@ -35,8 +35,9 @@ function sendNotes() {
   noteArray = [];
 }
 
-function main() {
+function startPianoUI() {
+  createFractalList();
+  let turtcanv1 = new TurtleCanvasobj("canvas3");
   addFractalOptions("selectFractal3");
-
-  connectToServer();
+  connectToServer([turtcanv1]);
 }
