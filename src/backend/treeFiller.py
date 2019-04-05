@@ -13,6 +13,7 @@ class treeFiller:
         self.angle = angle
         self.kids = kids
         self.max_duration = max_duration
+        self.duration_sum = 0
 
         # For changing the appearance of the drawn fractal
         self.colour_list = []
@@ -23,11 +24,11 @@ class treeFiller:
 
     def generate_nodes(self, commands, turtle, iteration): #self, commands, turtle, filler, iteration):
         self.coordinate_stack.append(turtle.coordinate.clone())
-        duration_sum = 0
+        self.duration_sum = 0
 
         for command in commands:
             if "F" in command or "A" in command or "B" in command:          #TODO Make more general
-                self.create_node(turtle, duration_sum, len(commands))
+                self.create_node(turtle, len(commands))
             if "l" in command:
                 self.turn_left(turtle)
             if "r" in command:
@@ -41,14 +42,14 @@ class treeFiller:
 
 # ======================================== HELP METHODS ======================================== #
 
-    def create_node(self, turtle, duration_sum, commands_length):
+    def create_node(self, turtle, commands_length):
         colour = self.get_node_colour(commands_length)
 
         turtle.forward(config.step)
         v = lineSegment(self.coordinate_stack.pop().clone(), turtle.coordinate.clone(), colour)
-        duration_sum += v.duration
-        if duration_sum > self.max_duration * 4:
-            duration_sum = 0
+        self.duration_sum += v.duration
+        if self.duration_sum > self.max_duration * 4:
+            self.duration_sum = 0
             v.new_track = True
         n = Node(v, None)
         self.tree.treeLists[0].append(n)
