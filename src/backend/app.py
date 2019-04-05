@@ -26,11 +26,20 @@ async def map_to_function(websocket, data):
     if data['mode'] == "piano":
         print(data['data'])
         interprete_notes(data['data'])
+        
         print("COLOR" + str(colorArray))
         print("RIGHT ANGLE" + str(rightAngleArray))
         print("LEFT ANGLE" + str(leftAngleArray))
+
         reset_drawing_arrays()
+        parser.add_modification_lists(colorArray, leftAngleArray, rightAngleArray)
         web = parser.parse_for_web(generate_file_name(data))
+
+        for m in web:
+            m = data['index'] + ";" + m
+            print(m)
+            await websocket.send(m)
+
         #call draw_piano_fractal()
     if data['mode'] == "math":
         pass
