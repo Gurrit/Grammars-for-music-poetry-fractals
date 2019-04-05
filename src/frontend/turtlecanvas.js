@@ -21,3 +21,10 @@ function getTurtle(canvas) {
     }
   }
 }
+
+function changecolor() {
+  console.log("byter färg?");
+  canvas = document.getElementById("canvas1");
+  let context = canvas.getContext("2d");
+  context.strokeStyle = "#FF0000";
+}
