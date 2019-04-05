@@ -46,3 +46,9 @@ body {
   border-radius: 5px;
   right: 0;
 }
+
+#canvas3 {
+  border: 2px solid blue;
+  border-radius: 5px;
+  right: 0;
+}

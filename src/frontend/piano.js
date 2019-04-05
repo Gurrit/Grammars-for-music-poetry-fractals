@@ -1,7 +1,7 @@
 /*! Copyright (c) 2013 - Peter Coles (mrcoles.com)
  *  Licensed under the MIT license: http://mrcoles.com/media/mit-license.txt
  */
-  var noteArray = [];
+var noteArray = [];
 
 (function() {
   //
@@ -9,34 +9,33 @@
   //
 
   var intToNotes = {
-      // Low octave
-      0 : "c",
-      1 : "c#",
-      2 : "d",
-      3 : "d#",
-      4 : "e",
-      5 : "f",
-      6 : "f#",
-      7 : "g",
-      8 : "g#",
-      9 : "a",
-      10 : "a#",
-      11 : "b",
-      // High octave
-      12 : "highc",
-      13 : "highc#",
-      14 : "highd",
-      15 : "highd#",
-      16 : "highe",
-      17 : "highf",
-      18 : "highf#",
-      19 : "highg",
-      20 : "highg#",
-      21 : "higha",
-      22 : "higha#",
-      23 : "highb",
+    // Low octave
+    0: "c",
+    1: "c#",
+    2: "d",
+    3: "d#",
+    4: "e",
+    5: "f",
+    6: "f#",
+    7: "g",
+    8: "g#",
+    9: "a",
+    10: "a#",
+    11: "b",
+    // High octave
+    12: "highc",
+    13: "highc#",
+    14: "highd",
+    15: "highd#",
+    16: "highe",
+    17: "highf",
+    18: "highf#",
+    19: "highg",
+    20: "highg#",
+    21: "higha",
+    22: "higha#",
+    23: "highb"
   };
-
 
   var notesOffset = 0;
   var mouseOffset = 12;
@@ -103,7 +102,12 @@
         class: "key" + blackKeyClass(i),
         "data-key": i,
         mousedown: function(evt) {
-          console.log("Key pressed by mouse, index: " + i  + "NOTE: " + intToNotes[i + mouseOffset]);
+          console.log(
+            "Key pressed by mouse, index: " +
+              i +
+              "NOTE: " +
+              intToNotes[i + mouseOffset]
+          );
           noteArray.push(intToNotes[i + mouseOffset]);
           $keys.trigger("note-" + i + ".play");
         }
@@ -176,67 +180,67 @@
 
   var keyToCodes = {
     // Low octave
-    /*z*/ 'z' : 122, // c
-    /*s*/ 's' : 115, // c#
-    /*x*/ 'x' : 120, // d
-    /*d*/ 'd' : 100, // d#
-    /*c*/ 'c' : 99, // e
-    /*v*/ 'v' : 118, // f
-    /*g*/ 'g' : 103, // f#
-    /*b*/ 'b' : 98, // g
-    /*h*/ 'h' : 104, // g#
-    /*n*/ 'n' : 110, // a
-    /*j*/ 'j' : 106, // a#
-    /*m*/ 'm' : 109, // b
+    /*z*/ z: 122, // c
+    /*s*/ s: 115, // c#
+    /*x*/ x: 120, // d
+    /*d*/ d: 100, // d#
+    /*c*/ c: 99, // e
+    /*v*/ v: 118, // f
+    /*g*/ g: 103, // f#
+    /*b*/ b: 98, // g
+    /*h*/ h: 104, // g#
+    /*n*/ n: 110, // a
+    /*j*/ j: 106, // a#
+    /*m*/ m: 109, // b
     // High octave
-    /*r*/ 'r' : 114, // c
-    /*5*/ '5' : 53, // c#
-    /*t*/ 't' : 116, // d
-    /*6*/ '6' : 54, // d#
-    /*y*/ 'y' : 121, // e
-    /*u*/ 'u' : 117, // f
-    /*8*/ "8" : 56, // f#
-    /*i*/ 'i' : 105, // g
-    /*9*/ '9' : 57, // g#
-    /*o*/ 'o' : 111, // a
-    /*0*/ '0' : 48, // a#
-    /*p*/ 'p' : 112 // b
+    /*r*/ r: 114, // c
+    /*5*/ "5": 53, // c#
+    /*t*/ t: 116, // d
+    /*6*/ "6": 54, // d#
+    /*y*/ y: 121, // e
+    /*u*/ u: 117, // f
+    /*8*/ "8": 56, // f#
+    /*i*/ i: 105, // g
+    /*9*/ "9": 57, // g#
+    /*o*/ o: 111, // a
+    /*0*/ "0": 48, // a#
+    /*p*/ p: 112 // b
   };
 
   var keyNotes = {
     // Low octave
-    /*z*/ 122 : 0, // c
-    /*s*/ 115 : 1, // c#
-    /*x*/ 120 : 2, // d
-    /*d*/ 100 : 3, // d#
-    /*c*/ 99 : 4, // e
-    /*v*/ 118 : 5, // f
-    /*g*/ 103 : 6, // f#
-    /*b*/ 98 : 7, // g
-    /*h*/ 104 : 8, // g#
-    /*n*/ 110 : 9, // a
-    /*j*/ 106 : 10, // a#
-    /*m*/ 109 : 11, // b
+    /*z*/ 122: 0, // c
+    /*s*/ 115: 1, // c#
+    /*x*/ 120: 2, // d
+    /*d*/ 100: 3, // d#
+    /*c*/ 99: 4, // e
+    /*v*/ 118: 5, // f
+    /*g*/ 103: 6, // f#
+    /*b*/ 98: 7, // g
+    /*h*/ 104: 8, // g#
+    /*n*/ 110: 9, // a
+    /*j*/ 106: 10, // a#
+    /*m*/ 109: 11, // b
     // High octave
-    /*r*/ 114 : 12, // c
-    /*5*/ 53 : 13, // c#
-    /*t*/ 116 : 14, // d
-    /*6*/ 54 : 15, // d#
-    /*y*/ 121 : 16, // e
-    /*u*/ 117 : 17, // f
-    /*8*/ 56 : 18, // f#
-    /*i*/ 105 : 19, // g
-    /*9*/ 57 : 20, // g#
-    /*o*/ 111 : 21, // a
-    /*0*/ 48 : 22, // a#
-    /*p*/ 112 : 23 // b
+    /*r*/ 114: 12, // c
+    /*5*/ 53: 13, // c#
+    /*t*/ 116: 14, // d
+    /*6*/ 54: 15, // d#
+    /*y*/ 121: 16, // e
+    /*u*/ 117: 17, // f
+    /*8*/ 56: 18, // f#
+    /*i*/ 105: 19, // g
+    /*9*/ 57: 20, // g#
+    /*o*/ 111: 21, // a
+    /*0*/ 48: 22, // a#
+    /*p*/ 112: 23 // b
   };
 
   var notesShift = -12;
   var downKeys = {};
 
   $(window)
-      .keydown(function(evt) {
+    .keydown(function(evt) {
       var keyTone = evt.key;
       var keyCode = keyToCodes[keyTone];
       if (!downKeys[keyCode]) {
@@ -244,17 +248,17 @@
         var key = keyNotes[keyCode];
         // console.log("Trigger     Keyboard: " + evt.key + "     Keycode: " + keyCode + "     key: " + key);
         if (typeof key != "undefined") {
-          noteArray.push(intToNotes[key])
+          noteArray.push(intToNotes[key]);
           // console.log(noteArray)
           $keys.trigger("note-" + (key + notesShift + notesOffset) + ".play");
           evt.preventDefault();
         } else if (keyCode == 188) {
-            notesShift = -12;
+          notesShift = -12;
         } else if (keyCode == 190) {
-            notesShift = 0;
+          notesShift = 0;
         } else if (keyCode == 37 || keyCode == 39) {
-            notesOffset += (keyCode == 37 ? -1 : 1) * 12;
-            buildPiano();
+          notesOffset += (keyCode == 37 ? -1 : 1) * 12;
+          buildPiano();
         }
       }
     })
@@ -293,44 +297,11 @@
   // prevent quick find...
   $(window).keydown(function(evt) {
     if (evt.target.nodeName != "INPUT" && evt.target.nodeName != "TEXTAREA") {
-      if (evt.key == 'single quote') {
+      if (evt.key == "single quote") {
         evt.preventDefault();
         return false;
       }
     }
     return true;
   });
-
 })();
-
-function toPianoJson(data,type,mode,iter,step) {
-  var string =
-    "{" +
-    '"data":' +
-    '"' +
-    data +
-    '", ' +
-    '"type":' +
-    '"' +
-    type +
-    '", ' +
-    '"mode":' +
-    '"' +
-    mode +
-    '", ' +
-    '"iteration":' +
-    iter +
-    ", " +
-    '"step":' +
-    step +
-    "}";
-  return string;
-}
-
- function sendNotes() {
-    var notes = JSON.stringify(noteArray);
-    var pianoJson = toPianoJson(noteArray,"Sierpinski","piano","3","20"); //TODO: select fractal
-    console.log(notes);
-    sendMessage(pianoJson);
-    noteArray = [];
-  }
