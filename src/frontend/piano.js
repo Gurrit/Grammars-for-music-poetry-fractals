@@ -305,3 +305,45 @@ var noteArray = [];
     return true;
   });
 })();
+<<<<<<< HEAD
+=======
+
+function toPianoJson(data,type,mode,draw,iter,step) { //TODO: listen
+  var string =
+    "{" +
+    '"data":' +
+    '"' +
+    data +
+    '", ' +
+    '"type":' +
+    '"' +
+    type +
+    '", ' +
+    '"mode":' +
+    '"' +
+    mode +
+    '", ' +
+    '"draw":' +
+    '"' +
+    draw +
+    '", ' +
+    '"iteration":' +
+    iter +
+    ", " +
+    '"step":' +
+    step +
+    "}";
+  return string;
+}
+
+ function sendNotes() {
+    var notes = JSON.stringify(noteArray);
+    var pianoJson = toPianoJson(noteArray,"Sierpinski","piano","true","3","20"); //TODO: select fractal
+    console.log(notes);
+    sendMessage(pianoJson);
+  }
+
+  function resetPiano() {
+    noteArray = [];
+  }
+>>>>>>> b06756b99d53784e6afd535436961438b162498f
