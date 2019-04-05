@@ -1,3 +1,7 @@
+.container-fluid{
+  margin: 0;
+  padding: 0;
+}
 .centerdiv {
   display: flex;
   justify-content: center;
@@ -6,18 +10,30 @@
 }
 
 #selectFractal1 {
-  width: 20vw;
-  height: 3vw;
+  width: 15vw;
+  height: 2vw;
 }
 
+.divider1{
+  width:20px;
+  height:auto;
+  display:inline-block;
+}
+
+.divider2{
+  width:50px;
+  height:auto;
+  display:inline-block;
+} 
+
 #selectIter1 {
-  width: 5vw;
-  height: 3vw;
+  width: 4vw;
+  height: 2vw;
 }
 
 #selectFractal2 {
-  width: 20vw;
-  height: 3vw;
+  width: 15vw;
+  height: 2vw;
 }
 
 h1 {
@@ -28,15 +44,29 @@ h1 {
   display: flex;
   justify-content: center;
 }
+.buttonDiv2 {
+  display: flex;
+ 
+}
 
-button {
-  width: 15vw;
+button1 {
+  width: 8vw;
+  height: 2vw;
+}
+
+button2 {
+  width: 3vw;
   height: 3vw;
 }
 
 .filler {
   width: 100%;
-  height: 3vw;
+  height: 1vw;
+}
+
+.filler2 {
+  width: 100%;
+  height: 0.5vw;
 }
 
 body {
@@ -64,10 +94,15 @@ body {
   border: 2px solid red;
   border-radius: 5px;
   left: 0;
+
 }
 
 #canvas2 {
   border: 2px solid green;
   border-radius: 5px;
   right: 0;
+
 }
+
+
+
