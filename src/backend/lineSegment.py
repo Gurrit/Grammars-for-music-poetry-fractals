@@ -5,7 +5,15 @@ class lineSegment:
 
     def __init__(self,coordinate_1,coordinate_2,color="#000000"):
         self.coordinate_1 = coordinate_1
+        if abs(coordinate_1.x) < 1e-12:
+            coordinate_1.x = 0
+        if abs(coordinate_1.y) < 1e-12:
+            coordinate_1.y = 0
         self.coordinate_2 = coordinate_2
+        if abs(coordinate_2.x) < 1e-12:
+            coordinate_2.x = 0
+        if abs(coordinate_2.y) < 1e-12:
+            coordinate_2.y = 0
         self.color = color
         self.x_length = coordinate_2.x - coordinate_1.x
         self.y_length = coordinate_2.y - coordinate_1.y
@@ -19,6 +27,10 @@ class lineSegment:
             self.angle = 90
         else:
             self.angle = -90
+        if self.x_length < 0:
+            self.angle += 180
+        if abs(self.angle) > 180:
+            self.angle -= 360 * self.angle/abs(self.angle)
 
 
 

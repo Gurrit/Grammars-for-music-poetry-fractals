@@ -26,7 +26,7 @@ class treeFiller:
                     duration_sum = 0
                     v.new_track = True
                 n = Node(v, None)
-                self.tree.treeLists[0].append(n)
+                self.tree.treeLists[0].nodes.append(n)
                 self.coordinate_stack.append(turtle.coordinate.clone())
             if "l" in command:
                 turtle.left(self.angle)
