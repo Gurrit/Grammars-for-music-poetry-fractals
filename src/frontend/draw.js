@@ -25,7 +25,7 @@ function connectToServer(canvases) {
 
 function sendMessage(message) {
   console.log("sending messages");
-  settings.drawers[0].reset();
+  //settings.drawers[0].reset();
   settings.socket.send(message);
 }
 

@@ -21,6 +21,9 @@ async def map_to_function(websocket, data):
         print(data['data'])
         interprete_notes(data['data'])
         print("COLOR" + str(colorArray))
+        print("RIGHT ANGLE" + str(rightAngleArray))
+        print("LEFT ANGLE" + str(leftAngleArray))
+        reset_drawing_arrays()
         #go to piano.py
     if data['mode'] == "math":
         pass
@@ -37,7 +40,6 @@ async def map_to_function(websocket, data):
                 m = data['index'] + ";" + m
                 print(m)
                 await websocket.send(m)
-
 
 def generate_new_fractal_file(data):
     iteration = data['iteration']

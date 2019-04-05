@@ -332,4 +332,5 @@ function toPianoJson(data,type,mode,iter,step) {
     var pianoJson = toPianoJson(noteArray,"Sierpinski","piano","3","20"); //TODO: select fractal
     console.log(notes);
     sendMessage(pianoJson);
+    noteArray = [];
   }

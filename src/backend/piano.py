@@ -74,6 +74,13 @@ def interprete_notes(noteArray):
         elif (note == "highb"):
             colorArray.append("#FF007F") #magenta
 
+    noteArray = []
+
+def reset_drawing_arrays():
+    colorArray = []
+    rightAngleArray = []
+    leftAngleArray = []
+
 #def go_turtle(grammarArrayen):
 
 #    brad = turtle.Turtle()
@@ -145,4 +152,4 @@ def interprete_notes(noteArray):
 
     #turtle.done()
  
-main("c#,d#,g,highc,highf#")
+#main("c#,d#,g,highc,highf#")
