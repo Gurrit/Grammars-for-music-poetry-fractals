@@ -125,7 +125,7 @@ function TurtleCanvasobj(canvas) {
 
 function getTurtle(canvas) {
   //get the turtle corresponding to canvas
-   console.log(canvasturtlelist);
+  console.log(canvasturtlelist);
   for (index in canvasturtlelist) {
     if (canvasturtlelist[index].canvasen === canvas) {
       return canvasturtlelist[index].turtlen;
@@ -180,6 +180,7 @@ function sendDrawMessage() {
         let turtle = getTurtle(canvases[canvas]);
         console.log("Startpos: " + fractalList[index].startpos);
 
+        //resetcanvas(canvases[canvas]);
         let array = getStartPos(canvases[canvas], fractalList[index].startpos);
         break;
       }
@@ -189,4 +190,9 @@ function sendDrawMessage() {
     console.log("meddelandet: " + msg);
     sendMessage(msg);
   }
+}
+
+function resetcanvas(canvas) {
+  const context = canvas.getContext("2d");
+  context.clearRect(0, 0, canvas.width, canvas.height);
 }
