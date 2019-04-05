@@ -19,14 +19,14 @@
     </div>
     <ul class="nav navbar-nav">
       <li class="active"><a href="page1.html">Science mode</a></li>
-      <li><a href="page2.html">Art and music mode</a></li>
+      <li><a href="page2.html">Art mode</a></li>
       <li><a href="info.html">Info</a></li>
     </ul>
   </div>
 </nav>
 
 <body onload="main()">
-  <h1 style="font-size:30px;">Translate between fractals</h1>
+  <h1 style="font-size:23px;">Translate between fractals</h1>
 
   <div class="selectdiv">
     <select id="selectFractal1" onchange="selected()">
@@ -37,8 +37,8 @@
 
     <select id="selectIter1"> </select>
     <div class="buttonDiv">
-      <button type="button1" id="translateBtn" onclick="sendDrawMessage()">
-        Translate To
+      <button style="font-size:14px;" type="button1" id="translateBtn" onclick="sendDrawMessage()">
+        Translate to
       </button>
     </div>
     <div class="divider1"></div>
@@ -50,7 +50,7 @@
   <div class="filler2"></div>
 
   <div class="buttonDiv">
-    <button type="button2" id="listeBtn" onclick="sendListenMessage()">
+    <button style="font-size:14px;" type="button2" id="listeBtn" onclick="sendListenMessage()">
       Listen!
     </button>
   </div>

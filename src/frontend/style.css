@@ -1,6 +1,8 @@
-.container-fluid{
-  margin: 0;
-  padding: 0;
+.navbar{
+  height: 20px;
+}
+.navbar-brand{
+  height: 20px;
 }
 .centerdiv {
   display: flex;
@@ -56,7 +58,7 @@ button1 {
 
 button2 {
   width: 3vw;
-  height: 3vw;
+  height: 2vw;
 }
 
 .filler {
