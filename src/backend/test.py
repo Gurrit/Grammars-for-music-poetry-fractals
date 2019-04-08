@@ -1,15 +1,10 @@
 from Parser import *
+from TreeSearcher import *
 
 p = Parser()
-t = p.fill_tree("gf_output.txt")
+t = p.fill_tree()
+searcher = TreeSearcher(t)
 
-#for node in t.get_layer(5).nodes:
-    #v = node.value
-    #print("(" + str(v.coordinate_1.x) + "," + str(v.coordinate_1.y) + ") to (" + str(v.coordinate_2.x) + "," + str(v.coordinate_2.y) + ") , angle: " + str(v.angle))
-    #print("(" + str(v.x_length) + "," + str(v.y_length) + "), angle: " + str(v.angle))
+t.visualise()
 
-p.parser_for_midi()
-
-
-
-
+print(searcher.closest_iteration(coordinate(31,31)))

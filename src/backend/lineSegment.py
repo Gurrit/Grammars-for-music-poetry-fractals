@@ -32,6 +32,24 @@ class lineSegment:
         if abs(self.angle) > 180:
             self.angle -= 360 * self.angle/abs(self.angle)
 
+    def shortest_distance(self, point):
+        x = point.x
+        x1 = self.coordinate_1.x
+        x2 = self.coordinate_2.x
+        y = point.y
+        y1 = self.coordinate_1.y
+        y2 = self.coordinate_2.y
+
+        if (y1 - y2) == 0 and x < max(x1,x2) and x > min(x1,x2):
+            return abs(y-y1)
+        elif (y1 - y2) != 0 and (y > min(y2+(x1-x)*(x2-x1)/(y2-y1),y1+(x1-x)*(x2-x1)/(y2-y1))) and (y < max(y2+(x1-x)*(x2-x1)/(y2-y1),y1+(x1-x)*(x2-x1)/(y2-y1))):
+            # Ortogonalprojektion
+            l = lineSegment(self.coordinate_1, point)
+            return abs(l.length * math.sin((l.angle - self.angle)*math.pi/180))
+
+        else:
+            return min(lineSegment(self.coordinate_2,point).length, lineSegment(self.coordinate_1,point).length)
+
 
 
 
