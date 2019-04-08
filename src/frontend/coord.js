@@ -51,7 +51,7 @@ function toJson(turtleN, type, iter, step) {
   var string =
     "{" +
     '"mode":' +
-    '"draw", ' +
+    '"math", ' +
     '"index":' +
     '"' +
     turtleN +

@@ -26,6 +26,8 @@ function CreateDrawer(canvas) {
     const context = canvas.getContext("2d");
     console.log("reseting ");
     context.clearRect(0, 0, canvas.width, canvas.height);
+    context.fillStyle = "rgba(255, 255, 255, 1)";
+    context.beginPath();
   };
   self.redraw = function() {
     for (let drawing in self.drawings) {

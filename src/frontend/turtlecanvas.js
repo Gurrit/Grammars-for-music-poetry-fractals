@@ -2,7 +2,7 @@ const canvasturtlelist = [];
 
 class TurtleCanvasobj {
   constructor(canvas) {
-    //creating objects sconsisting of a new turtle and the corresponding canvas
+    //creating objects consisting of a new turtle and the corresponding canvas
     let canvasen = document.getElementById(canvas);
     let drawer = new CreateDrawer(canvasen);
     let self = this;

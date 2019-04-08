@@ -3,9 +3,13 @@ function listenToFractal() {
   audio.play();
 }
 
-function toPianoJson(data, type, mode, iter, step) {
+function toPianoJson(canvas, data, type, mode, iter, step) {
   var string =
     "{" +
+    '"index":' +
+    '"' +
+    "0" +
+    '",' +
     '"data":' +
     '"' +
     data +
@@ -29,15 +33,26 @@ function toPianoJson(data, type, mode, iter, step) {
 
 function sendNotes() {
   var notes = JSON.stringify(noteArray);
-  var pianoJson = toPianoJson(noteArray, "Sierpinski", "piano", "3", "20"); //TODO: select fractal
+
+  pianoJson = toPianoJson(
+    "canvas3",
+    noteArray,
+    "Sierpinski",
+    "piano",
+    "3",
+    "20"
+  );
   console.log(notes);
+  console.log(pianoJson);
   sendMessage(pianoJson);
   noteArray = [];
 }
 
 function startPianoUI() {
   createFractalList();
-  let turtcanv1 = new TurtleCanvasobj("canvas3");
+  let turtcanv3 = new TurtleCanvasobj("canvas3");
+  canvasturtlelist.push(turtcanv3);
+  connectToServer([turtcanv3]);
   addFractalOptions("selectFractal3");
-  connectToServer([turtcanv1]);
+  sendNotes();
 }
