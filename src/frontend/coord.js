@@ -1,6 +1,6 @@
 const fractalList = [];
 canvasturtlelist = [];
-globalStep = 8;
+globalStep = 25;
 
 function main() {
   //skapar elementen till listorna och turtlecanvasobjekten
@@ -22,7 +22,6 @@ function main() {
     "bottomleftcorner"
   );
   fractalList.push(koch);
-
   let turtcanv1 = new TurtleCanvasobj("canvas1");
   let turtcanv2 = new TurtleCanvasobj("canvas2");
   canvasturtlelist.push(turtcanv1);
