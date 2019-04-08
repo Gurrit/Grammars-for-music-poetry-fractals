@@ -17,7 +17,7 @@ class init:
         self._web_forward = lambda step : "turtle.forward(" + str(config.step) + ")"
         self._web_right = lambda angle : "turtle.right(" + str(angle) + ")"
         self._web_left = lambda angle : "turtle.left(" + str(angle) + ")"
-
+        
     def get_visualization_map(self):
         if self._turtle is None:
             raise ValueError("No Turtle given")
