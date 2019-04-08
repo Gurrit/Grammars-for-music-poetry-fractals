@@ -1,8 +1,3 @@
-function listenToFractal() {
-  var audio = new Audio("audio_file.mp3");
-  audio.play();
-}
-
 function toPianoJson(canvas, data, type, mode, iter, step) {
   var string =
     "{" +
@@ -33,20 +28,35 @@ function toPianoJson(canvas, data, type, mode, iter, step) {
 
 function sendNotes() {
   var notes = JSON.stringify(noteArray);
+  let fractoption = getOption("selectFractal3");
+  let iteroption = getOption("selectIter3");
+
+  var value = "";
+  for (index in fractalList) {
+    if (fractalList[index].text === fractoption.value) {
+      value = fractalList[index].jsonFractal;
+      console.log("The fractal value: " + value);
+      //let turtle = getTurtle(canvases[canvas]);
+      break;
+    }
+  }
 
   pianoJson = toPianoJson(
     "canvas3",
     noteArray,
-    "Sierpinski",
+    value,
     "piano",
-    "3",
+    iteroption.value,
     "20"
   );
+
   console.log(notes);
   console.log(pianoJson);
   sendMessage(pianoJson);
   noteArray = [];
 }
+
+function resetPiano() {}
 
 function startPianoUI() {
   createFractalList();

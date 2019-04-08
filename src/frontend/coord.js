@@ -1,4 +1,4 @@
-globalStep = 8;
+globalStep = 1;
 
 function start() {
   createFractalList();
@@ -48,10 +48,15 @@ function sendCursorPosition(canvas, event) {
 }
 
 function toJson(turtleN, type, iter, step) {
+  empty = ["a", "b"];
   var string =
     "{" +
     '"mode":' +
-    '"math", ' +
+    '"piano", ' +
+    '"data":' +
+    '"' +
+    empty +
+    '", ' +
     '"index":' +
     '"' +
     turtleN +
@@ -82,16 +87,28 @@ function sendDrawMessage() {
     for (index in fractalList) {
       if (fractalList[index].text === optionFracs[canvas].value) {
         value = fractalList[index].jsonFractal;
-        let turtle = getTurtle(canvases[canvas]);
+        //let turtle = getTurtle(canvases[canvas]);
         console.log("Startpos: " + fractalList[index].startpos);
 
         let array = getStartPos(canvases[canvas], fractalList[index].startpos);
         break;
       }
     }
-    //resetCanvas("canvas1"); //måste rensa canvas och flytta turtle till början igen innan ny fraktal ritas
     let msg = toJson(canvas, value, optionIter1.value, globalStep);
     console.log("meddelandet: " + msg);
     sendMessage(msg);
+  }
+}
+
+function findJsonNameForFractal() {
+  for (index in fractalList) {
+    if (fractalList[index].text === optionFracs[canvas].value) {
+      value = fractalList[index].jsonFractal;
+      let turtle = getTurtle(canvases[canvas]);
+      console.log("Startpos: " + fractalList[index].startpos);
+
+      let array = getStartPos(canvases[canvas], fractalList[index].startpos);
+      break;
+    }
   }
 }

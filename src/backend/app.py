@@ -31,7 +31,7 @@ async def map_to_function(websocket, data):
         print("RIGHT ANGLE" + str(rightAngleArray))
         print("LEFT ANGLE" + str(leftAngleArray))
 
-        reset_drawing_arrays()
+        #reset_drawing_arrays()
         parser.add_modification_lists(colorArray, leftAngleArray, rightAngleArray)
         web = parser.parse_for_web(generate_file_name(data))
 

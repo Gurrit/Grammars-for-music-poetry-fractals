@@ -14,10 +14,13 @@ function connectToServer(canvases) {
   }
   socket.onmessage = function(event) {
     let dataStr = event.data;
-    let [index, from, to] = dataStr.split(";");
+    let [index, from, to, color] = dataStr.split(";");
     let coordinate1 = settings.drawers[index].extract(from);
     let coordinate2 = settings.drawers[index].extract(to);
+    settings.drawers[index].color(color);
     settings.drawers[index].draw(coordinate1, coordinate2);
+
+    console.log(event.data);
   };
 
   settings.socket = socket;
@@ -31,6 +34,8 @@ function sendMessage(message) {
   //}
   settings.drawers[0].reset();
   //settings.drawers[1].reset();
+
+  //scale(0, 0.5);
   console.log(settings.socket.send(message));
   settings.socket.send(message);
 }

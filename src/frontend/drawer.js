@@ -6,6 +6,7 @@ function CreateDrawer(canvas) {
   self.context = canvas.getContext("2d");
   self.height = canvas.height;
   self.width = canvas.width;
+
   self.draw = function(coordinate1, coordinate2) {
     self.context.moveTo(coordinate1.x, coordinate1.y);
     self.context.lineTo(coordinate2.x, coordinate2.y);
