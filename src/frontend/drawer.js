@@ -38,10 +38,6 @@ function CreateDrawer(canvas) {
             let maxY = Math.max.apply(null, self.drawings.map(a=>a.c2.y > a.c1.y ? a.c2.y : a.c1.y));
             let minX = Math.min.apply(null, self.drawings.map(a=>a.c2.x < a.c1.x ? a.c2.x : a.c1.x));
             let minY = Math.min.apply(null, self.drawings.map(a=>a.c2.y < a.c1.y ? a.c2.y : a.c1.y));
-            console.log(maxX);
-            console.log(maxY);
-            console.log(minY);
-            console.log(minX);
             let centerX = (Math.abs(maxX)- Math.abs(minX)) / 2;
             let centerY = (Math.abs(maxY) - Math.abs(minY)) / 2;
             let scaleX = self.width / (maxX - minX);
@@ -53,26 +49,6 @@ function CreateDrawer(canvas) {
             console.log("has drawn the image")
     };
     return self;
-}
-function greatestSigned(coordinates) {
-    let max = Number.MIN_VALUE;
-    let len = coordinates.length;
-    for (i = 0; i < len; i++) {
-        if(Math.abs(coordinates[i]) > Math.abs(max)) {
-            max = coordinates[i];
-        }
-    }
-    return max;
-}
-function smallestSigned(coordinates) {
-    let min = Number.MAX_VALUE;
-    let len = coordinates.length;
-    for (let i = 0; i < len; i++) {
-        if(Math.abs(coordinates[i]) < Math.abs(min)) {
-            min = coordinates[i];
-        }
-    }
-    return min;
 }
 class Line {
     constructor(c1, c2) {
