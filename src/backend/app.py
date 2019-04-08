@@ -14,7 +14,6 @@ async def message_receiver (websocket, path):
         await map_to_function(websocket, data)
 
 
-
 async def map_to_function(websocket, data):
     print(data)
     if data['mode'] == "piano":
@@ -28,15 +27,15 @@ async def map_to_function(websocket, data):
     if data['mode'] == "draw":
         if data['type'] in fractals:
             config.step = data['step']
-            print(config.step)
             if not os.path.isfile(generate_file_name(data)):
                 generate_new_fractal_file(data)
             print("done, sending message")
             web = parser.parse_for_web(generate_file_name(data))
-            for m in web:
-                m = data['index'] + ";" + m
-                print(m)
-                await websocket.send(m)
+            message = ""
+            for m in web:       # Change for speed?
+                message = data['index'] + ";" + m + "|" + message
+            message = message + ("D" + data['index'])
+            await websocket.send(message)
 
 
 def generate_new_fractal_file(data):
