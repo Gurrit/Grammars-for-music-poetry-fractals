@@ -22,6 +22,8 @@ def generate_gf_string(data):
         print("done, sending message")
 
 async def map_to_function(websocket, data):
+    generate_gf_string(data)
+
     print(data)
     if data['mode'] == "piano":
         print(data['data'])

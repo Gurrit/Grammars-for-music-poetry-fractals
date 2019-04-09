@@ -56,7 +56,7 @@ function sendNotes() {
     value,
     "piano",
     iteroption.value,
-    "20"
+    "8"
   );
 
   console.log(notes);
