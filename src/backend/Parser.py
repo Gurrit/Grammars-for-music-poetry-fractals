@@ -18,17 +18,15 @@ class Parser:
         self.kids = 0
         self.trees = {}
 
-    def parse(self):
-        self.parser_for_midi()
+    #def parse(self):
+    #    self.parser_for_midi()
 
     #        self.parse_for_turtle()
 
-    def parser_for_midi(self):
+    def parser_for_midi(self, tree, iteration):
         generator = MIDIGenerator()
-
-        for i in range(self.tree.depth):
-            generator.fill_track(self.tree, i)
-            generator.create_midi_file("fractal_" + str(i) + ".mid")
+        generator.fill_track(tree, iteration)
+        generator.create_midi_file("./midi-files/fractal_music.mid")
 
     def fill_tree(self, filename):
         turtle = HiddenTurtle()

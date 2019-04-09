@@ -2,9 +2,5 @@ from Parser import *
 from TreeSearcher import *
 
 p = Parser()
-t = p.fill_tree()
-searcher = TreeSearcher(t)
-
-t.visualise()
-
-print(searcher.closest_iteration(coordinate(31,31)))
+t = p.fill_tree("gf_output.txt")
+p.parser_for_midi(t,3)

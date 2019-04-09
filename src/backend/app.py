@@ -61,9 +61,7 @@ def generate_file_name(data):
     return config.gf_output_path + data['type'] + str(data['iteration']) + ".txt"
 
 def make_music(tree, iteration):
-    generator = MIDIGenerator()
-    generator.fill_track(tree, iteration)
-    generator.create_midi_file("fractal_music.mid")
+    parser.parser_for_midi(tree,iteration)
 
 parser = Parser()
 asyncio.get_event_loop().run_until_complete(
