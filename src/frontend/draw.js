@@ -28,14 +28,10 @@ function connectToServer(canvases) {
 
 function sendMessage(message) {
   console.log("sending messages");
-
-  //for (let i in settings.drawers) {
-  //  settings.drawers[i].reset();
-  //}
-  settings.drawers[0].reset();
-  //settings.drawers[1].reset();
-
-  //scale(0, 0.5);
+  array = settings.drawers;
+  for (var i in array) {
+    settings.drawers[i].reset();
+  }
   console.log(settings.socket.send(message));
   settings.socket.send(message);
 }

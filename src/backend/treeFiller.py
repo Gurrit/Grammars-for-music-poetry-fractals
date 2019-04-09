@@ -58,12 +58,18 @@ class treeFiller:
     def get_node_colour(self, commands_length):
         colour = "#000000"
         numberOfColors = len(self.colour_list)
+        print("numberOfColors: " + str(numberOfColors))
         colorSteps = commands_length
 
         if numberOfColors != 0:
             colorSteps = commands_length / numberOfColors + commands_length % numberOfColors
 
+        if(numberOfColors == 0):
+            return colour
+
+        colour = self.colour_list[self.colorIndex]
         if (self.draw_counter % colorSteps == 0) and (len(self.colour_list) != 0):
+            print("KOmmer vi ens hit? svar=nej")
             colour = self.colour_list[self.colorIndex]
             self.colorIndex += 1
 

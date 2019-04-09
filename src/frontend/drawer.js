@@ -39,9 +39,8 @@ function CreateDrawer(canvas) {
 
   self.color = function(hexkod) {
     let ctx = canvas.getContext("2d");
+    ctx.beginPath();
     ctx.strokeStyle = hexkod;
-
-    //self.context = context;
   };
   return self;
 }
