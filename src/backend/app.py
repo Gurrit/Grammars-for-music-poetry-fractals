@@ -6,7 +6,7 @@ import os
 from piano import *
 
 fractals = {"Sierpinski", "Dragon", "Koch", "Gosper"}
-
+piano = Piano()
 
 async def message_receiver (websocket, path):
     async for message in websocket:
@@ -16,7 +16,6 @@ async def message_receiver (websocket, path):
 def generate_gf_string(data):
     if data['type'] in fractals:
         config.step = data['step']
-        print(config.step)
         if not os.path.isfile(generate_file_name(data)):
             generate_new_fractal_file(data)
         print("done, sending message")
@@ -27,19 +26,20 @@ async def map_to_function(websocket, data):
     print(data)
     if data['mode'] == "piano":
         print(data['data'])
-        interprete_notes(data['data'])
+        piano.reset_drawing_arrays()
+        piano.interprete_notes(data['data'])
 
-        print("COLOR" + str(colorArray))
-        print("RIGHT ANGLE" + str(rightAngleArray))
-        print("LEFT ANGLE" + str(leftAngleArray))
+        print("COLOR" + str(piano.colorArray))
+        print("RIGHT ANGLE" + str(piano.rightAngleArray))
+        print("LEFT ANGLE" + str(piano.leftAngleArray))
 
-        #reset_drawing_arrays()
-        parser.add_modification_lists(colorArray, leftAngleArray, rightAngleArray)
+        parser.add_modification_lists(piano.colorArray, piano.leftAngleArray, piano.rightAngleArray)
         web = parser.parse_for_web(generate_file_name(data))
+
 
         for m in web:
             m = data['index'] + ";" + m
-            print(m)
+            # print(m)
             await websocket.send(m)
 
         #call draw_piano_fractal()
@@ -63,7 +63,7 @@ def generate_new_fractal_file(data):
     file = open(config.gf_script_path, 'w+')
     file.write(gf_commands)
     file.close()
-    print(gf_commands)
+    print("GF commands: " + str(gf_commands))
     os.system("gf < " + config.gf_script_path)
 
 

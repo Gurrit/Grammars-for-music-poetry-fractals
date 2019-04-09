@@ -1,6 +1,7 @@
 from lineSegment import *
 from treeList import *
 from config import *
+from math import *
 
 
 class treeFiller:
@@ -20,20 +21,23 @@ class treeFiller:
         self.left_angle_list = []
         self.right_angle_list = []
         self.draw_counter = 0
-        self.colorIndex = 0
+        self.colorIndex = -1
 
     def generate_nodes(self, commands, turtle, iteration): #self, commands, turtle, filler, iteration):
         self.coordinate_stack.append(turtle.coordinate.clone())
         self.duration_sum = 0
+        self.colorIndex = -1
+        self.draw_counter = 0
 
         for command in commands:
             if "F" in command or "A" in command or "B" in command:          #TODO Make more general
-                self.create_node(turtle, len(commands))
+                self.create_node(turtle, self.get_forward_commands(commands))
+                self.draw_counter += 1
             if "l" in command:
                 self.turn_left(turtle)
             if "r" in command:
                 self.turn_right(turtle)
-            self.draw_counter += 1
+
 
         for i in range(self.tree.depth):
             self.add_tree_layer(i)
@@ -41,6 +45,13 @@ class treeFiller:
         self.tree.treeLists.reverse()
 
 # ======================================== HELP METHODS ======================================== #
+
+    def get_forward_commands(self, commands):
+        command_sum = 0
+        for command in commands:
+            if "F" in command or "A" in command or "B" in command:          #TODO Make more general
+                command_sum += 1
+        return command_sum
 
     def create_node(self, turtle, commands_length):
         colour = self.get_node_colour(commands_length)
@@ -56,24 +67,19 @@ class treeFiller:
         self.coordinate_stack.append(turtle.coordinate.clone())
 
     def get_node_colour(self, commands_length):
-        colour = "#000000"
+        current_colour = "#000000"
         numberOfColors = len(self.colour_list)
-        print("numberOfColors: " + str(numberOfColors))
-        colorSteps = commands_length
+        print("numberOfColors: " + str(numberOfColors) + " Commands length: " + str(commands_length))
 
         if numberOfColors != 0:
-            colorSteps = commands_length / numberOfColors + commands_length % numberOfColors
+            colorSteps = floor(commands_length / numberOfColors) + commands_length % numberOfColors # Number of steps before changing colour.
+            print("COLORSTEPS: " + str(colorSteps))
+            if (self.draw_counter % colorSteps == 0) and (len(self.colour_list) != 0):
+                print("KOmmer vi ens hit? svar=nej")
+                self.colorIndex += 1
+            current_colour = self.colour_list[self.colorIndex]
 
-        if(numberOfColors == 0):
-            return colour
-
-        colour = self.colour_list[self.colorIndex]
-        if (self.draw_counter % colorSteps == 0) and (len(self.colour_list) != 0):
-            print("KOmmer vi ens hit? svar=nej")
-            colour = self.colour_list[self.colorIndex]
-            self.colorIndex += 1
-
-        return colour
+        return current_colour
 
     def turn_left(self, turtle):
         turtle.left(self.angle)     #TODO read from leftAngleArray

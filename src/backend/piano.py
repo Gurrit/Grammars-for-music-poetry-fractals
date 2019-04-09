@@ -1,85 +1,95 @@
 # from browser import document, html
 #import turtle
+
+class Piano:
+
+    def __init__(self):
+        # gf_string = "F r F l F l F r F r F r F l F l F r F l F r F l F l F r F l F r F l F l F r F r F r F l F l F r F r F r F l F l F r F r F r F l F l F r F l F r F l F l F r F l F r F l F l F r F r F r F l F l F r F l F r F l F l F r F r F r F l F l F r F l F r F l F l F r F l F r F l F l F r F r F r F l F l F r F l F r F l F l F r F r F r F l F l F r F l F r F l F l F r F l F r F l F l F r F r F r F l F l F r F r F r F l F l F r F r F r F l F l F r F l F r F l F l F r F l F r F l F l F r F r F r F l F l F r F r F r F l F l F r F r F r F l F l F r F l F r F l F l F r F l F r F l F l F r F r F r F l F l F r F r F r F l F l F r F r F r F l F l F r F l F r F l F l F r F l F r F l F l F r F r F r F l F l F r F l F r F l F l F r F r F r F l F l F r F l F r F l F l F r F l F r F l F l F r F r F r F l F l F r F l F r F l F l F r F r F r F l F l F r F l F r F l F l F r F l F r F l F l F r F r F r F l F l F r F r F r F l F l F r F r F r F l F l F r F l F r F l F l F r F l F r F l F l F r F r F r F l F l F r F l F r F l F l F r F r F r F l F l F r F l F r F l F l F r F l F r F l F l F r F r F r F l F l F r F r F r F l F l F r F r F r F l F l F r F l F r F l F l F r F l F r F l F l F r F r F r F l F l F r F l F r F l F l F r F r F r F l F l F r F l F r F l F l F r F l F r F l F l F r F r F r F l F l F r F l F r F l F l F r F r F r F l F l F r F l F r F l F l F r F l F r F l F l F r F r F r F l F l F r F r F r F l F l F r F r F r F l F l F r F l F r F l F l F r F l F r F l F l F r F r F r F l F l F r F l F r F l F l F r F r F r F l F l F r F l F r F l F l F r F l F r F l F l F r F r F r F l F l F r F r F r F l F l F r F r F r F l F l F r F l F r F l F l F r F l F r F l F l F r F r F r F l F l F r F l F r F l F l F r F r F r F l F l F r F l F r F l F l F r F l F r F l F l F r F r F r F l F l F r F l F r F l F l F r F r F r F l F l F r F l F r F l F l F r F l F r F l F l F r F r F r F l F l F r F r F r F l F l F r F r F r F l F l F r F l F r F l F l F r F l F r F l F l F r F r F r F l F l F r F r F r F l F l F r F r F r F l F l F r F l F r F l F l F r F l F r F l F l F r F r F r F l F l F r F r F r F l F l F r F r F r F l F l F r F l F r F l F l F r F l F r F l F l F r F r F r F l F l F r F l F r F l F l F r F r F r F l F l F r F l F r F l F l F r F l F r F l F l F r F r F r F l F l F r F l F r F l F l F r F r F r F l F l F r F l F r F l F l F r F l F r F l F l F r F r F r F l F l F r F r F r F l F l F r F r F r F l F l F r F l F r F l F l F r F l F r F l F l F r F r F r F l F l F r F"
+        self.rightAngle = 90
+        self.leftAngle = 90
+        self.colorArray = []
+        self.rightAngleArray = []
+        self.leftAngleArray = []
  
-gf_string = "F r F l F l F r F r F r F l F l F r F l F r F l F l F r F l F r F l F l F r F r F r F l F l F r F r F r F l F l F r F r F r F l F l F r F l F r F l F l F r F l F r F l F l F r F r F r F l F l F r F l F r F l F l F r F r F r F l F l F r F l F r F l F l F r F l F r F l F l F r F r F r F l F l F r F l F r F l F l F r F r F r F l F l F r F l F r F l F l F r F l F r F l F l F r F r F r F l F l F r F r F r F l F l F r F r F r F l F l F r F l F r F l F l F r F l F r F l F l F r F r F r F l F l F r F r F r F l F l F r F r F r F l F l F r F l F r F l F l F r F l F r F l F l F r F r F r F l F l F r F r F r F l F l F r F r F r F l F l F r F l F r F l F l F r F l F r F l F l F r F r F r F l F l F r F l F r F l F l F r F r F r F l F l F r F l F r F l F l F r F l F r F l F l F r F r F r F l F l F r F l F r F l F l F r F r F r F l F l F r F l F r F l F l F r F l F r F l F l F r F r F r F l F l F r F r F r F l F l F r F r F r F l F l F r F l F r F l F l F r F l F r F l F l F r F r F r F l F l F r F l F r F l F l F r F r F r F l F l F r F l F r F l F l F r F l F r F l F l F r F r F r F l F l F r F r F r F l F l F r F r F r F l F l F r F l F r F l F l F r F l F r F l F l F r F r F r F l F l F r F l F r F l F l F r F r F r F l F l F r F l F r F l F l F r F l F r F l F l F r F r F r F l F l F r F l F r F l F l F r F r F r F l F l F r F l F r F l F l F r F l F r F l F l F r F r F r F l F l F r F r F r F l F l F r F r F r F l F l F r F l F r F l F l F r F l F r F l F l F r F r F r F l F l F r F l F r F l F l F r F r F r F l F l F r F l F r F l F l F r F l F r F l F l F r F r F r F l F l F r F r F r F l F l F r F r F r F l F l F r F l F r F l F l F r F l F r F l F l F r F r F r F l F l F r F l F r F l F l F r F r F r F l F l F r F l F r F l F l F r F l F r F l F l F r F r F r F l F l F r F l F r F l F l F r F r F r F l F l F r F l F r F l F l F r F l F r F l F l F r F r F r F l F l F r F r F r F l F l F r F r F r F l F l F r F l F r F l F l F r F l F r F l F l F r F r F r F l F l F r F r F r F l F l F r F r F r F l F l F r F l F r F l F l F r F l F r F l F l F r F r F r F l F l F r F r F r F l F l F r F r F r F l F l F r F l F r F l F l F r F l F r F l F l F r F r F r F l F l F r F l F r F l F l F r F r F r F l F l F r F l F r F l F l F r F l F r F l F l F r F r F r F l F l F r F l F r F l F l F r F r F r F l F l F r F l F r F l F l F r F l F r F l F l F r F r F r F l F l F r F r F r F l F l F r F r F r F l F l F r F l F r F l F l F r F l F r F l F l F r F r F r F l F l F r F"
-rightAngle = 90
-leftAngle = 90
-colorArray = []
-rightAngleArray = []
-leftAngleArray = []
- 
-def main(notes):
-    # print("is in main!: " + str(notes) + str(ations))
-    translateNotes(notes)
- 
- 
-def translateNotes(notess):
-    # print("is in translatenotes!: " + str(notess) + str())
-    noteArray = notess.split(",")
-    interprete_notes(noteArray)    
+# def main(notes):
+#     # print("is in main!: " + str(notes) + str(ations))
+#     translateNotes(notes)
+#
+#
+# def translateNotes(notess):
+#     # print("is in translatenotes!: " + str(notess) + str())
+#     noteArray = notess.split(",")
+#     interprete_notes(noteArray)
  
     #go_turtle(noteArray)
  
 # --------------------------------------- Turtle -----------------------------------------------------------
-def interprete_notes(noteArray):
- 
-    for note in noteArray:
- 
-        if (note == "c"):
-            rightAngleArray.append(rightAngle - 1)
-        elif (note == "c#"):
-            colorArray.append("#FF0000") #red
-        elif (note == "d"):
-            leftAngleArray.append(leftAngle - 1)
-        elif (note == "d#"):
-            colorArray.append("#FF8000") #orange
-        elif (note == "e"):
-            rightAngleArray.append(rightAngle + 1)
-        elif (note == "f"):
-            colorArray.append("#FFFF00") #yellow
-        elif (note == "f#"):
-            leftAngleArray.append(leftAngle + 1)
-        elif (note == "g"):
-            colorArray.append("#80FF00") #bright green
-        elif (note == "g#"):
-            rightAngleArray.append(rightAngle - 2)
-        elif (note == "a"):
-            colorArray.append("#00FF00") #green
-        elif (note == "a#"):
-            leftAngleArray.append(leftAngle - 2)
-        elif (note == "b"):
-            colorArray.append("#00FF80") #turqouise
-        if (note == "highc"):
-            rightAngleArray.append(rightAngle + 2)
-        elif (note == "highc#"):
-            colorArray.append("#00FFFF") #baby blue
-        elif (note == "highd"):
-            leftAngleArray.append(leftAngle + 2)
-        elif (note == "highd#"):
-            colorArray.append("#0080FF") #bright blue
-        elif (note == "highe"):
-            rightAngleArray.append(rightAngle - 3)
-        elif (note == "highf"):
-            colorArray.append("#0000FF") #blue
-        elif (note == "highf#"):
-            leftAngleArray.append(leftAngle - 3)
-        elif (note == "highg"):
-            colorArray.append("#7F00FF") #purple
-        elif (note == "highg#"):
-            rightAngleArray.append(rightAngle + 3)
-        elif (note == "higha"):
-            colorArray.append("#FF00FF") #pink
-        elif (note == "higha#"):
-            leftAngleArray.append(leftAngle + 3)
-        elif (note == "highb"):
-            colorArray.append("#FF007F") #magenta
+    def interprete_notes(self, notes):
+        note_array = notes.split(",")
 
-    noteArray = []
+        print("PIANO NOTES: " + str(note_array))
+        index = 0
 
-def reset_drawing_arrays():
-    del colorArray[:]
-    del rightAngleArray[:]
-    del leftAngleArray[:]
+        for note in note_array:
+
+            index += 1
+
+            if (note == "c"):
+                self.rightAngleArray.append(self.rightAngle - 1)
+            elif (note == "c#"):
+                self.colorArray.append("#FF0000") #red
+            elif (note == "d"):
+                self.leftAngleArray.append(self.leftAngle - 1)
+            elif (note == "d#"):
+                self.colorArray.append("#FF8000") #orange
+            elif (note == "e"):
+                self.rightAngleArray.append(self.rightAngle + 1)
+            elif (note == "f"):
+                self.colorArray.append("#FFFF00") #yellow
+            elif (note == "f#"):
+                self.leftAngleArray.append(self.leftAngle + 1)
+            elif (note == "g"):
+                self.colorArray.append("#80FF00") #bright green
+            elif (note == "g#"):
+                self.rightAngleArray.append(self.rightAngle - 2)
+            elif (note == "a"):
+                self.colorArray.append("#00FF00") #green
+            elif (note == "a#"):
+                self.leftAngleArray.append(self.leftAngle - 2)
+            elif (note == "b"):
+                self.colorArray.append("#00FF80") #turqouise
+            if (note == "highc"):
+                self.rightAngleArray.append(self.rightAngle + 2)
+            elif (note == "highc#"):
+                self.colorArray.append("#00FFFF") #baby blue
+            elif (note == "highd"):
+                self.leftAngleArray.append(self.leftAngle + 2)
+            elif (note == "highd#"):
+                self.colorArray.append("#0080FF") #bright blue
+            elif (note == "highe"):
+                self.rightAngleArray.append(self.rightAngle - 3)
+            elif (note == "highf"):
+                self.colorArray.append("#0000FF") #blue
+            elif (note == "highf#"):
+                self.leftAngleArray.append(self.leftAngle - 3)
+            elif (note == "highg"):
+                self.colorArray.append("#7F00FF") #purple
+            elif (note == "highg#"):
+                self.rightAngleArray.append(self.rightAngle + 3)
+            elif (note == "higha"):
+                self.colorArray.append("#FF00FF") #pink
+            elif (note == "higha#"):
+                self.leftAngleArray.append(self.leftAngle + 3)
+            elif (note == "highb"):
+                self.colorArray.append("#FF007F") #magenta
+
+        print("PIANOINDEX: " + str(index))
+
+    def reset_drawing_arrays(self):
+        del self.colorArray[:]
+        del self.rightAngleArray[:]
+        del self.leftAngleArray[:]
+
 
 #def go_turtle(grammarArrayen):
 
