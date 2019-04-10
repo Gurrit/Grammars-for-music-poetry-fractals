@@ -55,8 +55,6 @@ function CreateDrawer(canvas) {
     return self;
 }
 class Line {
-    c1 = null;
-    c2 = null;
     constructor(c1, c2) {
         let self = this;
         self.c1 = c1;
@@ -65,8 +63,6 @@ class Line {
 }
 
 class Coordinate {
-    x = null;
-    y = null;
     constructor(x, y) {
         let self = this;
         self.x = x;
@@ -75,8 +71,6 @@ class Coordinate {
     }
 }
 class Fractal {
-    fractal = null;
-    iteration = null;
     constructor(fractal, iteration) {
         let self = this;
         self.fractal = fractal;

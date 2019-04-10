@@ -1,6 +1,6 @@
 const fractalList = [];
 canvasturtlelist = [];
-globalStep = 25;
+globalStep = 5;
 
 function main() {
   //skapar elementen till listorna och turtlecanvasobjekten
@@ -54,6 +54,8 @@ function getCursorPosition(canvas, event) {
   var rect = canvas.getBoundingClientRect();
   var x = event.clientX - rect.left;
   var y = event.clientY - rect.top;
+  console.log(x);
+  console.log(y);
   var str = "x:" + x + "," + "y:" + y;
 
   console.log("'{" + str + "}'");
@@ -200,7 +202,6 @@ function sendDrawMessage() {
     }
     //resetCanvas("canvas1"); //måste rensa canvas och flytta turtle till början igen innan ny fraktal ritas
     let msg = toJson(canvas, value, optionIter1.value, globalStep);
-    optionIter1.value
     console.log("meddelandet: " + msg);
     sendMessage(msg);
   }

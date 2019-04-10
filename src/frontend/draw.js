@@ -22,9 +22,11 @@ function connectToServer(canvases) {
                 let coordinate2 = settings.drawers[index].extract(to);
                 settings.drawers[index].saveNewLine(coordinate1, coordinate2);
         }
-        let data
-        let i = datas[len].substring(1, );
+        let [_, meta] = datas[len].split("+");
+        let [i, frac] = meta.split("&");
         settings.drawers[i].scaleToSize();
+        let [type, iter] = frac.split("*");
+        settings.drawers[i].saveFractal(type, iter);
     };
 
     settings.socket = socket;
