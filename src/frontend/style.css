@@ -42,6 +42,12 @@
   display:inline-block;
 } 
 
+.divider3{
+  width:20px;
+  height:auto;
+  display:inline-block;
+} 
+
 #selectIter1 {
   width: 4vw;
   height: 2vw;
@@ -97,6 +103,14 @@ body {
   display: flex;
 }
 
+.selectdiv2 {
+  display: table-cell;
+  width: 100%;
+  height: 3vw;
+  justify-content: center;
+  display: flex;
+}
+
 #container {
   display: flex;
   justify-content: center;
@@ -118,6 +132,14 @@ body {
   border-radius: 5px;
   right: 0;
 
+}
+
+#canvas3 {
+  border: 2px solid black;
+  border-radius: 5px;
+  padding: 0;
+  margin: auto;
+  display: block;
 }
 
 
