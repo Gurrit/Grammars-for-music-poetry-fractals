@@ -44,6 +44,8 @@ class MIDIGenerator:
         self.time = 0
         self.track = 0
         self.pitch = self.reference
+        print("Tree has depth " + str(tree.depth))
+        print("Trying to get layer " + str(iteration))
         old = tree.get_layer(iteration).nodes[0].value
         for node in tree.get_layer(iteration).nodes:
             new = node.value

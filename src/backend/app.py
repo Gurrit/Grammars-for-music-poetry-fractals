@@ -8,7 +8,7 @@ from piano import *
 fractals = {"Sierpinski", "Dragon", "Koch", "Gosper"}
 
 
-async def message_receiver (websocket, path):
+async def message_receiver(websocket, path):
     async for message in websocket:
         data = json.loads(message)
         await map_to_function(websocket, data)
@@ -59,10 +59,6 @@ def generate_new_fractal_file(data):
 def make_music(tree, data):
     parser.parser_for_midi(tree, data['iteration'], generate_midi_name(data))
     os.system("timidity " + generate_midi_name(data) + " -Ow -o " + generate_wav_name(data))
-
-
-def midi_to_wav(file_name):  # example Koch5  NOT Koch5.mid
-    os.system("timidity " + config.midi_path + file_name + ".mid -Ow -o " + config.wav_path + file_name + ".wav")
 
 def generate_file_name(data):
     return config.gf_output_path + data['type'] + str(data['iteration']) + ".txt"
