@@ -54,8 +54,6 @@ async def map_to_function(websocket, data):
         #call draw_piano_fractal()
     if data['mode'] == "math":
         pass
-        web = parser.parse_for_web(generate_file_name(data))
-        #call "draw_regular_fractal()" or equiv
 
 def generate_new_fractal_file(data):
     iteration = data['iteration']

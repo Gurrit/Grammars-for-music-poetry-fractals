@@ -13,7 +13,7 @@ class MIDIGenerator:
         self.tempo = 120  # In BPM
         self.volume = 100  # 0-127, as per the MIDI standard
         self.key = 0  # c=0, c#=1, d=2 etc.
-        self.reference = 72 + self.key
+        self.reference = 60 + self.key
         self.pitch = self.reference
         self.intervalAngle = 0 # Used to determine how much the note will change
         self.MyMIDI = MIDIFile(80)  # 80 tracks are allowed
@@ -47,15 +47,20 @@ class MIDIGenerator:
         old = tree.get_layer(iteration).nodes[0].value
         for node in tree.get_layer(iteration).nodes:
             new = node.value
-            self.pitch += (new.angle - old.angle)/30
-            self.to_major()
-            #self.to_minor()
-            #self.to_minor_harmonic()
+            delta = new.angle - old.angle
+            if abs(delta) > 180:
+                delta -= 360 * delta / abs(delta)
+            self.pitch += int((delta)/30)
+            if abs(self.pitch - self.reference) > 24:
+                self.pitch -= 24 * delta/abs(delta)
             if new.new_track:
                 self.pitch = self.reference
                 self.time = 0
                 self.track = self.track + 1
                 self.MyMIDI.addTempo(self.track, self.time, self.tempo)
+            #self.to_major()
+            self.to_minor()
+            #self.to_minor_harmonic()
             self.MyMIDI.addNote(self.track, self.channel, self.pitch, self.time, new.duration, self.volume)
             self.time = self.time + new.duration
             old = node.value
