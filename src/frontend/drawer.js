@@ -1,5 +1,6 @@
 function CreateDrawer(canvas) {
     let self = this;
+    self.fractal = null;
     self.drawings = [];
     self.penStyle = 'black';
     self.penWidth = 1;
@@ -48,9 +49,14 @@ function CreateDrawer(canvas) {
             self.redraw();
             console.log("has drawn the image")
     };
+    self.saveFractal = function (name, iteration) {
+        self.fractal = new Fractal(name, iteration);
+    };
     return self;
 }
 class Line {
+    c1 = null;
+    c2 = null;
     constructor(c1, c2) {
         let self = this;
         self.c1 = c1;
@@ -59,10 +65,21 @@ class Line {
 }
 
 class Coordinate {
+    x = null;
+    y = null;
     constructor(x, y) {
         let self = this;
         self.x = x;
         self.y = y;
         return self;
+    }
+}
+class Fractal {
+    fractal = null;
+    iteration = null;
+    constructor(fractal, iteration) {
+        let self = this;
+        self.fractal = fractal;
+        self.iteration = iteration;
     }
 }

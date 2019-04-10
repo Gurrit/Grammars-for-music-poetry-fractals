@@ -22,7 +22,8 @@ function connectToServer(canvases) {
                 let coordinate2 = settings.drawers[index].extract(to);
                 settings.drawers[index].saveNewLine(coordinate1, coordinate2);
         }
-        let i = datas[len].substring(1, datas[len].length);
+        let data
+        let i = datas[len].substring(1, );
         settings.drawers[i].scaleToSize();
     };
 
