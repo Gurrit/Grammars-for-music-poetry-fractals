@@ -22,12 +22,21 @@ def generate_gf_string(data):
 
 async def map_to_function(websocket, data):
     generate_gf_string(data)
-
     print(data)
+
     if data['mode'] == "piano":
+        angle = 0
         print(data['data'])
+
+        # Get the angle from the GF-file and send it to the piano-interpreter
+        file_reader = GFFileReader()
+        commands = file_reader.read_gf_file(generate_file_name(data))
+        print("READ FILE")
+        if "ang" in commands[1]:
+            angle = int(commands[1].split(":")[1])
+
         piano.reset_drawing_arrays()
-        piano.interprete_notes(data['data'])
+        piano.interpret_notes(data['data'], angle)
 
         print("COLOR" + str(piano.colorArray))
         print("RIGHT ANGLE" + str(piano.rightAngleArray))
