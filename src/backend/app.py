@@ -24,6 +24,8 @@ async def map_to_function(websocket, data):
     if data['mode'] == "math":
         pass
         #draw fractal
+    if data['mode'] == "coordinate":
+        fractal = data['type']
     if data['mode'] == "draw":
         if data['type'] in fractals:
             config.step = data['step']
@@ -34,7 +36,7 @@ async def map_to_function(websocket, data):
             message = ""
             for m in web:       # Change for speed?
                 message = data['index'] + ";" + m + "|" + message
-            message = message + ("D" + data['index'])
+            message = message + ("D" + data['index'] + "&" + data['type'] + "I" + data['iteration'])
             await websocket.send(message)
 
 
