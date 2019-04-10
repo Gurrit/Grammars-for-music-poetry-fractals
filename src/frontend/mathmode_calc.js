@@ -60,10 +60,12 @@ function getCursorPosition(canvas, event) {
   return "'{" + str + "}'";
 }
 
-function coordinateToJson(coordinate) {
+function coordinateToJson(coordinate, fractal, iteration) {
   return "{" +
-      '"mode":"coordinate"' +
-      '"coordinate":"' + coordinate + '"' +
+      '"mode":"coordinate", ' +
+      '"coordinate":"' + coordinate + '", ' +
+      '"type":"' + fractal + '", ' +
+      '"iteration":"' + iteration + '"' +
       "}";
 }
 
@@ -72,11 +74,11 @@ function sendCursorPosition(canvas, event) {
   let len = canvasturtlelist.length;
   let fractal = null;
   for (let i = 0; i < len; i++) {
-    if (canvasturtlelist[i].canvasen == canvas) {
-      fractal = canvasturtlelist
+    if (canvasturtlelist[i].canvasen === canvas) {
+      fractal = canvasturtlelist[i].turtlen.fractal;
     }
   }
-  let message = coordinateToJson(coordinate);
+  let message = coordinateToJson(coordinate, fractal.fractal, fractal.iteration);
   sendMessage(message);
 }
 
@@ -93,7 +95,6 @@ function addFractalOptions(selectID) {
   //add the objects to the <select>
   //add the fractals to the select dropdown
   var select = document.getElementById(selectID);
-  console.log("kommer vi hit? :) ");
   for (index in fractalList) {
     select.options[select.options.length] = new Option(fractalList[index].text);
   }
@@ -198,18 +199,9 @@ function sendDrawMessage() {
       }
     }
     //resetCanvas("canvas1"); //måste rensa canvas och flytta turtle till början igen innan ny fraktal ritas
-    let msg = toJson(canvas, fractal.fractal, fractal.iteration, globalStep);
-    fractalList.push(fractal);
+    let msg = toJson(canvas, value, optionIter1.value, globalStep);
+    optionIter1.value
     console.log("meddelandet: " + msg);
     sendMessage(msg);
-  }
-}
-
-class Fractal {
-  constructor(fractal, iteration) {
-    let self = this();
-    self.fractal = fractal;
-    self.iteration = iteration;
-    return self;
   }
 }

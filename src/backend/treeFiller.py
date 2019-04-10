@@ -6,7 +6,7 @@ from config import *
 class treeFiller:
 
     def __init__(self, tree, angle, kids, max_duration = 32):
-        self.current_position = coordinate(0,0)
+        self.current_position = Coordinate(0,0)
         self.coordinate_stack = []
         self.objectStack = []
         self.tree = tree

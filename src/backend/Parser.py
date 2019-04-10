@@ -1,13 +1,8 @@
-from init import *
+from TreeSearcher import TreeSearcher
 from GFFileReader import *
-from config import *
 from MIDIGenerator import *
-from treeList import *
-from lineSegment import *
 from treeFiller import *
-import turtle
 from HiddenTurtle import *
-
 
 class Parser:
 
@@ -55,3 +50,11 @@ class Parser:
             commands.append(str(i.value.coordinate_1.x) + ", " + str(i.value.coordinate_1.y)
                             + ";" + str(i.value.coordinate_2.x) + ", " + str(i.value.coordinate_2.y))
         return commands
+
+    def find_iteration(self, filename, coord):
+        tree = self.trees.get(filename)
+        searcher = TreeSearcher(tree)
+        c = coord.split(",")
+        x = int(''.join([i for i in c[0] if i.isdigit()]))
+        y = int(''.join([i for i in c[1] if i.isdigit()]))
+        return searcher.closest_iteration(Coordinate(x, y))

@@ -7,4 +7,4 @@ searcher = TreeSearcher(t)
 
 t.visualise()
 
-print(searcher.closest_iteration(coordinate(31,31)))
+print(searcher.closest_iteration(Coordinate(31,31)))
