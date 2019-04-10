@@ -37,25 +37,31 @@
 <div class="centerdiv">EXPERIMENTAL</div>
 
 <body onload="connectToServer()">
+
+
+  <div class="selectdiv">
+      <div class="hover_img">
+          <a href="#">Hover mouse here to display instructions for the digital piano!<span><img src="piano_help.PNG" alt="image" height="500" /></span></a>
+        </div> 
+  </div>
+  
+ 
+
   <div id="content">
       <div id="content-inner">
           <div id="piano">
           </div>
       </div>
 
-      <!-- <button onclick= "show_image('piano_help.PNG', 276, 110, 'Google Logo');"> 
-        Add Google Logo</button>  -->
-
-        <div class="hover_img">
-          <a href="#">Hover mouse here to display instructions for digital piano!<span><img src="piano_help.PNG" alt="image" height="500" /></span></a>
-        </div>
 
       <button onclick="sendNotes()" class="music_submit_button start_submit_margin"> Generate fractal from played melody! </button>
       <button class="music_submit_button submit_margin">  </button>
-      <!-- <h1 id="help_header"> How to play the piano </h1>
-      <img src="piano_help.PNG" id="help_picture" alt="Picture of piano notes."> -->
+
 
   </div>
+
+
+
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
   </div>
   <script src="jquery-1.7.1.min.js"></script>

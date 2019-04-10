@@ -1,8 +1,8 @@
 .navbar{
-  height: 20px;
+  height: 30px;
 }
 .navbar-brand{
-  height: 20px;
+  height: 30px;
 }
 .centerdiv {
   display: flex;
@@ -11,9 +11,19 @@
   flex-direction: column;
 }
 
-.hover_img a { position:relative; }
-.hover_img a span { position:absolute; display:none; z-index:99; }
-.hover_img a:hover span { display:block; }
+.hover_img a { 
+  position:relative;
+}
+
+.hover_img a span { 
+  position: absolute; 
+  display:none; 
+  z-index:99; 
+}
+
+.hover_img a:hover span { 
+  display:block; 
+}
 
 #selectFractal1 {
   width: 15vw;
