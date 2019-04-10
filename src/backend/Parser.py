@@ -23,10 +23,11 @@ class Parser:
 
     #        self.parse_for_turtle()
 
-    def parser_for_midi(self, tree, iteration):
+    def parser_for_midi(self, tree, iteration, output_file_name):
         generator = MIDIGenerator()
         generator.fill_track(tree, iteration)
-        generator.create_midi_file("./midi-files/fractal_music.mid")
+        generator.create_midi_file(output_file_name)
+        
 
     def fill_tree(self, filename):
         turtle = HiddenTurtle()

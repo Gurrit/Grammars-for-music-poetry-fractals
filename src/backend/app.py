@@ -56,12 +56,23 @@ def generate_new_fractal_file(data):
     print(gf_commands)
     os.system("gf < " + config.gf_script_path)
 
+def make_music(tree, data):
+    parser.parser_for_midi(tree, data['iteration'], generate_midi_name(data))
+    os.system("timidity " + generate_midi_name(data) + " -Ow -o " + generate_wav_name(data))
+
+
+def midi_to_wav(file_name):  # example Koch5  NOT Koch5.mid
+    os.system("timidity " + config.midi_path + file_name + ".mid -Ow -o " + config.wav_path + file_name + ".wav")
 
 def generate_file_name(data):
     return config.gf_output_path + data['type'] + str(data['iteration']) + ".txt"
 
-def make_music(tree, iteration):
-    parser.parser_for_midi(tree,iteration)
+def generate_midi_name(data):
+    return config.midi_path + data['type'] + str(data['iteration']) + ".mid"
+
+def generate_wav_name(data):
+    return config.wav_path + data['type'] + str(data['iteration']) + ".wav"
+
 
 parser = Parser()
 asyncio.get_event_loop().run_until_complete(
