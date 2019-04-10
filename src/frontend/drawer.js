@@ -7,6 +7,7 @@ function CreateDrawer(canvas) {
     self.context = canvas.getContext('2d');
     self.height = canvas.height;
     self.width = canvas.width;
+    self.transformation = null;
     self.context.transform(1, 0, 0, 1, self.width/2, self.height/2);
     self.draw = function (coordinate1, coordinate2) {
         self.context.moveTo(coordinate1.x, coordinate1.y);
@@ -43,10 +44,11 @@ function CreateDrawer(canvas) {
             let centerY = (Math.abs(maxY) - Math.abs(minY)) / 2;
             let scaleX = self.width / (maxX - minX);
             let scaleY = self.height / (maxY - minY);
-            let scale = Math.min(scaleX, scaleY);
-            self.context.transform(scale*0.9, 0, 0, scale*0.9, 0, 0);
+            let scale = Math.min(scaleX, scaleY) * 0.9;
+            self.context.transform(scale, 0, 0, scale, 0, 0);
             self.context.transform(1, 0, 0, 1, -centerX, -centerY);
             self.redraw();
+            self.transformation = new Transformation(scale, new Coordinate(-centerX, -centerY));
             console.log("has drawn the image")
     };
     self.saveFractal = function (name, iteration) {
@@ -75,5 +77,12 @@ class Fractal {
         let self = this;
         self.fractal = fractal;
         self.iteration = iteration;
+    }
+}
+class Transformation {
+    constructor(scale, position) {
+        let self = this;
+        self.scale = scale;
+        self.position = position;
     }
 }

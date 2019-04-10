@@ -49,11 +49,11 @@ function getStartPos(canvas, startpos) {
 
   return [x, y];
 }
-function getCursorPosition(canvas, event) {
+function getCursorPosition(canvas, event, transformation) {
   //get the position of the cursor on the canvas
   var rect = canvas.getBoundingClientRect();
-  var x = event.clientX - rect.left;
-  var y = event.clientY - rect.top;
+  var x = ((event.clientX - rect.left - (rect.width/2)) / transformation.scale) - transformation.position.x;
+  var y = ((event.clientY - rect.top - (rect.height/2)) / transformation.scale) - transformation.position.y;
   console.log(x);
   console.log(y);
   var str = "x:" + x + "," + "y:" + y;
@@ -72,14 +72,21 @@ function coordinateToJson(coordinate, fractal, iteration) {
 }
 
 function sendCursorPosition(canvas, event) {
-  let coordinate = getCursorPosition(canvas, event);
   let len = canvasturtlelist.length;
+  let drawer = null;
   let fractal = null;
   for (let i = 0; i < len; i++) {
     if (canvasturtlelist[i].canvasen === canvas) {
-      fractal = canvasturtlelist[i].turtlen.fractal;
+      drawer = canvasturtlelist[i].turtlen;
+      fractal = drawer.fractal;
+      break;
     }
   }
+  if(fractal === null) {
+    alert("something has gone wrong, not sending the message");
+    return;
+  }
+  let coordinate = getCursorPosition(canvas, event, drawer.transformation);
   let message = coordinateToJson(coordinate, fractal.fractal, fractal.iteration);
   sendMessage(message);
 }
