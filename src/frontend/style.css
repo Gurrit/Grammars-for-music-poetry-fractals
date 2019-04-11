@@ -14,6 +14,9 @@ button {
   height: 4vw;
 }
 
+.hidden {
+  display: none;
+}
 body {
   margin-left: auto;
   margin-right: auto;
@@ -43,6 +46,13 @@ body {
 
 #canvas2 {
   border: 2px solid green;
+  border-radius: 5px;
+
+  right: 0;
+}
+
+#canvas3 {
+  border: 2px solid blue;
   border-radius: 5px;
   right: 0;
 }
