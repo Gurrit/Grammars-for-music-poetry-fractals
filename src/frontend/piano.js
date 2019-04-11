@@ -204,7 +204,8 @@ var noteArray = [];
     /*9*/ "9": 57, // g#
     /*o*/ o: 111, // a
     /*0*/ "0": 48, // a#
-    /*p*/ p: 112 // b
+    /*p*/ p: 112, // b
+    /* Control */ Control : 1000
   };
 
   var keyNotes = {
@@ -238,12 +239,18 @@ var noteArray = [];
 
   var notesShift = -12;
   var downKeys = {};
+  var ctrlDown = 0
 
   $(window)
     .keydown(function(evt) {
       var keyTone = evt.key;
       var keyCode = keyToCodes[keyTone];
-      if (!downKeys[keyCode]) {
+
+      if(keyTone == "Control"){
+        ctrlDown = 1
+      }
+
+      if (!downKeys[keyCode] && !ctrlDown) {
         downKeys[keyCode] = 1;
         var key = keyNotes[keyCode];
         // console.log("Trigger     Keyboard: " + evt.key + "     Keycode: " + keyCode + "     key: " + key);
@@ -265,6 +272,11 @@ var noteArray = [];
     .keyup(function(evt) {
       var keyTone = evt.key;
       var keyCode = keyToCodes[keyTone];
+
+      if(keyTone == "Control"){
+        ctrlDown = 0
+      }
+      
       delete downKeys[keyCode];
     });
 
