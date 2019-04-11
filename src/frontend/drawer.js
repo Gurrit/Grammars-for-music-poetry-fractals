@@ -61,20 +61,20 @@ function CreateDrawer(canvas) {
     return self;
 }
 class Line {
-    constructor(c1, c2) {
-        let self = this;
-        self.c1 = c1;
-        self.c2 = c2;
-    }
+  constructor(c1, c2) {
+    let self = this;
+    self.c1 = c1;
+    self.c2 = c2;
+  }
 }
 
 class Coordinate {
-    constructor(x, y) {
-        let self = this;
-        self.x = x;
-        self.y = y;
-        return self;
-    }
+  constructor(x, y) {
+    let self = this;
+    self.x = x;
+    self.y = y;
+    return self;
+  }
 }
 class Fractal {
     constructor(fractal, iteration) {
