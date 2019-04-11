@@ -41,7 +41,7 @@ class Parser:
         if "kids" in commands[2]:
             self.kids = int(commands[2].split(":")[1])
         filler = treeFiller(self.tree, self.angle, self.kids)
-        filler.add_modification_lists(self.colours, self.left_angles, self.right_angles)
+       # filler.add_modification_lists(self.colours, self.left_angles, self.right_angles)
         filler.generate_nodes(commands, turtle, int(commands[0].split(":")[1]))
         self.trees[filename] = self.tree
         return self.tree
@@ -59,6 +59,7 @@ class Parser:
 
     def find_iteration(self, filename, coord):
         tree = self.trees.get(filename)
+        print(tree.treeLists)
         searcher = TreeSearcher(tree)
         c = coord.split(",")
         x = int(''.join([i for i in c[0] if i.isdigit()]))
@@ -67,7 +68,7 @@ class Parser:
         commands = []
         for i in layer.nodes:
             commands.append(str(i.value.coordinate_1.x) + ", " + str(i.value.coordinate_1.y)
-                            + ";" + str(i.value.coordinate_2.x) + ", " + str(i.value.coordinate_2.y))
+                            + ";" + str(i.value.coordinate_2.x) + ", " + str(i.value.coordinate_2.y) + ";" + str(i.value.color))
         return commands
 
     def add_modification_lists(self, colours, left_angles, right_angles):

@@ -9,23 +9,25 @@ from piano import Piano
 fractals = {"Sierpinski", "Dragon", "Koch", "Gosper"}
 piano = Piano()
 
+
 async def message_receiver (websocket, path):
     async for message in websocket:
         data = json.loads(message)
         await map_to_function(websocket, data)
+
 
 def generate_gf_string(data):
     if data['type'] in fractals:
         config.step = data['step']
         if not os.path.isfile(generate_file_name(data)):
             generate_new_fractal_file(data)
-        print("done, sending message")
+
 
 async def map_to_function(websocket, data):
-    generate_gf_string(data)
     print(data)
 
     if data['mode'] == "piano":
+        generate_gf_string(data)
         angle = 0
         print(data['data'])
 
@@ -58,8 +60,6 @@ async def map_to_function(websocket, data):
         await websocket.send(message)
 
         #call draw_piano_fractal()
-        interprete_notes(data['data'])
-        print("COLOR" + str(colorArray))
         #go to piano.py
     if data['mode'] == "math":
         pass
@@ -73,6 +73,7 @@ async def map_to_function(websocket, data):
         await websocket.send(message)
 
     if data['mode'] == "draw":
+        generate_gf_string(data)
         if data['type'] in fractals:
             config.step = data['step']
             print(str(config.step))
@@ -85,6 +86,7 @@ async def map_to_function(websocket, data):
                 message = data['index'] + ";" + m + "|" + message
             message = message + ("+" + data['index'] + "&" + data['type'] + "*" + str(data['iteration']))
             await websocket.send(message)
+
 
 def generate_new_fractal_file(data):
     iteration = data['iteration']

@@ -23,6 +23,14 @@ function CreateDrawer(canvas) {
         return new Coordinate(xInt, yInt);
     };
 
+    self.color = function(hexkod) {
+        console.log(hexkod);
+        let ctx = self.context;
+        //let ctx = canvas.getContext("2d");
+        ctx.beginPath();
+        ctx.strokeStyle = hexkod;
+        ctx.stroke();
+    };
     self.reset = function() {
         self.drawings = [];
         self.context.setTransform(1, 0, 0, 1, self.width/2, self.height/2);
