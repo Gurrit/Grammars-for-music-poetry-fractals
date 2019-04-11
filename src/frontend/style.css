@@ -1,3 +1,4 @@
+/* for all pages */
 .navbar{
   height: 30px;
 }
@@ -11,19 +12,93 @@
   flex-direction: column;
 }
 
+.btn-group button:hover {
+  background-color: #3e8e41;
+}
+
 .hover_img a { 
   position:relative;
+  justify-content: center; 
 }
 
 .hover_img a span { 
   position: absolute; 
+  justify-content: center; 
   display:none; 
   z-index:99; 
 }
 
-.hover_img a:hover span { 
-  display:block; 
+.canvasStyle {
+  text-align: center;
 }
+
+.hover_img a:hover span { 
+  justify-content: center; 
+  display:block; 
+
+}
+
+.btn-group button {
+  position: relative;
+  right: 100%;
+  background-color: #4CAF50; /* Green background */
+  border: 1px solid green; /* Green border */
+  color: white; /* White text */
+  padding: 5%; /* Some padding */
+  cursor: pointer; /* Pointer/hand icon */
+  display: block; /* Make the buttons appear below each other */
+  justify-content: center; /* align vertically center*/
+}
+
+
+.generate_button{
+
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  flex-direction: column; /* arrange items in column*/
+  justify-content: center; /* align vertically center*/
+}
+
+.reset_button{
+  
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  flex-direction: column; /* arrange items in column*/
+  justify-content: center; /* align vertically center*/
+
+}
+
+.music_submit_button{
+  position: relative; 
+  text-align: center;
+}
+
+.start_submit_margin{
+  position: relative; 
+  text-align: center;
+  top: 5%;
+  right: 5%;
+}
+
+.submit_margin{
+  position: relative; 
+  text-align: center;
+  top: 20%;
+  right: 5%;
+}
+
 
 #selectFractal1 {
   width: 15vw;
@@ -46,19 +121,9 @@
   width:20px;
   height:auto;
   display:inline-block;
-} 
-
-#selectIter1 {
-  width: 4vw;
-  height: 2vw;
 }
 
-#selectFractal2 {
-  width: 15vw;
-  height: 2vw;
-}
-
-h1 {
+.h1 {
   text-align: center;
 }
 
@@ -66,34 +131,10 @@ h1 {
   display: flex;
   justify-content: center;
 }
+
 .buttonDiv2 {
   display: flex;
- 
-}
 
-button1 {
-  width: 8vw;
-  height: 2vw;
-}
-
-button2 {
-  width: 3vw;
-  height: 2vw;
-}
-
-.filler {
-  width: 100%;
-  height: 1vw;
-}
-
-.filler2 {
-  width: 100%;
-  height: 0.5vw;
-}
-
-body {
-  margin-left: auto;
-  margin-right: auto;
 }
 
 .selectdiv {
@@ -111,13 +152,45 @@ body {
   display: flex;
 }
 
+.filler {
+  width: 100%;
+  height: 1vw;
+}
+
+.filler2 {
+  width: 100%;
+  height: 0.5vw;
+}
+
+.filler3 {
+  width: 100%;
+  height: 100%;
+}
+
+/* Math mode */
 #container {
   display: flex;
   justify-content: center;
 }
 
-.canvasStyle {
-  text-align: center;
+#selectIter1 {
+  width: 4vw;
+  height: 2vw;
+}
+
+#selectFractal2 {
+  width: 15vw;
+  height: 2vw;
+}
+
+button1 {
+  width: 8vw;
+  height: 2vw;
+}
+
+button2 {
+  width: 3vw;
+  height: 2vw;
 }
 
 #canvas1 {
@@ -130,7 +203,72 @@ body {
 #canvas2 {
   border: 2px solid black;
   border-radius: 5px;
-  right: 0;
+
+}
+
+/* Art and music mode */
+body {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#toptopcontainer{
+  margin: 1%;
+  left:50%;
+ 
+  float:top;
+  justify-content: center;
+  align-items: center;
+}
+#topcontainer{
+  margin: 1%;
+  float:top;
+  justify-content: center;
+  align-items: center;
+}
+
+#leftcontainer{
+  margin: 1%;
+  float:left;
+  width: 60vw;
+  flex-direction: column; 
+  justify-content: center;
+  align-items: center;
+}
+
+#rightcontainer{
+  margin: 1%;
+  width: 20vw;
+  float:right;
+  justify-content: center;
+  align-items: center;
+}
+#container2 {
+  display: flex;
+  justify-content: center;
+}
+
+#content{
+  justify-content: center;
+  align-items: center;
+}
+
+#content-inner{
+  justify-content: center;
+  align-items: center;
+}
+
+#selectFractal3 {
+  position: relative;
+  width: 15vw;
+  height: 2vw;
+}
+
+#selectIter3 {
+  position: relative;
+  top: 0;
+  width: 4vw;
+  height: 2vw;
 
 }
 
@@ -140,6 +278,7 @@ body {
   padding: 0;
   margin: auto;
   display: block;
+
 }
 
 
