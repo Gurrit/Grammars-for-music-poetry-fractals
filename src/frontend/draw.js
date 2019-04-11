@@ -3,7 +3,7 @@ const settings = {
     socket: null,
     drawers: []
 };
-
+a = 0;
 function connectToServer(canvases) {
     let url = settings.url;
     let socket = new WebSocket(url);
@@ -13,6 +13,7 @@ function connectToServer(canvases) {
         settings.drawers[canvas] = getTurtle(canvases[canvas].canvasen);
     }
     socket.onmessage = function (event) {
+        settings.drawers[1].reset();
         let dataStr = event.data;
         let datas = dataStr.split("|");
         let len = datas.length - 1;
@@ -24,9 +25,10 @@ function connectToServer(canvases) {
         }
         let [_, meta] = datas[len].split("+");
         let [i, frac] = meta.split("&");
-        settings.drawers[i].scaleToSize();
+            settings.drawers[i].scaleToSize();
         let [type, iter] = frac.split("*");
         settings.drawers[i].saveFractal(type, iter);
+        a++;
     };
 
     settings.socket = socket;

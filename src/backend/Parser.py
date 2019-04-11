@@ -57,4 +57,9 @@ class Parser:
         c = coord.split(",")
         x = int(''.join([i for i in c[0] if i.isdigit()]))
         y = int(''.join([i for i in c[1] if i.isdigit()]))
-        return searcher.closest_iteration(Coordinate(x, y))
+        layer = searcher.closest_iteration(Coordinate(x, y))
+        commands = []
+        for i in layer.nodes:
+            commands.append(str(i.value.coordinate_1.x) + ", " + str(i.value.coordinate_1.y)
+                            + ";" + str(i.value.coordinate_2.x) + ", " + str(i.value.coordinate_2.y))
+        return commands

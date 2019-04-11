@@ -22,7 +22,11 @@ function CreateDrawer(canvas) {
         let yInt = Number(y);
         return new Coordinate(xInt, yInt);
     };
+
     self.reset = function() {
+        self.drawings = [];
+        self.context.setTransform(1, 0, 0, 1, self.width/2, self.height/2);
+        self.transformation = null;
         self.context.fillStyle = "rgba(255, 255, 255, 1)";
         self.context.clearRect(-canvas.width, -canvas.height, canvas.width*2, canvas.height*2);
         self.context.beginPath();

@@ -25,9 +25,13 @@ async def map_to_function(websocket, data):
         pass
         #draw fractal
     if data['mode'] == "coordinate":
-        layer = parser.find_iteration(generate_file_name(data), data['coordinate'])
-        for i in layer.nodes:
-            fromstr = i.value
+        lines = parser.find_iteration(generate_file_name(data), data['coordinate'])
+        message = ""
+        for m in lines:
+            message = "1" + ";" + m + "|" + message
+        message = message + ("+" + "1" + "&" + data['type'] + "*" + str(data['iteration']))
+        await websocket.send(message)
+
     if data['mode'] == "draw":
         if data['type'] in fractals:
             config.step = data['step']
@@ -37,6 +41,7 @@ async def map_to_function(websocket, data):
             web = parser.parse_for_web(generate_file_name(data))
             message = ""
             for m in web:       # Why did I do this?
+                print(m)
                 message = data['index'] + ";" + m + "|" + message
             message = message + ("+" + data['index'] + "&" + data['type'] + "*" + str(data['iteration']))
             await websocket.send(message)
