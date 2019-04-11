@@ -41,7 +41,6 @@ async def map_to_function(websocket, data):
             web = parser.parse_for_web(generate_file_name(data))
             message = ""
             for m in web:       # Why did I do this?
-                print(m)
                 message = data['index'] + ";" + m + "|" + message
             message = message + ("+" + data['index'] + "&" + data['type'] + "*" + str(data['iteration']))
             await websocket.send(message)

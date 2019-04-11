@@ -82,6 +82,8 @@ function sendCursorPosition(canvas, event) {
       break;
     }
   }
+  console.log(canvasturtlelist);
+  fractal = canvasturtlelist[1].turtlen.fractal;
   if(fractal === null) {
     alert("something has gone wrong, not sending the message");
     return;
