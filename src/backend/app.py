@@ -4,6 +4,7 @@ import json
 from Parser import *
 import os
 from piano import *
+from piano import Piano
 
 fractals = {"Sierpinski", "Dragon", "Koch", "Gosper"}
 piano = Piano()
@@ -31,6 +32,8 @@ async def map_to_function(websocket, data):
         # Get the angle from the GF-file and send it to the piano-interpreter
         file_reader = GFFileReader()
         commands = file_reader.read_gf_file(generate_file_name(data))
+        config.step = data['step']
+
         print("READ FILE")
         if "ang" in commands[1]:
             angle = int(commands[1].split(":")[1])
@@ -43,17 +46,30 @@ async def map_to_function(websocket, data):
         print("LEFT ANGLE" + str(piano.leftAngleArray))
 
         parser.add_modification_lists(piano.colorArray, piano.leftAngleArray, piano.rightAngleArray)
+        print("innan web?")
         web = parser.parse_for_web(generate_file_name(data))
-
-
+        print("efter web?")
+        message = ""
         for m in web:
-            m = data['index'] + ";" + m
-            # print(m)
-            await websocket.send(m)
+            message = data['index'] + ";" + m + "|" + message
+        message = message + ("D" + data['index'])
+        print("M??" + message)
+        await websocket.send(message)
 
         #call draw_piano_fractal()
-    if data['mode'] == "math":
-        pass
+    if data['mode'] == "draw":
+        if data['type'] in fractals:
+            config.step = data['step']
+            print(str(config.step))
+            if not os.path.isfile(generate_file_name(data)):
+                generate_new_fractal_file(data)
+            print("done, sending message")
+            web = parser.parse_for_web(generate_file_name(data))
+            message = ""
+            for m in web:  # Change for speed?
+                message = data['index'] + ";" + m + "|" + message
+            message = message + ("D" + data['index'])
+        await websocket.send(message)
 
 def generate_new_fractal_file(data):
     iteration = data['iteration']

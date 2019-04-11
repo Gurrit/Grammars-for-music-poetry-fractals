@@ -1,4 +1,4 @@
-globalStep = 1;
+globalStep = 25;
 
 function start() {
   createFractalList();
@@ -52,7 +52,7 @@ function toJson(turtleN, type, iter, step) {
   var string =
     "{" +
     '"mode":' +
-    '"piano", ' +
+    '"draw", ' +
     '"data":' +
     '"' +
     empty +
