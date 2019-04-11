@@ -107,11 +107,10 @@ function smallestSigned(coordinates) {
   return min;
 }
 class Line {
-  constructor(c1, c2, color) {
+  constructor(c1, c2) {
     let self = this;
     self.c1 = c1;
     self.c2 = c2;
-    self.color = color;
   }
 }
 

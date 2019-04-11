@@ -21,7 +21,7 @@ function connectToServer(canvases) {
       console.log("ska byta färg");
       settings.drawers[index].color(color);
       let coordinate2 = settings.drawers[index].extract(to);
-      settings.drawers[index].saveNewLine(coordinate1, coordinate2, color);
+      settings.drawers[index].saveNewLine(coordinate1, coordinate2);
     }
     let i = datas[len].substring(1, datas[len].length);
     //settings.drawers[i].scaleToSize();
