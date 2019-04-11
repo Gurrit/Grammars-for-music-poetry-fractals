@@ -41,9 +41,11 @@ function CreateDrawer(canvas) {
 
   self.color = function(hexkod) {
     console.log(hexkod);
-    let ctx = canvas.getContext("2d");
+    ctx = self.context;
+    //let ctx = canvas.getContext("2d");
     ctx.beginPath();
     ctx.strokeStyle = hexkod;
+    ctx.stroke();
   };
   self.scaleToSize = function() {
     // Make sure efficiency.
@@ -105,10 +107,11 @@ function smallestSigned(coordinates) {
   return min;
 }
 class Line {
-  constructor(c1, c2) {
+  constructor(c1, c2, color) {
     let self = this;
     self.c1 = c1;
     self.c2 = c2;
+    self.color = color;
   }
 }
 

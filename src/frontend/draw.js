@@ -18,9 +18,10 @@ function connectToServer(canvases) {
     for (let data = 0; data < len; data++) {
       let [index, from, to, color] = datas[data].split(";");
       let coordinate1 = settings.drawers[index].extract(from);
-      let coordinate2 = settings.drawers[index].extract(to);
+      console.log("ska byta färg");
       settings.drawers[index].color(color);
-      settings.drawers[index].saveNewLine(coordinate1, coordinate2);
+      let coordinate2 = settings.drawers[index].extract(to);
+      settings.drawers[index].saveNewLine(coordinate1, coordinate2, color);
     }
     let i = datas[len].substring(1, datas[len].length);
     //settings.drawers[i].scaleToSize();

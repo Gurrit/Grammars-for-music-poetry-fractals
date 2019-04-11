@@ -46,6 +46,7 @@ async def map_to_function(websocket, data):
         print("LEFT ANGLE" + str(piano.leftAngleArray))
 
         parser.add_modification_lists(piano.colorArray, piano.leftAngleArray, piano.rightAngleArray)
+        print("pianoarray: " + str(piano.colorArray))
         print("innan web?")
         web = parser.parse_for_web(generate_file_name(data))
         print("efter web?")
