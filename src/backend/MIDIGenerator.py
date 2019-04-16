@@ -22,8 +22,10 @@ class MIDIGenerator:
         with open(file_name, "wb") as output_file:
             self.MyMIDI.writeFile(output_file)
 
-    def fill_track(self, tree, iteration, data={"scale":"c minor"}):
+    def fill_track(self, tree, data):
         self.new_midi(data)
+        if "iteration" in data:
+            iteration = data['iteration']
         old = tree.get_layer(iteration).nodes[0].value
         for node in tree.get_layer(iteration).nodes:
             new = node.value
@@ -62,17 +64,21 @@ class MIDIGenerator:
 # Scale related
 
     def set_scale(self, data):
-        scale = data['scale'].split()
         keys = {"c":0, "c#":1, "d":2, "d#":3, "e":4, "f":5, "f#":6, "g":7, "g#":8, "a":9, "a#":10, "b":11}
-        self.key = keys[scale[0]]
-        self.scale_rule = scale[1]
+        if "scale" in data:
+            scale = data['scale'].split()
+            self.key = keys[scale[0]]
+            self.scale_rule = scale[1]
+        else:
+            self.key = keys['c']
+            self.scale_rule = "minor"
 
     def to_scale(self):
-        if self.scale_rule = "major":
+        if self.scale_rule == "major":
             self.to_major()
-        elif self.scale_rule = "minor":
+        elif self.scale_rule == "minor":
             self.to_minor()
-        elif self.scale_rule = "minor_harmonic":
+        elif self.scale_rule == "minor_harmonic":
             self.to_minor_harmonic()
 
     def to_minor_harmonic(self):
