@@ -49,12 +49,13 @@ async def map_to_function(websocket, data):
         print("pianoarray: " + str(piano.colorArray))
         print("innan web?")
         web = parser.parse_for_web(generate_file_name(data))
-        print("efter web?")
+
+
         message = ""
         for m in web:
             message = data['index'] + ";" + m + "|" + message
-        message = message + ("D" + data['index'])
-        print("M??" + message)
+            message = message + ("D" + data['index'])
+            # print("M??" + message)
         await websocket.send(message)
 
         #call draw_piano_fractal()

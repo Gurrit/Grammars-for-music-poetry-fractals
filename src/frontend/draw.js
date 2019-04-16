@@ -1,5 +1,5 @@
 const settings = {
-  url: "192.168.99.100",
+  url: "ws://192.168.99.100:8765/",
   socket: null,
   drawers: []
 };
