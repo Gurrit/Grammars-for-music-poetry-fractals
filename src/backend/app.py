@@ -72,6 +72,14 @@ async def map_to_function(websocket, data):
             message = message + ("D" + data['index'])
         await websocket.send(message)
 
+    if data['mode'] == "music":
+        print("Syns detta?")
+        print("inne i musiken")
+        name = generate_file_name(data)
+        tree = parser.fill_tree(name)
+        make_music(tree,data)
+
+
 def generate_new_fractal_file(data):
     iteration = data['iteration']
     gf_file = config.gf_file_path + data['type']
@@ -91,6 +99,7 @@ def generate_new_fractal_file(data):
     os.system("gf < " + config.gf_script_path)
 
 def make_music(tree, data):
+    print("skapar musikennnnn")
     parser.parser_for_midi(tree, data['iteration'], generate_midi_name(data))
     os.system("timidity " + generate_midi_name(data) + " -Ow -o " + generate_wav_name(data))
 
@@ -101,6 +110,7 @@ def generate_midi_name(data):
     return config.midi_path + data['type'] + str(data['iteration']) + ".mid"
 
 def generate_wav_name(data):
+    print("skapar wav-filen")
     return config.wav_path + data['type'] + str(data['iteration']) + ".wav"
 
 
