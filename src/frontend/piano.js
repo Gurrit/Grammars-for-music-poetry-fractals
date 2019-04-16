@@ -276,7 +276,7 @@ var noteArray = [];
       if(keyTone == "Control"){
         ctrlDown = 0
       }
-      
+
       delete downKeys[keyCode];
     });
 

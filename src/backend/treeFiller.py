@@ -61,10 +61,12 @@ class treeFiller:
 
 # ======================================== HELP METHODS ======================================== #
 
-    def get_commands(self, commands, condition):
+    def get_commands(self, commands, conditions):
         command_sum = 0
         for command in commands:
-            if command in condition:
+            for condition in conditions:
+                if condition not in command:
+                    continue
                 command_sum += 1
         return command_sum
 
