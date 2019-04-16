@@ -75,22 +75,25 @@ class MIDIGenerator:
 
     def to_scale(self):
         if self.scale_rule == "major":
-            self.to_major()
+            self.fit_pitch([0,2,4,5,7,9,11])
         elif self.scale_rule == "minor":
-            self.to_minor()
+            self.fit_pitch([0,2,3,5,7,8,10])
         elif self.scale_rule == "minor_harmonic":
-            self.to_minor_harmonic()
+            self.fit_pitch([0,2,3,5,7,8,11])
+        elif self.scale_rule == "major_pentatonic":
+            self.fit_pitch([0,2,4,7,9])
+        elif self.scale_rule == "minor_pentatonic":
+            self.fit_pitch([0,3,5,7,10])
+        elif self.scale_rule == "blues":
+            self.fit_pitch([0,3,5,6,7,10])
 
-    def to_minor_harmonic(self):
-        if (self.pitch - 1) % 12 == self.key or (self.pitch - 4) % 12 == self.key or (self.pitch - 6) % 12 == self.key or (self.pitch - 9) % 12 == self.key:
-            self.pitch = self.pitch - 1
-        if (self.pitch + 2) % 12 == self.key:
-            self.pitch = self.pitch + 1
+    def fit_pitch(self, allowed_tones):
+        i = 0
+        while !(((self.pitch - i - self.key) % 12) in allowed_tones):
+            if ((self.pitch - (i+1) - self.key) % 12) in allowed_tones:
+                self.pitch -= i+1
+            elif ((self.pitch + (i+1) - self.key) % 12) in allowed_tones:
+                self.pitch += i+1
+            i += 1
+        
 
-    def to_major(self):
-        if (self.pitch - 1) % 12 == self.key or (self.pitch - 3) % 12 == self.key or (self.pitch - 6) % 12 == self.key or (self.pitch - 8) % 12 == self.key or (self.pitch - 10) % 12 == self.key:
-            self.pitch = self.pitch - 1
-
-    def to_minor(self):
-        if (self.pitch - 1) % 12 == self.key or (self.pitch - 4) % 12 == self.key or (self.pitch - 6) % 12 == self.key or (self.pitch - 9) % 12 == self.key or (self.pitch - 11) % 12 == self.key:
-            self.pitch = self.pitch - 1
