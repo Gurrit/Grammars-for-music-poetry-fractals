@@ -109,6 +109,7 @@ var noteArray = [];
               intToNotes[i + mouseOffset]
           );
           noteArray.push(intToNotes[i + mouseOffset]);
+          document.getElementById("notesText").innerHTML = noteArray;
           $keys.trigger("note-" + i + ".play");
         }
       }).appendTo($keys);
