@@ -15,8 +15,11 @@ class treeFiller:
         self.kids = kids
         self.max_duration = max_duration
         self.duration_sum = 0
+        self.forward_condition = ["F","A","B"]
+        self.turn_right_condition = ["r"]
+        self.turn_left_condition = ["l"]
 
-        # For changing the appearance of the drawn fractal
+        # For changing the appearance of the drawn fractal,
         self.colour_list = []
         self.left_angle_list = []
         self.right_angle_list = []
@@ -41,14 +44,14 @@ class treeFiller:
         self.left_angle_index = -1
 
         for command in commands:
-            if "F" in command or "A" in command or "B" in command:          #TODO Make more general
-                self.create_node(turtle, self.get_forward_commands(commands))
+            if command in self.forward_condition:
+                self.create_node(turtle, self.get_commands(commands, self.forward_condition))
                 self.draw_counter += 1
-            if "l" in command:
-                self.turn_left(turtle, self.get_left_commands(commands))
+            if command in self.turn_left_condition:
+                self.turn_left(turtle, self.get_commands(commands, self.turn_left_condition))
                 self.left_turn_counter += 1
-            if "r" in command:
-                self.turn_right(turtle, self.get_right_commands(commands))
+            if command in self.turn_right_condition:
+                self.turn_right(turtle, self.get_commands(commands, self.turn_right_condition))
                 self.right_turn_counter += 1
 
         for i in range(self.tree.depth):
@@ -58,24 +61,10 @@ class treeFiller:
 
 # ======================================== HELP METHODS ======================================== #
 
-    def get_forward_commands(self, commands):
+    def get_commands(self, commands, condition):
         command_sum = 0
         for command in commands:
-            if "F" in command or "A" in command or "B" in command:          #TODO Make more general
-                command_sum += 1
-        return command_sum
-
-    def get_right_commands(self, commands):
-        command_sum = 0
-        for command in commands:
-            if "r" in command:
-                command_sum += 1
-        return command_sum
-
-    def get_left_commands(self, commands):
-        command_sum = 0
-        for command in commands:
-            if "l" in command:
+            if command in condition:
                 command_sum += 1
         return command_sum
 
