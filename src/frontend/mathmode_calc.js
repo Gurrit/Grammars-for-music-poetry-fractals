@@ -44,34 +44,27 @@ function getCursorPosition(canvas, event, transformation) {
   return "'{" + str + "}'";
 }
 
-function coordinateToJson(coordinate, fractal, iteration) {
+function coordinateToJson(coordinate, fromFractal, iteration, toFractal) {
   return "{" +
       '"mode":"coordinate", ' +
       '"coordinate":"' + coordinate + '", ' +
-      '"type":"' + fractal + '", ' +
-      '"iteration":"' + iteration + '"' +
+      '"type":"' + fromFractal + '", ' +
+      '"iteration":"' + iteration + '", ' +
+      '"to":"' + toFractal + '"' +
       "}";
 }
 
 function sendCursorPosition(canvas, event) {
-  let len = canvasturtlelist.length;
-  let drawer = null;
-  let fractal = null;
-  for (let i = 0; i < len; i++) {
-    if (canvasturtlelist[i].canvasen === canvas) {
-      drawer = canvasturtlelist[i].turtlen;
-      fractal = drawer.fractal;
-      break;
-    }
-  }
-  console.log(canvasturtlelist);
-  fractal = canvasturtlelist[1].turtlen.fractal;
-  if(fractal === null) {
+    //should probably not be hardcoded
+  let drawer = canvasturtlelist[0].turtlen;
+  let fromFractal = canvasturtlelist[0].turtlen.fractal;
+  let toFractal = canvasturtlelist[1].turtlen.fractal;
+  if(fromFractal === null || toFractal === null) {
     alert("something has gone wrong, not sending the message");
     return;
   }
   let coordinate = getCursorPosition(canvas, event, drawer.transformation);
-  let message = coordinateToJson(coordinate, fractal.fractal, fractal.iteration);
+  let message = coordinateToJson(coordinate, fromFractal.fractal, fromFractal.iteration, toFractal.fractal);
   sendMessage(message);
 }
 function toJson(turtleN, type, iter, step) {

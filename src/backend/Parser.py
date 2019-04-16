@@ -57,14 +57,14 @@ class Parser:
 
         return commands
 
-    def find_iteration(self, filename, coord):
+    def find_iteration(self, filename, coord, toFractal):       # Doesn't work right now, to fractal must be fixed.
         tree = self.trees.get(filename)
-        print(tree.treeLists)
         searcher = TreeSearcher(tree)
         c = coord.split(",")
         x = int(''.join([i for i in c[0] if i.isdigit()]))
         y = int(''.join([i for i in c[1] if i.isdigit()]))
-        layer = searcher.closest_iteration(Coordinate(x, y))
+        fromLayer = searcher.closest_iteration(Coordinate(x, y))
+        layer = fromLayer.layerIndex
         commands = []
         for i in layer.nodes:
             commands.append(str(i.value.coordinate_1.x) + ", " + str(i.value.coordinate_1.y)

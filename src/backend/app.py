@@ -65,7 +65,8 @@ async def map_to_function(websocket, data):
         pass
         #draw fractal
     if data['mode'] == "coordinate":
-        lines = parser.find_iteration(generate_file_name(data), data['coordinate'])
+        toFractal = data['to']
+        lines = parser.find_iteration(generate_file_name(data), data['coordinate'], toFractal)
         message = ""
         for m in lines:
             message = "1" + ";" + m + "|" + message
