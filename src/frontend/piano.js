@@ -256,6 +256,7 @@ var noteArray = [];
         // console.log("Trigger     Keyboard: " + evt.key + "     Keycode: " + keyCode + "     key: " + key);
         if (typeof key != "undefined") {
           noteArray.push(intToNotes[key]);
+          document.getElementById("notesText").innerHTML = noteArray;
           // console.log(noteArray)
           $keys.trigger("note-" + (key + notesShift + notesOffset) + ".play");
           evt.preventDefault();

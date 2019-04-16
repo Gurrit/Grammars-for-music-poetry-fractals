@@ -65,7 +65,10 @@ function sendNotes() {
   noteArray = [];
 }
 
-function resetPiano() {}
+function resetPiano() {
+  noteArray = [];
+  document.getElementById("notesText").innerHTML = "";
+}
 
 function startPianoUI() {
   createFractalList();
