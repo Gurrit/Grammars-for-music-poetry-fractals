@@ -1,2 +1,7 @@
+<<<<<<< HEAD
 import ./app/te/Sierpinski.gf 
  l -bracket c(s (s(s(s(s(s(s(s z)))))))) | wf -file=fractals/Sierpinski7.txt
+=======
+import ./app/te/Dragon.gf 
+ l -bracket c(s (s(s z))) | wf -file=fractals/Dragon2.txt
+>>>>>>> music-to-frontend
