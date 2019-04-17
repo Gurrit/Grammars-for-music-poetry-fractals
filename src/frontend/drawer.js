@@ -40,6 +40,7 @@ function CreateDrawer(canvas) {
         self.context.beginPath();
     };
     self.redraw = function () {
+        self.context.lineWidth = self.penWidth;
         for(let drawing in self.drawings) {
             let c1 = self.drawings[drawing].c1;
             let c2 = self.drawings[drawing].c2;

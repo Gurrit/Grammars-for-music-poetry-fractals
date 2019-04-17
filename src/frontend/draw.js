@@ -1,7 +1,8 @@
 const settings = {
   url: "ws://localhost:8765/",
   socket: null,
-  drawers: []
+  drawers: [],
+  hasRun: 0
 };
 function connectToServer(canvases) {
   let url = settings.url;
@@ -10,7 +11,15 @@ function connectToServer(canvases) {
     settings.drawers[canvas] = getTurtle(canvases[canvas].canvasen);
   }
   socket.onmessage = function(event) {
-      settings.drawers[1].reset();
+      if(settings.hasRun < 2) {
+          settings.drawers[1].reset();
+      }
+      else {
+          settings.drawers[1].drawings = [];
+          settings.drawers[1].strokeWidth = 1;
+          settings.drawers[1].strokeStyle = "#000000";
+          settings.drawers[1].redraw();
+      }
     let dataStr = event.data;
     console.log("DATAN TILL FRONTEND:" + event.data);
     let datas = dataStr.split("|");
@@ -21,12 +30,23 @@ function connectToServer(canvases) {
         settings.drawers[index].color(color);
         let coordinate2 = settings.drawers[index].extract(to);
         settings.drawers[index].saveNewLine(coordinate1, coordinate2);
+        if(settings.hasRun >=2 ) {
+            settings.drawers[index].draw(coordinate1, coordinate2);
+        }
     }
         let [_, meta] = datas[len].split("+");
         let [i, frac] = meta.split("&");
-            settings.drawers[i].scaleToSize();
+        if(settings.hasRun < 2) {       // Once again, bad code.
+          settings.drawers[i].scaleToSize();
         let [type, iter] = frac.split("*");
-        settings.drawers[i].saveFractal(type, iter);
+            settings.drawers[i].saveFractal(type, iter);
+            settings.hasRun++
+        }
+        else {
+            settings.drawers[i].penWidth = 3;
+            settings.drawers[i].color("#ff0000");
+            settings.drawers[i].redraw();
+        }
     };
 
     settings.socket = socket;
