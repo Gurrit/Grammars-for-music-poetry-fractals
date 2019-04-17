@@ -13,6 +13,7 @@ class Parser:
         self.kids = 0
         self.trees = {}
 
+
         self.colours = []
         self.right_angles = []
         self.left_angles = []
@@ -20,7 +21,6 @@ class Parser:
     def parse(self):
         self.parser_for_midi()
 
-    #        self.parse_for_turtle()
 
     def parser_for_midi(self, tree, iteration, output_file_name):
         generator = MIDIGenerator()
