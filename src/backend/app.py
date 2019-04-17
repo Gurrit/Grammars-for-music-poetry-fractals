@@ -67,7 +67,7 @@ async def map_to_function(websocket, data):
             message = ""
             for m in web:  # Change for speed?
                 message = data['index'] + ";" + m + "|" + message
-            message = message + ("D" + data['index'])
+            message = messa2ge + ("D" + data['index'])
         await websocket.send(message)
 
     if data['mode'] == "music":
