@@ -1,3 +1,5 @@
+import json
+
 from config import *
 
 def generate_file_name(type, iteration):
@@ -43,3 +45,15 @@ def generate_gf_string(data, fractals):
 
 def serialize_coords(coordinate):
     return {'x': coordinate.x, 'y': coordinate.y}
+
+
+def create_json(message_type, lines, canvas):
+    # Is not serialized, since Python is weird when it comes to serializing
+    ser_val = (json.dumps({'mode': message_type,
+                           'lines': [{'coordinate1': serialize_coords(i.coordinate_1),
+                                      'coordinate2': serialize_coords(i.coordinate_2),
+                                      'color': i.color
+                                      }for i in lines],
+                           'canvas': canvas}, sort_keys=True, indent=2, separators=(',', ': ')))
+    print(ser_val)
+    return ser_val

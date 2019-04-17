@@ -22,7 +22,6 @@ async def message_receiver(websocket, path):
 
 async def map_to_function(websocket, data):
     generate_gf_string(data, fractals)
-    print(data)
 
     if data['mode'] == "piano":
         generate_gf_string(data['type'], data['iteration'])
@@ -73,15 +72,7 @@ async def map_to_function(websocket, data):
         await websocket.send(message)
 
     if data['mode'] == "draw":
-        generate_gf_string(data, fractals)
-        if data['type'] in fractals:
-            config.step = data['step']
-            print(str(config.step))
-            if not os.path.isfile(generate_file_name(data['type'], data['iteration'])):
-                generate_new_fractal_file(data)
-            print("done, sending message")
-            web = parser.parse_for_web(generate_file_name(data['type'], data['iteration']))
-            await websocket.send(create_json("draw", web, 1))
+        generate_translation(data, websocket)
 
     if data['mode'] == "music":
         print("inne i musiken")
@@ -112,16 +103,16 @@ def make_music(tree, data):
     os.system("timidity " + generate_midi_name(data) +
               " -Ow -o " + generate_wav_name(data))
 
-def create_json(message_type, lines, canvas):
-    # Is not serialized, since Python is weird when it comes to serializing
-    ser_val = (json.dumps({'mode': message_type,
-                           'lines': [{'coordinate1': serialize_coords(i.coordinate_1),
-                                      'coordinate2': serialize_coords(i.coordinate_2),
-                                      'color': i.color
-                                      }for i in lines],
-                           'canvas': canvas}, sort_keys=True, indent=2, separators=(',', ': ')))
-    print(ser_val)
-    return ser_val
+
+def generate_translation(data, websocket):
+    generate_gf_string(data, fractals)
+    if data['type'] in fractals:
+        config.step = data['step']
+        if not os.path.isfile(generate_file_name(data['type'], data['iteration'])):
+            generate_new_fractal_file(data)
+        web = parser.parse_for_web(generate_file_name(data['type'], data['iteration']))
+        await websocket.send(create_json("draw", web, 1))
+
 
 parser = Parser()
 asyncio.get_event_loop().run_until_complete(
