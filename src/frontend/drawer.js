@@ -11,6 +11,8 @@ function CreateDrawer(canvas) {
     self.context.transform(1, 0, 0, 1, self.width/2, self.height/2);
     self.draw = function (coordinate1, coordinate2, color) {
         if (color !== self.color) {     // optimizes drawing with different colors.
+            console.log("switching to " + color);
+            self.context.strokeStyle = color;
             self.context.stroke();
             self.color = color
         }
