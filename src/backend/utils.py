@@ -47,13 +47,16 @@ def serialize_coords(coordinate):
     return {'x': coordinate.x, 'y': coordinate.y}
 
 
-def create_json(message_type, lines, canvas):
+def create_draw_json(lines, canvas):
     # Is not serialized, since Python is weird when it comes to serializing
-    ser_val = (json.dumps({'mode': message_type,
+    ser_val = json.dumps({'mode': "draw",
                            'lines': [{'coordinate1': serialize_coords(i.coordinate_1),
                                       'coordinate2': serialize_coords(i.coordinate_2),
                                       'color': i.color
                                       }for i in lines],
-                           'canvas': canvas}, sort_keys=True, indent=2, separators=(',', ': ')))
-    print(ser_val)
+                           'canvas': canvas}, sort_keys=True, indent=2, separators=(',', ': '))
     return ser_val
+
+
+def create_piano_json():
+    ser_val = (json.dumps())

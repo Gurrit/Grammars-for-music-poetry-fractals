@@ -4,6 +4,7 @@ from MIDIGenerator import *
 from treeFiller import *
 from HiddenTurtle import *
 from utils import *
+import time
 
 class Parser:
 
@@ -28,7 +29,7 @@ class Parser:
         generator.fill_track(tree, data)
         generator.create_midi_file(generate_midi_name(data))
 
-    def fill_tree(self, filename):
+    def fill_tree(self, filename):      # This is really slow
         turtle = HiddenTurtle()
         self.tree = TreeList()
         file_reader = GFFileReader()
@@ -40,16 +41,18 @@ class Parser:
         if "kids" in commands[2]:
             self.kids = int(commands[2].split(":")[1])
         filler = treeFiller(self.tree, self.angle, self.kids)
-       # filler.add_modification_lists(self.colours, self.left_angles, self.right_angles)
+        filler.add_modification_lists(self.colours, self.left_angles, self.right_angles)
         filler.generate_nodes(commands, turtle, int(commands[0].split(":")[1]))
         self.trees[filename] = self.tree
         return self.tree
 
     def parse_for_web(self, filename):
+        t1 = (time.time())
         self.tree = self.trees.get(filename)  # change the name?
         if self.tree is None:
             self.fill_tree(filename)
         commands = [i.value for i in self.tree.treeLists[len(self.tree.treeLists) - 1].nodes]
+        print(time.time() - t1)
         return commands
 
     def find_iteration(self, filename, coord, filename2):       # Doesn't work right now, to fractal must be fixed.
