@@ -25,7 +25,7 @@ async def map_to_function(websocket, data):
     print(data)
 
     if data['mode'] == "piano":
-        generate_gf_string(data)
+        generate_gf_string(data['type'], data['iteration'])
         angle = 0
         print(data['data'])
 
@@ -48,7 +48,7 @@ async def map_to_function(websocket, data):
         parser.add_modification_lists(
             piano.colorArray, piano.leftAngleArray, piano.rightAngleArray)
         print("pianoarray: " + str(piano.colorArray))
-        web = parser.parse_for_web(generate_file_name(data))
+        web = parser.parse_for_web(generate_file_name(data['type'], data['iteration']))
         message = ""
         for m in web:
             message = data['index'] + ";" + m + "|" + message
@@ -73,7 +73,7 @@ async def map_to_function(websocket, data):
         await websocket.send(message)
 
     if data['mode'] == "draw":
-        generate_gf_string(data)
+        generate_gf_string(data, fractals)
         if data['type'] in fractals:
             config.step = data['step']
             print(str(config.step))
@@ -84,18 +84,18 @@ async def map_to_function(websocket, data):
             message = ""
             for m in web:       # Why did I do this?
                 message = data['index'] + ";" + m + "|" + message
-            message = messa2ge + ("D" + data['index'])
+            message = message + ("D" + data['index'])
         await websocket.send(message)
 
     if data['mode'] == "music":
         print("inne i musiken")
-        name = generate_file_name(data)
+        name = generate_file_name(data['type'], data['iteration'])
         tree = parser.fill_tree(name)
         make_music(tree, data)
 
     if data['mode'] == "play":
         print("inne i musiken")
-        name = generate_file_name(data)
+        name = generate_file_name(data['type'], data['iteration'])
         tree = parser.fill_tree(name)
         make_music(tree, data)
         name = str(data['type']) + str(data['iteration'])

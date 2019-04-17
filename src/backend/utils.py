@@ -1,7 +1,7 @@
 from config import *
 
-def generate_file_name(data):
-    return config.gf_output_path + data['type'] + str(data['iteration']) + ".txt"
+def generate_file_name(type, iteration):
+    return config.gf_output_path + type + str(iteration) + ".txt"
 
 
 def generate_midi_name(data):
@@ -26,7 +26,7 @@ def generate_new_fractal_file(data):
     for i in range(iteration):
         end_iterations = end_iterations + ")"
     gf_commands = gf_commands + end_iterations + \
-        " | wf -file=" + generate_file_name(data) + "\n"
+        " | wf -file=" + generate_file_name(data['type'], data['iteration']) + "\n"
     file = open(config.gf_script_path, 'w+')
     file.write(gf_commands)
     file.close()
@@ -37,6 +37,5 @@ def generate_new_fractal_file(data):
 def generate_gf_string(data, fractals):
     if data['type'] in fractals:
         config.step = data['step']
-        if not os.path.isfile(generate_file_name(data)):
+        if not os.path.isfile(generate_file_name(data['type'], data['iteration'])):
             generate_new_fractal_file(data)
-        print("done, sending message")
