@@ -14,7 +14,7 @@ class MIDIGenerator:
         self.key = 0  # c=0, c#=1, d=2 etc.
         self.reference = 60 + self.key
         self.pitch = self.reference
-        self.scale_rule = "minor"
+        self.scale_rule = ""
         self.MyMIDI = MIDIFile(80)  # 80 tracks are allowed
 
     def create_midi_file(self, file_name = "turtle.mid"):
@@ -39,11 +39,11 @@ class MIDIGenerator:
 
     def new_midi(self, data):
         self.set_scale(data)
+        self.pitch = self.reference
         self.MyMIDI = MIDIFile(80)
         self.begin_track(0)
 
     def begin_track(self, track):
-        self.pitch = self.reference
         self.time = 0
         self.track = track
         self.MyMIDI.addTempo(track, self.time, self.tempo) 
@@ -54,12 +54,12 @@ class MIDIGenerator:
             delta -= 360 * delta / abs(delta)
         self.pitch += int((delta)/30)
         if abs(self.pitch - self.reference) > 24:
-            self.pitch -= 24 * delta/abs(delta)
-        if new.new_track:
+            self.pitch -= 24 * (self.pitch - self.reference)/abs(self.pitch - self.reference)
+        if new_lineSegment.new_track:
             self.begin_track(self.track + 1)
         self.to_scale()
-        self.MyMIDI.addNote(self.track, self.channel, self.pitch, self.time, new.duration, self.volume)
-        self.time = self.time + new.duration
+        self.MyMIDI.addNote(self.track, self.channel, self.pitch, self.time, new_lineSegment.duration, self.volume)
+        self.time = self.time + new_lineSegment.duration
 
 # Scale related
 
@@ -68,6 +68,7 @@ class MIDIGenerator:
         if "scale" in data:
             scale = data['scale'].split()
             self.key = keys[scale[0]]
+            self.reference = 60 + self.key
             self.scale_rule = scale[1]
         else:
             self.key = keys['c']
@@ -87,13 +88,11 @@ class MIDIGenerator:
         elif self.scale_rule == "blues":
             self.fit_pitch([0,3,5,6,7,10])
 
-    def fit_pitch(self, allowed_tones):
+    def fit_pitch(self, allowed_tones=range(12)):
         i = 0
-        while !(((self.pitch - i - self.key) % 12) in allowed_tones):
+        while ((self.pitch - i - self.key) % 12) not in allowed_tones:
             if ((self.pitch - (i+1) - self.key) % 12) in allowed_tones:
                 self.pitch -= i+1
             elif ((self.pitch + (i+1) - self.key) % 12) in allowed_tones:
                 self.pitch += i+1
             i += 1
-        
-
