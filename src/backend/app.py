@@ -5,14 +5,18 @@ from Parser import *
 import os
 from piano import *
 from piano import Piano
+import wave, struct
+import audioop
 
 fractals = {"Sierpinski", "Dragon", "Koch", "Gosper"}
 piano = Piano()
+
 
 async def message_receiver(websocket, path):
     async for message in websocket:
         data = json.loads(message)
         await map_to_function(websocket, data)
+
 
 def generate_gf_string(data):
     if data['type'] in fractals:
@@ -20,6 +24,7 @@ def generate_gf_string(data):
         if not os.path.isfile(generate_file_name(data)):
             generate_new_fractal_file(data)
         print("done, sending message")
+
 
 async def map_to_function(websocket, data):
     generate_gf_string(data)
@@ -45,7 +50,8 @@ async def map_to_function(websocket, data):
         print("RIGHT ANGLE" + str(piano.rightAngleArray))
         print("LEFT ANGLE" + str(piano.leftAngleArray))
 
-        parser.add_modification_lists(piano.colorArray, piano.leftAngleArray, piano.rightAngleArray)
+        parser.add_modification_lists(
+            piano.colorArray, piano.leftAngleArray, piano.rightAngleArray)
         print("pianoarray: " + str(piano.colorArray))
         print("innan web?")
         web = parser.parse_for_web(generate_file_name(data))
@@ -57,7 +63,7 @@ async def map_to_function(websocket, data):
         print("M??" + message)
         await websocket.send(message)
 
-        #call draw_piano_fractal()
+        # call draw_piano_fractal()
     if data['mode'] == "draw":
         if data['type'] in fractals:
             config.step = data['step']
@@ -77,13 +83,28 @@ async def map_to_function(websocket, data):
         print("inne i musiken")
         name = generate_file_name(data)
         tree = parser.fill_tree(name)
-        make_music(tree,data)
+        make_music(tree, data)
+
+    if data['mode'] == "play":
+        print("send the audio file")
+        name = str(data['type']) + str(data['iteration'])
+        print(str(name))
+        filename = ("./wav-files/" + str(name) + ".wav")
+        print(str(filename))
+
+        with open(filename, 'rb') as wavefile: #tar tid, ej optimalt
+            contents = wavefile.read()
+
+        #f = open(file)
+        print(str(contents))
+        await websocket.send(contents)
 
 
 def generate_new_fractal_file(data):
     iteration = data['iteration']
     gf_file = config.gf_file_path + data['type']
-    gf_commands = "import " + gf_file + ".gf \n l -bracket c(s "       # How should this look?
+    gf_commands = "import " + gf_file + \
+        ".gf \n l -bracket c(s "       # How should this look?
     start_iterations = ""
     for i in range(iteration):
         start_iterations = start_iterations + "(s"
@@ -91,23 +112,29 @@ def generate_new_fractal_file(data):
     end_iterations = ""
     for i in range(iteration):
         end_iterations = end_iterations + ")"
-    gf_commands = gf_commands + end_iterations + " | wf -file=" + generate_file_name(data) + "\n"
+    gf_commands = gf_commands + end_iterations + \
+        " | wf -file=" + generate_file_name(data) + "\n"
     file = open(config.gf_script_path, 'w+')
     file.write(gf_commands)
     file.close()
     print("GF commands: " + str(gf_commands))
     os.system("gf < " + config.gf_script_path)
 
+
 def make_music(tree, data):
     print("skapar musikennnnn")
     parser.parser_for_midi(tree, data['iteration'], generate_midi_name(data))
-    os.system("timidity " + generate_midi_name(data) + " -Ow -o " + generate_wav_name(data))
+    os.system("timidity " + generate_midi_name(data) +
+              " -Ow -o " + generate_wav_name(data))
+
 
 def generate_file_name(data):
     return config.gf_output_path + data['type'] + str(data['iteration']) + ".txt"
 
+
 def generate_midi_name(data):
     return config.midi_path + data['type'] + str(data['iteration']) + ".mid"
+
 
 def generate_wav_name(data):
     print("skapar wav-filen")
