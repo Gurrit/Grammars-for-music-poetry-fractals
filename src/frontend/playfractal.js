@@ -1,36 +1,12 @@
-globalStep = 25;
-//fractalopt = "";
-//iteropt = "";
-//value = "";
-
-function listenToFractal() {
-  fractalopt = getOption("selectFractal3");
-  iteropt = getOption("selectIter3");
-
-  value = findFractalInSelect(fractalopt);
-
-  msg1 = toMusicJson("", data, value, "music", iteropt.value, 25); //create the music file (wav and midi in backend)
-  sendMessage(msg1);
-
-  var x = 1;
-  var y = null; // To keep under proper scope
-
-  setTimeout(function() {
-    x = x * 3 + 2;
-    y = x / 2;
-  }, 100);
-
-  sendMessage(msg2);
-  //playsong();
-}
-
 function setFileURL(eventdata) {
+  //creates the URL for the sent wav file
   objectURL = URL.createObjectURL(eventdata);
   console.log("Objecturl:" + objectURL.toString());
 
   playsong(objectURL);
 }
 function sendfiles() {
+  //send information av what fractal to generate and listen to
   data = [];
 
   fractalopt = getOption("selectFractal3");
@@ -44,6 +20,7 @@ function sendfiles() {
 }
 
 function playsong(src) {
+  //play the song
   console.log(src);
   var audio = new Audio(src);
   audio.play();
@@ -75,19 +52,3 @@ function toMusicJson(canvas, data, type, mode, iter, step) {
     "}";
   return string;
 }
-
-var xhr = new XMLHttpRequest();
-xhr.open("GET", "/getFileName", true);
-xhr.send();
-
-xhr.onreadystatechange = function() {
-  if (this.readyState == 4) {
-    var filePath = this.responseText;
-    var audio = document.getElementById("mySong");
-    audio.src = filePath;
-    audio.load();
-    audio.oncanplaythrough = function() {
-      this.play();
-    };
-  }
-};
