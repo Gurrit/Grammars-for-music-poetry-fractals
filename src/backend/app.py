@@ -18,16 +18,10 @@ async def message_receiver(websocket, path):
         await map_to_function(websocket, data)
 
 
-def generate_gf_string(data):
-    if data['type'] in fractals:
-        config.step = data['step']
-        if not os.path.isfile(generate_file_name(data)):
-            generate_new_fractal_file(data)
-        print("done, sending message")
 
 
 async def map_to_function(websocket, data):
-    generate_gf_string(data)
+    generate_gf_string(data, fractals)
     print(data)
 
     if data['mode'] == "piano":
@@ -83,6 +77,10 @@ async def map_to_function(websocket, data):
         make_music(tree, data)
 
     if data['mode'] == "play":
+        print("inne i musiken")
+        name = generate_file_name(data)
+        tree = parser.fill_tree(name)
+        make_music(tree, data)
         name = str(data['type']) + str(data['iteration'])
         print(str(name))
         filename = ("./wav-files/" + str(name) + ".wav")
@@ -95,45 +93,13 @@ async def map_to_function(websocket, data):
         await websocket.send(contents)
 
 
-def generate_new_fractal_file(data):
-    iteration = data['iteration']
-    gf_file = config.gf_file_path + data['type']
-    gf_commands = "import " + gf_file + \
-        ".gf \n l -bracket c(s "       # How should this look?
-    start_iterations = ""
-    for i in range(iteration):
-        start_iterations = start_iterations + "(s"
-    gf_commands = gf_commands + start_iterations + " z)"
-    end_iterations = ""
-    for i in range(iteration):
-        end_iterations = end_iterations + ")"
-    gf_commands = gf_commands + end_iterations + \
-        " | wf -file=" + generate_file_name(data) + "\n"
-    file = open(config.gf_script_path, 'w+')
-    file.write(gf_commands)
-    file.close()
-    print("GF commands: " + str(gf_commands))
-    os.system("gf < " + config.gf_script_path)
-
-
 def make_music(tree, data):
     print("skapar musikennnnn")
-    parser.parser_for_midi(tree, data['iteration'], generate_midi_name(data))
+    parser.parser_for_midi(tree, data)
     os.system("timidity " + generate_midi_name(data) +
               " -Ow -o " + generate_wav_name(data))
 
 
-def generate_file_name(data):
-    return config.gf_output_path + data['type'] + str(data['iteration']) + ".txt"
-
-
-def generate_midi_name(data):
-    return config.midi_path + data['type'] + str(data['iteration']) + ".mid"
-
-
-def generate_wav_name(data):
-    print("skapar wav-filen")
-    return config.wav_path + data['type'] + str(data['iteration']) + ".wav"
 
 
 parser = Parser()

@@ -19,6 +19,7 @@ class MIDIGenerator:
 
     def create_midi_file(self, file_name = "turtle.mid"):
         # Create the file
+        print(file_name)
         with open(file_name, "wb") as output_file:
             self.MyMIDI.writeFile(output_file)
 

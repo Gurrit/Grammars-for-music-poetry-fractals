@@ -1,8 +1,13 @@
+from init import *
 from GFFileReader import *
+from config import *
 from MIDIGenerator import *
+from treeList import *
+from lineSegment import *
 from treeFiller import *
+import turtle
 from HiddenTurtle import *
-
+from utils import *
 
 class Parser:
 
@@ -20,11 +25,12 @@ class Parser:
     def parse(self):
         self.parser_for_midi()
 
+    #        self.parse_for_turtle()
 
-    def parser_for_midi(self, tree, iteration, output_file_name):
+    def parser_for_midi(self, tree, data):
         generator = MIDIGenerator()
         generator.fill_track(tree, data)
-        generator.create_midi_file(app.generate_midi_name(data))
+        generator.create_midi_file(generate_midi_name(data))
 
     def fill_tree(self, filename):
         turtle = HiddenTurtle()
