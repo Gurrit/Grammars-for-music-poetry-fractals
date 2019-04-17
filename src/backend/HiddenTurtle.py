@@ -1,10 +1,11 @@
 from lineSegment import *
 from math import *
 
+
 class HiddenTurtle:
 
     def __init__(self):
-        self.coordinate = coordinate(0, 0)
+        self.coordinate = Coordinate(0, 0)
         self.angle = 0
 
     def forward(self, distance):

@@ -7,6 +7,7 @@ class TreeList:
     def add_new_iteration(self, amount=1):
         for i in range(amount):
             layer = Layer()
+            layer.layerIndex = self.depth
             self.treeLists.append(layer)
             self.depth += 1
 
@@ -33,6 +34,7 @@ class Layer:
 
     def __init__(self):
         self.nodes = []  # Better name?
+        self.layerIndex = 0
 
     def append(self, node):
         list.append(self.nodes, node)

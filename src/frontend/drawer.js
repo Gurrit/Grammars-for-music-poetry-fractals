@@ -1,110 +1,73 @@
 function CreateDrawer(canvas) {
-  let self = this;
-  self.drawings = [];
-  self.penStyle = "black";
-  self.penWidth = 1;
-  self.context = canvas.getContext("2d");
-  self.height = canvas.height;
-  self.width = canvas.width;
-  self.context.transform(1, 0, 0, 1, self.width / 2, self.height / 2);
-  self.draw = function(coordinate1, coordinate2) {
-    self.context.moveTo(coordinate1.x, coordinate1.y);
-    self.context.lineTo(coordinate2.x, coordinate2.y);
-  };
-  self.saveNewLine = function(coordinate1, coordinate2) {
-    self.drawings.push(new Line(coordinate1, coordinate2));
-  };
-  self.extract = function(inputString) {
-    let [x, y] = inputString.split(", ");
-    let xInt = Number(x);
-    let yInt = Number(y);
-    return new Coordinate(xInt, yInt);
-  };
-  self.reset = function() {
-    self.context.fillStyle = "rgba(255, 255, 255, 1)";
-    self.context.clearRect(
-      -canvas.width,
-      -canvas.height,
-      canvas.width * 2,
-      canvas.height * 2
-    );
-    self.context.beginPath();
-  };
-  self.redraw = function() {
-    for (let drawing in self.drawings) {
-      let c1 = self.drawings[drawing].c1;
-      let c2 = self.drawings[drawing].c2;
-      self.draw(c1, c2);
-    }
-    self.context.stroke();
-  };
+    let self = this;
+    self.fractal = null;
+    self.drawings = [];
+    self.penStyle = 'black';
+    self.penWidth = 1;
+    self.context = canvas.getContext('2d');
+    self.height = canvas.height;
+    self.width = canvas.width;
+    self.transformation = null;
+    self.context.transform(1, 0, 0, 1, self.width/2, self.height/2);
+    self.draw = function (coordinate1, coordinate2) {
+        self.context.moveTo(coordinate1.x, coordinate1.y);
+        self.context.lineTo(coordinate2.x, coordinate2.y);
+    };
+    self.saveNewLine = function (coordinate1, coordinate2) {
+        self.drawings.push(new Line(coordinate1, coordinate2));
+    };
+    self.extract = function(inputString) {
+        let [x, y] = inputString.split(", ");
+        let xInt = Number(x);
+        let yInt = Number(y);
+        return new Coordinate(xInt, yInt);
+    };
 
-  self.color = function(hexkod) {
-    console.log(hexkod);
-    ctx = self.context;
-    //let ctx = canvas.getContext("2d");
-    ctx.beginPath();
-    ctx.strokeStyle = hexkod;
-    ctx.stroke();
-  };
-  self.scaleToSize = function() {
-    // Make sure efficiency.
-    let maxX = Math.max.apply(
-      null,
-      self.drawings.map(a => (a.c2.x > a.c1.x ? a.c2.x : a.c1.x))
-    );
-    let maxY = Math.max.apply(
-      null,
-      self.drawings.map(a => (a.c2.y > a.c1.y ? a.c2.y : a.c1.y))
-    );
-    let minX = Math.min.apply(
-      null,
-      self.drawings.map(a => (a.c2.x < a.c1.x ? a.c2.x : a.c1.x))
-    );
-    let minY = Math.min.apply(
-      null,
-      self.drawings.map(a => (a.c2.y < a.c1.y ? a.c2.y : a.c1.y))
-    );
-
-    //maxX = 25;
-    //maxY = 50;
-    //minX = 0;
-    //minY = 0;
-    console.log(maxX);
-    console.log(maxY);
-    console.log(minY);
-    console.log(minX);
-    let centerX = (Math.abs(maxX) - Math.abs(minX)) / 2;
-    let centerY = (Math.abs(maxY) - Math.abs(minY)) / 2;
-    let scaleX = self.width / (maxX - minX);
-    let scaleY = self.height / (maxY - minY);
-    let scale = Math.min(scaleX, scaleY);
-    self.context.transform(scale * 0.9, 0, 0, scale * 0.9, 0, 0);
-    self.context.transform(1, 0, 0, 1, -centerX, -centerY);
-    self.redraw();
-    console.log("has drawn the image");
-  };
-  return self;
-}
-function greatestSigned(coordinates) {
-  let max = Number.MIN_VALUE;
-  let len = coordinates.length;
-  for (i = 0; i < len; i++) {
-    if (Math.abs(coordinates[i]) > Math.abs(max)) {
-      max = coordinates[i];
-    }
-  }
-  return max;
-}
-function smallestSigned(coordinates) {
-  let min = Number.MAX_VALUE;
-  let len = coordinates.length;
-  for (let i = 0; i < len; i++) {
-    if (Math.abs(coordinates[i]) < Math.abs(min)) {
-      min = coordinates[i];
-    }
-  }
-  return min;
+    self.color = function(hexkod) {
+        console.log(hexkod);
+        let ctx = self.context;
+        //let ctx = canvas.getContext("2d");
+        ctx.beginPath();
+        ctx.strokeStyle = hexkod;
+        ctx.stroke();
+    };
+    self.reset = function() {
+        self.drawings = [];
+        self.context.setTransform(1, 0, 0, 1, self.width/2, self.height/2);
+        self.transformation = null;
+        self.context.fillStyle = "rgba(255, 255, 255, 1)";
+        self.context.clearRect(-canvas.width, -canvas.height, canvas.width*2, canvas.height*2);
+        self.context.beginPath();
+    };
+    self.redraw = function () {
+        self.context.lineWidth = self.penWidth;
+        for(let drawing in self.drawings) {
+            let c1 = self.drawings[drawing].c1;
+            let c2 = self.drawings[drawing].c2;
+            self.draw(c1, c2);
+        }
+        self.context.stroke();
+    };
+    self.scaleToSize = function () {        // Make sure efficiency.
+            let maxX = Math.max.apply(null, self.drawings.map(a=>a.c2.x > a.c1.x ? a.c2.x : a.c1.x));
+            let maxY = Math.max.apply(null, self.drawings.map(a=>a.c2.y > a.c1.y ? a.c2.y : a.c1.y));
+            let minX = Math.min.apply(null, self.drawings.map(a=>a.c2.x < a.c1.x ? a.c2.x : a.c1.x));
+            let minY = Math.min.apply(null, self.drawings.map(a=>a.c2.y < a.c1.y ? a.c2.y : a.c1.y));
+            let centerX = (Math.abs(maxX)- Math.abs(minX)) / 2;
+            let centerY = (Math.abs(maxY) - Math.abs(minY)) / 2;
+            let scaleX = self.width / (maxX - minX);
+            let scaleY = self.height / (maxY - minY);
+            let scale = Math.min(scaleX, scaleY) * 0.9;
+            self.context.transform(scale, 0, 0, scale, 0, 0);
+            self.context.transform(1, 0, 0, 1, -centerX, -centerY);
+            self.redraw();
+            self.transformation = new Transformation(scale, new Coordinate(-centerX, -centerY));
+            console.log("has drawn the image")
+    };
+    self.saveFractal = function (name, iteration) {
+        self.fractal = new Fractal(name, iteration);
+    };
+    return self;
 }
 class Line {
   constructor(c1, c2) {
@@ -121,4 +84,18 @@ class Coordinate {
     self.y = y;
     return self;
   }
+}
+class Fractal {
+    constructor(fractal, iteration) {
+        let self = this;
+        self.fractal = fractal;
+        self.iteration = iteration;
+    }
+}
+class Transformation {
+    constructor(scale, position) {
+        let self = this;
+        self.scale = scale;
+        self.position = position;
+    }
 }

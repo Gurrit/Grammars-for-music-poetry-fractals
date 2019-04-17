@@ -1,11 +1,7 @@
-from init import *
+from TreeSearcher import TreeSearcher
 from GFFileReader import *
-from config import *
 from MIDIGenerator import *
-from treeList import *
-from lineSegment import *
 from treeFiller import *
-import turtle
 from HiddenTurtle import *
 from utils import *
 
@@ -44,7 +40,7 @@ class Parser:
         if "kids" in commands[2]:
             self.kids = int(commands[2].split(":")[1])
         filler = treeFiller(self.tree, self.angle, self.kids)
-        filler.add_modification_lists(self.colours, self.left_angles, self.right_angles)
+       # filler.add_modification_lists(self.colours, self.left_angles, self.right_angles)
         filler.generate_nodes(commands, turtle, int(commands[0].split(":")[1]))
         self.trees[filename] = self.tree
         return self.tree
@@ -55,6 +51,24 @@ class Parser:
             self.fill_tree(filename)
         commands = []
         for i in self.tree.treeLists[len(self.tree.treeLists) - 1].nodes:
+            commands.append(str(i.value.coordinate_1.x) + ", " + str(i.value.coordinate_1.y)
+                            + ";" + str(i.value.coordinate_2.x) + ", " + str(i.value.coordinate_2.y) + ";" + str(i.value.color))
+        return commands
+
+    def find_iteration(self, filename, coord, filename2):       # Doesn't work right now, to fractal must be fixed.
+        tree = self.trees.get(filename)
+        tree2 = self.trees.get(filename2)
+        searcher = TreeSearcher(tree)
+        c = coord.split(",")
+        x = int(''.join([i for i in c[0] if i.isdigit()]))
+        y = int(''.join([i for i in c[1] if i.isdigit()]))
+        from_layer = searcher.closest_iteration(Coordinate(x, y))
+        print(from_layer)
+        layer = tree2.get_layer(from_layer.layerIndex)
+        print("f1 " + filename)
+        print("f2 " + filename2)
+        commands = []
+        for i in layer.nodes:
             commands.append(str(i.value.coordinate_1.x) + ", " + str(i.value.coordinate_1.y)
                             + ";" + str(i.value.coordinate_2.x) + ", " + str(i.value.coordinate_2.y) + ";" + str(i.value.color))
         return commands

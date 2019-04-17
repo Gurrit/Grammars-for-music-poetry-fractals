@@ -1,9 +1,9 @@
 const settings = {
   url: "ws://192.168.99.100:8765/",
   socket: null,
-  drawers: []
+  drawers: [],
+  hasRun: 0
 };
-
 function connectToServer(canvases) {
   let url = settings.url;
   let socket = new WebSocket(url);
@@ -11,45 +11,49 @@ function connectToServer(canvases) {
     settings.drawers[canvas] = getTurtle(canvases[canvas].canvasen);
   }
   socket.onmessage = function(event) {
+      if(settings.hasRun < 2) {
+          settings.drawers[1].reset();
+      }
+      else {
+          settings.drawers[1].drawings = [];
+          settings.drawers[1].strokeWidth = 1;
+          settings.drawers[1].strokeStyle = "#000000";
+          settings.drawers[1].redraw();
+      }
     let dataStr = event.data;
-
-    console.log(event.data);
-    if (event.data[0] == "0" || event.data[0] == "1") {
-      //if the first thing sent is a number of a canvas
-      console.log("drawing mode");
-      let datas = dataStr.split("|");
-
-      let len = datas.length - 1;
-      for (let data = 0; data < len; data++) {
+    console.log("DATAN TILL FRONTEND:" + event.data);
+    let datas = dataStr.split("|");
+    let len = datas.length - 1;
+    for (let data = 0; data < len; data++) {
         let [index, from, to, color] = datas[data].split(";");
         let coordinate1 = settings.drawers[index].extract(from);
-        console.log("ska byta färg");
         settings.drawers[index].color(color);
         let coordinate2 = settings.drawers[index].extract(to);
         settings.drawers[index].saveNewLine(coordinate1, coordinate2);
-      }
-      let i = datas[len].substring(1, datas[len].length);
-      settings.drawers[i].scaleToSize();
-      //settings.drawers[0].scaleToSize();
-    } else {
-      console.log("playing mode");
-      setFileURL(event.data);
+        if(settings.hasRun >=2 ) {
+            settings.drawers[index].draw(coordinate1, coordinate2);
+        }
     }
-  };
+        let [_, meta] = datas[len].split("+");
+        let [i, frac] = meta.split("&");
+        if(settings.hasRun < 2) {       // Once again, bad code.
+          settings.drawers[i].scaleToSize();
+        let [type, iter] = frac.split("*");
+            settings.drawers[i].saveFractal(type, iter);
+            settings.hasRun++
+        }
+        else {
+            settings.drawers[i].penWidth = 3;
+            settings.drawers[i].color("#ff0000");
+            settings.drawers[i].redraw();
+        }
+    };
 
-  settings.socket = socket;
+    settings.socket = socket;
 }
 
 function sendMessage(message) {
   console.log("sending messages");
-  array = settings.drawers;
-  for (var i in array) {
-    settings.drawers[i].reset();
-  }
   settings.socket.send(message);
 }
 
-function scale(canvas, factor) {
-  console.log("scaling");
-  settings.drawers[canvas].scale(factor);
-}
