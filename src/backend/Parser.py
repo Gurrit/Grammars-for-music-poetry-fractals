@@ -7,7 +7,7 @@ from lineSegment import *
 from treeFiller import *
 import turtle
 from HiddenTurtle import *
-
+from utils import *
 
 class Parser:
 
@@ -27,12 +27,10 @@ class Parser:
 
     #        self.parse_for_turtle()
 
-    def parser_for_midi(self):
+    def parser_for_midi(self, tree, data):
         generator = MIDIGenerator()
-
-        for i in range(self.tree.depth):
-            generator.fill_track(self.tree, i)
-            generator.create_midi_file("fractal_" + str(i) + ".mid")
+        generator.fill_track(tree, data)
+        generator.create_midi_file(generate_midi_name(data))
 
     def fill_tree(self, filename):
         turtle = HiddenTurtle()
