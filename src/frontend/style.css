@@ -17,6 +17,7 @@
 }
 
 .hover_img a { 
+  left: 37%;
   position:relative;
   justify-content: center; 
 }
@@ -38,9 +39,11 @@
 
 }
 
-.btn-group button {
+.btn-group button{
+  display: table-column-group;
   position: relative;
   right: 100%;
+  bottom:100%;
   background-color: #4CAF50; /* Green background */
   border: 1px solid green; /* Green border */
   color: white; /* White text */
@@ -118,6 +121,12 @@
 } 
 
 .divider3{
+  width:50px;
+  height:auto;
+  display:inline-block;
+} 
+
+.divider3{
   width:20px;
   height:auto;
   display:inline-block;
@@ -134,6 +143,7 @@
 
 .buttonDiv2 {
   display: flex;
+  justify-content: center;
 
 }
 
@@ -145,7 +155,10 @@
 }
 
 .selectdiv2 {
+  position: relative;
+  /* float:left; */
   display: table-cell;
+  right:34%;
   width: 100%;
   height: 3vw;
   justify-content: center;
@@ -208,14 +221,14 @@ button2 {
 
 /* Art and music mode */
 body {
+  background-color: lightpink;
   margin-left: auto;
   margin-right: auto;
 }
 
 #toptopcontainer{
   margin: 1%;
-  left:50%;
- 
+  left:100%;
   float:top;
   justify-content: center;
   align-items: center;
@@ -223,7 +236,7 @@ body {
 #topcontainer{
   margin: 1%;
   float:top;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
 }
 
@@ -237,12 +250,24 @@ body {
 }
 
 #rightcontainer{
+  position: relative;
   margin: 1%;
   width: 20vw;
   float:right;
   justify-content: center;
   align-items: center;
 }
+
+#innerrightcontainer{
+  margin: 1%;
+  float:bottom;
+
+  width: 60vw;
+  flex-direction: column; 
+  justify-content: center;
+  align-items: center;
+}
+
 #container2 {
   display: flex;
   justify-content: center;
@@ -259,12 +284,14 @@ body {
 }
 
 #selectFractal3 {
+  left:11%;
   position: relative;
   width: 15vw;
   height: 2vw;
 }
 
 #selectIter3 {
+  left:44%;
   position: relative;
   top: 0;
   width: 4vw;

@@ -25,11 +25,11 @@
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="index.html">Grammar for music and poetry</a>
+      <a class="navbar-brand" href="index.html">Grammar for fractals and music</a>
     </div>
     <ul class="nav navbar-nav">
       <li><a href="mathmode.html">Math Mode</a></li>
-      <li class="active"><a href="artmode.html">Art and music Mode</a></li>
+      <li class="active"><a href="artmode.html">Piano Mode</a></li>
       <li><a href="info.html">Info</a></li>
     </ul>
   </div>
@@ -46,19 +46,21 @@
 <!-- Start top container -->
     <div  id= "topcontainer">
         <div class="hover_img">
-            <a href="#">Hover mouse here to display instructions for the digital piano!<span><img src="piano_help.PNG" alt="image" height="500" /></span></a>
+            <a href="#">Hover mouse here to display instructions for the virtual piano!<span><img src="piano.png" alt="image" height="500" /></span></a>
         </div>
     </div> <!-- End top container -->
 
 <!-- Start left container -->
     <div  id= "leftcontainer">
-        <select id="selectFractal3" onchange="selected(id)">
-            <option value="None">Select fractal</option>
-        </select>
-        
+
+        <div class="selectdiv2">
         <select id="selectIter3"> 
             <option value="None">No. Iterations</option>
         </select> 
+        <select id="selectFractal3" onchange="selected()">
+            <option value="None">Select fractal</option>
+        </select>
+        </div>
         
         <div class="filler2"></div>
 
@@ -74,13 +76,15 @@
 <!-- Start right container  -->
     <div  id= "rightcontainer">
 
+      <div id ="innerrightcontainer">
+
             <div class="btn-group">
                 <button onclick="sendNotes()" class="generate_button"> Generate fractal from played melody! </button>
                 <div class="filler2"></div>
                 <button onclick="resetPiano()" class="reset_button"> Reset piano </button>
             </div>
-            
-        
+      </div>      
+      
     </div><!-- End right container -->
 
 <!-- The piano -->
