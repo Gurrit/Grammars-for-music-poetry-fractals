@@ -51,13 +51,11 @@ class lineSegment:
             return min(lineSegment(self.coordinate_2,point).length, lineSegment(self.coordinate_1,point).length)
 
 
+class Coordinate:
 
-
-class coordinate:
-
-    def __init__(self,x,y):
+    def __init__(self, x, y):
         self.x = x
         self.y = y
 
     def clone(self):
-        return coordinate(self.x, self.y)
+        return Coordinate(self.x, self.y)

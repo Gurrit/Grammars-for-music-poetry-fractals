@@ -13,5 +13,6 @@ class TreeSearcher:
                 if node.value.shortest_distance(coordinate) < closest_line.shortest_distance(coordinate):
                     closest_layer = layer
                     closest_line = node.value
+                    print(node.value)
 
         return closest_layer

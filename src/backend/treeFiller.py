@@ -1,13 +1,12 @@
 from lineSegment import *
 from treeList import *
 from config import *
-from math import *
 
 
 class treeFiller:
 
     def __init__(self, tree, angle, kids, max_duration = 32):
-        self.current_position = coordinate(0, 0)
+        self.current_position = Coordinate(0,0)
         self.coordinate_stack = []
         self.objectStack = []
         self.tree = tree
@@ -34,15 +33,7 @@ class treeFiller:
 
     def generate_nodes(self, commands, turtle, iteration): #self, commands, turtle, filler, iteration):
         self.coordinate_stack.append(turtle.coordinate.clone())
-        # Reset values
-        self.duration_sum = 0
-        self.color_index = -1
-        self.draw_counter = 0
-        self.right_turn_counter = 0
-        self.left_turn_counter = 0
-        self.right_angle_index = -1
-        self.left_angle_index = -1
-
+        duration_sum = 0
         for command in commands:
 
             if self.is_any_condition_in_command(command, self.forward_condition):
@@ -56,11 +47,19 @@ class treeFiller:
                 self.right_turn_counter += 1
 
         for i in range(self.tree.depth):
-            self.add_tree_layer(i)
-
+            if i != 0:
+                children = []
+                for node in self.tree.treeLists[i-1].nodes:
+                    children.append(node)
+                    if len(children) == self.kids:
+                        parent = Node(lineSegment(children[0].value.coordinate_1.clone(),children[self.kids - 1].value.coordinate_2.clone()),children)
+                        self.tree.treeLists[i].append(parent)
+                        for child in children:
+                            if child.value.new_track:
+                                parent.value.new_track = True
+                        children = []
         self.tree.treeLists.reverse()
 
-# ======================================== HELP METHODS ======================================== #
 
     def get_commands(self, commands, conditions):
         command_sum = 0
