@@ -7,6 +7,7 @@ from lineSegment import *
 from treeFiller import *
 import turtle
 from HiddenTurtle import *
+from app import *
 
 
 class Parser:
@@ -18,8 +19,12 @@ class Parser:
         self.kids = 0
         self.trees = {}
 
-    #def parse(self):
-    #    self.parser_for_midi()
+        self.colours = []
+        self.right_angles = []
+        self.left_angles = []
+
+    def parse(self):
+        self.parser_for_midi()
 
     #        self.parse_for_turtle()
 
@@ -41,6 +46,7 @@ class Parser:
         if "kids" in commands[2]:
             self.kids = int(commands[2].split(":")[1])
         filler = treeFiller(self.tree, self.angle, self.kids)
+        filler.add_modification_lists(self.colours, self.left_angles, self.right_angles)
         filler.generate_nodes(commands, turtle, int(commands[0].split(":")[1]))
         self.trees[filename] = self.tree
         return self.tree
@@ -52,5 +58,11 @@ class Parser:
         commands = []
         for i in self.tree.treeLists[len(self.tree.treeLists) - 1].nodes:
             commands.append(str(i.value.coordinate_1.x) + ", " + str(i.value.coordinate_1.y)
-                            + ";" + str(i.value.coordinate_2.x) + ", " + str(i.value.coordinate_2.y))
+                            + ";" + str(i.value.coordinate_2.x) + ", " + str(i.value.coordinate_2.y) + ";" + str(i.value.color))
+
         return commands
+
+    def add_modification_lists(self, colours, left_angles, right_angles):
+        self.colours = colours
+        self.left_angles = left_angles
+        self.right_angles = right_angles

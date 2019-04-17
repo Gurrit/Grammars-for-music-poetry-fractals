@@ -9,38 +9,41 @@ class MIDIGenerator:
         self.track = 0
         self.channel = 0
         self.time = 0  # In beats
-        self.duration = 1  # In beats
         self.tempo = 120  # In BPM
         self.volume = 100  # 0-127, as per the MIDI standard
         self.key = 0  # c=0, c#=1, d=2 etc.
         self.reference = 60 + self.key
         self.pitch = self.reference
-        self.intervalAngle = 0 # Used to determine how much the note will change
+        self.scale_rule = ""
         self.MyMIDI = MIDIFile(80)  # 80 tracks are allowed
-        self.MyMIDI.addTempo(self.track, self.time, self.tempo)
 
     def create_midi_file(self, file_name = "turtle.mid"):
         # Create the file
         with open(file_name, "wb") as output_file:
             self.MyMIDI.writeFile(output_file)
 
-    def to_minor_harmonic(self):
-        if (self.pitch - 1) % 12 == self.key or (self.pitch - 4) % 12 == self.key or (self.pitch - 6) % 12 == self.key or (self.pitch - 9) % 12 == self.key:
-            self.pitch = self.pitch - 1
-        if (self.pitch + 2) % 12 == self.key:
-            self.pitch = self.pitch + 1
+    def fill_track(self, tree, data):
+        self.new_midi(data)
+        if "iteration" in data:
+            iteration = data['iteration']
+        old = tree.get_layer(iteration).nodes[0].value
+        for node in tree.get_layer(iteration).nodes:
+            new = node.value
+            self.add_to_track(old, new)
+            old = node.value
 
-    def to_major(self):
-        if (self.pitch - 1) % 12 == self.key or (self.pitch - 3) % 12 == self.key or (self.pitch - 6) % 12 == self.key or (self.pitch - 8) % 12 == self.key or (self.pitch - 10) % 12 == self.key:
-            self.pitch = self.pitch - 1
 
-    def to_minor(self):
-        if (self.pitch - 1) % 12 == self.key or (self.pitch - 4) % 12 == self.key or (self.pitch - 6) % 12 == self.key or (self.pitch - 9) % 12 == self.key or (self.pitch - 11) % 12 == self.key:
-            self.pitch = self.pitch - 1
-            
+# ======================================== HELP METHODS ======================================== #
 
-    def fill_track(self, tree, iteration):
+# Modifying midis
+
+    def new_midi(self, data):
+        self.set_scale(data)
+        self.pitch = self.reference
         self.MyMIDI = MIDIFile(80)
+        self.begin_track(0)
+
+    def begin_track(self, track):
         self.time = 0
         self.track = 0
         self.pitch = self.reference
@@ -67,28 +70,51 @@ class MIDIGenerator:
             self.time = self.time + new.duration
             old = node.value
 
-    
-    def add_to_track(self, command):
+    def add_to_track(self, old_lineSegment, new_lineSegment):
+        delta = new_lineSegment.angle - old_lineSegment.angle
+        if abs(delta) > 180:
+            delta -= 360 * delta / abs(delta)
+        self.pitch += int((delta)/30)
+        if abs(self.pitch - self.reference) > 24:
+            self.pitch -= 24 * (self.pitch - self.reference)/abs(self.pitch - self.reference)
+        if new_lineSegment.new_track:
+            self.begin_track(self.track + 1)
+        self.to_scale()
+        self.MyMIDI.addNote(self.track, self.channel, self.pitch, self.time, new_lineSegment.duration, self.volume)
+        self.time = self.time + new_lineSegment.duration
 
-        command_split = command.split(":")
+# Scale related
 
-        if command == "f":
-            if self.time > 4 * 32 or self.pitch < self.reference - 3*12 or self.pitch > self.reference + 3*12:  # One measure is 4 beats, one octave is 12 semitones
-                self.pitch = self.reference
-                self.time = 0
-                self.track = self.track + 1
-                self.MyMIDI.addTempo(self.track, self.time, self.tempo)
-            self.duration = math.pow(2, random.randint(-2, 2))  # Randomise notelength
-            self.pitch = self.pitch + self.intervalAngle/30 # 30 degrees = 1 semitone
-            # Make the note fit into the selected scale, uncomment to choose
-            #self.to_minor_harmonic()
-            #self.to_major()
-            self.to_minor()
-            # Add the note
-            self.MyMIDI.addNote(self.track, self.channel, self.pitch, self.time, self.duration, self.volume)
-            self.time = self.time + self.duration # Move position in the track to the end of the note just added
-            self.intervalAngle = 0
-        elif command_split[0] == "r":
-            self.intervalAngle = (self.intervalAngle - int(command_split[1]))
-        elif command_split[0] == "l":
-            self.intervalAngle = (self.intervalAngle + int(command_split[1]))
+    def set_scale(self, data):
+        keys = {"c":0, "c#":1, "d":2, "d#":3, "e":4, "f":5, "f#":6, "g":7, "g#":8, "a":9, "a#":10, "b":11}
+        if "scale" in data:
+            scale = data['scale'].split()
+            self.key = keys[scale[0]]
+            self.reference = 60 + self.key
+            self.scale_rule = scale[1]
+        else:
+            self.key = keys['c']
+            self.scale_rule = "minor"
+
+    def to_scale(self):
+        if self.scale_rule == "major":
+            self.fit_pitch([0,2,4,5,7,9,11])
+        elif self.scale_rule == "minor":
+            self.fit_pitch([0,2,3,5,7,8,10])
+        elif self.scale_rule == "minor_harmonic":
+            self.fit_pitch([0,2,3,5,7,8,11])
+        elif self.scale_rule == "major_pentatonic":
+            self.fit_pitch([0,2,4,7,9])
+        elif self.scale_rule == "minor_pentatonic":
+            self.fit_pitch([0,3,5,7,10])
+        elif self.scale_rule == "blues":
+            self.fit_pitch([0,3,5,6,7,10])
+
+    def fit_pitch(self, allowed_tones=range(12)):
+        i = 0
+        while ((self.pitch - i - self.key) % 12) not in allowed_tones:
+            if ((self.pitch - (i+1) - self.key) % 12) in allowed_tones:
+                self.pitch -= i+1
+            elif ((self.pitch + (i+1) - self.key) % 12) in allowed_tones:
+                self.pitch += i+1
+            i += 1
