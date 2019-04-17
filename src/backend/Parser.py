@@ -53,7 +53,6 @@ class Parser:
         for i in self.tree.treeLists[len(self.tree.treeLists) - 1].nodes:
             commands.append(str(i.value.coordinate_1.x) + ", " + str(i.value.coordinate_1.y)
                             + ";" + str(i.value.coordinate_2.x) + ", " + str(i.value.coordinate_2.y) + ";" + str(i.value.color))
-
         return commands
 
     def find_iteration(self, filename, coord, filename2):       # Doesn't work right now, to fractal must be fixed.
