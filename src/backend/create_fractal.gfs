@@ -1,2 +1,2 @@
-import ./app/te/Gosper.gf 
- l -bracket c(s (s z)) | wf -file=fractals/Gosper1.txt
+import ./app/te/Sierpinski.gf 
+ l -bracket c(s (s(s(s(s(s(s z))))))) | wf -file=fractals/Sierpinski6.txt

@@ -53,6 +53,19 @@ function addFractalOptions(selectID) {
   }
 }
 
+function findFractalInSelect(fractoption) {
+  var value = "";
+  for (index in fractalList) {
+    if (fractalList[index].text === fractoption.value) {
+      value = fractalList[index].jsonFractal;
+      console.log("The fractal value: " + value);
+      break;
+    }
+  }
+
+  return value;
+}
+
 function addIterOptions(textFractal, selectID) {
   //adding the iteration options corresponding to the fractal
   max = 0;
