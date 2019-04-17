@@ -1,13 +1,7 @@
-from init import *
 from GFFileReader import *
-from config import *
 from MIDIGenerator import *
-from treeList import *
-from lineSegment import *
 from treeFiller import *
-import turtle
 from HiddenTurtle import *
-from app import *
 
 
 class Parser:
