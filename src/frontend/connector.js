@@ -11,7 +11,9 @@ function connectToServer(canvases) {
     settings.drawers[canvas] = getTurtle(canvases[canvas].canvasen);
   }
   socket.onmessage = function(event) {
-      if(settings.hasRun < 2) {
+      let message = JSON.parse(event.data);
+      map_messages(message);
+   /*   if(settings.hasRun < 2) {
           settings.drawers[1].reset();
       }
       else {
@@ -21,7 +23,6 @@ function connectToServer(canvases) {
           settings.drawers[1].redraw();
       }
     let dataStr = event.data;
-    console.log("DATAN TILL FRONTEND:" + event.data);
     let datas = dataStr.split("|");
     let len = datas.length - 1;
     for (let data = 0; data < len; data++) {
@@ -46,10 +47,16 @@ function connectToServer(canvases) {
             settings.drawers[i].penWidth = 3;
             settings.drawers[i].color("#ff0000");
             settings.drawers[i].redraw();
-        }
+        }*/
     };
 
     settings.socket = socket;
+}
+
+function map_messages(message) {
+    if(message.mode === "draw") {
+        drawNewFractal(message.lines, settings.drawers[message.canvas]);
+    }
 }
 
 function sendMessage(message) {

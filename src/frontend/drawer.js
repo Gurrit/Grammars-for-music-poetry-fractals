@@ -13,8 +13,8 @@ function CreateDrawer(canvas) {
         self.context.moveTo(coordinate1.x, coordinate1.y);
         self.context.lineTo(coordinate2.x, coordinate2.y);
     };
-    self.saveNewLine = function (coordinate1, coordinate2) {
-        self.drawings.push(new Line(coordinate1, coordinate2));
+    self.saveNewLine = function (coordinate1, coordinate2, color) {
+        self.drawings.push(new Line(coordinate1, coordinate2, color));
     };
     self.extract = function(inputString) {
         let [x, y] = inputString.split(", ");
@@ -70,10 +70,11 @@ function CreateDrawer(canvas) {
     return self;
 }
 class Line {
-  constructor(c1, c2) {
+  constructor(c1, c2, color) {
     let self = this;
     self.c1 = c1;
     self.c2 = c2;
+    self.color = color;
   }
 }
 
