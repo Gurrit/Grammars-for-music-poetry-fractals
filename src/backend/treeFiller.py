@@ -31,6 +31,7 @@ class treeFiller:
         self.current_right_angle = 0
         self.current_left_angle = 0
 
+    # This method is really slow. Takes over 100 seconds on the server to run on sierpinski 7
     def generate_nodes(self, commands, turtle, iteration): #self, commands, turtle, filler, iteration):
         self.coordinate_stack.append(turtle.coordinate.clone())
         duration_sum = 0

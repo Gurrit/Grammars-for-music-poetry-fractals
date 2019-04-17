@@ -29,7 +29,8 @@ class Parser:
         generator.fill_track(tree, data)
         generator.create_midi_file(generate_midi_name(data))
 
-    def fill_tree(self, filename):      # This is really slow
+    def fill_tree(self, filename):
+        t1 = (time.time())
         turtle = HiddenTurtle()
         self.tree = TreeList()
         file_reader = GFFileReader()
@@ -42,7 +43,8 @@ class Parser:
             self.kids = int(commands[2].split(":")[1])
         filler = treeFiller(self.tree, self.angle, self.kids)
         filler.add_modification_lists(self.colours, self.left_angles, self.right_angles)
-        filler.generate_nodes(commands, turtle, int(commands[0].split(":")[1]))
+        filler.generate_nodes(commands, turtle, int(commands[0].split(":")[1])) # This method is ridiculously slow.
+        print(time.time() - t1)
         self.trees[filename] = self.tree
         return self.tree
 
@@ -53,6 +55,10 @@ class Parser:
             self.fill_tree(filename)
         commands = [i.value for i in self.tree.treeLists[len(self.tree.treeLists) - 1].nodes]
         print(time.time() - t1)
+        #if these are removed, some very cool results can be had.
+        self.colours = []
+        self.right_angles = []
+        self.left_angles = []
         return commands
 
     def find_iteration(self, filename, coord, filename2):       # Doesn't work right now, to fractal must be fixed.

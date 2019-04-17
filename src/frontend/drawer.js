@@ -2,14 +2,18 @@ function CreateDrawer(canvas) {
     let self = this;
     self.fractal = null;
     self.drawings = [];
-    self.penStyle = 'black';
     self.penWidth = 1;
     self.context = canvas.getContext('2d');
     self.height = canvas.height;
     self.width = canvas.width;
     self.transformation = null;
+    self.color = "#000000";
     self.context.transform(1, 0, 0, 1, self.width/2, self.height/2);
-    self.draw = function (coordinate1, coordinate2) {
+    self.draw = function (coordinate1, coordinate2, color) {
+        if (color !== self.color) {     // optimizes drawing with different colors.
+            self.context.stroke();
+            self.color = color
+        }
         self.context.moveTo(coordinate1.x, coordinate1.y);
         self.context.lineTo(coordinate2.x, coordinate2.y);
     };
@@ -44,7 +48,8 @@ function CreateDrawer(canvas) {
         for(let drawing in self.drawings) {
             let c1 = self.drawings[drawing].c1;
             let c2 = self.drawings[drawing].c2;
-            self.draw(c1, c2);
+            let color = self.drawings[drawing].color;
+            self.draw(c1, c2, color);
         }
         self.context.stroke();
     };

@@ -55,8 +55,11 @@ def create_draw_json(lines, canvas):
                                       'color': i.color
                                       }for i in lines],
                            'canvas': canvas}, sort_keys=True, indent=2, separators=(',', ': '))
+    # List comprehension, effective way of getting all coords and color in one loop.
+
     return ser_val
 
 
-def create_piano_json():
-    ser_val = (json.dumps())
+def create_music_json(file):
+    ser_val = json.dumps({'mode': "music", 'content': file},sort_keys=True, indent=2, separators=(',', ': '))
+    return ser_val

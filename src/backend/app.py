@@ -38,34 +38,24 @@ async def map_to_function(websocket, data):
     if data['mode'] == "draw":
         await generate_translation(data, websocket)
 
-    if data['mode'] == "music":
-        print("inne i musiken")
-        name = generate_file_name(data['type'], data['iteration'])
-        tree = parser.fill_tree(name)
-        make_music(tree, data)
-
     if data['mode'] == "play":
-        print("inne i musiken")
-        name = generate_file_name(data['type'], data['iteration'])
-        tree = parser.fill_tree(name)
-        make_music(tree, data)
-        name = str(data['type']) + str(data['iteration'])
-        print(str(name))
-        filename = ("./wav-files/" + str(name) + ".wav")
-        print(str(filename))
+        await generate_music_file(data, websocket)
 
-        with open(filename, 'rb') as wavefile: #tar tid, ej optimalt för högre grader av iterationer
-            contents = wavefile.read()
-
-        print("sending the audio file" + str(contents))
-        await websocket.send(contents)
-
-
-def make_music(tree, data):
+def make_music(tree, data): # this should probably be moved.
     print("skapar musikennnnn")
     parser.parser_for_midi(tree, data)
     os.system("timidity " + generate_midi_name(data) +
               " -Ow -o " + generate_wav_name(data))
+
+async def generate_music_file(data, websocket):
+    name = generate_file_name(data['type'], data['iteration'])
+    tree = parser.fill_tree(name)
+    make_music(tree, data)
+    name = str(data['type']) + str(data['iteration'])
+    filename = ("./wav-files/" + str(name) + ".wav")
+    with open(filename, 'rb') as wavefile:  # tar tid, ej optimalt för högre grader av iterationer
+        contents = wavefile.read()
+    await websocket.send(create_music_json(contents))
 
 
 async def generate_translation(data, websocket):

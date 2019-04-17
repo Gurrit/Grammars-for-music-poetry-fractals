@@ -54,9 +54,14 @@ function connectToServer(canvases) {
 }
 
 function map_messages(message) {
-    if(message.mode === "draw") {
-        drawNewFractal(message.lines, settings.drawers[message.canvas]);
+    switch(message.mode) {
+        case "draw":
+            drawNewFractal(message.lines, settings.drawers[message.canvas]);
+            break;
+        case "music":
+            setFileURL(message.content)
     }
+
 }
 
 function sendMessage(message) {
