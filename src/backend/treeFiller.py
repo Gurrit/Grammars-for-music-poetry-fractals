@@ -15,8 +15,11 @@ class treeFiller:
         self.kids = kids
         self.max_duration = max_duration
         self.duration_sum = 0
+        self.forward_condition = ["F", "A", "B"]
+        self.turn_right_condition = ["r"]
+        self.turn_left_condition = ["l"]
 
-        # For changing the appearance of the drawn fractal
+        # For changing the appearance of the drawn fractal,
         self.colour_list = []
         self.left_angle_list = []
         self.right_angle_list = []
@@ -41,14 +44,15 @@ class treeFiller:
         self.left_angle_index = -1
 
         for command in commands:
-            if "F" in command or "A" in command or "B" in command:          #TODO Make more general
-                self.create_node(turtle, self.get_forward_commands(commands))
+
+            if self.is_any_condition_in_command(command, self.forward_condition):
+                self.create_node(turtle, self.get_commands(commands, self.forward_condition))
                 self.draw_counter += 1
-            if "l" in command:
-                self.turn_left(turtle, self.get_left_commands(commands))
+            if self.is_any_condition_in_command(command, self.turn_left_condition):
+                self.turn_left(turtle, self.get_commands(commands, self.turn_left_condition))
                 self.left_turn_counter += 1
-            if "r" in command:
-                self.turn_right(turtle, self.get_right_commands(commands))
+            if self.is_any_condition_in_command(command, self.turn_right_condition):
+                self.turn_right(turtle, self.get_commands(commands, self.turn_right_condition))
                 self.right_turn_counter += 1
 
         for i in range(self.tree.depth):
@@ -58,26 +62,19 @@ class treeFiller:
 
 # ======================================== HELP METHODS ======================================== #
 
-    def get_forward_commands(self, commands):
+    def get_commands(self, commands, conditions):
         command_sum = 0
         for command in commands:
-            if "F" in command or "A" in command or "B" in command:          #TODO Make more general
+            if self.is_any_condition_in_command(command, conditions):
                 command_sum += 1
         return command_sum
 
-    def get_right_commands(self, commands):
-        command_sum = 0
-        for command in commands:
-            if "r" in command:
-                command_sum += 1
-        return command_sum
-
-    def get_left_commands(self, commands):
-        command_sum = 0
-        for command in commands:
-            if "l" in command:
-                command_sum += 1
-        return command_sum
+    def is_any_condition_in_command(self, command, conditions):
+        for condition in conditions:
+            if condition not in command:
+                continue
+            return True
+        return False
 
     def create_node(self, turtle, commands_length):
         colour = self.get_node_colour(commands_length)
@@ -110,19 +107,13 @@ class treeFiller:
 
         if numberOfRightAngles != 0:
             leftAngleSteps = floor(commands_length / numberOfRightAngles) + commands_length % numberOfRightAngles
-            print("LEFTANGLESTEPS: " + str(leftAngleSteps) + "TURN COUNTER: " + str(self.left_turn_counter))
+            # print("LEFTANGLESTEPS: " + str(leftAngleSteps) + "TURN COUNTER: " + str(self.left_turn_counter))
             if (self.left_turn_counter % leftAngleSteps == 0) and (len(self.left_angle_list) != 0):
-                print("Left loop inside")
+                # print("Left loop inside")
                 self.left_angle_index += 1
             self.current_left_angle = self.left_angle_list[self.left_angle_index]
-            print("CURRENT LEFT ANGLE: " + str(self.current_left_angle))
+            # print("CURRENT LEFT ANGLE: " + str(self.current_left_angle))
         turtle.left(self.current_left_angle)
-
-    # def turn_left(self, turtle):
-    #     turtle.left(self.angle)     #TODO read from leftAngleArray
-
-    # def turn_right(self, turtle):
-    #     turtle.right(self.angle)    #TODO read from leftAngleArray
 
     def turn_right(self, turtle, commands_length):
         self.current_right_angle = int(self.angle)
@@ -130,9 +121,12 @@ class treeFiller:
 
         if numberOfRightAngles != 0:
             rightAngleSteps = floor(commands_length / numberOfRightAngles) + commands_length % numberOfRightAngles
+            # print("RIGHTANGLESTEPS: " + str(rightAngleSteps) + "TURN COUNTER: " + str(self.right_turn_counter))
             if (self.right_turn_counter % rightAngleSteps == 0) and (len(self.right_angle_list) != 0):
+                # print("RIGHT loop inside")
                 self.right_angle_index += 1
             self.current_right_angle = self.right_angle_list[self.right_angle_index]
+            # print("CURRENT RIGHT ANGLE: " + str(self.current_right_angle))
         turtle.right(self.current_right_angle)
 
     def add_tree_layer(self, i):

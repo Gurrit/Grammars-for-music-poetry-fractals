@@ -51,8 +51,8 @@ async def map_to_function(websocket, data):
         message = ""
         for m in web:
             message = data['index'] + ";" + m + "|" + message
-        message = message + ("D" + data['index'])
-        print("M??" + message)
+            message = message + ("D" + data['index'])
+            # print("M??" + message)
         await websocket.send(message)
 
         # call draw_piano_fractal()
