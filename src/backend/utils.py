@@ -39,3 +39,7 @@ def generate_gf_string(data, fractals):
         config.step = data['step']
         if not os.path.isfile(generate_file_name(data['type'], data['iteration'])):
             generate_new_fractal_file(data)
+
+
+def serialize_coords(coordinate):
+    return {'x': coordinate.x, 'y': coordinate.y}

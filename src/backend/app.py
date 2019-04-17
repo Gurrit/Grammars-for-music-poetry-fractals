@@ -81,11 +81,7 @@ async def map_to_function(websocket, data):
                 generate_new_fractal_file(data)
             print("done, sending message")
             web = parser.parse_for_web(generate_file_name(data['type'], data['iteration']))
-            message = ""
-            for m in web:       # Why did I do this?
-                message = data['index'] + ";" + m + "|" + message
-            message = message + ("D" + data['index'])
-        await websocket.send(message)
+            await websocket.send(create_json("draw", web, 1))
 
     if data['mode'] == "music":
         print("inne i musiken")
@@ -116,8 +112,16 @@ def make_music(tree, data):
     os.system("timidity " + generate_midi_name(data) +
               " -Ow -o " + generate_wav_name(data))
 
-
-
+def create_json(message_type, lines, canvas):
+    # Is not serialized, since Python is weird when it comes to serializing
+    ser_val = (json.dumps({'mode': message_type,
+                           'lines': [{'coordinate1': serialize_coords(i.coordinate_1),
+                                      'coordinate2': serialize_coords(i.coordinate_2),
+                                      'color': i.color
+                                      }for i in lines],
+                           'canvas': canvas}, sort_keys=True, indent=2, separators=(',', ': ')))
+    print(ser_val)
+    return ser_val
 
 parser = Parser()
 asyncio.get_event_loop().run_until_complete(
