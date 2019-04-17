@@ -29,8 +29,8 @@ function connectToServer(canvases) {
         settings.drawers[index].saveNewLine(coordinate1, coordinate2);
       }
       let i = datas[len].substring(1, datas[len].length);
-      //settings.drawers[i].scaleToSize();
-      settings.drawers[0].scaleToSize();
+      settings.drawers[i].scaleToSize();
+      //settings.drawers[0].scaleToSize();
     } else {
       console.log("playing mode");
       setFileURL(event.data);
