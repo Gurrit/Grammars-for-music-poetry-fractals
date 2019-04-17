@@ -121,3 +121,9 @@ dmypy.json
 .pyre/
 
 .idea
+
+src/backend/fractals/Dragon3\.txt
+
+src/backend/fractals/Koch4\.txt
+
+src/backend/fractals/Koch6\.txt
