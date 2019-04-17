@@ -5,24 +5,23 @@ from Parser import *
 import os
 from piano import *
 from piano import Piano
+import wave, struct
+import audioop
 
 fractals = {"Sierpinski", "Dragon", "Koch", "Gosper"}
 piano = Piano()
 
-async def message_receiver (websocket, path):
+
+async def message_receiver(websocket, path):
     async for message in websocket:
         data = json.loads(message)
         await map_to_function(websocket, data)
 
-def generate_gf_string(data):
-    if data['type'] in fractals:
-        config.step = data['step']
-        if not os.path.isfile(generate_file_name(data)):
-            generate_new_fractal_file(data)
-        print("done, sending message")
+
+
 
 async def map_to_function(websocket, data):
-    generate_gf_string(data)
+    generate_gf_string(data, fractals)
     print(data)
 
     if data['mode'] == "piano":
@@ -45,11 +44,10 @@ async def map_to_function(websocket, data):
         print("RIGHT ANGLE" + str(piano.rightAngleArray))
         print("LEFT ANGLE" + str(piano.leftAngleArray))
 
-        parser.add_modification_lists(piano.colorArray, piano.leftAngleArray, piano.rightAngleArray)
+        parser.add_modification_lists(
+            piano.colorArray, piano.leftAngleArray, piano.rightAngleArray)
         print("pianoarray: " + str(piano.colorArray))
-        print("innan web?")
         web = parser.parse_for_web(generate_file_name(data))
-        print("efter web?")
         message = ""
         for m in web:
             message = data['index'] + ";" + m + "|" + message
@@ -57,7 +55,7 @@ async def map_to_function(websocket, data):
         print("M??" + message)
         await websocket.send(message)
 
-        #call draw_piano_fractal()
+        # call draw_piano_fractal()
     if data['mode'] == "draw":
         if data['type'] in fractals:
             config.step = data['step']
@@ -69,30 +67,39 @@ async def map_to_function(websocket, data):
             message = ""
             for m in web:  # Change for speed?
                 message = data['index'] + ";" + m + "|" + message
-            message = message + ("D" + data['index'])
+            message = messa2ge + ("D" + data['index'])
         await websocket.send(message)
 
-def generate_new_fractal_file(data):
-    iteration = data['iteration']
-    gf_file = config.gf_file_path + data['type']
-    gf_commands = "import " + gf_file + ".gf \n l -bracket c(s "       # How should this look?
-    start_iterations = ""
-    for i in range(iteration):
-        start_iterations = start_iterations + "(s"
-    gf_commands = gf_commands + start_iterations + " z)"
-    end_iterations = ""
-    for i in range(iteration):
-        end_iterations = end_iterations + ")"
-    gf_commands = gf_commands + end_iterations + " | wf -file=" + generate_file_name(data) + "\n"
-    file = open(config.gf_script_path, 'w+')
-    file.write(gf_commands)
-    file.close()
-    print("GF commands: " + str(gf_commands))
-    os.system("gf < " + config.gf_script_path)
+    if data['mode'] == "music":
+        print("inne i musiken")
+        name = generate_file_name(data)
+        tree = parser.fill_tree(name)
+        make_music(tree, data)
+
+    if data['mode'] == "play":
+        print("inne i musiken")
+        name = generate_file_name(data)
+        tree = parser.fill_tree(name)
+        make_music(tree, data)
+        name = str(data['type']) + str(data['iteration'])
+        print(str(name))
+        filename = ("./wav-files/" + str(name) + ".wav")
+        print(str(filename))
+
+        with open(filename, 'rb') as wavefile: #tar tid, ej optimalt för högre grader av iterationer
+            contents = wavefile.read()
+
+        print("sending the audio file" + str(contents))
+        await websocket.send(contents)
 
 
-def generate_file_name(data):
-    return config.gf_output_path + data['type'] + str(data['iteration']) + ".txt"
+def make_music(tree, data):
+    print("skapar musikennnnn")
+    parser.parser_for_midi(tree, data)
+    os.system("timidity " + generate_midi_name(data) +
+              " -Ow -o " + generate_wav_name(data))
+
+
 
 
 parser = Parser()

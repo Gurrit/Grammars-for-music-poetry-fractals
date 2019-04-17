@@ -19,6 +19,7 @@ class MIDIGenerator:
 
     def create_midi_file(self, file_name = "turtle.mid"):
         # Create the file
+        print(file_name)
         with open(file_name, "wb") as output_file:
             self.MyMIDI.writeFile(output_file)
 
@@ -26,8 +27,9 @@ class MIDIGenerator:
         self.new_midi(data)
         if "iteration" in data:
             iteration = data['iteration']
-        old = tree.get_layer(iteration).nodes[0].value
-        for node in tree.get_layer(iteration).nodes:
+        tree.visualise()
+        old = tree.get_layer(iteration-1).nodes[0].value
+        for node in tree.get_layer(iteration-1).nodes:
             new = node.value
             self.add_to_track(old, new)
             old = node.value
@@ -58,7 +60,7 @@ class MIDIGenerator:
         if new_lineSegment.new_track:
             self.begin_track(self.track + 1)
         self.to_scale()
-        self.MyMIDI.addNote(self.track, self.channel, self.pitch, self.time, new_lineSegment.duration, self.volume)
+        self.MyMIDI.addNote(self.track, self.channel, int(self.pitch), self.time, new_lineSegment.duration, self.volume)
         self.time = self.time + new_lineSegment.duration
 
 # Scale related

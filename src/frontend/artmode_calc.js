@@ -1,3 +1,5 @@
+const globalStep = 25;
+
 function toPianoJson(canvas, data, type, mode, iter, step) {
   var string =
     "{" +
@@ -40,15 +42,7 @@ function sendNotes() {
   let fractoption = getOption("selectFractal3");
   let iteroption = getOption("selectIter3");
 
-  var value = "";
-  for (index in fractalList) {
-    if (fractalList[index].text === fractoption.value) {
-      value = fractalList[index].jsonFractal;
-      console.log("The fractal value: " + value);
-      //let turtle = getTurtle(canvases[canvas]);
-      break;
-    }
-  }
+  value = findFractalInSelect(fractoption);
 
   pianoJson = toPianoJson(
     "canvas3",
@@ -56,7 +50,7 @@ function sendNotes() {
     value,
     "piano",
     iteroption.value,
-    "8"
+    globalStep
   );
 
   console.log(notes);

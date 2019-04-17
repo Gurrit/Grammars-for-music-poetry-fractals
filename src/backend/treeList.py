@@ -12,6 +12,7 @@ class TreeList:
 
     def get_layer(self, layer):
         if layer > self.depth-1:
+            print(layer)
             raise IndexError("the structure is not that deep")
         return self.treeLists[layer]
 
