@@ -53,9 +53,7 @@ async def map_to_function(websocket, data):
         parser.add_modification_lists(
             piano.colorArray, piano.leftAngleArray, piano.rightAngleArray)
         print("pianoarray: " + str(piano.colorArray))
-        print("innan web?")
         web = parser.parse_for_web(generate_file_name(data))
-        print("efter web?")
         message = ""
         for m in web:
             message = data['index'] + ";" + m + "|" + message
@@ -79,24 +77,21 @@ async def map_to_function(websocket, data):
         await websocket.send(message)
 
     if data['mode'] == "music":
-        print("Syns detta?")
         print("inne i musiken")
         name = generate_file_name(data)
         tree = parser.fill_tree(name)
         make_music(tree, data)
 
     if data['mode'] == "play":
-        print("send the audio file")
         name = str(data['type']) + str(data['iteration'])
         print(str(name))
         filename = ("./wav-files/" + str(name) + ".wav")
         print(str(filename))
 
-        with open(filename, 'rb') as wavefile: #tar tid, ej optimalt
+        with open(filename, 'rb') as wavefile: #tar tid, ej optimalt för högre grader av iterationer
             contents = wavefile.read()
 
-        #f = open(file)
-        print(str(contents))
+        print("sending the audio file" + str(contents))
         await websocket.send(contents)
 
 

@@ -15,6 +15,7 @@ function connectToServer(canvases) {
 
     console.log(event.data);
     if (event.data[0] == "0" || event.data[0] == "1") {
+      //if the first thing sent is a number of a canvas
       console.log("drawing mode");
       let datas = dataStr.split("|");
 
