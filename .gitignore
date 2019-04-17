@@ -153,3 +153,9 @@ src/backend/fractals/Koch3\.txt
 src/backend/fractals/Koch6\.txt
 
 src/backend/fractals/Koch4\.txt
+
+src/backend/create_fractal\.gfs
+
+src/backend/fractals/Sierpinski4\.txt
+
+src/backend/fractals/Sierpinski5\.txt
