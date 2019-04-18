@@ -28,7 +28,7 @@ function map_messages(message) {
             setFileURL(message.content);
             break;
         case "translation":
-
+            translateFractal(message.lines, settings.drawers[1], "#ff0017")
     }
 }
 

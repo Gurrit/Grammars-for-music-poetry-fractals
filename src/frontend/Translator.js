@@ -12,3 +12,6 @@ function drawNewFractal(lines, drawer, fractal, iteration) {
     drawer.saveFractal(fractal, iteration);
 }
 
+function translateFractal(lines, drawer, newColor) {
+
+}
