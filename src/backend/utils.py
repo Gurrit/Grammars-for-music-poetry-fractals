@@ -47,19 +47,31 @@ def serialize_coords(coordinate):
     return {'x': coordinate.x, 'y': coordinate.y}
 
 
-def create_draw_json(lines, canvas):
+def create_draw_json(lines, canvas, fractal, iteration):
     # Is not serialized, since Python is weird when it comes to serializing
     ser_val = json.dumps({'mode': "draw",
                            'lines': [{'coordinate1': serialize_coords(i.coordinate_1),
                                       'coordinate2': serialize_coords(i.coordinate_2),
                                       'color': i.color
                                       }for i in lines],
-                           'canvas': canvas}, sort_keys=True, indent=2, separators=(',', ': '))
+                            'canvas': canvas,
+                            'type': fractal,
+                            'iteration': iteration}, sort_keys=True, indent=2, separators=(',', ': '))
     # List comprehension, effective way of getting all coords and color in one loop.
 
     return ser_val
 
 
 def create_music_json(file):
-    ser_val = json.dumps({'mode': "music", 'content': file},sort_keys=True, indent=2, separators=(',', ': '))
+    ser_val = json.dumps({'mode': "music", 'content': file}, sort_keys=True, indent=2, separators=(',', ': '))
     return ser_val
+
+
+def create_translation_json(lines):
+    ser_val = json.dumps({'mode': "translation",
+                          'lines': [{'coordinate1': serialize_coords(i.coordinate_1),
+                                      'coordinate2': serialize_coords(i.coordinate_2),
+                                      'color': i.color
+                                      }for i in lines]}, sort_keys=True, indent=2, separators=(',', ': '))
+    return ser_val
+
