@@ -44,9 +44,9 @@ async def generate_music_file(data, websocket):
     make_music(tree, data)
     name = str(data['type']) + str(data['iteration'])
     filename = ("./wav-files/" + str(name) + ".wav")
-    with open(filename, 'w') as wavefile:  # tar tid, ej optimalt för högre grader av iterationer
+    with open(filename, 'rb') as wavefile:  # tar tid, ej optimalt för högre grader av iterationer
         contents = wavefile.read()
-    await websocket.send(create_music_json(contents))
+    await websocket.send(contents)
 
 
 async def generate_fractal(data, websocket):
