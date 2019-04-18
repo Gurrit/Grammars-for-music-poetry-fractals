@@ -1,4 +1,6 @@
 import asyncio
+import base64
+
 import websockets
 import json
 from Parser import *
@@ -18,105 +20,66 @@ async def message_receiver(websocket, path):
         await map_to_function(websocket, data)
 
 
-
-
 async def map_to_function(websocket, data):
-    generate_gf_string(data, fractals)
-    print(data)
-
     if data['mode'] == "piano":
-        generate_gf_string(data['type'], data['iteration'])
-        angle = 0
-        print(data['data'])
-
-        # Get the angle from the GF-file and send it to the piano-interpreter
-        file_reader = GFFileReader()
-        commands = file_reader.read_gf_file(generate_file_name(data['type'], data['iteration']))
-        config.step = data['step']
-
-        print("READ FILE")
-        if "ang" in commands[1]:
-            angle = int(commands[1].split(":")[1])
-
-        piano.reset_drawing_arrays()
-        piano.interpret_notes(data['data'], angle)
-
-        print("COLOR" + str(piano.colorArray))
-        print("RIGHT ANGLE" + str(piano.rightAngleArray))
-        print("LEFT ANGLE" + str(piano.leftAngleArray))
-
-        parser.add_modification_lists(
-            piano.colorArray, piano.leftAngleArray, piano.rightAngleArray)
-        print("pianoarray: " + str(piano.colorArray))
-        web = parser.parse_for_web(generate_file_name(data['type'], data['iteration']))
-        message = ""
-        for m in web:
-            message = data['index'] + ";" + m + "|" + message
-            message = message + ("D" + data['index'])
-            # print("M??" + message)
-        await websocket.send(message)
-
-        # call draw_piano_fractal()
-        #call draw_piano_fractal()
-        #go to piano.py
-    if data['mode'] == "math":
-        pass
-        #draw fractal
+        await generate_piano_fractal(data, websocket)
     if data['mode'] == "coordinate":
-        toFractal = data['to']
-        lines = parser.find_iteration(generate_file_name(data['type'], data['iteration']), data['coordinate'],
-                                      generate_file_name(data['to'], data['iteration']))
-        message = ""
-        for m in lines:
-            message = "1" + ";" + m + "|" + message
-        message = message + ("+" + "1" + "&" + data['type'] + "*" + str(data['iteration']))
-        await websocket.send(message)
-
+        await generate_translation(data, websocket)
     if data['mode'] == "draw":
-        generate_gf_string(data, fractals)
-        if data['type'] in fractals:
-            config.step = data['step']
-            print(str(config.step))
-            if not os.path.isfile(generate_file_name(data['type'], data['iteration'])):
-                generate_new_fractal_file(data)
-            print("done, sending message")
-            web = parser.parse_for_web(generate_file_name(data['type'], data['iteration']))
-            message = ""
-            for m in web:       # Why did I do this?
-                message = data['index'] + ";" + m + "|" + message
-            message = message + ("D" + data['index'])
-        await websocket.send(message)
-
-    if data['mode'] == "music":
-        print("inne i musiken")
-        name = generate_file_name(data['type'], data['iteration'])
-        tree = parser.fill_tree(name)
-        make_music(tree, data)
-
+        await generate_fractal(data, websocket)
     if data['mode'] == "play":
-        print("inne i musiken")
-        name = generate_file_name(data['type'], data['iteration'])
-        tree = parser.fill_tree(name)
-        make_music(tree, data)
-        name = str(data['type']) + str(data['iteration'])
-        print(str(name))
-        filename = ("./wav-files/" + str(name) + ".wav")
-        print(str(filename))
-
-        with open(filename, 'rb') as wavefile: #tar tid, ej optimalt för högre grader av iterationer
-            contents = wavefile.read()
-
-        print("sending the audio file" + str(contents))
-        await websocket.send(contents)
+        await generate_music_file(data, websocket)
 
 
-def make_music(tree, data):
+def make_music(tree, data): # this should probably be moved.
     print("skapar musikennnnn")
     parser.parser_for_midi(tree, data)
     os.system("timidity " + generate_midi_name(data) +
               " -Ow -o " + generate_wav_name(data))
 
 
+async def generate_music_file(data, websocket):
+    name = generate_file_name(data['type'], data['iteration'])
+    tree = parser.fill_tree(name)
+    make_music(tree, data)
+    name = str(data['type']) + str(data['iteration'])
+    filename = ("./wav-files/" + str(name) + ".wav")
+    with open(filename, 'rb') as wavefile:  # tar tid, ej optimalt för högre grader av iterationer
+        contents = wavefile.read()
+    await websocket.send(contents)
+
+
+async def generate_fractal(data, websocket):
+    generate_gf_string(data, fractals)
+    if data['type'] in fractals:
+        config.step = data['step']
+        if not os.path.isfile(generate_file_name(data['type'], data['iteration'])):
+            generate_new_fractal_file(data)
+        web = parser.parse_for_web(generate_file_name(data['type'], data['iteration']))
+        await websocket.send(create_draw_json(web, data['index'], data['type'], data['iteration']))
+
+
+async def generate_piano_fractal(data, websocket):      # This should probably have code moved.
+    generate_gf_string(data, fractals)
+    angle = 0
+    # Get the angle from the GF-file and send it to the piano-interpreter
+    file_reader = GFFileReader()
+    commands = file_reader.read_gf_file(generate_file_name(data['type'], data['iteration']))
+    config.step = data['step']
+    if "ang" in commands[1]:
+        angle = int(commands[1].split(":")[1])
+    piano.reset_drawing_arrays()
+    piano.interpret_notes(data['data'], angle)
+    parser.add_modification_lists(
+        piano.colorArray, piano.leftAngleArray, piano.rightAngleArray)
+    web = parser.parse_for_web(generate_file_name(data['type'], data['iteration']))
+    await websocket.send(create_draw_json(web, data['index'], data['type'], data['iteration']))
+
+
+async def generate_translation(data, websocket):
+    lines = parser.find_iteration(generate_file_name(data['type'], data['iteration']), data['coordinate'],
+                                  generate_file_name(data['to'], data['iteration']))
+    await websocket.send(create_translation_json(lines))
 
 
 parser = Parser()

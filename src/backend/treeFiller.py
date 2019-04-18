@@ -31,6 +31,7 @@ class treeFiller:
         self.current_right_angle = 0
         self.current_left_angle = 0
 
+    # This method is really slow. Takes over 100 seconds on the server to run on sierpinski 7
     def generate_nodes(self, commands, turtle, iteration): #self, commands, turtle, filler, iteration):
         self.coordinate_stack.append(turtle.coordinate.clone())
         duration_sum = 0
@@ -93,7 +94,7 @@ class treeFiller:
         numberOfColors = len(self.colour_list)
 
         if numberOfColors != 0:
-            colorSteps = floor(forward_commands_length / numberOfColors) + forward_commands_length % numberOfColors # Number of steps before changing colour.
+            colorSteps = math.floor(forward_commands_length / numberOfColors) + forward_commands_length % numberOfColors # Number of steps before changing colour.
             if (self.draw_counter % colorSteps == 0) and (len(self.colour_list) != 0):
                 self.color_index += 1
             current_colour = self.colour_list[self.color_index]
@@ -105,7 +106,7 @@ class treeFiller:
         numberOfRightAngles = len(self.left_angle_list)
 
         if numberOfRightAngles != 0:
-            leftAngleSteps = floor(commands_length / numberOfRightAngles) + commands_length % numberOfRightAngles
+            leftAngleSteps = math.floor(commands_length / numberOfRightAngles) + commands_length % numberOfRightAngles
             # print("LEFTANGLESTEPS: " + str(leftAngleSteps) + "TURN COUNTER: " + str(self.left_turn_counter))
             if (self.left_turn_counter % leftAngleSteps == 0) and (len(self.left_angle_list) != 0):
                 # print("Left loop inside")
@@ -119,7 +120,7 @@ class treeFiller:
         numberOfRightAngles = len(self.right_angle_list)
 
         if numberOfRightAngles != 0:
-            rightAngleSteps = floor(commands_length / numberOfRightAngles) + commands_length % numberOfRightAngles
+            rightAngleSteps = math.floor(commands_length / numberOfRightAngles) + commands_length % numberOfRightAngles
             # print("RIGHTANGLESTEPS: " + str(rightAngleSteps) + "TURN COUNTER: " + str(self.right_turn_counter))
             if (self.right_turn_counter % rightAngleSteps == 0) and (len(self.right_angle_list) != 0):
                 # print("RIGHT loop inside")

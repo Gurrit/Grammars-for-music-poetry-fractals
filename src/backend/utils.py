@@ -1,3 +1,5 @@
+import json
+
 from config import *
 
 def generate_file_name(type, iteration):
@@ -39,3 +41,37 @@ def generate_gf_string(data, fractals):
         config.step = data['step']
         if not os.path.isfile(generate_file_name(data['type'], data['iteration'])):
             generate_new_fractal_file(data)
+
+
+def serialize_coords(coordinate):
+    return {'x': coordinate.x, 'y': coordinate.y}
+
+
+def create_draw_json(lines, canvas, fractal, iteration):
+    # Is not serialized, since Python is weird when it comes to serializing
+    ser_val = json.dumps({'mode': "draw",
+                           'lines': [{'coordinate1': serialize_coords(i.coordinate_1),
+                                      'coordinate2': serialize_coords(i.coordinate_2),
+                                      'color': i.color
+                                      }for i in lines],
+                            'canvas': canvas,
+                            'type': fractal,
+                            'iteration': iteration}, sort_keys=True, indent=2, separators=(',', ': '))
+    # List comprehension, effective way of getting all coords and color in one loop.
+
+    return ser_val
+
+
+def create_music_json(file):
+    ser_val = json.dumps({'mode': "music", 'content': file}, sort_keys=True, indent=2, separators=(',', ': '))
+    return ser_val
+
+
+def create_translation_json(lines):
+    ser_val = json.dumps({'mode': "translation",
+                          'lines': [{'coordinate1': serialize_coords(i.coordinate_1),
+                                      'coordinate2': serialize_coords(i.coordinate_2),
+                                      'color': i.color
+                                      }for i in lines]}, sort_keys=True, indent=2, separators=(',', ': '))
+    return ser_val
+
