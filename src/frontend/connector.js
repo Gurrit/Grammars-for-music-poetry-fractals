@@ -21,19 +21,19 @@ function connectToServer(canvases) {
 function map_messages(message) {
     switch(message.mode) {
         case "draw":
-            console.log(message);
             drawNewFractal(message.lines, settings.drawers[message.canvas], message.type, message.iteration);
             break;
         case "music":
             setFileURL(message.content);
             break;
         case "translation":
-            translateFractal(message.lines, settings.drawers[1], "#ff0017")
+            console.log(message);
+            translateFractal(message.lines, settings.drawers[1], "#ff0017");
+            break;
     }
 }
 
 function sendMessage(message) {
-  console.log("sending messages" + message);
   settings.socket.send(message);
 }
 

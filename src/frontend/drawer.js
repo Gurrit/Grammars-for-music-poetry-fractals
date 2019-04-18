@@ -22,12 +22,6 @@ function CreateDrawer(canvas) {
     self.saveNewLine = function (coordinate1, coordinate2, color) {
         self.drawings.push(new Line(coordinate1, coordinate2, color));
     };
-    self.extract = function(inputString) {
-        let [x, y] = inputString.split(", ");
-        let xInt = Number(x);
-        let yInt = Number(y);
-        return new Coordinate(xInt, yInt);
-    };
 
     self.color = function(hexkod) {
         console.log(hexkod);
@@ -93,7 +87,7 @@ class Coordinate {
     return self;
   }
 }
-class Fractal {
+class Fractal {     // This should maybe contain all drawings aswell.
     constructor(fractal, iteration) {
         let self = this;
         self.fractal = fractal;
