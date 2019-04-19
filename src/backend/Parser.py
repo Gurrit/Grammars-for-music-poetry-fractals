@@ -44,7 +44,6 @@ class Parser:
         filler = treeFiller(self.tree, self.angle, self.kids)
         filler.add_modification_lists(self.colours, self.left_angles, self.right_angles)
         filler.generate_nodes(commands, turtle, int(commands[0].split(":")[1])) # This method is ridiculously slow.
-        print(time.time() - t1)
         self.trees[filename] = self.tree
         return self.tree
 
