@@ -10,7 +10,6 @@ function start() {
   addFractalOptions("selectFractal1");
   addFractalOptions("selectFractal2");
 
-
   connectToServer([turtcanv1, turtcanv2]);
 }
 
@@ -34,8 +33,12 @@ function getStartPos(canvas, startpos) {
 function getCursorPosition(canvas, event, transformation) {
   //get the position of the cursor on the canvas
   var rect = canvas.getBoundingClientRect();
-  var x = ((event.clientX - rect.left - (rect.width/2)) / transformation.scale) - transformation.position.x;
-  var y = ((event.clientY - rect.top - (rect.height/2)) / transformation.scale) - transformation.position.y;
+  var x =
+    (event.clientX - rect.left - rect.width / 2) / transformation.scale -
+    transformation.position.x;
+  var y =
+    (event.clientY - rect.top - rect.height / 2) / transformation.scale -
+    transformation.position.y;
   console.log(x);
   console.log(y);
   var str = "x:" + x + "," + "y:" + y;
@@ -44,54 +47,23 @@ function getCursorPosition(canvas, event, transformation) {
   return "'{" + str + "}'";
 }
 
-function coordinateToJson(coordinate, fromFractal, iteration, toFractal) {
-  return "{" +
-      '"mode":"coordinate", ' +
-      '"coordinate":"' + coordinate + '", ' +
-      '"type":"' + fromFractal + '", ' +
-      '"iteration":"' + iteration + '", ' +
-      '"to":"' + toFractal + '"' +
-      "}";
-}
-
 function sendCursorPosition(canvas, event) {
-    //should probably not be hardcoded
+  //should probably not be hardcoded
   let drawer = canvasturtlelist[0].turtlen;
   let fromFractal = canvasturtlelist[0].turtlen.fractal;
   let toFractal = canvasturtlelist[1].turtlen.fractal;
-  if(fromFractal === null || toFractal === null) {
+  if (fromFractal === null || toFractal === null) {
     alert("something has gone wrong, not sending the message");
     return;
   }
   let coordinate = getCursorPosition(canvas, event, drawer.transformation);
-  let message = coordinateToJson(coordinate, fromFractal.fractal, fromFractal.iteration, toFractal.fractal);
+  let message = coordinateToJson(
+    coordinate,
+    fromFractal.fractal,
+    fromFractal.iteration,
+    toFractal.fractal
+  );
   sendMessage(message);
-}
-function toJson(turtleN, type, iter, step) {
-  empty = [];
-  var string =
-    "{" +
-    '"mode":' +
-    '"draw", ' +
-    '"data":' +
-    '"' +
-    empty +
-    '", ' +
-    '"index":' +
-    '"' +
-    turtleN +
-    '", ' +
-    '"type":' +
-    '"' +
-    type +
-    '", ' +
-    '"iteration":' +
-    iter +
-    ", " +
-    '"step":' +
-    step +
-    "}";
-  return string;
 }
 
 function sendDrawMessage() {

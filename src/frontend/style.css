@@ -30,12 +30,12 @@ body {
 }
 
 #container {
-  position: relative;
+  display: flex;
+  justify-content: center;
 }
 
 .canvasStyle {
-  display: inline-block;
-  position: absolute;
+  text-align: center;
 }
 
 #canvas1 {

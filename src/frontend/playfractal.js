@@ -5,12 +5,18 @@ function setFileURL(eventdata) {
 
   playsong(objectURL);
 }
-function sendfiles() {
+function sendfiles(id) {
   //send information av what fractal to generate and listen to
   data = [];
 
-  fractalopt = getOption("selectFractal3");
-  iteropt = getOption("selectIter3");
+  if (id == "canv1play") {
+    fractalopt = getOption("selectFractal1");
+    iteropt = getOption("selectIter1");
+    console.log("ID:" + id);
+  } else {
+    fractalopt = getOption("selectFractal2");
+    iteropt = getOption("selectIter1");
+  }
 
   value = findFractalInSelect(fractalopt);
 
