@@ -121,20 +121,20 @@
 } 
 
 .divider3{
-  width:50px;
+  width:65%;
   height:auto;
   display:inline-block;
 } 
 
-.divider3{
-  width:20px;
-  height:auto;
-  display:inline-block;
-}
 
-.h1 {
+h1 {
   text-align: center;
 }
+
+h2 {
+  text-align: center;
+}
+
 
 .buttonDiv {
   display: flex;
@@ -180,6 +180,15 @@
   height: 100%;
 }
 
+body {
+  background-color: lightpink;
+  margin-left: auto;
+  margin-right: auto;
+}
+#main{
+  background-color: lightpink;
+}
+
 /* Math mode */
 #container {
   display: flex;
@@ -220,11 +229,7 @@ button2 {
 }
 
 /* Art and music mode */
-body {
-  background-color: lightpink;
-  margin-left: auto;
-  margin-right: auto;
-}
+
 
 #toptopcontainer{
   margin: 1%;
