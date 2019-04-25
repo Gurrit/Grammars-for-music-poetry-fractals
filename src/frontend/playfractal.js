@@ -5,18 +5,34 @@ function setFileURL(eventdata) {
 
   playsong(objectURL);
 }
-function sendfiles() {
+function sendfiles(id) {
   //send information av what fractal to generate and listen to
   data = [];
 
-  fractalopt = getOption("selectFractal3");
-  iteropt = getOption("selectIter3");
+  if (id == "canv1play") {
+    fractalopt = getOption("selectFractal1");
+    iteropt = getOption("selectIter1");
+  } else {
+    fractalopt = getOption("selectFractal2");
+    iteropt = getOption("selectIter1");
+  }
 
   value = findFractalInSelect(fractalopt);
 
-  msg2 = toMusicJson("", data, value, "play", iteropt.value, 25);
+  if (value === "") {
+    alert("You have not selected a fractal to play.");
+    return;
+  }
 
-  sendMessage(msg2);
+  console.log(iteropt.value);
+  if (iteropt.value == "Select iteration") {
+    alert("You have not selected an iteration.");
+    return;
+  }
+
+  msg = toJson(0, data, value, "play", iteropt.value);
+
+  sendMessage(msg);
 }
 
 function playsong(src) {
@@ -24,31 +40,4 @@ function playsong(src) {
   console.log(src);
   var audio = new Audio(src);
   audio.play();
-}
-function toMusicJson(canvas, data, type, mode, iter, step) {
-  var string =
-    "{" +
-    '"index":' +
-    '"' +
-    "0" +
-    '",' +
-    '"data":' +
-    '"' +
-    data +
-    '", ' +
-    '"type":' +
-    '"' +
-    type +
-    '", ' +
-    '"mode":' +
-    '"' +
-    mode +
-    '", ' +
-    '"iteration":' +
-    iter +
-    ", " +
-    '"step":' +
-    step +
-    "}";
-  return string;
 }

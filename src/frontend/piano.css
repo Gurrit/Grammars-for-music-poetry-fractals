@@ -12,12 +12,6 @@ p {
   padding: 0;
 }
 
-html {
-  background: #fff;
-  font: normal 14px/24px futura, Helvetica, Arial, sans serif;
-  color: #999;
-}
-
 strong {
   font-weight: normal;
 }
@@ -25,19 +19,19 @@ a {
   text-decoration: none;
 }
 
-html,
-body {
-  height: 100%;
-}
-
 #content {
-  min-height: 100%;
+  min-height: 20%;
   text-align: left;
   overflow: hidden;
+  /*-webkit-transform: rotate(-90deg);
+  -moz-transform: rotate(-90deg);
+  -o-transform: rotate(-90deg);
+  -ms-transform: rotate(-90deg);
+  transform: rotate(-90deg);*/
 }
 
 #content-inner {
-  padding: 60px 0;
+  padding: 30px 0;
 }
 
 #piano {
@@ -302,7 +296,6 @@ body {
   margin-bottom: 50px;
   font-family: Verdana;
   float: left;
-
 }
 
 .music_submit_button {
@@ -330,18 +323,18 @@ body {
 }
 
 #playedNotes {
-  margin-left: 20%;
-  margin-right: 20%;
+  margin-left: 0%;
   width: 60%;
-  background-color: lightpink;
+  background-color: gray;
+  border-radius: 40px;
 }
 
 #notesText {
   width: 80%;
-  margin-left: 10%;
+  margin-left: 3%;
   height: 20px;
   /*margin-top: 40px;*/
-  color: black;
+  color: white;
   box-sizing: border-box;
   overflow-wrap: break-word;
 }

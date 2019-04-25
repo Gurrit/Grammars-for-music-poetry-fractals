@@ -1,35 +1,7 @@
-const globalStep = 25;
-
-function toPianoJson(canvas, data, type, mode, iter, step) {
-  var string =
-    "{" +
-    '"index":' +
-    '"' +
-    "0" +
-    '",' +
-    '"data":' +
-    '"' +
-    data +
-    '", ' +
-    '"type":' +
-    '"' +
-    type +
-    '", ' +
-    '"mode":' +
-    '"' +
-    mode +
-    '", ' +
-    '"iteration":' +
-    iter +
-    ", " +
-    '"step":' +
-    step +
-    "}";
-  return string;
-}
-
 function showpic() {
-  var x = document.getElementById("help_picture");
+  var x = document.getElementById("help_piano");
+  console.log("syns bilden?");
+  console.log("displayen:" + x.style.display);
   if (x.style.display === "none") {
     x.style.display = "block";
   } else {
@@ -38,24 +10,26 @@ function showpic() {
 }
 
 function sendNotes() {
+  let optionIter1 = getOption("selectIter1");
+  let optionFracs = [getOption("selectFractal1"), getOption("selectFractal2")];
+  let canvases = [
+    document.getElementById("canvas1"),
+    document.getElementById("canvas2")
+  ];
   var notes = JSON.stringify(noteArray);
-  let fractoption = getOption("selectFractal3");
-  let iteroption = getOption("selectIter3");
 
-  value = findFractalInSelect(fractoption);
-
-  pianoJson = toPianoJson(
-    "canvas3",
-    noteArray,
-    value,
-    "piano",
-    iteroption.value,
-    globalStep
-  );
-
-  console.log(notes);
-  console.log(pianoJson);
-  sendMessage(pianoJson);
+  var value = "";
+  for (canvas in canvases) {
+    for (index in fractalList) {
+      if (fractalList[index].text === optionFracs[canvas].value) {
+        value = fractalList[index].jsonFractal;
+        break;
+      }
+    }
+    msg = toJson(canvas, noteArray, value, "piano", optionIter1.value);
+    sendMessage(msg);
+    console.log(msg);
+  }
   noteArray = [];
 }
 
@@ -66,9 +40,47 @@ function resetPiano() {
 
 function startPianoUI() {
   createFractalList();
-  let turtcanv3 = new TurtleCanvasobj("canvas3");
-  canvasturtlelist.push(turtcanv3);
-  connectToServer([turtcanv3]);
-  addFractalOptions("selectFractal3");
-  sendNotes();
+  let turtcanv1 = new TurtleCanvasobj("canvas1");
+  let turtcanv2 = new TurtleCanvasobj("canvas2");
+  canvasturtlelist.push(turtcanv1);
+  canvasturtlelist.push(turtcanv2);
+  connectToServer([turtcanv1, turtcanv2]);
+  addFractalOptions("selectFractal1");
+  addFractalOptions("selectFractal2");
+}
+
+function sendCursorPosition(canvas, event) {
+  //should probably not be hardcoded
+  let drawer = canvasturtlelist[0].turtlen;
+  let fromFractal = canvasturtlelist[0].turtlen.fractal;
+  let toFractal = canvasturtlelist[1].turtlen.fractal;
+  if (fromFractal === null || toFractal === null) {
+    alert("something has gone wrong, not sending the message");
+    return;
+  }
+  let coordinate = getCursorPosition(canvas, event, drawer.transformation);
+  let message = coordinateToJson(
+    coordinate,
+    fromFractal.fractal,
+    fromFractal.iteration,
+    toFractal.fractal
+  );
+  sendMessage(message);
+}
+
+function getCursorPosition(canvas, event, transformation) {
+  //get the position of the cursor on the canvas
+  var rect = canvas.getBoundingClientRect();
+  var x =
+    (event.clientX - rect.left - rect.width / 2) / transformation.scale -
+    transformation.position.x;
+  var y =
+    (event.clientY - rect.top - rect.height / 2) / transformation.scale -
+    transformation.position.y;
+  console.log(x);
+  console.log(y);
+  var str = "x:" + x + "," + "y:" + y;
+
+  console.log("'{" + str + "}'");
+  return "'{" + str + "}'";
 }

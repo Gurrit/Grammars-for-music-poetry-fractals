@@ -5,54 +5,176 @@
   flex-direction: column;
 }
 
-h1 {
-  text-align: center;
+p,
+h1,
+h2,
+h3,
+a,
+button,
+option,
+select {
+  /*font-family: "Avant Garde", "Sans serif" !important;*/
+  font-family: Avant Garde, Avantgarde, Century Gothic, CenturyGothic,
+    AppleGothic, sans-serif;
+  color: white;
 }
 
-button {
-  width: 15vw;
-  height: 4vw;
+#padding {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+#generate {
+  color: white;
+  background-color: red;
+  border-radius: 20px;
+  width: 10vw;
+  height: 5vw;
 }
 
-.hidden {
+hidden {
   display: none;
 }
+
 body {
   margin-left: auto;
   margin-right: auto;
+  background-color: lightgray !important;
 }
 
 .selectdiv {
   display: table-cell;
   width: 100%;
+  height: 3vw;
   justify-content: center;
   display: flex;
 }
 
-#container {
-  position: relative;
+.fractalbox {
+  background-color: gray;
+  color: white;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none; /* remove default arrow */
+  background-image: url(...); /* add custom arrow */
 }
 
-.canvasStyle {
-  display: inline-block;
-  position: absolute;
+.fractalbox:hover {
+  cursor: pointer;
 }
 
-#canvas1 {
-  border: 2px solid red;
-  border-radius: 5px;
+#selectFractal1 {
+  background-color: gray;
+  color: white;
+  width: 15vw;
+  height: 3vw;
+}
+
+#selectFractal2 {
+  background-color: gray;
+  color: white;
+  width: 15vw;
+  height: 3vw;
+}
+
+#selectIter1 {
+  background-color: gray;
+  color: white;
+  width: 5vw;
+  height: 3vw;
+}
+
+#selectScale1,
+#selectScale2 {
+  background-color: gray;
+  color: white;
+  width: 5vw;
+  height: 3vw;
+}
+
+.container {
+  padding: 25px 0;
+  display: flex;
+  justify-content: center;
+}
+
+.left {
   left: 0;
 }
 
-#canvas2 {
-  border: 2px solid green;
-  border-radius: 5px;
-
+.right {
   right: 0;
 }
 
-#canvas3 {
-  border: 2px solid blue;
-  border-radius: 5px;
+.leftcontainer {
+  left: 0;
+  width: 600vw;
+  text-align: center;
+  /* border: 2px solid white;*/
+}
+
+.rightcontainer {
   right: 0;
+  width: 600vw;
+  text-align: center;
+  /* border: 2px solid white;*/
+}
+
+.verticalplace {
+  display: flex;
+  justify-content: center;
+}
+
+#resetbtn {
+  margin-left: 0%;
+  right: 0;
+  width: 5vw;
+  height: 2vw;
+  border-radius: 20px;
+  background-color: gray;
+  color: white;
+}
+
+#infobtn {
+  margin-left: 0%;
+  right: 0;
+  width: 2vw;
+  height: 2vw;
+  border-radius: 20px;
+  background-color: red;
+  color: white;
+}
+
+.canvascontainer {
+  width: 1000vw;
+  height: 400vw;
+  display: flex;
+  justify-content: center;
+}
+
+.canvasStyle {
+  text-align: center;
+  padding: 0px 20px 0px 20px;
+}
+
+#canvas1 {
+  border: 2px solid white;
+  border-radius: 5px;
+  left: 0;
+  background-color: black;
+}
+
+#canvas2 {
+  border: 2px solid white;
+  border-radius: 5px;
+  background-color: black;
+  right: 0;
+}
+
+.listenimage {
+  width: 3vw;
+  height: 3vw;
+}
+
+.listenimage:hover {
+  cursor: pointer;
 }

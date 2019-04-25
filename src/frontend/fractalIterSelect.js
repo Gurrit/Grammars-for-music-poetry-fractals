@@ -1,23 +1,13 @@
 const fractalList = [];
 
 function createFractalList() {
-  var sierpinski = new optionValue(
-    "Sierpinski Triangle",
-    "Sierpinski",
-    10,
-    "middle"
-  );
+  var sierpinski = new optionValue("Sierpinski Triangle", "Sierpinski", 7);
   fractalList.push(sierpinski);
-  var dragon = new optionValue("Dragon Curve", "Dragon", 10, "middle");
+  var dragon = new optionValue("Dragon Curve", "Dragon", 10);
   fractalList.push(dragon);
-  var gosper = new optionValue("Gosper Curve", "Gosper", 3, "middle");
+  var gosper = new optionValue("Gosper Curve", "Gosper", 3);
   fractalList.push(gosper);
-  var koch = new optionValue(
-    "Square Koch Snowflake",
-    "Koch",
-    7,
-    "bottomleftcorner"
-  );
+  var koch = new optionValue("Square Koch Snowflake", "Koch", 3);
   fractalList.push(koch);
 }
 
@@ -34,13 +24,12 @@ function selected(selectID) {
   addIterOptions(option1.value, selectIterID);
 }
 
-function optionValue(text, jsonFractal, maxIter, startpos) {
+function optionValue(text, jsonFractal, maxIter) {
   //create optionvalue objects for dropwodn menu
   //type = text (det som syns), maxIter = maximum of iterations, jsonFractal (det som skickas till server), startpos = middle or bottomleftcorner
   this.text = text;
   this.jsonFractal = jsonFractal;
   this.maxIter = maxIter;
-  this.startpos = startpos;
 }
 
 function addFractalOptions(selectID) {
