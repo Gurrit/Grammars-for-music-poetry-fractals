@@ -2,15 +2,12 @@
 <meta charset="utf-8" />
 <head>
   <link href="style.css" rel="stylesheet" />
-  <link
-    rel="stylesheet"
-    href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"
-  />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
 </head>
 
 <head>
   <meta charset=utf-8>
-  <title>HTML5 JavaScript Piano - with Data URIs</title>
   <meta name="description" content="A synth piano synth that generates all of its audio files dynamically using JavaScript and data URIs. Choose from a variety of sounds styles and play with the looper, visual waveforms, and more." />
   <link rel="stylesheet" type="text/css" href="piano.css" />
   <meta property="og:image" content="http://mrcoles.com/media/img/piano-visual-mode.png">
@@ -24,79 +21,98 @@
 <script src="playfractal.js"></script>
 <script src="connector.js"></script>
 <script src="ownJSON.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="index.html">Grammar for music and poetry</a>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="index.html">Grammar for music and poetry</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" href="artmode.html">Experiment With Fractals <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item active">
+            <a class="nav-link" href="info.html">Info<span class="sr-only"></span></a>
+          </li>
+      
+      </ul>
     </div>
-    <ul class="nav navbar-nav">
-      <li><a href="mathmode.html">Math Mode</a></li>
-      <li class="active"><a href="artmode.html">Art and music Mode</a></li>
-      <li><a href="info.html">Info</a></li>
-    </ul>
-  </div>
-</nav>
+  </nav>
+
 
 <body onload="startPianoUI()">
 
 
+    <div id="content">
+        <div id="content-inner">
+            <div id="piano">
+            </div>
+        </div>
+      </div>
   <div class="container">
-    <div class="leftcontainer">
-      <p>FRACTAL 1</p>
-        <select id="selectFractal1" class="fractalbox" onchange="selected(id)">
-            <option value="None">Choose Fractal</option>
-          </select>
-          <select id="selectIter1"class="fractalbox">
-          <option value="Select iteration">Select iteration</option>
-        </select>
-        <select id="selectScale1" class="fractalbox"><option value="Select scale">Select scale</option>
-          <option value="major">Major</option>
-          <option value="minor">Minor</option>
-          <option value="minor_harmonic">Minor Harmonic</option>
-          <option value="major_pentatonic">Major Pentatonic</option>
-          <option value="minor_pentatonic">Minor Pentatonic</option>
-          <option value="blues">Blues</option></select
-          >
-          <option value="Select iteration">Select iteration</option>
-        <img src="./images/listen.png" onclick="sendfiles(id)" id ="canv1play" class="listenimage">
-    </div>
-    <div class="rightcontainer">
-      <p>FRACTAL 2</p>
-        <select id="selectFractal2" class="fractalbox">
-            <option value="None">Choose Fractal</option></select
-          >
-          <select id="selectScale2"class="fractalbox">
-            <option value="Select scale">Select scale</option>
-            <option value="major">Major</option>
-            <option value="minor">Minor</option>
-            <option value="minor_harmonic">Minor Harmonic</option>
-            <option value="major_pentatonic">Major Pentatonic</option>
-            <option value="minor_pentatonic">Minor Pentatonic</option>
-            <option value="blues">Blues</option>
-            </select
-          >
-          <img src="./images/listen.png" onclick="sendfiles(id)" id ="canv2play" class="listenimage">
-    </div>
+    
+      <div class="card" style="width: 25rem;">
+          <canvas
+          class="canvasStyle, card-img-top"
+          id="canvas1"
+          onclick="sendCursorPosition(canvas2, event)"
+          height="400vw"
+          width="400vw"
+        ></canvas>
+          <div class="card-body">
+            <h7 class="card-title">FRACTAL 1</h7>
+            <p class="card-text">
+            <select id="selectFractal1" class="fractalbox" onchange="selected(id)">
+              </select>
+              <select id="selectIter1" class="fractalbox">
+                  <option value="1">1</option>
+                </select>
+                <select id="selectScale1" class="fractalbox">
+                  <option value="major">Major</option>
+                  <option value="minor">Minor</option>
+                  <option value="minor_harmonic">Minor Harmonic</option>
+                  <option value="major_pentatonic">Major Pentatonic</option>
+                  <option value="minor_pentatonic">Minor Pentatonic</option>
+                  <option value="blues">Blues</option></select
+                  >
+                <img src="./images/listen.png" onclick="sendfiles(id)" id ="canv1play" class="listenimage">
+              </p>
+          </div>
+        </div>
+      
+        <div class="card" style="width: 25rem;">
+            <canvas
+            class="canvasStyle, card-img-top"
+            id="canvas2"
+            onclick="sendCursorPosition(canvas2, event)"
+            height="400vw"
+            width="400vw"
+          ></canvas>
+            <div class="card-body">
+              <h7 class="card-title">FRACTAL 2</h7>
+              <p class="card-text">
+              <select id="selectFractal2" class="fractalbox">
+                  <option value="None">Choose Fractal</option></select
+                >
+                <select id="selectScale2"class="fractalbox">
+                    <option value="major">Major</option>
+                    <option value="minor">Minor</option>
+                    <option value="minor_harmonic">Minor Harmonic</option>
+                    <option value="major_pentatonic">Major Pentatonic</option>
+                    <option value="minor_pentatonic">Minor Pentatonic</option>
+                    <option value="blues">Blues</option>
+                    </select
+                  >
+                  <img src="./images/listen.png" onclick="sendfiles(id)" id ="canv2play" class="listenimage">
+                </p>
+            </div>
+          </div>
+        
   </div>
-  <div id="padding"><button id="generate" onclick="sendNotes()" >Generate Fractals</button></div>
-  <div class="container">
-    <canvas
-      class="canvasStyle"
-      id="canvas1"
-      onclick="sendCursorPosition(canvas1, event)"
-      height="400vw"
-      width="400vw"
-    ></canvas>
 
-    <canvas
-      class="canvasStyle"
-      id="canvas2"
-      onclick="sendCursorPosition(canvas2, event)"
-      height="400vw"
-      width="400vw"
-    ></canvas>
-  </div>
+  <button type="button" class="btn btn-primary btn-lg" onclick="sendNotes()">Generate Fractals</button>
 
   <div class="container">
     <div id="playedNotes" class="left">

@@ -16,6 +16,7 @@ select {
   /*font-family: "Avant Garde", "Sans serif" !important;*/
   font-family: Avant Garde, Avantgarde, Century Gothic, CenturyGothic,
     AppleGothic, sans-serif;
+  color: white;
 }
 
 #padding {
@@ -37,7 +38,7 @@ hidden {
 body {
   margin-left: auto;
   margin-right: auto;
-  background-color: black !important;
+  background-color: lightgray !important;
 }
 
 .selectdiv {
@@ -81,7 +82,17 @@ body {
   width: 5vw;
   height: 3vw;
 }
+
+#selectScale1,
+#selectScale2 {
+  background-color: gray;
+  color: white;
+  width: 5vw;
+  height: 3vw;
+}
+
 .container {
+  padding: 25px 0;
   display: flex;
   justify-content: center;
 }
@@ -96,14 +107,14 @@ body {
 
 .leftcontainer {
   left: 0;
-  width: 400vw;
+  width: 600vw;
   text-align: center;
   /* border: 2px solid white;*/
 }
 
 .rightcontainer {
   right: 0;
-  width: 400vw;
+  width: 600vw;
   text-align: center;
   /* border: 2px solid white;*/
 }
@@ -133,19 +144,27 @@ body {
   color: white;
 }
 
+.canvascontainer {
+  width: 1000vw;
+  height: 400vw;
+  display: flex;
+  justify-content: center;
+}
+
 .canvasStyle {
   text-align: center;
+  padding: 0px 20px 0px 20px;
 }
 
 #canvas1 {
-  /*border: 2px solid white;*/
+  border: 2px solid white;
   border-radius: 5px;
   left: 0;
   background-color: black;
 }
 
 #canvas2 {
-  /*border: 2px solid white;*/
+  border: 2px solid white;
   border-radius: 5px;
   background-color: black;
   right: 0;

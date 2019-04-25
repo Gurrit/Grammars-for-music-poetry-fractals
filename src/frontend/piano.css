@@ -20,9 +20,14 @@ a {
 }
 
 #content {
-  min-height: 100%;
+  min-height: 20%;
   text-align: left;
   overflow: hidden;
+  /*-webkit-transform: rotate(-90deg);
+  -moz-transform: rotate(-90deg);
+  -o-transform: rotate(-90deg);
+  -ms-transform: rotate(-90deg);
+  transform: rotate(-90deg);*/
 }
 
 #content-inner {
