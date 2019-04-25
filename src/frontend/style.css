@@ -12,10 +12,10 @@ h3,
 a,
 button,
 option,
-select,
-value {
-  font-family: "Lucida Console", Monospace !important;
-  color: white;
+select {
+  /*font-family: "Avant Garde", "Sans serif" !important;*/
+  font-family: Avant Garde, Avantgarde, Century Gothic, CenturyGothic,
+    AppleGothic, sans-serif;
 }
 
 #padding {
@@ -48,6 +48,19 @@ body {
   display: flex;
 }
 
+.fractalbox {
+  background-color: gray;
+  color: white;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none; /* remove default arrow */
+  background-image: url(...); /* add custom arrow */
+}
+
+.fractalbox:hover {
+  cursor: pointer;
+}
+
 #selectFractal1 {
   background-color: gray;
   color: white;
@@ -65,16 +78,10 @@ body {
 #selectIter1 {
   background-color: gray;
   color: white;
-  width: 10vw;
+  width: 5vw;
   height: 3vw;
 }
 .container {
-  display: flex;
-  justify-content: center;
-}
-
-.containernopad {
-  padding: 30px 0;
   display: flex;
   justify-content: center;
 }
@@ -89,13 +96,15 @@ body {
 
 .leftcontainer {
   left: 0;
-  width: 600vw;
+  width: 400vw;
+  text-align: center;
   /* border: 2px solid white;*/
 }
 
 .rightcontainer {
   right: 0;
-  width: 600vw;
+  width: 400vw;
+  text-align: center;
   /* border: 2px solid white;*/
 }
 

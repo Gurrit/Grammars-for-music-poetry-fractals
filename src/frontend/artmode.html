@@ -40,66 +40,81 @@
 
 <body onload="startPianoUI()">
 
-    <div class="container">
-        <div id="playedNotes" class="left">
-            <p id="notesText"></p>
-        </div>
-        <button id="resetbtn" onclick="resetPiano()" class="right">Reset</button>
-        <button id="infobtn" onclick="showpic()" class="right">i</button>
-      </div>
-      
-      <div class="centerdiv">
-      <img id="help_piano" class="hidden" src="./images/piano.png" >
-    </div>
-  <div id="content">
-      <div id="content-inner">
-          <div id="piano">
-          </div>
-      </div>
-  </div>
-
-
-  <div class="selectdiv">
-
-  </div>
 
   <div class="container">
     <div class="leftcontainer">
       <p>FRACTAL 1</p>
-        <select id="selectFractal1" onchange="selected(id)">
+        <select id="selectFractal1" class="fractalbox" onchange="selected(id)">
             <option value="None">Choose Fractal</option>
           </select>
-          <select id="selectIter1">
+          <select id="selectIter1"class="fractalbox">
           <option value="Select iteration">Select iteration</option>
         </select>
+        <select id="selectScale1" class="fractalbox"><option value="Select scale">Select scale</option>
+          <option value="major">Major</option>
+          <option value="minor">Minor</option>
+          <option value="minor_harmonic">Minor Harmonic</option>
+          <option value="major_pentatonic">Major Pentatonic</option>
+          <option value="minor_pentatonic">Minor Pentatonic</option>
+          <option value="blues">Blues</option></select
+          >
+          <option value="Select iteration">Select iteration</option>
         <img src="./images/listen.png" onclick="sendfiles(id)" id ="canv1play" class="listenimage">
     </div>
-    <div id="padding" class="right"><button id="generate" onclick="sendNotes()" >Generate Fractals</button></div>
     <div class="rightcontainer">
       <p>FRACTAL 2</p>
-        <select id="selectFractal2">
+        <select id="selectFractal2" class="fractalbox">
             <option value="None">Choose Fractal</option></select
+          >
+          <select id="selectScale2"class="fractalbox">
+            <option value="Select scale">Select scale</option>
+            <option value="major">Major</option>
+            <option value="minor">Minor</option>
+            <option value="minor_harmonic">Minor Harmonic</option>
+            <option value="major_pentatonic">Major Pentatonic</option>
+            <option value="minor_pentatonic">Minor Pentatonic</option>
+            <option value="blues">Blues</option>
+            </select
           >
           <img src="./images/listen.png" onclick="sendfiles(id)" id ="canv2play" class="listenimage">
     </div>
   </div>
+  <div id="padding"><button id="generate" onclick="sendNotes()" >Generate Fractals</button></div>
   <div class="container">
     <canvas
       class="canvasStyle"
       id="canvas1"
       onclick="sendCursorPosition(canvas1, event)"
-      height="600vw"
-      width="600vw"
+      height="400vw"
+      width="400vw"
     ></canvas>
 
     <canvas
       class="canvasStyle"
       id="canvas2"
       onclick="sendCursorPosition(canvas2, event)"
-      height="600vw"
-      width="600vw"
+      height="400vw"
+      width="400vw"
     ></canvas>
   </div>
+
+  <div class="container">
+    <div id="playedNotes" class="left">
+        <p id="notesText"></p>
+    </div>
+    <button id="resetbtn" onclick="resetPiano()" class="right">Reset</button>
+    <button id="infobtn" onclick="showpic()" class="right">i</button>
+  </div>
+  
+  <div class="centerdiv">
+  <img id="help_piano" class="hidden" src="./images/piano.png" >
+</div>
+<div id="content">
+  <div id="content-inner">
+      <div id="piano">
+      </div>
+  </div>
+</div>
 
 
  
