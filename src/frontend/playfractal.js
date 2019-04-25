@@ -7,14 +7,15 @@ function setFileURL(eventdata) {
 }
 function sendfiles(id) {
   //send information av what fractal to generate and listen to
-  data = [];
 
   if (id == "canv1play") {
     fractalopt = getOption("selectFractal1");
     iteropt = getOption("selectIter1");
+    data = getOption("selectScale1");
   } else {
     fractalopt = getOption("selectFractal2");
     iteropt = getOption("selectIter1");
+    data = getOption("selectScale2");
   }
 
   value = findFractalInSelect(fractalopt);
@@ -30,7 +31,9 @@ function sendfiles(id) {
     return;
   }
 
-  msg = toJson(0, data, value, "play", iteropt.value);
+  console.log("Skalan: " + data.value);
+
+  msg = toJson(0, data.value, value, "play", iteropt.value);
 
   sendMessage(msg);
 }
