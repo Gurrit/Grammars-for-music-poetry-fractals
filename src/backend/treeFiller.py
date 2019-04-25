@@ -90,7 +90,7 @@ class treeFiller:
         self.coordinate_stack.append(turtle.coordinate.clone())
 
     def get_node_colour(self, forward_commands_length):
-        current_colour = "#000000"
+        current_colour = "#FFFFFF"
         numberOfColors = len(self.colour_list)
 
         if numberOfColors != 0:

@@ -57,6 +57,6 @@ class init:
         self._turtle.goto(0, 0)
         self._turtle.pendown()
         self._turtle.hideturtle()
-        self._turtle.color("red")
+        #self._turtle.color("red") Doesnt work
         # self._turtle.tracer(0, 0) #TODO doesn't generate the full fractal for some reason??
 

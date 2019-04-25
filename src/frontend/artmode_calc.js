@@ -1,5 +1,7 @@
 function showpic() {
-  var x = document.getElementById("help_picture");
+  var x = document.getElementById("help_piano");
+  console.log("syns bilden?");
+  console.log("displayen:" + x.style.display);
   if (x.style.display === "none") {
     x.style.display = "block";
   } else {
@@ -26,9 +28,8 @@ function sendNotes() {
     }
     msg = toJson(canvas, noteArray, value, "piano", optionIter1.value);
     sendMessage(msg);
+    console.log(msg);
   }
-  console.log(notes);
-  console.log(msg);
   noteArray = [];
 }
 
@@ -46,7 +47,6 @@ function startPianoUI() {
   connectToServer([turtcanv1, turtcanv2]);
   addFractalOptions("selectFractal1");
   addFractalOptions("selectFractal2");
-  sendNotes();
 }
 
 function sendCursorPosition(canvas, event) {

@@ -40,32 +40,50 @@
 
 <body onload="startPianoUI()">
 
+    <div class="container">
+        <div id="playedNotes" class="left">
+            <p id="notesText"></p>
+        </div>
+        <button id="resetbtn" onclick="resetPiano()" class="right">Reset</button>
+        <button id="infobtn" onclick="showpic()" class="right">i</button>
+      </div>
+      
+      <div class="centerdiv">
+      <img id="help_piano" class="hidden" src="./images/piano.png" >
+    </div>
   <div id="content">
       <div id="content-inner">
           <div id="piano">
           </div>
       </div>
+  </div>
 
-      <div id="playedNotes" class="music_submit_button">
-          <p id="notesText"></p>
-      </div>
-  
-      <button onclick="sendNotes()" class="music_submit_button start_submit_margin"> Generate fractal from played melody! </button>
-      <button onclick="resetPiano()" class="music_submit_button submit_margin"> Reset piano </button>
-      
-      <div class="selectdiv">
-        <select id="selectFractal1" onchange="selected(id)">
-          <option value="None">None</option>
-        </select>
-        <select id="selectIter1"> </select>
-        <select id="selectFractal2">
-          <option value="None">None</option></select
-        >
-      </div>
+
+  <div class="selectdiv">
 
   </div>
 
-  <div id="container">
+  <div class="container">
+    <div class="leftcontainer">
+      <p>FRACTAL 1</p>
+        <select id="selectFractal1" onchange="selected(id)">
+            <option value="None">Choose Fractal</option>
+          </select>
+          <select id="selectIter1">
+          <option value="Select iteration">Select iteration</option>
+        </select>
+        <img src="./images/listen.png" onclick="sendfiles(id)" id ="canv1play" class="listenimage">
+    </div>
+    <div id="padding" class="right"><button id="generate" onclick="sendNotes()" >Generate Fractals</button></div>
+    <div class="rightcontainer">
+      <p>FRACTAL 2</p>
+        <select id="selectFractal2">
+            <option value="None">Choose Fractal</option></select
+          >
+          <img src="./images/listen.png" onclick="sendfiles(id)" id ="canv2play" class="listenimage">
+    </div>
+  </div>
+  <div class="container">
     <canvas
       class="canvasStyle"
       id="canvas1"
@@ -82,9 +100,7 @@
       width="600vw"
     ></canvas>
   </div>
-  
-  <div><button onclick="sendfiles(id)" id ="canv1play">Listen to fractal 1</button></div>
-  <div><button onclick="sendfiles(id)" id ="canv2play">Listen to fractal 2</button></div>
+
 
  
 
