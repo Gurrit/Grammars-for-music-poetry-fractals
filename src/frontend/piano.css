@@ -20,7 +20,7 @@ a {
 }
 
 #content {
-  min-height: 20%;
+  min-height: 10%;
   text-align: left;
   overflow: hidden;
   /*-webkit-transform: rotate(-90deg);
@@ -37,7 +37,7 @@ a {
 #piano {
   position: relative;
   /*width: 782px;*/
-  width: 60%;
+  width: 120%; /*Var 60% innan*/
   border-radius: 20px;
   margin-left: 20%;
   z-index: 2;
@@ -48,7 +48,7 @@ a {
 #piano .keys {
   /*width: 1144px;*/
   /*width: 730px;*/
-  width: 100%;
+  width: 50%; /*var 100% innan*/
   padding: 2px 0 0 2px;
   overflow: hidden;
   background: #000;
@@ -59,7 +59,7 @@ a {
   float: left;
   position: relative;
   width: 6.886%;
-  height: 180px;
+  height: 100px; /*var 180 innan*/
   margin: 0 2px 2px 0;
   background: #fff;
   border-radius: 0 0 4px 4px;
@@ -80,8 +80,8 @@ a {
   top: -2px;
   left: -16px;
   display: block;
-  width: 28px;
-  height: 117px;
+  width: 30px; /*28 innan*/
+  height: 50px; /*117 innan*/
   background: #000;
   border-radius: 0 0 4px 4px;
   box-shadow: 1px 1px 0 #555, 2px 2px 0 #555;

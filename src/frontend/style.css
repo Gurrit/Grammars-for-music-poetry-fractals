@@ -16,7 +16,11 @@ select {
   /*font-family: "Avant Garde", "Sans serif" !important;*/
   font-family: Avant Garde, Avantgarde, Century Gothic, CenturyGothic,
     AppleGothic, sans-serif;
-  color: white;
+  color: black;
+}
+
+p {
+  font-size: 13px;
 }
 
 #padding {
@@ -92,9 +96,19 @@ body {
 }
 
 .container {
-  padding: 25px 0;
-  display: flex;
-  justify-content: center;
+  width: 100%;
+  margin: 0 auto;
+  padding: 10px 0;
+  /*display: flex;
+  justify-content: center;*/
+}
+
+.holder {
+  width: 100%;
+}
+.wrapper {
+  float: left;
+  width: 50%;
 }
 
 .left {
@@ -157,14 +171,14 @@ body {
 }
 
 #canvas1 {
-  border: 2px solid white;
+  /*border: 2px solid white;*/
   border-radius: 5px;
   left: 0;
   background-color: black;
 }
 
 #canvas2 {
-  border: 2px solid white;
+  /*border: 2px solid white;*/
   border-radius: 5px;
   background-color: black;
   right: 0;
