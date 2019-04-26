@@ -59,7 +59,7 @@ body {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none; /* remove default arrow */
-  background-image: url(...); /* add custom arrow */
+  border-radius: 10px;
 }
 
 .fractalbox:hover {
@@ -91,7 +91,7 @@ body {
 #selectScale2 {
   background-color: gray;
   color: white;
-  width: 5vw;
+  width: 10vw;
   height: 3vw;
 }
 
