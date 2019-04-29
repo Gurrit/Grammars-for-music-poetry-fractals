@@ -5,7 +5,16 @@
   flex-direction: column;
 }
 
-p,
+.navcolor {
+  background-color: #4e4087 !important;
+  color: white !important;
+}
+
+.navfont {
+  color: white !important;
+  font: bold !important;
+}
+
 h1,
 h2,
 h3,
@@ -13,10 +22,13 @@ a,
 button,
 option,
 select {
-  /*font-family: "Avant Garde", "Sans serif" !important;*/
   font-family: Avant Garde, Avantgarde, Century Gothic, CenturyGothic,
-    AppleGothic, sans-serif;
-  color: white;
+    AppleGothic, sans-serif !important;
+  color: black;
+}
+
+p {
+  font-size: 13px;
 }
 
 #padding {
@@ -25,13 +37,10 @@ select {
 }
 #generate {
   color: white;
-  background-color: red;
-  border-radius: 20px;
-  width: 10vw;
-  height: 5vw;
+  background-color: #4e4087 !important;
 }
 
-hidden {
+.hidden {
   display: none;
 }
 
@@ -50,12 +59,10 @@ body {
 }
 
 .fractalbox {
-  background-color: gray;
+  background-color: #a196cc;
   color: white;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none; /* remove default arrow */
-  background-image: url(...); /* add custom arrow */
+  border-radius: 10px;
+  height: 2vw;
 }
 
 .fractalbox:hover {
@@ -63,38 +70,73 @@ body {
 }
 
 #selectFractal1 {
-  background-color: gray;
+  background-color: #a196cc;
   color: white;
   width: 15vw;
-  height: 3vw;
 }
 
 #selectFractal2 {
-  background-color: gray;
+  background-color: #a196cc;
   color: white;
   width: 15vw;
-  height: 3vw;
 }
 
 #selectIter1 {
-  background-color: gray;
+  background-color: #a196cc;
   color: white;
   width: 5vw;
-  height: 3vw;
 }
 
 #selectScale1,
 #selectScale2 {
-  background-color: gray;
+  background-color: #a196cc;
   color: white;
-  width: 5vw;
-  height: 3vw;
+  width: 10vw;
 }
 
 .container {
-  padding: 25px 0;
-  display: flex;
-  justify-content: center;
+  width: 100%;
+  margin: 0 auto;
+  padding: 10px 0;
+  /*display: flex;
+  justify-content: center;*/
+}
+
+.holder {
+  width: 100%;
+  height: 60vh;
+}
+
+.canvas-container {
+}
+
+.canvas-container > #canvas1 {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-left: 20px;
+  width: 370px;
+  height: 370px;
+}
+
+.canvas-container > #canvas2 {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-right: 0px;
+  width: 320px;
+  height: 320px;
+}
+
+.margin-fix {
+  margin-left: 10px;
+}
+
+.margin-fix-2 {
+  margin-left: -10px;
+}
+
+.wrapper {
+  float: left;
+  width: 50%;
 }
 
 .left {
@@ -157,17 +199,17 @@ body {
 }
 
 #canvas1 {
-  border: 2px solid white;
+  /*border: 2px solid white;*/
   border-radius: 5px;
-  left: 0;
+  left: 10;
   background-color: black;
 }
 
 #canvas2 {
-  border: 2px solid white;
+  /*border: 2px solid white;*/
   border-radius: 5px;
   background-color: black;
-  right: 0;
+  right: 10;
 }
 
 .listenimage {
