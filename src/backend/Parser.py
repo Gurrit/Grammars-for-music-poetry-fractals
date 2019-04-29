@@ -6,6 +6,7 @@ from HiddenTurtle import *
 from utils import *
 import time
 
+
 class Parser:
 
     def __init__(self):
@@ -29,7 +30,7 @@ class Parser:
         generator.fill_track(tree, data)
         generator.create_midi_file(generate_midi_name(data))
 
-    def fill_tree(self, name, filename):
+    def fill_tree(self, filename, name=None):
         t1 = (time.time())
         turtle = HiddenTurtle()
         self.tree = TreeList()
@@ -42,10 +43,12 @@ class Parser:
         if "kids" in commands[2]:
             self.kids = int(commands[2].split(":")[1])
         filler = treeFiller(self.tree, self.angle, self.kids)
-        filler.add_modification_lists(self.colours, self.left_angles, self.right_angles)
+        filler.add_modification_lists(
+            self.colours, self.left_angles, self.right_angles)
         filler.generate_nodes(commands, turtle, int(commands[0].split(":")[1]))
         print(time.time() - t1)
-        self.trees[name] = self.tree
+        if not name == None:
+            self.trees[name] = self.tree
         return self.tree
 
     def parse_for_web(self, name, file, modified):
@@ -53,9 +56,10 @@ class Parser:
         self.tree = self.trees.get(name)
         if self.tree is None or modified:
             self.fill_tree(name, file)
-        commands = [i.value for i in self.tree.treeLists[len(self.tree.treeLists) - 1].nodes]
+        commands = [i.value for i in self.tree.treeLists[len(
+            self.tree.treeLists) - 1].nodes]
         print(time.time() - t1)
-        #if these are removed, some very cool results can be had.
+        # if these are removed, some very cool results can be had.
         self.colours = []
         self.right_angles = []
         self.left_angles = []
