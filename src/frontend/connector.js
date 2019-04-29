@@ -1,8 +1,7 @@
 const settings = {
-  url: "ws://192.168.99.100:8765/",
+  url: "ws://localhost:8765",
   socket: null,
   drawers: [],
-  hasRun: 0
 };
 
 function connectToServer(canvases) {

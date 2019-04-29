@@ -12,12 +12,9 @@ services:
   frontend:
     build:
       context: ./src/frontend
-      dockerfile: Dockerfile
-      sed "s/localhost:8765/bachelor.engsmyre.xyz/" connector.js > connector2.js && mv connector2.js connector.js
+      dockerfile: prod.Dockerfile
     ports: 
       - 80:80
-    volumes: 
-      - ./src/frontend/:/usr/share/nginx/html
 
       
 
