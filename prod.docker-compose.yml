@@ -1,0 +1,23 @@
+version: "2"
+
+services: 
+  gf:
+    build:
+      context: ./src/backend
+      dockerfile: Dockerfile
+    ports:
+      - 8765:8765
+    volumes:
+      - ./src/backend/:/app/
+  frontend:
+    build:
+      context: ./src/frontend
+      dockerfile: Dockerfile
+      sed "s/localhost:8765/bachelor.engsmyre.xyz/" connector.js > connector2.js && mv connector2.js connector.js
+    ports: 
+      - 80:80
+    volumes: 
+      - ./src/frontend/:/usr/share/nginx/html
+
+      
+
