@@ -55,7 +55,7 @@ class Parser:
         t1 = (time.time())
         self.tree = self.trees.get(name)
         if self.tree is None or modified:
-            self.fill_tree(name, file)
+            self.fill_tree(file, name)
         commands = [i.value for i in self.tree.treeLists[len(
             self.tree.treeLists) - 1].nodes]
         print(time.time() - t1)
