@@ -11,17 +11,31 @@ function createFractalList() {
   fractalList.push(koch);
 }
 
-function selected(selectID) {
-  var selectIterID = "";
+function selected() {
+  //om man valt en viss fraktal ska den med lägst iterationer visas i dropdownmenyn
+  var option2 = getOption("selectFractal2");
+  var option1 = getOption("selectFractal1");
+  opt1iter = 0;
+  opt2iter = 0;
+  var selectID = "";
 
-  if (selectID == "selectFractal1") {
-    selectIterID = "selectIter1";
-  } else if (selectID == "selectFractal3") {
-    selectIterID = "selectIter3";
+  for (i in fractalList) {
+    if (fractalList[i].text == option1.value) {
+      opt1iter = fractalList[i].maxIter;
+    }
+    if (fractalList[i].text == option2.value) {
+      opt2iter = fractalList[i].maxIter;
+    }
   }
-  //om man valt en viss fraktal ska vissa iterationer visas i dropdownmenyn
-  var option1 = getOption(selectID);
-  addIterOptions(option1.value, selectIterID);
+  console.log("Max för vänstra:" + opt1iter);
+  if (opt1iter > opt2iter) {
+    selectID = option2.value;
+  } else if (opt1iter < opt2iter) {
+    selectID = option1.value;
+  } else {
+    selectID = option1.value;
+  }
+  addIterOptions(selectID, "selectIter1");
 }
 
 function optionValue(text, jsonFractal, maxIter) {

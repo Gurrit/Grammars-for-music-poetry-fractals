@@ -34,6 +34,7 @@ function sendfiles(id) {
   console.log("Skalan: " + data.value);
 
   msg = toJson(0, data.value, value, "play", iteropt.value);
+  console.log("Musikmeddelandet:" + msg);
 
   sendMessage(msg);
 }

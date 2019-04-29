@@ -65,6 +65,7 @@ function sendCursorPosition(canvas, event) {
     fromFractal.iteration,
     toFractal.fractal
   );
+  console.log("koordinatmeddelandet" + message);
   sendMessage(message);
 }
 

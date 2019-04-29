@@ -2,16 +2,6 @@
  *  Licensed under the MIT license: http://mrcoles.com/media/mit-license.txt
  */
 
-html,
-body,
-div,
-span,
-h1,
-p {
-  margin: 0;
-  padding: 0;
-}
-
 strong {
   font-weight: normal;
 }
@@ -19,10 +9,10 @@ a {
   text-decoration: none;
 }
 
-#content {
-  min-height: 10%;
+.piano-content {
   text-align: left;
-  overflow: hidden;
+  width: 100%;
+  /*overflow: hidden;*/
   /*-webkit-transform: rotate(-90deg);
   -moz-transform: rotate(-90deg);
   -o-transform: rotate(-90deg);
@@ -31,15 +21,13 @@ a {
 }
 
 #content-inner {
-  padding: 30px 0;
 }
 
-#piano {
+.pianoclass {
   position: relative;
   /*width: 782px;*/
-  width: 120%; /*Var 60% innan*/
+  width: 100%; /*Var 60% innan*/
   border-radius: 20px;
-  margin-left: 20%;
   z-index: 2;
 }
 
@@ -48,7 +36,7 @@ a {
 #piano .keys {
   /*width: 1144px;*/
   /*width: 730px;*/
-  width: 50%; /*var 100% innan*/
+  width: 100%; /*var 100% innan*/
   padding: 2px 0 0 2px;
   overflow: hidden;
   background: #000;
