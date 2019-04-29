@@ -72,13 +72,13 @@ body {
 #selectFractal1 {
   background-color: #a196cc;
   color: white;
-  width: 15vw;
+  width: 12vw;
 }
 
 #selectFractal2 {
   background-color: #a196cc;
   color: white;
-  width: 15vw;
+  width: 12vw;
 }
 
 #selectIter1 {
@@ -91,7 +91,7 @@ body {
 #selectScale2 {
   background-color: #a196cc;
   color: white;
-  width: 10vw;
+  width: 5vw;
 }
 
 .container {
@@ -114,16 +114,17 @@ body {
   margin-top: 20px;
   margin-bottom: 20px;
   margin-left: 20px;
-  width: 370px;
-  height: 370px;
+  width: 380px;
+  height: 380px;
 }
 
 .canvas-container > #canvas2 {
   margin-top: 20px;
   margin-bottom: 20px;
-  margin-right: 0px;
-  width: 320px;
-  height: 320px;
+  margin-right: 20px;
+  width: 380px;
+  height: 380px;
+  float: right;
 }
 
 .margin-fix {
