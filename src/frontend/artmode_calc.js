@@ -16,8 +16,7 @@ function sendNotes() {
     document.getElementById("canvas1"),
     document.getElementById("canvas2")
   ];
-  var notes = JSON.stringify(noteArray);
-
+  type = "draw";
   var value = "";
   for (canvas in canvases) {
     for (index in fractalList) {
@@ -26,7 +25,11 @@ function sendNotes() {
         break;
       }
     }
-    msg = toJson(canvas, noteArray, value, "piano", optionIter1.value);
+
+    if (noteArray.length !== 0) {
+      type = "piano";
+    }
+    msg = toJson(canvas, noteArray, value, type, optionIter1.value);
     sendMessage(msg);
     console.log(msg);
   }
