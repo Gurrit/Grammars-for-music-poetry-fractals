@@ -79,7 +79,7 @@
         <div class="card-body">
           <h5 class="card-title">FRACTAL 1</h5>
           <p class="card-text">
-            Choose Fractal to draw and Choose iteration
+            Choose Fractal to draw:
           </p>
           <p class="card-text">
             <select
@@ -88,6 +88,11 @@
               onchange="selected(id)"
             >
             </select>
+          </p>
+          <p class="card-text">
+            Choose Iteration:
+          </p>
+          <p class="card-text">
             <select id="selectIter1" class="fractalbox form-control">
               <option value="1">1</option>
             </select>
@@ -96,16 +101,21 @@
         <ul class="list-group list-group-flush">
           <li class="list-group-item">
             <p class="card-text">
-              Choose what scale to play said fractal in
+              Choose what scale to play said fractal in:
             </p>
-            <select id="selectScale1" class="fractalbox form-control">
-              <option value="major">Major</option>
-              <option value="minor">Minor</option>
-              <option value="minor_harmonic">Minor Harmonic</option>
-              <option value="major_pentatonic">Major Pentatonic</option>
-              <option value="minor_pentatonic">Minor Pentatonic</option>
-              <option value="blues">Blues</option></select
-            >
+            <p class="card-text" style="padding-top: 0px !important;">
+              <select id="selectScale1" class="fractalbox form-control">
+                <option value="major">Major</option>
+                <option value="minor">Minor</option>
+                <option value="minor_harmonic">Minor Harmonic</option>
+                <option value="major_pentatonic">Major Pentatonic</option>
+                <option value="minor_pentatonic">Minor Pentatonic</option>
+                <option value="blues">Blues</option></select
+              >
+            </p>
+            <p class="card-text">
+              Play said fractal:
+            </p>
             <img
               src="./images/Play-Music-icon.png"
               onclick="sendfiles(id)"
@@ -136,22 +146,20 @@
       <div class="col-md-2">
         <div class="card-body">
           <h5 class="card-title">FRACTAL 2</h5>
-          <p class="card-text ">Choose Fractal to draw and translate to</p>
-          <p class="card-text">
-            <select
-              id="selectFractal2"
-              class="fractalbox form-control"
-              onchange="selected(id)"
-            >
-            </select>
-          </p>
+          <p class="boxtext">Choose Fractal to draw and translate to:</h8>
+          <select
+            id="selectFractal2"
+            class="fractalbox form-control"
+            onchange="selected(id)"
+          >
+          </select>
         </div>
         <ul class="list-group list-group-flush">
           <li class="list-group-item margin-fix ">
-            <p class="card-text margin-fix-2">
-              Choose what scale to play said fractal in
+            <p class="margin-fix-2 card-text">
+              Choose what scale to play said fractal in:
             </p>
-            <p card-text margin-fix-2>
+            <p class="card-text">
               <select
                 id="selectScale2"
                 class="fractalbox margin-fix-2 form-control"
@@ -163,13 +171,17 @@
                 <option value="minor_pentatonic">Minor Pentatonic</option>
                 <option value="blues">Blues</option></select
               >
+            </p>
+              <p class="margin-fix-2">
+                Play said fractal:
+              </p>
               <img
                 src="./images/Play-Music-icon.png"
                 onclick="sendfiles(id)"
                 id="canv2play"
                 class="listenimage"
               />
-            </p>
+            
           </li>
           <li class="list-group-item margin-fix ">
             <button

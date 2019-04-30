@@ -24,7 +24,7 @@ option,
 select {
   font-family: Avant Garde, Avantgarde, Century Gothic, CenturyGothic,
     AppleGothic, sans-serif !important;
-  color: black;
+  color: white;
 }
 
 p {
@@ -63,6 +63,7 @@ body {
   color: white;
   border-radius: 10px;
   height: 2vw;
+  font-size: 12px !important;
 }
 
 .fractalbox:hover {
@@ -72,13 +73,13 @@ body {
 #selectFractal1 {
   background-color: #a196cc;
   color: white;
-  width: 12vw;
+  width: 13vw;
 }
 
 #selectFractal2 {
   background-color: #a196cc;
   color: white;
-  width: 12vw;
+  width: 13vw;
 }
 
 #selectIter1 {
@@ -91,7 +92,11 @@ body {
 #selectScale2 {
   background-color: #a196cc;
   color: white;
-  width: 5vw;
+  width: 13vw;
+}
+
+.boxtext {
+  font-size: 12px;
 }
 
 .container {
@@ -211,6 +216,11 @@ body {
   border-radius: 5px;
   background-color: black;
   right: 10;
+}
+
+#canvas2:hover,
+#canvas1:hover {
+  cursor: crosshair;
 }
 
 .listenimage {
