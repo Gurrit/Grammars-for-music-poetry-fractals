@@ -1,3 +1,5 @@
+import time
+
 from lineSegment import *
 from treeList import *
 from config import *
@@ -17,6 +19,15 @@ def map_list_values(lst, command, mapped_values=None):
     for val in lst:
         mapped_values[val] = command
     return mapped_values
+
+
+def get_commands(commands, conditions):
+    command_sum = 0
+    for command in commands:
+        if is_any_condition_in_command(command, conditions):
+            command_sum += 1
+    return command_sum
+
 
 class treeFiller:
 
@@ -49,14 +60,14 @@ class treeFiller:
     # This method is really slow. Takes over 100 seconds on the server to run on sierpinski 7
     def generate_nodes(self, commands, turtle, iteration):  # self, commands, turtle, filler, iteration):
         self.coordinate_stack.append(turtle.coordinate.clone())
-        n_condition_map = map_list_values(self.forward_condition, self.get_commands(commands, self.forward_condition))
+        n_condition_map = map_list_values(self.forward_condition, get_commands(commands, self.forward_condition))
         n_condition_map = map_list_values(self.turn_left_condition,
-                                          self.get_commands(commands, self.turn_left_condition), n_condition_map)
+                                          get_commands(commands, self.turn_left_condition), n_condition_map)
         n_condition_map = map_list_values(self.turn_right_condition,
-                                          self.get_commands(commands, self.turn_right_condition), n_condition_map)
+                                          get_commands(commands, self.turn_right_condition), n_condition_map)
         for command in commands:
             if is_any_condition_in_command(command, self.forward_condition):
-                self.create_node(turtle, n_condition_map.get(self.forward_condition[0]))    # all values in the list should match
+                self.create_node(turtle, n_condition_map.get(self.forward_condition[0]))
                 self.draw_counter += 1
             if is_any_condition_in_command(command, self.turn_left_condition):
                 self.turn_left(turtle, n_condition_map.get(self.turn_left_condition[0]))
@@ -79,14 +90,7 @@ class treeFiller:
                         children = []
         self.tree.treeLists.reverse()
 
-    def get_commands(self, commands, conditions):
-        command_sum = 0
-        for command in commands:
-            if is_any_condition_in_command(command, conditions):
-                command_sum += 1
-        return command_sum
-
-    def create_node(self, turtle, commands_length):
+    def create_node(self, turtle, commands_length):     # Performance wise, this is by far worst right now.
         colour = self.get_node_colour(commands_length)
         turtle.forward(config.step)
         v = lineSegment(self.coordinate_stack.pop().clone(), turtle.coordinate.clone(), colour)
