@@ -1,46 +1,49 @@
 const fractalList = [];
 
 function createFractalList() {
-  var sierpinski = new optionValue(
-    "Sierpinski Triangle",
-    "Sierpinski",
-    10,
-    "middle"
-  );
+  var sierpinski = new optionValue("Sierpinski Triangle", "Sierpinski", 7);
   fractalList.push(sierpinski);
-  var dragon = new optionValue("Dragon Curve", "Dragon", 10, "middle");
+  var dragon = new optionValue("Dragon Curve", "Dragon", 10);
   fractalList.push(dragon);
-  var gosper = new optionValue("Gosper Curve", "Gosper", 3, "middle");
+  var gosper = new optionValue("Gosper Curve", "Gosper", 3);
   fractalList.push(gosper);
-  var koch = new optionValue(
-    "Square Koch Snowflake",
-    "Koch",
-    7,
-    "bottomleftcorner"
-  );
+  var koch = new optionValue("Square Koch Snowflake", "Koch", 3);
   fractalList.push(koch);
 }
 
-function selected(selectID) {
-  var selectIterID = "";
+function selected() {
+  //om man valt en viss fraktal ska den med lägst iterationer visas i dropdownmenyn
+  var option2 = getOption("selectFractal2");
+  var option1 = getOption("selectFractal1");
+  opt1iter = 0;
+  opt2iter = 0;
+  var selectID = "";
 
-  if (selectID == "selectFractal1") {
-    selectIterID = "selectIter1";
-  } else if (selectID == "selectFractal3") {
-    selectIterID = "selectIter3";
+  for (i in fractalList) {
+    if (fractalList[i].text == option1.value) {
+      opt1iter = fractalList[i].maxIter;
+    }
+    if (fractalList[i].text == option2.value) {
+      opt2iter = fractalList[i].maxIter;
+    }
   }
-  //om man valt en viss fraktal ska vissa iterationer visas i dropdownmenyn
-  var option1 = getOption(selectID);
-  addIterOptions(option1.value, selectIterID);
+  console.log("Max för vänstra:" + opt1iter);
+  if (opt1iter > opt2iter) {
+    selectID = option2.value;
+  } else if (opt1iter < opt2iter) {
+    selectID = option1.value;
+  } else {
+    selectID = option1.value;
+  }
+  addIterOptions(selectID, "selectIter1");
 }
 
-function optionValue(text, jsonFractal, maxIter, startpos) {
+function optionValue(text, jsonFractal, maxIter) {
   //create optionvalue objects for dropwodn menu
   //type = text (det som syns), maxIter = maximum of iterations, jsonFractal (det som skickas till server), startpos = middle or bottomleftcorner
   this.text = text;
   this.jsonFractal = jsonFractal;
   this.maxIter = maxIter;
-  this.startpos = startpos;
 }
 
 function addFractalOptions(selectID) {

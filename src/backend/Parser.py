@@ -29,8 +29,7 @@ class Parser:
         generator.fill_track(tree, data)
         generator.create_midi_file(generate_midi_name(data))
 
-    def fill_tree(self, filename):
-        t1 = (time.time())
+    def fill_tree(self, name, filename):
         turtle = HiddenTurtle()
         self.tree = TreeList()
         file_reader = GFFileReader()
@@ -47,11 +46,11 @@ class Parser:
         self.trees[filename] = self.tree
         return self.tree
 
-    def parse_for_web(self, filename):
+    def parse_for_web(self, name, file, modified):
         t1 = (time.time())
-        self.tree = self.trees.get(filename)  # change the name?
-        if self.tree is None:
-            self.fill_tree(filename)
+        self.tree = self.trees.get(name)
+        if self.tree is None or modified:
+            self.fill_tree(name, file)
         commands = [i.value for i in self.tree.treeLists[len(self.tree.treeLists) - 1].nodes]
         print(time.time() - t1)
         #if these are removed, some very cool results can be had.

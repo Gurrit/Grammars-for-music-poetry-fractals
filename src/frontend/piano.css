@@ -2,22 +2,6 @@
  *  Licensed under the MIT license: http://mrcoles.com/media/mit-license.txt
  */
 
-html,
-body,
-div,
-span,
-h1,
-p {
-  margin: 0;
-  padding: 0;
-}
-
-html {
-  background: #fff;
-  font: normal 14px/24px futura, Helvetica, Arial, sans serif;
-  color: #999;
-}
-
 strong {
   font-weight: normal;
 }
@@ -25,27 +9,25 @@ a {
   text-decoration: none;
 }
 
-html,
-body {
-  height: 100%;
-}
-
-#content {
-  min-height: 100%;
+.piano-content {
   text-align: left;
-  overflow: hidden;
+  width: 100%;
+  /*overflow: hidden;*/
+  /*-webkit-transform: rotate(-90deg);
+  -moz-transform: rotate(-90deg);
+  -o-transform: rotate(-90deg);
+  -ms-transform: rotate(-90deg);
+  transform: rotate(-90deg);*/
 }
 
 #content-inner {
-  padding: 60px 0;
 }
 
-#piano {
+.pianoclass {
   position: relative;
   /*width: 782px;*/
-  width: 60%;
+  width: 100%; /*Var 60% innan*/
   border-radius: 20px;
-  margin-left: 20%;
   z-index: 2;
 }
 
@@ -54,7 +36,7 @@ body {
 #piano .keys {
   /*width: 1144px;*/
   /*width: 730px;*/
-  width: 100%;
+  width: 100%; /*var 100% innan*/
   padding: 2px 0 0 2px;
   overflow: hidden;
   background: #000;
@@ -65,7 +47,7 @@ body {
   float: left;
   position: relative;
   width: 6.886%;
-  height: 180px;
+  height: 100px; /*var 180 innan*/
   margin: 0 2px 2px 0;
   background: #fff;
   border-radius: 0 0 4px 4px;
@@ -86,8 +68,8 @@ body {
   top: -2px;
   left: -16px;
   display: block;
-  width: 28px;
-  height: 117px;
+  width: 30px; /*28 innan*/
+  height: 50px; /*117 innan*/
   background: #000;
   border-radius: 0 0 4px 4px;
   box-shadow: 1px 1px 0 #555, 2px 2px 0 #555;
@@ -302,7 +284,6 @@ body {
   margin-bottom: 50px;
   font-family: Verdana;
   float: left;
-
 }
 
 .music_submit_button {
@@ -330,18 +311,18 @@ body {
 }
 
 #playedNotes {
-  margin-left: 20%;
-  margin-right: 20%;
+  margin-left: 0%;
   width: 60%;
-  background-color: lightpink;
+  background-color: gray;
+  border-radius: 40px;
 }
 
 #notesText {
   width: 80%;
-  margin-left: 10%;
+  margin-left: 3%;
   height: 20px;
   /*margin-top: 40px;*/
-  color: black;
+  color: white;
   box-sizing: border-box;
   overflow-wrap: break-word;
 }

@@ -5,41 +5,53 @@
   <link href="style.css" rel="stylesheet" />
   <link
     rel="stylesheet"
-    href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+    crossorigin="anonymous"
   />
 </head>
+<script
+  src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+  integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+  crossorigin="anonymous"
+></script>
+
+
 <body>
-  <nav class="navbar navbar-inverse">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <a class="navbar-brand" href="index.html"
-          >Grammar for music and poetry</a
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="index.html">Grammar for music and poetry</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
         >
-      </div>
-      <ul class="nav navbar-nav">
-        <li><a href="mathmode.html">Math Mode</a></li>
-        <li><a href="artmode.html">Art and music Mode </a></li>
-        <li><a href="info.html">Info</a></li>
-      </ul>
-    </div>
-  </nav>
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item active">
+              <a class="nav-link" href="artmode.html"
+                >Experiment With Fractals <span class="sr-only">(current)</span></a
+              >
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="info.html"
+                >Info<span class="sr-only"></span
+              ></a>
+            </li>
+          </ul>
+        </div>
+      </nav>
 
   <div class="centerdiv">
-    <h1>Mr. Fractal</h1>
-     <img src = "mrFractal.png" />
-    <script id="sample" type="javascript/sample-code"></script>
-    <div style="text-align: center">
-        <div>
-            <button id="send command" onclick="sendMessage()" title="click me">
-                Click to draw
-            </button>
-        </div>
-            <canvas id="canvas" width="1000" height="1000" onclick="getCoordinate(canvas, event)">
-                This applications does not seem to be supported by your browser.
-            </canvas> <!-- This should be taking screen size into account.-->
-    </div>
-    <script src="drawer.js"></script>
-    <script src="connector.js"></script>
+    <h1>Welcome to a bachelor thesis project about Grammatical Framework and fractals!</h1>
+    <h3>This project was developed January to May of 2019 by a group of students at Chalmers University of Technology.</h3>
+     <img src = "./images/mrFractal.png"/>
+    
 </body>
 <script src="mathmode_calc.js"></script>
 <script src="turtle.js"></script>

@@ -1,8 +1,7 @@
 const settings = {
-  url: "ws://localhost:8765/",
+  url: "ws://localhost:8765",
   socket: null,
   drawers: [],
-  hasRun: 0
 };
 
 function connectToServer(canvases) {
@@ -12,29 +11,34 @@ function connectToServer(canvases) {
     settings.drawers[canvas] = getTurtle(canvases[canvas].canvasen);
   }
   socket.onmessage = function(event) {
-      console.log(event.data);
-      if(event.data instanceof Blob) {  // Checks if type is of blob, then it is an image.
-          setFileURL(event.data);
-      }
-      let message = JSON.parse(event.data);
-      map_messages(message);
-    };
-    settings.socket = socket;
+    console.log(event.data);
+    if (event.data instanceof Blob) {
+      // Checks if type is of blob, then it is an image.
+      setFileURL(event.data);
+    }
+    let message = JSON.parse(event.data);
+    map_messages(message);
+  };
+  settings.socket = socket;
 }
 
 function map_messages(message) {
-    switch(message.mode) {
-        case "draw":
-            drawNewFractal(message.lines, settings.drawers[message.canvas], message.type, message.iteration);
-            break;
-        case "translation":
-            console.log(message);
-            translateFractal(message.lines, settings.drawers[1], "#ff0017");
-            break;
-    }
+  switch (message.mode) {
+    case "draw":
+      drawNewFractal(
+        message.lines,
+        settings.drawers[message.canvas],
+        message.type,
+        message.iteration
+      );
+      break;
+    case "translation":
+      console.log(message);
+      translateFractal(message.lines, settings.drawers[1], "#ff0017");
+      break;
+  }
 }
 
 function sendMessage(message) {
   settings.socket.send(message);
 }
-
