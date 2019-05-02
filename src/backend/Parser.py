@@ -30,7 +30,6 @@ class Parser:
         generator.create_midi_file(generate_midi_name(data))
 
     def fill_tree(self, name, filename):
-        t1 = (time.time())
         turtle = HiddenTurtle()
         self.tree = TreeList()
         file_reader = GFFileReader()
@@ -43,9 +42,8 @@ class Parser:
             self.kids = int(commands[2].split(":")[1])
         filler = treeFiller(self.tree, self.angle, self.kids)
         filler.add_modification_lists(self.colours, self.left_angles, self.right_angles)
-        filler.generate_nodes(commands, turtle, int(commands[0].split(":")[1]))
-        print(time.time() - t1)
-        self.trees[name] = self.tree
+        filler.generate_nodes(commands, turtle, int(commands[0].split(":")[1])) # This method is ridiculously slow.
+        self.trees[filename] = self.tree
         return self.tree
 
     def parse_for_web(self, name, file, modified):
