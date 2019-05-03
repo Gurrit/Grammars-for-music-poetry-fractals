@@ -78,32 +78,28 @@
       <div class="col-md-2">
         <div class="card-body">
           <h5 class="card-title">FRACTAL 1</h5>
-          <p class="card-text">
+          <p class="boxtext">
             Choose Fractal to draw:
-          </p>
-          <p class="card-text">
+          </h8>
             <select
               id="selectFractal1"
               class="fractalbox form-control"
               onchange="selected(id)"
             >
             </select>
-          </p>
-          <p class="card-text">
+          <p class="boxtext">
             Choose Iteration:
-          </p>
-          <p class="card-text">
+          </h8>
             <select id="selectIter1" class="fractalbox form-control">
               <option value="1">1</option>
             </select>
-          </p>
+          
         </div>
         <ul class="list-group list-group-flush">
           <li class="list-group-item">
-            <p class="card-text">
+            <p class="boxtext">
               Choose what scale to play said fractal in:
-            </p>
-            <p class="card-text" style="padding-top: 0px !important;">
+            </h8>
               <select id="selectScale1" class="fractalbox form-control">
                 <option value="major">Major</option>
                 <option value="minor">Minor</option>
@@ -112,13 +108,15 @@
                 <option value="minor_pentatonic">Minor Pentatonic</option>
                 <option value="blues">Blues</option></select
               >
-            </p>
-            <p class="card-text">
+            <p class="boxtext">
               Play said fractal:
-            </p>
+            </h8>
+            <span id="musicloading1" style="display:none;"class="spinner-border" role="status">
+              <span class="sr-only">Loading...</span>
+            </span>
             <img
               src="./images/Play-Music-icon.png"
-              onclick="sendfiles(id)"
+              onclick="sendfiles(id), hidemusic(id)"
               id="canv1play"
               class="listenimage"
             />
@@ -156,13 +154,12 @@
         </div>
         <ul class="list-group list-group-flush">
           <li class="list-group-item margin-fix ">
-            <p class="margin-fix-2 card-text">
+            <p class="margin-fix-2 boxtext">
               Choose what scale to play said fractal in:
-            </p>
-            <p class="card-text">
+            </h8>
               <select
                 id="selectScale2"
-                class="fractalbox margin-fix-2 form-control"
+                class="fractalbox form-control"
               >
                 <option value="major">Major</option>
                 <option value="minor">Minor</option>
@@ -171,13 +168,12 @@
                 <option value="minor_pentatonic">Minor Pentatonic</option>
                 <option value="blues">Blues</option></select
               >
-            </p>
-              <p class="margin-fix-2">
+              <p class="margin-fix-2 boxtext">
                 Play said fractal:
-              </p>
-              <div id="musicloading2" style="display:none;"class="spinner-border" role="status">
+              </h8>
+              <span id="musicloading2" style="display:none;"class="spinner-border" role="status">
                 <span class="sr-only">Loading...</span>
-              </div>
+              </span>
               <img
                 src="./images/Play-Music-icon.png"
                 onclick="sendfiles(id), hidemusic(id)"
@@ -209,11 +205,11 @@
         <p id="notesText"></p>
       </div>
       <button id="resetbtn"  type="button"
-      class="btn btn-lg" onclick="resetPiano()" class="right">
+      class="btn" onclick="resetPiano()">
         Reset
       </button>
       <button id="infobtn"  type="button"
-      class="btn btn-lg" onclick="showpic()" class="right">i</button>
+      class="btn">i</button>
     </div>
     <div class="row no-gutters">
       <div class="col-md-2"></div>
@@ -252,3 +248,4 @@
 <script src="connector.js"></script>
 <script src="Translator.js"></script>
 <script src="drawer.js"></script>
+<script src="loadingbars.js"></script>

@@ -284,5 +284,4 @@ window.log = function f() {
 
   window.DataGenerator = DataGenerator;
   window.Notes = Notes;
-  finishedmusic();
 })();
