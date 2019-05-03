@@ -38,10 +38,19 @@ p {
 #generate {
   color: white;
   background-color: #4e4087 !important;
+  width: 12vw;
+  height: 10vh;
 }
 
+#buttontext {
+  font-size: 15px;
+}
 .hidden {
   display: none;
+}
+
+.showtext {
+  visibility: hidden;
 }
 
 body {
@@ -103,8 +112,11 @@ body {
   width: 100%;
   margin: 0 auto;
   padding: 10px 0;
-  /*display: flex;
-  justify-content: center;*/
+}
+
+.resetcontainer {
+  display: flex;
+  justify-content: center;
 }
 
 .holder {
@@ -179,6 +191,7 @@ body {
   height: 2vw;
   border-radius: 20px;
   background-color: gray;
+  font-size: 12px;
   color: white;
 }
 
@@ -188,7 +201,8 @@ body {
   width: 2vw;
   height: 2vw;
   border-radius: 20px;
-  background-color: red;
+  background-color: #4e4087;
+  font-size: 12px;
   color: white;
 }
 

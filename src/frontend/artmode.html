@@ -175,9 +175,12 @@
               <p class="margin-fix-2">
                 Play said fractal:
               </p>
+              <div id="musicloading2" style="display:none;"class="spinner-border" role="status">
+                <span class="sr-only">Loading...</span>
+              </div>
               <img
                 src="./images/Play-Music-icon.png"
-                onclick="sendfiles(id)"
+                onclick="sendfiles(id), hidemusic(id)"
                 id="canv2play"
                 class="listenimage"
               />
@@ -188,15 +191,30 @@
               type="button"
               class="btn btn-primary btn-lg"
               id="generate"
-              onclick="sendNotes()"
+              onclick="sendNotes(), startedLoadingBtn()"
             >
-              Generate Fractals
+            <span id="loadingbar" class="spinner-border spinner-border-sm hidden" role="status" aria-hidden="true" ></span>
+              <div id="buttontext" aria-hidden="true"></div>
+              
+                        
             </button>
+            
           </li>
         </ul>
       </div>
     </div>
 
+    <div class="resetcontainer">
+      <div id="playedNotes" class="left">
+        <p id="notesText"></p>
+      </div>
+      <button id="resetbtn"  type="button"
+      class="btn btn-lg" onclick="resetPiano()" class="right">
+        Reset
+      </button>
+      <button id="infobtn"  type="button"
+      class="btn btn-lg" onclick="showpic()" class="right">i</button>
+    </div>
     <div class="row no-gutters">
       <div class="col-md-2"></div>
       <div class="col-md-8">
@@ -206,15 +224,6 @@
           </div>
         </div>
 
-        <div class="container">
-          <div id="playedNotes" class="left">
-            <p id="notesText"></p>
-          </div>
-          <button id="resetbtn" onclick="resetPiano()" class="right">
-            Reset
-          </button>
-          <button id="infobtn" onclick="showpic()" class="right">i</button>
-        </div>
 
         <div class="centerdiv">
           <img id="help_piano" class="hidden" src="./images/piano.png" />
@@ -242,3 +251,4 @@
 <script src="piano.js"></script>
 <script src="connector.js"></script>
 <script src="Translator.js"></script>
+<script src="drawer.js"></script>

@@ -1,11 +1,51 @@
-function showpic() {
-  var x = document.getElementById("help_piano");
-  console.log("syns bilden?");
-  console.log("displayen:" + x.style.display);
-  if (x.style.display === "none") {
-    x.style.display = "block";
-  } else {
+function finishedLoadingBtn() {
+  changetext(false);
+  hideelement("loadingbar", "display");
+}
+
+function startedLoadingBtn() {
+  changetext(true);
+  showelement("loadingbar", "display");
+}
+
+function finishedmusic() {
+  showelement("canv2play", "display");
+}
+
+function hidemusic(id) {
+  hideelement(id, "display");
+  showelement("musicloading2", "display");
+}
+
+function hideelement(id, format) {
+  //visbility for text, and display for divs and such
+  var x = document.getElementById(id);
+
+  if (format == "display") {
     x.style.display = "none";
+  } else if (format == "visibility") {
+    x.style.visbility = "hidden";
+  }
+}
+
+function changetext(loading) {
+  var btntext = document.getElementById("buttontext");
+
+  if (loading) {
+    btntext.innerText = "Loading";
+  } else if (!loading) {
+    btntext.innerText = "Generate Fractals";
+  }
+}
+
+function showelement(id, format) {
+  //visbility for text, and display for divs and such
+  var x = document.getElementById(id);
+
+  if (format == "display") {
+    x.style.display = "inline-block";
+  } else if (format == "visibility") {
+    x.style.visbility = "initial";
   }
 }
 
@@ -50,6 +90,8 @@ function startPianoUI() {
   connectToServer([turtcanv1, turtcanv2]);
   addFractalOptions("selectFractal1");
   addFractalOptions("selectFractal2");
+  hideelement("loadingbar", "display");
+  changetext(false);
 }
 
 function sendCursorPosition(canvas, event) {
