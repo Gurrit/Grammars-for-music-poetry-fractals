@@ -50,7 +50,7 @@ class Parser:
         t1 = (time.time())
         self.tree = self.trees.get(name)
         if self.tree is None or modified:
-            self.fill_tree(name, file)
+            self.fill_tree(file, name)
         commands = [i.value for i in self.tree.treeLists[len(self.tree.treeLists) - 1].nodes]
         print(time.time() - t1)
         #if these are removed, some very cool results can be had.
@@ -60,9 +60,11 @@ class Parser:
         return commands
 
     def find_iteration(self, filename, coord, filename2):
+        print(self.trees)
         tree = self.trees.get(filename)
         tree2 = self.trees.get(filename2)
         searcher = TreeSearcher(tree)
+        print(searcher)
         c = coord.split(",")
         x = int(''.join([i for i in c[0] if i.isdigit()]))
         y = int(''.join([i for i in c[1] if i.isdigit()]))
