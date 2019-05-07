@@ -309,20 +309,3 @@ a {
 .music_submit_button:active {
   background-color: #5d5d5d;
 }
-
-#playedNotes {
-  margin-left: 0%;
-  width: 60%;
-  background-color: gray;
-  border-radius: 40px;
-}
-
-#notesText {
-  width: 80%;
-  margin-left: 3%;
-  height: 20px;
-  /*margin-top: 40px;*/
-  color: white;
-  box-sizing: border-box;
-  overflow-wrap: break-word;
-}

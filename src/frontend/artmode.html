@@ -40,6 +40,7 @@
   integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
   crossorigin="anonymous"
 ></script>
+<script src="./bootstrap-4.3.1-dist/js/bootstrap.bundle.js"></script>
 
 <nav class="navbar navbar-expand-lg navbar-light navcolor navfont">
   <a class="navbar-brand navfont" href="index.html"
@@ -73,45 +74,55 @@
 </nav>
 
 <body onload="startPianoUI()">
+
+  <title>Experiment With Fractals</title>
+  
   <div class="card mb-3" style="max-width: 100%;">
     <div class="row no-gutters">
       <div class="col-md-2">
         <div class="card-body">
           <h5 class="card-title">FRACTAL 1</h5>
-          <p class="card-text">
-            Choose Fractal to draw and Choose iteration
-          </p>
-          <p class="card-text">
+          <p class="boxtext">
+            Choose Fractal to draw:
+          </h8>
             <select
               id="selectFractal1"
               class="fractalbox form-control"
               onchange="selected(id)"
             >
             </select>
+          <p class="boxtext">
+            Choose Iteration:
+          </h8>
             <select id="selectIter1" class="fractalbox form-control">
               <option value="1">1</option>
             </select>
-          </p>
+          
         </div>
         <ul class="list-group list-group-flush">
           <li class="list-group-item">
-            <p class="card-text">
-              Choose what scale to play said fractal in
-            </p>
-            <select id="selectScale1" class="fractalbox form-control">
-              <option value="major">Major</option>
-              <option value="minor">Minor</option>
-              <option value="minor_harmonic">Minor Harmonic</option>
-              <option value="major_pentatonic">Major Pentatonic</option>
-              <option value="minor_pentatonic">Minor Pentatonic</option>
-              <option value="blues">Blues</option></select
-            >
+            <p class="boxtext">
+              Choose what scale to play said fractal in:
+            </h8>
+              <select id="selectScale1" class="fractalbox form-control">
+                <option value="major">Major</option>
+                <option value="minor">Minor</option>
+                <option value="minor_harmonic">Minor Harmonic</option>
+                <option value="major_pentatonic">Major Pentatonic</option>
+                <option value="minor_pentatonic">Minor Pentatonic</option>
+                <option value="blues">Blues</option></select
+              >
+            <p class="boxtext">
+              Play said fractal:
+            </h8>
+            <span id="musicloading1" style="display:none;"class="spinner-border" role="status">
+              <span class="sr-only">Loading...</span>
+            </span>
             <img
               src="./images/Play-Music-icon.png"
-              onclick="sendfiles(id)"
+              onclick="sendfiles(id), hidemusic(id)"
               id="canv1play"
-              class="listenimage"
-            />
+              class="listenimage"/>
           </li>
         </ul>
       </div>
@@ -136,53 +147,74 @@
       <div class="col-md-2">
         <div class="card-body">
           <h5 class="card-title">FRACTAL 2</h5>
-          <p class="card-text ">Choose Fractal to draw and translate to</p>
-          <p class="card-text">
-            <select
-              id="selectFractal2"
-              class="fractalbox form-control"
-              onchange="selected(id)"
-            >
-            </select>
-          </p>
+          <p class="boxtext">Choose Fractal to draw and translate to:</h8>
+          <select
+            id="selectFractal2"
+            class="fractalbox form-control"
+            onchange="selected(id)"
+          >
+          </select>
         </div>
         <ul class="list-group list-group-flush">
           <li class="list-group-item margin-fix ">
-            <p class="card-text margin-fix-2">
-              Choose what scale to play said fractal in
-            </p>
-            <select
-              id="selectScale2"
-              class="fractalbox margin-fix-2 form-control"
-            >
-              <option value="major">Major</option>
-              <option value="minor">Minor</option>
-              <option value="minor_harmonic">Minor Harmonic</option>
-              <option value="major_pentatonic">Major Pentatonic</option>
-              <option value="minor_pentatonic">Minor Pentatonic</option>
-              <option value="blues">Blues</option></select
-            >
-            <img
-              src="./images/Play-Music-icon.png"
-              onclick="sendfiles(id)"
-              id="canv2play"
-              class="listenimage"
-            />
+            <p class="margin-fix-2 boxtext">
+              Choose what scale to play said fractal in:
+            </h8>
+              <select
+                id="selectScale2"
+                class="fractalbox form-control"
+              >
+                <option value="major">Major</option>
+                <option value="minor">Minor</option>
+                <option value="minor_harmonic">Minor Harmonic</option>
+                <option value="major_pentatonic">Major Pentatonic</option>
+                <option value="minor_pentatonic">Minor Pentatonic</option>
+                <option value="blues">Blues</option></select
+              >
+              <p class="margin-fix-2 boxtext">
+                Play said fractal:
+              </h8>
+              <span id="musicloading2" style="display:none;"class="spinner-border" role="status">
+                <span class="sr-only">Loading...</span>
+              </span>
+              <img
+                src="./images/Play-Music-icon.png"
+                onclick="sendfiles(id), hidemusic(id)"
+                id="canv2play"
+                class="listenimage"
+              />
+            
           </li>
           <li class="list-group-item margin-fix ">
             <button
               type="button"
               class="btn btn-primary btn-lg"
               id="generate"
-              onclick="sendNotes()"
+              onclick="sendNotes(), startedLoadingBtn()"
+              data-toggle="tooltip" data-placement="right"
             >
-              Generate Fractals
+            <span id="loadingbar" class="spinner-border spinner-border-sm hidden" role="status" aria-hidden="true" ></span>
+              <div id="buttontext" aria-hidden="true"></div>
+              
+                        
             </button>
+            
           </li>
         </ul>
       </div>
     </div>
 
+    <div class="resetcontainer">
+      <div id="playedNotes" class="left">
+        <p id="notesText"></p>
+      </div>
+      <button id="resetbtn"  type="button"
+      class="btn" onclick="resetPiano()">
+        Reset
+      </button>
+      <button id="infobtn"  type="button"
+      class="btn">i</button>
+    </div>
     <div class="row no-gutters">
       <div class="col-md-2"></div>
       <div class="col-md-8">
@@ -192,15 +224,6 @@
           </div>
         </div>
 
-        <div class="container">
-          <div id="playedNotes" class="left">
-            <p id="notesText"></p>
-          </div>
-          <button id="resetbtn" onclick="resetPiano()" class="right">
-            Reset
-          </button>
-          <button id="infobtn" onclick="showpic()" class="right">i</button>
-        </div>
 
         <div class="centerdiv">
           <img id="help_piano" class="hidden" src="./images/piano.png" />
@@ -228,3 +251,5 @@
 <script src="piano.js"></script>
 <script src="connector.js"></script>
 <script src="Translator.js"></script>
+<script src="drawer.js"></script>
+<script src="loadingbars.js"></script>

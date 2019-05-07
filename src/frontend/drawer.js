@@ -79,6 +79,7 @@ function CreateDrawer(canvas) {
       new Coordinate(-centerX, -centerY)
     );
     console.log("has drawn the image");
+    finishedLoadingBtn();
   };
   self.saveFractal = function(name, iteration) {
     self.fractal = new Fractal(name, iteration);

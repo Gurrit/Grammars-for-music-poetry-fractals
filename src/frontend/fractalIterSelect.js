@@ -40,7 +40,7 @@ function selected() {
 
 function optionValue(text, jsonFractal, maxIter) {
   //create optionvalue objects for dropwodn menu
-  //type = text (det som syns), maxIter = maximum of iterations, jsonFractal (det som skickas till server), startpos = middle or bottomleftcorner
+  //type = text (det som syns), maxIter = maximum of iterations, jsonFractal (det som skickas till server)
   this.text = text;
   this.jsonFractal = jsonFractal;
   this.maxIter = maxIter;

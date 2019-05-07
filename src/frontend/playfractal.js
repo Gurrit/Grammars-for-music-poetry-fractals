@@ -2,7 +2,7 @@ function setFileURL(eventdata) {
   //creates the URL for the sent wav file
   objectURL = URL.createObjectURL(eventdata);
   console.log("Objecturl:" + objectURL.toString());
-
+  finishedmusic();
   playsong(objectURL);
 }
 function sendfiles(id) {

@@ -1,14 +1,3 @@
-function showpic() {
-  var x = document.getElementById("help_piano");
-  console.log("syns bilden?");
-  console.log("displayen:" + x.style.display);
-  if (x.style.display === "none") {
-    x.style.display = "block";
-  } else {
-    x.style.display = "none";
-  }
-}
-
 function sendNotes() {
   let optionIter1 = getOption("selectIter1");
   let optionFracs = [getOption("selectFractal1"), getOption("selectFractal2")];
@@ -16,8 +5,7 @@ function sendNotes() {
     document.getElementById("canvas1"),
     document.getElementById("canvas2")
   ];
-  var notes = JSON.stringify(noteArray);
-
+  type = "draw";
   var value = "";
   for (canvas in canvases) {
     for (index in fractalList) {
@@ -26,7 +14,11 @@ function sendNotes() {
         break;
       }
     }
-    msg = toJson(canvas, noteArray, value, "piano", optionIter1.value);
+
+    if (noteArray.length !== 0) {
+      type = "piano";
+    }
+    msg = toJson(canvas, noteArray, value, type, optionIter1.value);
     sendMessage(msg);
     console.log(msg);
   }
@@ -47,6 +39,12 @@ function startPianoUI() {
   connectToServer([turtcanv1, turtcanv2]);
   addFractalOptions("selectFractal1");
   addFractalOptions("selectFractal2");
+  hideelement("loadingbar", "display");
+  changetext(false);
+
+  $(function() {
+    $('[data-toggle="tooltip"]').tooltip();
+  });
 }
 
 function sendCursorPosition(canvas, event) {
