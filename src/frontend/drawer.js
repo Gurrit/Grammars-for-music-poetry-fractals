@@ -13,9 +13,9 @@ function CreateDrawer(canvas) {
     if (color !== self.color) {
       // optimizes drawing with different colors.
       console.log("switching to " + color);
-      self.context.strokeStyle = color;
-      self.context.beginPath();
       self.context.stroke();
+      self.context.beginPath();
+      self.context.strokeStyle = color;
       self.color = color;
     }
     self.context.moveTo(coordinate1.x, coordinate1.y);
@@ -25,14 +25,6 @@ function CreateDrawer(canvas) {
     self.drawings.push(new Line(coordinate1, coordinate2, color));
   };
 
-  self.color = function(hexkod) {
-    console.log(hexkod);
-    let ctx = self.context;
-    //let ctx = canvas.getContext("2d");
-    ctx.beginPath();
-    ctx.strokeStyle = hexkod;
-    ctx.stroke();
-  };
   self.reset = function() {
     self.drawings = [];
     self.context.setTransform(1, 0, 0, 1, self.width / 2, self.height / 2);

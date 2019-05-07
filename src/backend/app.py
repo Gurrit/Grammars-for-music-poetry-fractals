@@ -39,8 +39,8 @@ def make_music(tree, data): # this should probably be moved.
 
 
 async def generate_music_file(data, websocket):
-    name = generate_file_name(data['type'], data['iteration'])
-    tree = parser.fill_tree(name)
+    filename = generate_file_name(data['type'], data['iteration'])
+    tree = parser.fill_tree(filename)
     make_music(tree, data)
     name = str(data['type']) + str(data['iteration'])
     filename = ("./wav-files/" + str(name) + ".wav")
@@ -79,8 +79,8 @@ async def generate_piano_fractal(data, websocket):      # This should probably h
 
 
 async def generate_translation(data, websocket):
-    lines = parser.find_iteration(generate_file_name(data['type'], data['iteration']), data['coordinate'],
-                                  generate_file_name(data['to'], data['iteration']))
+    lines = parser.find_iteration((data['type']) + str(data['iteration'] + "_modified"), data['coordinate'],
+                                  (data['to']) + str(data['iteration'] + "_modified"))
     await websocket.send(create_translation_json(lines))
 
 

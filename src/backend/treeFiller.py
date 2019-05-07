@@ -1,12 +1,38 @@
+import time
+
 from lineSegment import *
 from treeList import *
 from config import *
 
 
+def is_any_condition_in_command(command, conditions):
+    for condition in conditions:
+        if condition not in command:
+            continue
+        return True
+    return False
+
+
+def map_list_values(lst, command, mapped_values=None):
+    if mapped_values is None:
+        mapped_values = {}      # Python convention
+    for val in lst:
+        mapped_values[val] = command
+    return mapped_values
+
+
+def get_commands(commands, conditions):
+    command_sum = 0
+    for command in commands:
+        if is_any_condition_in_command(command, conditions):
+            command_sum += 1
+    return command_sum
+
+
 class treeFiller:
 
-    def __init__(self, tree, angle, kids, max_duration = 32):
-        self.current_position = Coordinate(0,0)
+    def __init__(self, tree, angle, kids, max_duration=32):
+        self.current_position = Coordinate(0, 0)
         self.coordinate_stack = []
         self.objectStack = []
         self.tree = tree
@@ -32,28 +58,31 @@ class treeFiller:
         self.current_left_angle = 0
 
     # This method is really slow. Takes over 100 seconds on the server to run on sierpinski 7
-    def generate_nodes(self, commands, turtle, iteration): #self, commands, turtle, filler, iteration):
+    def generate_nodes(self, commands, turtle, iteration):  # self, commands, turtle, filler, iteration):
         self.coordinate_stack.append(turtle.coordinate.clone())
-        duration_sum = 0
+        n_condition_map = map_list_values(self.forward_condition, get_commands(commands, self.forward_condition))
+        n_condition_map = map_list_values(self.turn_left_condition,
+                                          get_commands(commands, self.turn_left_condition), n_condition_map)
+        n_condition_map = map_list_values(self.turn_right_condition,
+                                          get_commands(commands, self.turn_right_condition), n_condition_map)
         for command in commands:
-
-            if self.is_any_condition_in_command(command, self.forward_condition):
-                self.create_node(turtle, self.get_commands(commands, self.forward_condition))
+            if is_any_condition_in_command(command, self.forward_condition):
+                self.create_node(turtle, n_condition_map.get(self.forward_condition[0]))
                 self.draw_counter += 1
-            if self.is_any_condition_in_command(command, self.turn_left_condition):
-                self.turn_left(turtle, self.get_commands(commands, self.turn_left_condition))
+            if is_any_condition_in_command(command, self.turn_left_condition):
+                self.turn_left(turtle, n_condition_map.get(self.turn_left_condition[0]))
                 self.left_turn_counter += 1
-            if self.is_any_condition_in_command(command, self.turn_right_condition):
-                self.turn_right(turtle, self.get_commands(commands, self.turn_right_condition))
+            if is_any_condition_in_command(command, self.turn_right_condition):
+                self.turn_right(turtle, n_condition_map.get(self.turn_right_condition[0]))
                 self.right_turn_counter += 1
-
         for i in range(self.tree.depth):
             if i != 0:
                 children = []
-                for node in self.tree.treeLists[i-1].nodes:
+                for node in self.tree.treeLists[i - 1].nodes:
                     children.append(node)
                     if len(children) == self.kids:
-                        parent = Node(lineSegment(children[0].value.coordinate_1.clone(),children[self.kids - 1].value.coordinate_2.clone()),children)
+                        parent = Node(lineSegment(children[0].value.coordinate_1.clone(),
+                                                  children[self.kids - 1].value.coordinate_2.clone()), children)
                         self.tree.treeLists[i].append(parent)
                         for child in children:
                             if child.value.new_track:
@@ -61,24 +90,8 @@ class treeFiller:
                         children = []
         self.tree.treeLists.reverse()
 
-
-    def get_commands(self, commands, conditions):
-        command_sum = 0
-        for command in commands:
-            if self.is_any_condition_in_command(command, conditions):
-                command_sum += 1
-        return command_sum
-
-    def is_any_condition_in_command(self, command, conditions):
-        for condition in conditions:
-            if condition not in command:
-                continue
-            return True
-        return False
-
-    def create_node(self, turtle, commands_length):
+    def create_node(self, turtle, commands_length):     # Performance wise, this is by far worst right now.
         colour = self.get_node_colour(commands_length)
-
         turtle.forward(config.step)
         v = lineSegment(self.coordinate_stack.pop().clone(), turtle.coordinate.clone(), colour)
         self.duration_sum += v.duration
@@ -94,7 +107,8 @@ class treeFiller:
         numberOfColors = len(self.colour_list)
 
         if numberOfColors != 0:
-            colorSteps = math.floor(forward_commands_length / numberOfColors) + forward_commands_length % numberOfColors # Number of steps before changing colour.
+            colorSteps = math.floor(
+                forward_commands_length / numberOfColors) + forward_commands_length % numberOfColors  # Number of steps before changing colour.
             if (self.draw_counter % colorSteps == 0) and (len(self.colour_list) != 0):
                 self.color_index += 1
             current_colour = self.colour_list[self.color_index]

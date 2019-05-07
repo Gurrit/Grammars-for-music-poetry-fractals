@@ -20,18 +20,12 @@ class Parser:
         self.right_angles = []
         self.left_angles = []
 
-    def parse(self):
-        self.parser_for_midi()
-
-    #        self.parse_for_turtle()
-
     def parser_for_midi(self, tree, data):
         generator = MIDIGenerator()
         generator.fill_track(tree, data)
         generator.create_midi_file(generate_midi_name(data))
 
     def fill_tree(self, filename, name=None):
-        t1 = (time.time())
         turtle = HiddenTurtle()
         self.tree = TreeList()
         file_reader = GFFileReader()
@@ -46,8 +40,7 @@ class Parser:
         filler.add_modification_lists(
             self.colours, self.left_angles, self.right_angles)
         filler.generate_nodes(commands, turtle, int(commands[0].split(":")[1]))
-        print(time.time() - t1)
-        if not name == None:
+        if name is not None:
             self.trees[name] = self.tree
         return self.tree
 
@@ -56,8 +49,7 @@ class Parser:
         self.tree = self.trees.get(name)
         if self.tree is None or modified:
             self.fill_tree(file, name)
-        commands = [i.value for i in self.tree.treeLists[len(
-            self.tree.treeLists) - 1].nodes]
+        commands = [i.value for i in self.tree.treeLists[len(self.tree.treeLists) - 1].nodes]
         print(time.time() - t1)
         # if these are removed, some very cool results can be had.
         self.colours = []
@@ -66,9 +58,11 @@ class Parser:
         return commands
 
     def find_iteration(self, filename, coord, filename2):
+        print(self.trees)
         tree = self.trees.get(filename)
         tree2 = self.trees.get(filename2)
         searcher = TreeSearcher(tree)
+        print(searcher)
         c = coord.split(",")
         x = int(''.join([i for i in c[0] if i.isdigit()]))
         y = int(''.join([i for i in c[1] if i.isdigit()]))
