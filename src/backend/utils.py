@@ -19,11 +19,11 @@ def generate_new_fractal_file(data):
     iteration = data['iteration']
     gf_file = config.gf_file_path + data['type']
     gf_commands = "import " + gf_file + \
-        ".gf \n l -bracket c(s "       # How should this look?
+        ".gf \n l -bracket c"       # How should this look?
     start_iterations = ""
     for i in range(iteration):
         start_iterations = start_iterations + "(s"
-    gf_commands = gf_commands + start_iterations + " z)"
+    gf_commands = gf_commands + start_iterations + " z"
     end_iterations = ""
     for i in range(iteration):
         end_iterations = end_iterations + ")"

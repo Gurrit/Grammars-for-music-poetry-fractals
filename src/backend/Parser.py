@@ -6,6 +6,7 @@ from HiddenTurtle import *
 from utils import *
 import time
 
+
 class Parser:
 
     def __init__(self):
@@ -36,7 +37,8 @@ class Parser:
         if "kids" in commands[2]:
             self.kids = int(commands[2].split(":")[1])
         filler = treeFiller(self.tree, self.angle, self.kids)
-        filler.add_modification_lists(self.colours, self.left_angles, self.right_angles)
+        filler.add_modification_lists(
+            self.colours, self.left_angles, self.right_angles)
         filler.generate_nodes(commands, turtle, int(commands[0].split(":")[1]))
         if name is not None:
             self.trees[name] = self.tree
@@ -49,7 +51,7 @@ class Parser:
             self.fill_tree(file, name)
         commands = [i.value for i in self.tree.treeLists[len(self.tree.treeLists) - 1].nodes]
         print(time.time() - t1)
-        #if these are removed, some very cool results can be had.
+        # if these are removed, some very cool results can be had.
         self.colours = []
         self.right_angles = []
         self.left_angles = []
