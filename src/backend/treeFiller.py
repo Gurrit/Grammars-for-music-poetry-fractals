@@ -31,7 +31,7 @@ def get_commands(commands, conditions):
 
 class treeFiller:
 
-    def __init__(self, tree, angle, kids, max_duration=16):
+    def __init__(self, tree, angle, kids, max_duration=8):
         self.current_position = Coordinate(0, 0)
         self.coordinate_stack = []
         self.objectStack = []
@@ -88,7 +88,7 @@ class treeFiller:
                         self.duration_sum += parent.value.duration 
                         if self.duration_sum > self.max_duration * 4:
                             self.duration_sum = 0
-                            parent.new_track = True
+                            parent.value.new_track = True
                         children = []
         self.tree.treeLists.reverse()
 
