@@ -12,14 +12,12 @@ function sendfiles(id) {
     fractalopt = getOption("selectFractal1");
     iteropt = getOption("selectIter1");
     data = getOption("selectScale1");
-    //groundnote = getOption("selectNote1");
-    groundnote = "c";
+    groundnote = getOption("selectNote1");
   } else {
     fractalopt = getOption("selectFractal2");
     iteropt = getOption("selectIter1");
     data = getOption("selectScale2");
-    //groundnote = getOption("selectNote1");
-    groundnote = "d";
+    groundnote = getOption("selectNote2");
   }
 
   value = findFractalInSelect(fractalopt);
@@ -35,7 +33,7 @@ function sendfiles(id) {
     return;
   }
 
-  scale = groundnote + " " + data.value;
+  scale = groundnote.value + " " + data.value;
 
   console.log("Skalan: " + data.value);
 

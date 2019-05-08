@@ -58,22 +58,27 @@ class treeFiller:
         self.current_left_angle = 0
 
     # This method is really slow. Takes over 100 seconds on the server to run on sierpinski 7
-    def generate_nodes(self, commands, turtle, iteration):  # self, commands, turtle, filler, iteration):
+    # self, commands, turtle, filler, iteration):
+    def generate_nodes(self, commands, turtle, iteration):
         self.coordinate_stack.append(turtle.coordinate.clone())
-        n_condition_map = map_list_values(self.forward_condition, get_commands(commands, self.forward_condition))
+        n_condition_map = map_list_values(
+            self.forward_condition, get_commands(commands, self.forward_condition))
         n_condition_map = map_list_values(self.turn_left_condition,
                                           get_commands(commands, self.turn_left_condition), n_condition_map)
         n_condition_map = map_list_values(self.turn_right_condition,
                                           get_commands(commands, self.turn_right_condition), n_condition_map)
         for command in commands:
             if is_any_condition_in_command(command, self.forward_condition):
-                self.create_node(turtle, n_condition_map.get(self.forward_condition[0]))
+                self.create_node(turtle, n_condition_map.get(
+                    self.forward_condition[0]))
                 self.draw_counter += 1
             if is_any_condition_in_command(command, self.turn_left_condition):
-                self.turn_left(turtle, n_condition_map.get(self.turn_left_condition[0]))
+                self.turn_left(turtle, n_condition_map.get(
+                    self.turn_left_condition[0]))
                 self.left_turn_counter += 1
             if is_any_condition_in_command(command, self.turn_right_condition):
-                self.turn_right(turtle, n_condition_map.get(self.turn_right_condition[0]))
+                self.turn_right(turtle, n_condition_map.get(
+                    self.turn_right_condition[0]))
                 self.right_turn_counter += 1
         for i in range(self.tree.depth):
             if i != 0:
@@ -85,17 +90,19 @@ class treeFiller:
                         parent = Node(lineSegment(children[0].value.coordinate_1.clone(),
                                                   children[self.kids - 1].value.coordinate_2.clone()), children)
                         self.tree.treeLists[i].append(parent)
-                        self.duration_sum += parent.value.duration 
+                        self.duration_sum += parent.value.duration
                         if self.duration_sum > self.max_duration * 4:
                             self.duration_sum = 0
                             parent.value.new_track = True
                         children = []
         self.tree.treeLists.reverse()
 
-    def create_node(self, turtle, commands_length):     # Performance wise, this is by far worst right now.
+    # Performance wise, this is by far worst right now.
+    def create_node(self, turtle, commands_length):
         colour = self.get_node_colour(commands_length)
         turtle.forward(config.step)
-        v = lineSegment(self.coordinate_stack.pop().clone(), turtle.coordinate.clone(), colour)
+        v = lineSegment(self.coordinate_stack.pop().clone(),
+                        turtle.coordinate.clone(), colour)
         self.duration_sum += v.duration
         if self.duration_sum > self.max_duration * 4:
             self.duration_sum = 0
@@ -105,7 +112,7 @@ class treeFiller:
         self.coordinate_stack.append(turtle.coordinate.clone())
 
     def get_node_colour(self, forward_commands_length):
-        current_colour = "#FFFFFF"
+        current_colour = "#000000"
         numberOfColors = len(self.colour_list)
 
         if numberOfColors != 0:
@@ -122,7 +129,8 @@ class treeFiller:
         numberOfRightAngles = len(self.left_angle_list)
 
         if numberOfRightAngles != 0:
-            leftAngleSteps = math.floor(commands_length / numberOfRightAngles) + commands_length % numberOfRightAngles
+            leftAngleSteps = math.floor(
+                commands_length / numberOfRightAngles) + commands_length % numberOfRightAngles
             # print("LEFTANGLESTEPS: " + str(leftAngleSteps) + "TURN COUNTER: " + str(self.left_turn_counter))
             if (self.left_turn_counter % leftAngleSteps == 0) and (len(self.left_angle_list) != 0):
                 # print("Left loop inside")
@@ -136,7 +144,8 @@ class treeFiller:
         numberOfRightAngles = len(self.right_angle_list)
 
         if numberOfRightAngles != 0:
-            rightAngleSteps = math.floor(commands_length / numberOfRightAngles) + commands_length % numberOfRightAngles
+            rightAngleSteps = math.floor(
+                commands_length / numberOfRightAngles) + commands_length % numberOfRightAngles
             # print("RIGHTANGLESTEPS: " + str(rightAngleSteps) + "TURN COUNTER: " + str(self.right_turn_counter))
             if (self.right_turn_counter % rightAngleSteps == 0) and (len(self.right_angle_list) != 0):
                 # print("RIGHT loop inside")
