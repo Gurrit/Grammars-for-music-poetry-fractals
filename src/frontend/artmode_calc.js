@@ -41,10 +41,6 @@ function startPianoUI() {
   addFractalOptions("selectFractal2");
   hideelement("loadingbar", "display");
   changetext(false);
-
-  $(function() {
-    $('[data-toggle="tooltip"]').tooltip();
-  });
 }
 
 function sendCursorPosition(canvas, event) {
