@@ -67,8 +67,8 @@ class MIDIGenerator:
 
     def set_scale(self, data):
         keys = {"c":0, "c#":1, "d":2, "d#":3, "e":4, "f":5, "f#":6, "g":7, "g#":8, "a":9, "a#":10, "b":11}
-        if "scale" in data:
-            scale = data['scale'].split()
+        if "data" in data:
+            scale = data['data'].split()
             self.key = keys[scale[0]]
             self.reference = 60 + self.key
             self.scale_rule = scale[1]

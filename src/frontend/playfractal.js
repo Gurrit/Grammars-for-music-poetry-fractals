@@ -12,10 +12,14 @@ function sendfiles(id) {
     fractalopt = getOption("selectFractal1");
     iteropt = getOption("selectIter1");
     data = getOption("selectScale1");
+    //groundnote = getOption("selectNote1");
+    groundnote = "c";
   } else {
     fractalopt = getOption("selectFractal2");
     iteropt = getOption("selectIter1");
     data = getOption("selectScale2");
+    //groundnote = getOption("selectNote1");
+    groundnote = "d";
   }
 
   value = findFractalInSelect(fractalopt);
@@ -31,9 +35,11 @@ function sendfiles(id) {
     return;
   }
 
+  scale = groundnote + " " + data.value;
+
   console.log("Skalan: " + data.value);
 
-  msg = toJson(0, data.value, value, "play", iteropt.value);
+  msg = toJson(0, scale, value, "play", iteropt.value);
   console.log("Musikmeddelandet:" + msg);
 
   sendMessage(msg);
