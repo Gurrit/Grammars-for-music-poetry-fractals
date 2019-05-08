@@ -28,8 +28,8 @@ class MIDIGenerator:
         if "iteration" in data:
             iteration = data['iteration']
         tree.visualise()
-        old = tree.get_layer(iteration-1).nodes[0].value
-        for node in tree.get_layer(iteration-1).nodes:
+        old = tree.get_layer(iteration).nodes[0].value
+        for node in tree.get_layer(iteration).nodes:
             new = node.value
             self.add_to_track(old, new)
             old = node.value
