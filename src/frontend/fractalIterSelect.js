@@ -1,13 +1,13 @@
 const fractalList = [];
 
 function createFractalList() {
-  var sierpinski = new optionValue("Sierpinski Triangle", "Sierpinski", 7);
+  var sierpinski = new optionValue("Sierpinski Triangle", "Sierpinski", 8);
   fractalList.push(sierpinski);
-  var dragon = new optionValue("Dragon Curve", "Dragon", 10);
+  var dragon = new optionValue("Dragon Curve", "Dragon", 11);
   fractalList.push(dragon);
-  var gosper = new optionValue("Gosper Curve", "Gosper", 3);
+  var gosper = new optionValue("Gosper Curve", "Gosper", 5);
   fractalList.push(gosper);
-  var koch = new optionValue("Square Koch Snowflake", "Koch", 3);
+  var koch = new optionValue("Square Koch Snowflake", "Koch", 5);
   fractalList.push(koch);
 }
 

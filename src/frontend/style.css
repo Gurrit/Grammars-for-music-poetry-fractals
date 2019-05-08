@@ -117,6 +117,13 @@ body {
   width: 13vw;
 }
 
+#selectNote1,
+#selectNote2 {
+  background-color: #a196cc;
+  color: white;
+  width: 5vw;
+}
+
 .boxtext {
   font-size: 12px;
 }
@@ -255,13 +262,13 @@ body {
   /*border: 2px solid white;*/
   border-radius: 5px;
   left: 10;
-  background-color: black;
+  background-color: white;
 }
 
 #canvas2 {
   /*border: 2px solid white;*/
   border-radius: 5px;
-  background-color: black;
+  background-color: white;
   right: 10;
 }
 

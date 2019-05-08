@@ -71,3 +71,12 @@ function showelement(id, format) {
     x.style.visbility = "initial";
   }
 }
+
+function showorhidepic() {
+  helpimage = document.getElementById("pianohelp");
+  if (helpimage.style.display == "inline-block") {
+    hideelement("pianohelp", "display");
+  } else {
+    showelement("pianohelp", "display");
+  }
+}
