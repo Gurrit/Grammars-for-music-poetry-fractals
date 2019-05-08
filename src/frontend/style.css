@@ -255,13 +255,13 @@ body {
   /*border: 2px solid white;*/
   border-radius: 5px;
   left: 10;
-  background-color: black;
+  background-color: white;
 }
 
 #canvas2 {
   /*border: 2px solid white;*/
   border-radius: 5px;
-  background-color: black;
+  background-color: white;
   right: 10;
 }
 
