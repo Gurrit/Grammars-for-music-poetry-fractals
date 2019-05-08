@@ -15,6 +15,7 @@ function connectToServer(canvases) {
     if (event.data instanceof Blob) {
       // Checks if type is of blob, then it is an image.
       setFileURL(event.data);
+      return;
     }
     let message = JSON.parse(event.data);
     map_messages(message);
