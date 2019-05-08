@@ -22,14 +22,7 @@
   />
 </head>
 
-<script src="fractalIterSelect.js"></script>
-<script src="artmode_calc.js"></script>
-<script src="drawer.js"></script>
-<script src="turtlecanvas.js"></script>
-<script src="playfractal.js"></script>
-<script src="connector.js"></script>
-<script src="ownJSON.js"></script>
-<script src="./bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 <script
   src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
   integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -40,7 +33,16 @@
   integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
   crossorigin="anonymous"
 ></script>
+<script src="./bootstrap-4.3.1-dist/js/bootstrap.bundle.min.js"></script>
 <script src="./bootstrap-4.3.1-dist/js/bootstrap.bundle.js"></script>
+<script src="./bootstrap-4.3.1-dist/js/bootstrap.min.js"></script>
+<script src="fractalIterSelect.js"></script>
+<script src="artmode_calc.js"></script>
+<script src="drawer.js"></script>
+<script src="turtlecanvas.js"></script>
+<script src="playfractal.js"></script>
+<script src="connector.js"></script>
+<script src="ownJSON.js"></script>
 
 <nav class="navbar navbar-expand-lg navbar-light navcolor navfont">
   <a class="navbar-brand navfont" href="index.html"
@@ -66,7 +68,7 @@
       </li>
       <li class="nav-item active navfont">
         <a class="nav-link navfont" href="info.html"
-          >Info<span class="sr-only"></span
+          >Resources<span class="sr-only"></span
         ></a>
       </li>
     </ul>
@@ -75,42 +77,62 @@
 
 <body onload="startPianoUI()">
 
+  <script>jQuery(document).ready(function($) {
+       $('[data-toggle="tooltip"]').tooltip()
+    });
+
+  
+    </script>
+
   <title>Fractal Fun</title>
   
   <div class="card mb-3" style="max-width: 100%;">
     <div class="row no-gutters">
       <div class="col-md-2">
         <div class="card-body">
-          <h5 class="card-title">FRACTAL 1</h5>
+          <h5 class="card-title">FRACTAL 1: Draw</h5>
           <p class="boxtext">
-            Choose Fractal to draw:
+            Choose Fractal:
           </h8>
             <select
               id="selectFractal1"
               class="fractalbox form-control"
               onchange="selected(id)"
+              data-toggle="tooltip" data-placement="right" title="Choose a fractal to draw in the left canvas."
             >
             </select>
           <p class="boxtext">
             Choose Iteration:
           </h8>
-            <select id="selectIter1" class="fractalbox form-control">
+            <select id="selectIter1" class="fractalbox form-control" 
+            data-toggle="tooltip" data-placement="right" title="The higher iteration, the more complex fractal.">
               <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+
             </select>
           
         </div>
         <ul class="list-group list-group-flush">
           <li class="list-group-item">
+              <h5 class="card-title">Music</h5>
             <p class="boxtext">
-              Choose what key note to play Fractal 1 in:
+              Choose key note:
             </h8>
             <select
                 id="selectNote1"
                 class="fractalbox form-control"
+                data-toggle="tooltip" data-placement="right" title="Decide the overall notes of the generated music.">
               >
                 <option value="c">c</option>
                 <option value="c#">c#</option>
-                <option value="d">d#</option>
+                <option value="d">d</option>
+                <option value="d#">d#</option>
                 <option value="e">e</option>
                 <option value="f">f</option>
                 <option value="f#">f#</option>
@@ -121,9 +143,10 @@
                 <option value="b">b</option>
               </select>
               <p class="boxtext">
-                Choose what scale to play Fractal 1 in:
+                Choose scale:
               </h8>
-              <select id="selectScale1" class="fractalbox form-control">
+              <select id="selectScale1" class="fractalbox form-control"
+              data-toggle="tooltip" data-placement="right" title="Decides what scale the generated music will be played in.">
                 <option value="major">Major</option>
                 <option value="minor">Minor</option>
                 <option value="minor_harmonic">Minor Harmonic</option>
@@ -165,8 +188,8 @@
       </div>
       <div class="col-md-2">
         <div class="card-body">
-          <h5 class="card-title">FRACTAL 2</h5>
-          <p class="boxtext">Choose Fractal to draw and translate to:</h8>
+          <h5 class="card-title">FRACTAL 2: Draw</h5>
+          <p class="boxtext">Choose Fractal:</h8>
           <select
             id="selectFractal2"
             class="fractalbox form-control"
@@ -176,8 +199,9 @@
         </div>
         <ul class="list-group list-group-flush">
           <li class="list-group-item margin-fix ">
+            <h5 class="margin-fix-2" >Music</h5>
             <p class="margin-fix-2 boxtext">
-              Choose what scale to play Fractal 2 in:
+              Choose key note:
             </h8>
             <select
                 id="selectNote2"
@@ -185,7 +209,8 @@
               >
                 <option value="c">c</option>
                 <option value="c#">c#</option>
-                <option value="d">d#</option>
+                <option value="d">d</option>
+                <option value="d#">d#</option>
                 <option value="e">e</option>
                 <option value="f">f</option>
                 <option value="f#">f#</option>
@@ -195,6 +220,9 @@
                 <option value="a#">a#</option>
                 <option value="b">b</option>
               </select>
+              <p class="margin-fix-2 boxtext">
+                Choose scale:
+              </h8>
               <select
                 id="selectScale2"
                 class="fractalbox form-control"
@@ -226,7 +254,7 @@
               class="btn btn-primary btn-lg"
               id="generate"
               onclick="sendNotes(), startedLoadingBtn()"
-              data-toggle="tooltip" data-placement="right"
+              
             >
             <span id="loadingbar" class="spinner-border spinner-border-sm hidden" role="status" aria-hidden="true" ></span>
               <div id="buttontext" aria-hidden="true"></div>
@@ -238,7 +266,6 @@
         </ul>
       </div>
     </div>
-
     <div class="resetcontainer">
       <div id="playedNotes" class="left">
         <p id="notesText"></p>

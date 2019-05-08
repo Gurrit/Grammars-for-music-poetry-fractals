@@ -10,6 +10,10 @@
   color: white !important;
 }
 
+.backgroundh {
+  background-color: #ffffff !important;
+}
+
 .navfont {
   color: white !important;
   font: bold !important;
@@ -29,6 +33,10 @@ a {
   font-family: Avant Garde, Avantgarde, Century Gothic, CenturyGothic,
     AppleGothic, sans-serif !important;
   color: black;
+}
+
+title {
+  font-size: 1px !important;
 }
 
 button,
@@ -192,8 +200,11 @@ body {
 }
 
 .wrapper {
+  overflow: hidden;
+}
+
+.float {
   float: left;
-  width: 50%;
 }
 
 .left {
@@ -278,10 +289,25 @@ body {
 }
 
 .listenimage {
-  width: 3vw;
-  height: 3vw;
+  width: 2vw;
+  height: 2vw;
 }
 
 .listenimage:hover {
   cursor: pointer;
+}
+
+#musicloading1,
+#musicloading2 {
+  width: 1.6vw;
+  height: 1.6vw;
+}
+
+.tooltip > .tooltip-inner {
+  background-color: #4e4087;
+  color: #ffffff;
+  font-family: Avant Garde, Avantgarde, Century Gothic, CenturyGothic,
+    AppleGothic, sans-serif !important;
+  padding: 5px;
+  font-size: 10px;
 }
