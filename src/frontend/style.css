@@ -283,7 +283,6 @@ body {
   right: 10;
 }
 
-#canvas2:hover,
 #canvas1:hover {
   cursor: crosshair;
 }

@@ -45,6 +45,7 @@
 <script src="ownJSON.js"></script>
 
 <nav class="navbar navbar-expand-lg navbar-light navcolor navfont">
+  <img src="./images/mrFractalblack.png" style="width:50px; height:40px; padding-right: 10px">
   <a class="navbar-brand navfont" href="index.html"
   >Fractal-O-Mat</a
   >
@@ -127,7 +128,7 @@
             <select
                 id="selectNote1"
                 class="fractalbox form-control"
-                data-toggle="tooltip" data-placement="right" title="Decide the overall notes of the generated music.">
+                data-toggle="tooltip" data-placement="right" title="Decides the overall notes of the generated music.">
               >
                 <option value="c">c</option>
                 <option value="c#">c#</option>
@@ -194,6 +195,7 @@
             id="selectFractal2"
             class="fractalbox form-control"
             onchange="selected(id)"
+            data-toggle="tooltip" data-placement="left" title="Choose a fractal to draw in the right canvas."
           >
           </select>
         </div>
@@ -206,6 +208,7 @@
             <select
                 id="selectNote2"
                 class="fractalbox form-control"
+                data-toggle="tooltip" data-placement="left" title="Decides the overall notes of the generated music."
               >
                 <option value="c">c</option>
                 <option value="c#">c#</option>
@@ -226,6 +229,7 @@
               <select
                 id="selectScale2"
                 class="fractalbox form-control"
+                data-toggle="tooltip" data-placement="left" title="Decides what scale the generated music will be played in."
               >
                 <option value="major">Major</option>
                 <option value="minor">Minor</option>
@@ -281,7 +285,7 @@
       <div class="col-md-2"></div>
       <div class="col-md-8">
         <div class="piano-content" style="position: absolute; z-index: 1;">
-          <img id="pianohelp" src="./images/pianomedbok.png" style="position: absolute; z-index: 5; width:850px; height:104px;">
+          <img id="pianohelp" src="./images/pianomedbok.png" style="position: absolute; z-index: 5; width:850px; height:104px; display: none;">
           <div id="content-inner">
             <div class="pianoclass" id="piano"></div>
           </div>
@@ -292,7 +296,6 @@
           <img id="help_piano" class="hidden" src="./images/piano.png" />
         </div>
       </div>
-      <div class="col-md-2"></div>
     </div>
   </div>
   <script>
