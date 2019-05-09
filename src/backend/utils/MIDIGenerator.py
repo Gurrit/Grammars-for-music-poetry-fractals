@@ -15,7 +15,7 @@ class MIDIGenerator:
         self.reference = 60 + self.key
         self.pitch = self.reference
         self.scale_rule = ""
-        self.MyMIDI = MIDIFile(80)  # 80 tracks are allowed
+        self.MyMIDI = MIDIFile(160)  # 80 tracks are allowed
 
     def create_midi_file(self, file_name = "turtle.mid"):
         # Create the file
@@ -46,12 +46,13 @@ class MIDIGenerator:
         self.begin_track(0)
 
     def begin_track(self, track):
+        print(track)
         self.time = 0
         self.track = track
         self.MyMIDI.addTempo(track, self.time, self.tempo) 
 
     def add_to_track(self, old_lineSegment, new_lineSegment):
-        delta = new_lineSegment.angle - old_lineSegment.angle
+        delta = round(new_lineSegment.angle - old_lineSegment.angle)
         if abs(delta) > 180:
             delta -= 360 * delta / abs(delta)
         self.pitch += int((delta)/30)
@@ -92,7 +93,7 @@ class MIDIGenerator:
 
     def fit_pitch(self, allowed_tones=range(12)):
         i = 0
-        while ((self.pitch - i - self.key) % 12) not in allowed_tones:
+        while ((self.pitch - self.key) % 12) not in allowed_tones:
             if ((self.pitch - (i+1) - self.key) % 12) in allowed_tones:
                 self.pitch -= i+1
             elif ((self.pitch + (i+1) - self.key) % 12) in allowed_tones:
