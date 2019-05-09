@@ -1,8 +1,6 @@
-import time
-
-from lineSegment import *
-from treeList import *
-from config import *
+from fractal_generation.LineSegment import *
+from fractal_generation.TreeList import *
+from Config import *
 
 
 def is_any_condition_in_command(command, conditions):
@@ -15,7 +13,7 @@ def is_any_condition_in_command(command, conditions):
 
 def map_list_values(lst, command, mapped_values=None):
     if mapped_values is None:
-        mapped_values = {}      # Python convention
+        mapped_values = {}  # Python convention
     for val in lst:
         mapped_values[val] = command
     return mapped_values
@@ -29,7 +27,7 @@ def get_commands(commands, conditions):
     return command_sum
 
 
-class treeFiller:
+class TreeFiller:
 
     def __init__(self, tree, angle, kids, max_duration=8):
         self.current_position = Coordinate(0, 0)
@@ -87,7 +85,7 @@ class treeFiller:
                 for node in self.tree.treeLists[i - 1].nodes:
                     children.append(node)
                     if len(children) == self.kids:
-                        parent = Node(lineSegment(children[0].value.coordinate_1.clone(),
+                        parent = Node(LineSegment(children[0].value.coordinate_1.clone(),
                                                   children[self.kids - 1].value.coordinate_2.clone()), children)
                         self.tree.treeLists[i].append(parent)
                         self.duration_sum += parent.value.duration
@@ -100,8 +98,8 @@ class treeFiller:
     # Performance wise, this is by far worst right now.
     def create_node(self, turtle, commands_length):
         colour = self.get_node_colour(commands_length)
-        turtle.forward(config.step)
-        v = lineSegment(self.coordinate_stack.pop().clone(),
+        turtle.forward(Config.step)
+        v = LineSegment(self.coordinate_stack.pop().clone(),
                         turtle.coordinate.clone(), colour)
         self.duration_sum += v.duration
         if self.duration_sum > self.max_duration * 4:
@@ -113,12 +111,12 @@ class treeFiller:
 
     def get_node_colour(self, forward_commands_length):
         current_colour = "#000000"
-        numberOfColors = len(self.colour_list)
+        number_of_colors = len(self.colour_list)
 
-        if numberOfColors != 0:
-            colorSteps = math.floor(
-                forward_commands_length / numberOfColors) + forward_commands_length % numberOfColors  # Number of steps before changing colour.
-            if (self.draw_counter % colorSteps == 0) and (len(self.colour_list) != 0):
+        if number_of_colors != 0:
+            color_steps = math.floor(
+                forward_commands_length / number_of_colors) + forward_commands_length % number_of_colors  # Number of steps before changing colour.
+            if (self.draw_counter % color_steps == 0) and (len(self.colour_list) != 0):
                 self.color_index += 1
             current_colour = self.colour_list[self.color_index]
 
@@ -126,13 +124,13 @@ class treeFiller:
 
     def turn_left(self, turtle, commands_length):
         self.current_left_angle = int(self.angle)
-        numberOfRightAngles = len(self.left_angle_list)
+        number_of_right_angles = len(self.left_angle_list)
 
-        if numberOfRightAngles != 0:
-            leftAngleSteps = math.floor(
-                commands_length / numberOfRightAngles) + commands_length % numberOfRightAngles
+        if number_of_right_angles != 0:
+            left_angle_steps = math.floor(
+                commands_length / number_of_right_angles) + commands_length % number_of_right_angles
             # print("LEFTANGLESTEPS: " + str(leftAngleSteps) + "TURN COUNTER: " + str(self.left_turn_counter))
-            if (self.left_turn_counter % leftAngleSteps == 0) and (len(self.left_angle_list) != 0):
+            if (self.left_turn_counter % left_angle_steps == 0) and (len(self.left_angle_list) != 0):
                 # print("Left loop inside")
                 self.left_angle_index += 1
             self.current_left_angle = self.left_angle_list[self.left_angle_index]
@@ -160,7 +158,7 @@ class treeFiller:
             for node in self.tree.treeLists[i - 1].nodes:
                 children.append(node)
                 if len(children) == self.kids:
-                    parent = Node(lineSegment(children[0].value.coordinate_1.clone(),
+                    parent = Node(LineSegment(children[0].value.coordinate_1.clone(),
                                               children[self.kids - 1].value.coordinate_2.clone()), children)
                     self.tree.treeLists[i].append(parent)
                     for child in children:

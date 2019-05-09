@@ -1,9 +1,9 @@
-from TreeSearcher import TreeSearcher
-from GFFileReader import *
-from MIDIGenerator import *
-from treeFiller import *
-from HiddenTurtle import *
-from utils import *
+from fractal_generation.TreeSearcher import TreeSearcher
+from utils.MIDIGenerator import *
+from fractal_generation.TreeFiller import *
+from fractal_generation.HiddenTurtle import *
+from utils.GFFileReader import *
+from utils.GenerationUtils import *
 import time
 
 
@@ -28,15 +28,14 @@ class Parser:
     def fill_tree(self, filename, name=None):
         turtle = HiddenTurtle()
         self.tree = TreeList()
-        file_reader = GFFileReader()
-        commands = file_reader.read_gf_file(filename)
+        commands = read_gf_file(filename)
         if "S" in commands[0]:  # Fix this to not be hardcoded
             self.tree.add_new_iteration(int(commands[0].split(":")[1]))
         if "ang" in commands[1]:
             self.angle = int(commands[1].split(":")[1])
         if "kids" in commands[2]:
             self.kids = int(commands[2].split(":")[1])
-        filler = treeFiller(self.tree, self.angle, self.kids)
+        filler = TreeFiller(self.tree, self.angle, self.kids)
         filler.add_modification_lists(
             self.colours, self.left_angles, self.right_angles)
         filler.generate_nodes(commands, turtle, int(commands[0].split(":")[1]))
@@ -58,6 +57,8 @@ class Parser:
         return commands
 
     def find_iteration(self, filename, coord, filename2):
+        print(filename)
+        print(filename2)
         print(self.trees)
         tree = self.trees.get(filename)
         tree2 = self.trees.get(filename2)
