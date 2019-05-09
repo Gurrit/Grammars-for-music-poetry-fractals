@@ -1,0 +1,2 @@
+import ./files/gf/Koch.gf 
+ l -bracket c( s( z)) | wf -file=files/fractals/Koch1.txt

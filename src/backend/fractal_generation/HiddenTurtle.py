@@ -1,5 +1,4 @@
-from lineSegment import *
-from math import *
+from fractal_generation.LineSegment import *
 
 
 class HiddenTurtle:

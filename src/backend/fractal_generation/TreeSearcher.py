@@ -1,6 +1,3 @@
-from treeList import *
-from lineSegment import *
-
 class TreeSearcher:
     def __init__(self, tree):
         self.tree = tree
