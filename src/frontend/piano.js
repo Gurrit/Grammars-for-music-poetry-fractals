@@ -37,10 +37,10 @@ var noteArray = [];
     23: "highb"
   };
 
-  var notesOffset = 0;
-  var mouseOffset = 12;
+  let notesOffset = 0;
+  let mouseOffset = 12;
 
-  var blackKeys = {
+  let blackKeys = {
     1: 1,
     3: 3,
     6: 1,
@@ -55,11 +55,11 @@ var noteArray = [];
     return blackKeys[(i % 12) + (i < 0 ? 12 : 0)] || "";
   }
 
-  var $keys = $("<div>", { class: "keys" }).appendTo("#piano");
+  let $keys = $("<div>", { class: "keys" }).appendTo("#piano");
 
-  var buildingPiano = false;
+  let buildingPiano = false;
 
-  var isIos = navigator.userAgent.match(/(iPhone|iPad)/i);
+  let isIos = navigator.userAgent.match(/(iPhone|iPad)/i);
 
   function buildPiano() {
     if (buildingPiano) return;
@@ -69,14 +69,14 @@ var noteArray = [];
     $keys.empty().off(".play");
 
     function addKey(i) {
-      var dataURI = isIos ? "" : Notes.getDataURI(i);
+      let dataURI = isIos ? "" : Notes.getDataURI(i);
 
       // trick to deal with note getting hit multiple times before finishing...
-      var sounds = [new Audio(dataURI), new Audio(dataURI), new Audio(dataURI)];
-      var curSound = 0;
-      var pressedTimeout;
+      let sounds = [new Audio(dataURI), new Audio(dataURI), new Audio(dataURI)];
+      let curSound = 0;
+      let pressedTimeout;
       dataURI = null;
-      function play(evt) {
+      function play() {
         // sound
         sounds[curSound].pause();
         try {
@@ -98,12 +98,12 @@ var noteArray = [];
         }, 200);
       }
       $keys.on("note-" + i + ".play", play);
-      var $key = $("<div>", {
+      $("<div>", {
         class: "key" + blackKeyClass(i),
         "data-key": i,
         mousedown: function(evt) {
           console.log(
-            "Key pressed by mouse, index: " +
+              "Key pressed by mouse, index: " +
               i +
               "NOTE: " +
               intToNotes[i + mouseOffset]
@@ -118,7 +118,7 @@ var noteArray = [];
     // delayed for-loop to stop browser from crashing :'(
     // go slower on Chrome...
 
-    var i = -12,
+    let i = -12,
       max = 12,
       addDelay = /Chrome/i.test(navigator.userAgent) ? 80 : 0;
     (function go() {
@@ -144,13 +144,13 @@ var noteArray = [];
   }
 
   $.each(["volume", "style"], function(i, setting) {
-    var $opts = $("<div>", {
+    let $opts = $("<div>", {
       class: "opts",
       html: "<p><strong>" + camelToText(setting) + ":</strong></p>"
     }).appendTo("#synth-settings");
 
     $.each(DataGenerator[setting], function(name, fn) {
-      if (name != "default") {
+      if (name !== "default") {
         $("<p>")
           .append(
             $("<a>", {
@@ -161,7 +161,7 @@ var noteArray = [];
                 evt.preventDefault();
                 DataGenerator[setting].default = fn;
                 buildPiano();
-                var $this = $(this);
+                let $this = $(this);
                 $this
                   .closest(".opts")
                   .find(".selected")
@@ -179,7 +179,7 @@ var noteArray = [];
   // Setup keyboard interaction
   //
 
-  var keyToCodes = {
+  let keyToCodes = {
     // Low octave
     /*z*/ z: 122, // c
     /*s*/ s: 115, // c#
@@ -209,7 +209,7 @@ var noteArray = [];
     /* Control */ Control : 1000
   };
 
-  var keyNotes = {
+  const keyNotes = {
     // Low octave
     /*z*/ 122: 0, // c
     /*s*/ 115: 1, // c#
@@ -238,22 +238,22 @@ var noteArray = [];
     /*p*/ 112: 23 // b
   };
 
-  var notesShift = -12;
-  var downKeys = {};
-  var ctrlDown = 0
+  let notesShift = -12;
+  const downKeys = {};
+  let ctrlDown = 0;
 
   $(window)
     .keydown(function(evt) {
-      var keyTone = evt.key;
-      var keyCode = keyToCodes[keyTone];
+      const keyTone = evt.key;
+      const keyCode = keyToCodes[keyTone];
 
-      if(keyTone == "Control"){
+      if(keyTone === "Control"){
         ctrlDown = 1
       }
 
       if (!downKeys[keyCode] && !ctrlDown) {
         downKeys[keyCode] = 1;
-        var key = keyNotes[keyCode];
+        const key = keyNotes[keyCode];
         // console.log("Trigger     Keyboard: " + evt.key + "     Keycode: " + keyCode + "     key: " + key);
         if (typeof key != "undefined") {
           noteArray.push(intToNotes[key]);
@@ -261,21 +261,21 @@ var noteArray = [];
           // console.log(noteArray)
           $keys.trigger("note-" + (key + notesShift + notesOffset) + ".play");
           evt.preventDefault();
-        } else if (keyCode == 188) {
+        } else if (keyCode === 188) {
           notesShift = -12;
-        } else if (keyCode == 190) {
+        } else if (keyCode === 190) {
           notesShift = 0;
-        } else if (keyCode == 37 || keyCode == 39) {
-          notesOffset += (keyCode == 37 ? -1 : 1) * 12;
+        } else if (keyCode === 37 || keyCode === 39) {
+          notesOffset += (keyCode === 37 ? -1 : 1) * 12;
           buildPiano();
         }
       }
     })
     .keyup(function(evt) {
-      var keyTone = evt.key;
-      var keyCode = keyToCodes[keyTone];
+      const keyTone = evt.key;
+      const keyCode = keyToCodes[keyTone];
 
-      if(keyTone == "Control"){
+      if(keyTone === "Control"){
         ctrlDown = 0
       }
 
@@ -286,13 +286,13 @@ var noteArray = [];
   // Help controls
   //
 
-  var $help = $(".help");
+  const $help = $(".help");
 
-  var qTimeout,
-    qCanToggle = true;
+  let qTimeout,
+      qCanToggle = true;
   $(window).keypress(function(evt) {
     // trigger help when ? is pressed, but make sure it doesn't repeat crazy
-    if (evt.which == 63 || evt.which == 48) {
+    if (evt.which === 63 || evt.which === 48) {
       window.clearTimeout(qTimeout);
       qTimeout = window.setTimeout(function() {
         qCanToggle = true;
@@ -310,8 +310,8 @@ var noteArray = [];
 
   // prevent quick find...
   $(window).keydown(function(evt) {
-    if (evt.target.nodeName != "INPUT" && evt.target.nodeName != "TEXTAREA") {
-      if (evt.key == "single quote") {
+    if (evt.target.nodeName !== "INPUT" && evt.target.nodeName !== "TEXTAREA") {
+      if (evt.key === "single quote") {
         evt.preventDefault();
         return false;
       }

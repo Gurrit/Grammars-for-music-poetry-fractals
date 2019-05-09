@@ -3,7 +3,7 @@ canvplay = "";
 function finishedLoadingBtn() {
   //for the "generete fractal"-button
   changetext(false);
-  hideelement("loadingbar", "display");
+  hideElement("loadingbar", "display");
 }
 
 function startedLoadingBtn() {
@@ -15,20 +15,19 @@ function startedLoadingBtn() {
 function finishedmusic() {
   id = getCurrentPlay();
   showelement(id, "display");
-  if (id == "canv2play") {
-    hideelement("musicloading2", "display");
-  } else if (id == "canv1play") {
-    hideelement("musicloading1", "display");
+  if (id === "canv2play") {
+    hideElement("musicloading2", "display");
+  } else if (id === "canv1play") {
+    hideElement("musicloading1", "display");
   }
 }
 
 function hidemusic(id) {
-  hideelement(id, "display");
+  hideElement(id, "display");
   setCurrentPlay(id);
-  console.log(id);
-  if (id == "canv1play") {
+  if (id === "canv1play") {
     showelement("musicloading1", "display");
-  } else if (id == "canv2play") {
+  } else if (id === "canv2play") {
     showelement("musicloading2", "display");
   }
 }
@@ -38,21 +37,21 @@ function getCurrentPlay() {
 }
 
 function setCurrentPlay(id) {
-  canvplay = id;
+  let canvplay = id;
 }
-function hideelement(id, format) {
+function hideElement(id, format) {
   //visbility for text, and display for divs and such
-  var x = document.getElementById(id);
+  let x = document.getElementById(id);
 
-  if (format == "display") {
+  if (format === "display") {
     x.style.display = "none";
-  } else if (format == "visibility") {
+  } else if (format === "visibility") {
     x.style.visbility = "hidden";
   }
 }
 
 function changetext(loading) {
-  var btntext = document.getElementById("buttontext");
+  let btntext = document.getElementById("buttontext");
 
   if (loading) {
     btntext.innerText = "Loading";
@@ -63,19 +62,19 @@ function changetext(loading) {
 
 function showelement(id, format) {
   //visbility for text, and display for divs and such
-  var x = document.getElementById(id);
+  let x = document.getElementById(id);
 
-  if (format == "display") {
+  if (format === "display") {
     x.style.display = "inline-block";
-  } else if (format == "visibility") {
+  } else if (format === "visibility") {
     x.style.visbility = "initial";
   }
 }
 
 function showorhidepic() {
-  helpimage = document.getElementById("pianohelp");
-  if (helpimage.style.display == "inline-block") {
-    hideelement("pianohelp", "display");
+  let helpimage = document.getElementById("pianohelp");
+  if (helpimage.style.display === "inline-block") {
+    hideElement("pianohelp", "display");
   } else {
     showelement("pianohelp", "display");
   }

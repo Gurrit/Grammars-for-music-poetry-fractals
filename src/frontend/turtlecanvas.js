@@ -1,12 +1,12 @@
-const canvasturtlelist = [];
+const canvasTurtleList = [];
 
-class TurtleCanvasobj {
-  constructor(canvas) {
+class TurtleCanvasObj {
+  constructor(canvasObject) {
     //creating objects consisting of a new turtle and the corresponding canvas
-    let canvasen = document.getElementById(canvas);
-    let drawer = new CreateDrawer(canvasen);
+    let canvas = document.getElementById(canvasObject);
+    let drawer = new CreateDrawer(canvas);
     let self = this;
-    this.canvasen = canvasen;
+    this.canvasen = canvas;
     this.turtlen = drawer;
     return self;
   }
@@ -14,17 +14,9 @@ class TurtleCanvasobj {
 
 function getTurtle(canvas) {
   //get the turtle corresponding to canvas
-  console.log(canvasturtlelist);
-  for (index in canvasturtlelist) {
-    if (canvasturtlelist[index].canvasen === canvas) {
-      return canvasturtlelist[index].turtlen;
+  for (let index in canvasTurtleList) {
+    if (canvasTurtleList[index].canvasen === canvas) {
+      return canvasTurtleList[index].turtlen;
     }
   }
-}
-
-function changecolor() {
-  console.log("byter färg?");
-  canvas = document.getElementById("canvas1");
-  let context = canvas.getContext("2d");
-  context.strokeStyle = "#FF0000";
 }

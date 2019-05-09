@@ -5,8 +5,8 @@ function sendNotes() {
     document.getElementById("canvas1"),
     document.getElementById("canvas2")
   ];
-  type = "draw";
-  var value = "";
+  let type = "draw";
+  let value = "";
   for (canvas in canvases) {
     for (index in fractalList) {
       if (fractalList[index].text === optionFracs[canvas].value) {
@@ -18,7 +18,7 @@ function sendNotes() {
     if (noteArray.length !== 0) {
       type = "piano";
     }
-    msg = toJson(canvas, noteArray, value, type, optionIter1.value);
+    let msg = toJson(canvas, noteArray, value, type, optionIter1.value);
     sendMessage(msg);
     console.log(msg);
   }
@@ -32,22 +32,22 @@ function resetPiano() {
 
 function startPianoUI() {
   createFractalList();
-  let turtcanv1 = new TurtleCanvasobj("canvas1");
-  let turtcanv2 = new TurtleCanvasobj("canvas2");
-  canvasturtlelist.push(turtcanv1);
-  canvasturtlelist.push(turtcanv2);
+  let turtcanv1 = new TurtleCanvasObj("canvas1");
+  let turtcanv2 = new TurtleCanvasObj("canvas2");
+  canvasTurtleList.push(turtcanv1);
+  canvasTurtleList.push(turtcanv2);
   connectToServer([turtcanv1, turtcanv2]);
   addFractalOptions("selectFractal1");
   addFractalOptions("selectFractal2");
-  hideelement("loadingbar", "display");
+  hideElement("loadingbar", "display");
   changetext(false);
 }
 
 function sendCursorPosition(canvas, event) {
   //should probably not be hardcoded
-  let drawer = canvasturtlelist[0].turtlen;
-  let fromFractal = canvasturtlelist[0].turtlen.fractal;
-  let toFractal = canvasturtlelist[1].turtlen.fractal;
+  let drawer = canvasTurtleList[0].turtlen;
+  let fromFractal = canvasTurtleList[0].turtlen.fractal;
+  let toFractal = canvasTurtleList[1].turtlen.fractal;
   if (fromFractal === null || toFractal === null) {
     alert("something has gone wrong, not sending the message");
     return;
@@ -65,16 +65,16 @@ function sendCursorPosition(canvas, event) {
 
 function getCursorPosition(canvas, event, transformation) {
   //get the position of the cursor on the canvas
-  var rect = canvas.getBoundingClientRect();
-  var x =
+  let rect = canvas.getBoundingClientRect();
+  let x =
     (event.clientX - rect.left - rect.width / 2) / transformation.scale -
     transformation.position.x;
-  var y =
+  let y =
     (event.clientY - rect.top - rect.height / 2) / transformation.scale -
     transformation.position.y;
   console.log(x);
   console.log(y);
-  var str = "x:" + x + "," + "y:" + y;
+  let str = "x:" + x + "," + "y:" + y;
 
   console.log("'{" + str + "}'");
   return "'{" + str + "}'";
