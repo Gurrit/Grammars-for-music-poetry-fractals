@@ -37,7 +37,7 @@ function getCurrentPlay() {
 }
 
 function setCurrentPlay(id) {
-  let canvplay = id;
+  canvplay = id;
 }
 function hideElement(id, format) {
   //visbility for text, and display for divs and such
