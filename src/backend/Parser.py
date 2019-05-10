@@ -64,9 +64,14 @@ class Parser:
         x = int(''.join([i for i in c[0] if i.isdigit()]))
         y = int(''.join([i for i in c[1] if i.isdigit()]))
         from_layer = searcher.closest_iteration(Coordinate(x, y))
-        layer = tree2.get_layer(from_layer.layerIndex)
+        print("from_layer: " + from_layer.to_string())
+        print("from_layer: " + str(from_layer.layerIndex))
+
+        layer = tree2.get_layer(tree2.depth - from_layer.layerIndex - 1)
         commands = [i.value for i in layer.nodes]
         origin_commands = [i.value for i in from_layer.nodes]
+        print("layer: " + str(layer.layerIndex))
+        print("layer: " + layer.to_string())
         return [commands, origin_commands]
 
     def add_modification_lists(self, colours, left_angles, right_angles):
