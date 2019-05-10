@@ -2,6 +2,7 @@ function CreateDrawer(canvas) {
   let self = this;
   self.fractal = null;
   self.drawings = [];
+  self.tempDrawings = [];
   self.penWidth = 1;
   self.context = canvas.getContext("2d");
   self.height = canvas.height;
@@ -27,6 +28,7 @@ function CreateDrawer(canvas) {
 
   self.reset = function() {
     self.drawings = [];
+    self.tempDrawings = [];
     self.context.setTransform(1, 0, 0, 1, self.width / 2, self.height / 2);
     self.transformation = null;
     self.context.fillStyle = "rgb(0, 0, 0,1)";
@@ -38,18 +40,21 @@ function CreateDrawer(canvas) {
     );
     self.context.beginPath();
   };
+
   self.redraw = function() {
     self.context.lineWidth = self.penWidth;
-    for (let drawing in self.drawings) {
-      let c1 = self.drawings[drawing].c1;
-      let c2 = self.drawings[drawing].c2;
-      let color = self.drawings[drawing].color;
+    let dr = self.drawings.slice().concat(self.tempDrawings);
+    console.log(dr);
+    for (let drawing in dr) {
+      let c1 = dr[drawing].c1;
+      let c2 = dr[drawing].c2;
+      let color = dr[drawing].color;
       self.draw(c1, c2, color);
     }
     self.context.stroke();
   };
+
   self.scaleToSize = function() {
-    // Make sure efficiency.
     let maxX = Math.max.apply(
       null,
       self.drawings.map(a => (a.c2.x > a.c1.x ? a.c2.x : a.c1.x))
@@ -81,8 +86,13 @@ function CreateDrawer(canvas) {
     console.log("has drawn the image");
     finishedLoadingBtn();
   };
+
   self.saveFractal = function(name, iteration) {
     self.fractal = new Fractal(name, iteration);
+  };
+
+  self.saveNewTranslatedLine = function (coordinate1, coordinate2, color) {
+    self.tempDrawings.push(new Line(coordinate1, coordinate2, color));
   };
   return self;
 }
