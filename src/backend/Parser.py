@@ -57,20 +57,17 @@ class Parser:
         return commands
 
     def find_iteration(self, filename, coord, filename2):
-        print(filename)
-        print(filename2)
-        print(self.trees)
         tree = self.trees.get(filename)
         tree2 = self.trees.get(filename2)
         searcher = TreeSearcher(tree)
-        print(searcher)
         c = coord.split(",")
         x = int(''.join([i for i in c[0] if i.isdigit()]))
         y = int(''.join([i for i in c[1] if i.isdigit()]))
         from_layer = searcher.closest_iteration(Coordinate(x, y))
         layer = tree2.get_layer(from_layer.layerIndex)
         commands = [i.value for i in layer.nodes]
-        return commands
+        origin_commands = [i.value for i in from_layer.nodes]
+        return [commands, origin_commands]
 
     def add_modification_lists(self, colours, left_angles, right_angles):
         self.colours = colours

@@ -24,8 +24,9 @@ def create_music_json(file):
     return ser_val
 
 
-def create_translation_json(lines):
+def create_translation_json(lines, canvas):
     ser_val = json.dumps({'mode': "translation",
+                          'canvas': canvas,
                           'lines': [{'coordinate1': serialize_coords(line.coordinate_1),
                                      'coordinate2': serialize_coords(line.coordinate_2),
                                      'color': line.color
