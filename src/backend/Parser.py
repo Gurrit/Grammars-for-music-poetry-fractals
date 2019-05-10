@@ -1,4 +1,4 @@
-from fractal_generation.TreeSearcher import TreeSearcher
+from fractal_generation import TreeSearcher
 from utils.MIDIGenerator import *
 from fractal_generation.TreeFiller import *
 from fractal_generation.HiddenTurtle import *
@@ -48,7 +48,8 @@ class Parser:
         self.tree = self.trees.get(name)
         if self.tree is None or modified:
             self.fill_tree(file, name)
-        commands = [i.value for i in self.tree.treeLists[len(self.tree.treeLists) - 1].nodes]
+        print(self.tree.treeLists[len(self.tree.treeLists) - 1].nodes[0][0].value)
+        commands = [i.value for i in self.tree.treeLists[len(self.tree.treeLists) - 1].nodes[0]]
         print(time.time() - t1)
         # if these are removed, some very cool results can be had.
         self.colours = []
@@ -56,14 +57,13 @@ class Parser:
         self.left_angles = []
         return commands
 
-    def find_iteration(self, filename, coord, filename2):
-        tree = self.trees.get(filename)
-        tree2 = self.trees.get(filename2)
-        searcher = TreeSearcher(tree)
+    def find_iteration(self, fractal_name, coord, fractal_name2):
+        tree = self.trees.get(fractal_name)
+        tree2 = self.trees.get(fractal_name2)
         c = coord.split(",")
         x = int(''.join([i for i in c[0] if i.isdigit()]))
         y = int(''.join([i for i in c[1] if i.isdigit()]))
-        from_layer = searcher.closest_iteration(Coordinate(x, y))
+        from_layer = TreeSearcher.closest_iteration(Coordinate(x, y), tree)
         print("from_layer: " + from_layer.to_string())
         print("from_layer: " + str(from_layer.layerIndex))
 
