@@ -1,9 +1,8 @@
 concrete Dragon of Graftal = open Operations in { 
-lincat N = {x : Str; y : Str} ; 
-lincat S = {s : Str} ; 
+    lincat N = {a : Str; b : Str} ; 
+    lincat S = {s : Str} ; 
  
-lin z = {x = ""; y = ""} ; 
-lin s x = {x = x.x ++ L ++ x.y ++ F ++ L; y = R ++ F ++ x.x ++ R ++ x.y} ; 
-lin c x = {s = "ang:90" ++ "kids:2" ++ F ++ x.x } ; 
- 
+    lin z = {a = ""; b = ""} ; 
+    lin s x = {a = x.a ++ L ++ x.b ++ F ++ L; b = R ++ F ++ x.a ++ R ++ x.b} ; 
+    lin c x = {s = "ang:90" ++ "kids:2" ++ F ++ x.a } ; 
 }
