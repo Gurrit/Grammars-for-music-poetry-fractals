@@ -73,9 +73,10 @@ async def generate_piano_fractal(data, websocket):  # This should probably have 
 
 
 async def generate_translation(data, websocket):
-    lines = parser.find_iteration((data['type']) + str(data['iteration']), data['coordinate'],
+    [to_lines, from_lines] = parser.find_iteration((data['type']) + str(data['iteration']), data['coordinate'],
                                   (data['to']) + str(data['iteration']))
-    await websocket.send(create_translation_json(lines))
+    await websocket.send(create_translation_json(to_lines, 1))
+    await websocket.send(create_translation_json(from_lines, 0))
 
 
 parser = Parser()

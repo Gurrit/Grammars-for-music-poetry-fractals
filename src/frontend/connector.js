@@ -35,7 +35,9 @@ function map_messages(message) {
       break;
     case "translation":
       console.log(message);
-      translateFractal(message.lines, settings.drawers[1], "#ff0017");
+      translateFractal(message.lines,
+          settings.drawers[message.canvas],
+          "#ff0017");
       break;
   }
 }
