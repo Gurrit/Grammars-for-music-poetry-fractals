@@ -59,7 +59,7 @@ class Parser:
         x = coord['x']
         y = coord['y']
         n_part = TreeSearcher.closest_iteration(Coordinate(x, y), tree, iteration)
-        layer = tree2.get_layer(iteration).nodes[n_part]
+        layer = tree2.get_layer(iteration).nodes[n_part % len(tree2.get_layer(iteration).nodes)]
         from_layer = tree.get_layer(iteration).nodes[n_part]
         commands = [i.value for i in layer]
         origin_commands = [i.value for i in from_layer]
