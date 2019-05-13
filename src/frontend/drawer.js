@@ -105,14 +105,6 @@ class Line {
   }
 }
 
-class Coordinate {
-  constructor(x, y) {
-    let self = this;
-    self.x = x;
-    self.y = y;
-    return self;
-  }
-}
 class Fractal {
   // This should maybe contain all drawings aswell.
   constructor(fractal, iteration) {

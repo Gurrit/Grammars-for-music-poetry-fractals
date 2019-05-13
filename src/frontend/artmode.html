@@ -44,7 +44,7 @@
 <script src="playfractal.js"></script>
 <script src="connector.js"></script>
 <script src="ownjson.js"></script>
-
+<script src="coordinate.js"></script>
 <nav class="navbar navbar-expand-lg navbar-light navcolor navfont">
   <img src="./images/mrFractalblack.png" style="width:50px; height:40px; padding-right: 10px">
   <a class="navbar-brand navfont" href="index.html"
@@ -270,9 +270,26 @@
               
                         
             </button>
-            
+
           </li>
+
         </ul>
+
+      </div>
+      <div class="centerdiv ">
+        <h9>
+          Which iteration to translate to
+        </h9>
+        <select
+              id="selectTranslationIteration"
+              class="fractalbox form-control align-middle"
+              data-toggle="tooltip" data-placement="middle" title="Chooses which iteration of the fractal that should be translated">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
       </div>
     </div>
     <div class="resetcontainer">

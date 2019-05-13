@@ -44,34 +44,25 @@ class Parser:
         return self.tree
 
     def parse_for_web(self, name, file, modified):
-        t1 = (time.time())
         self.tree = self.trees.get(name)
         if self.tree is None or modified:
             self.fill_tree(file, name)
-        print(self.tree.treeLists[len(self.tree.treeLists) - 1].nodes[0][0].value)
         commands = [i.value for i in self.tree.treeLists[len(self.tree.treeLists) - 1].nodes[0]]
-        print(time.time() - t1)
-        # if these are removed, some very cool results can be had.
         self.colours = []
         self.right_angles = []
         self.left_angles = []
         return commands
 
-    def find_iteration(self, fractal_name, coord, fractal_name2):
+    def find_iteration(self, fractal_name, coord, fractal_name2, iteration):
         tree = self.trees.get(fractal_name)
         tree2 = self.trees.get(fractal_name2)
-        c = coord.split(",")
-        x = int(''.join([i for i in c[0] if i.isdigit()]))
-        y = int(''.join([i for i in c[1] if i.isdigit()]))
-        from_layer = TreeSearcher.closest_iteration(Coordinate(x, y), tree)
-        print("from_layer: " + from_layer.to_string())
-        print("from_layer: " + str(from_layer.layerIndex))
-
-        layer = tree2.get_layer(tree2.depth - from_layer.layerIndex - 1)
-        commands = [i.value for i in layer.nodes]
-        origin_commands = [i.value for i in from_layer.nodes]
-        print("layer: " + str(layer.layerIndex))
-        print("layer: " + layer.to_string())
+        x = coord['x']
+        y = coord['y']
+        n_part = TreeSearcher.closest_iteration(Coordinate(x, y), tree, iteration)
+        layer = tree2.get_layer(iteration).nodes[n_part]
+        from_layer = tree.get_layer(iteration).nodes[n_part]
+        commands = [i.value for i in layer]
+        origin_commands = [i.value for i in from_layer]
         return [commands, origin_commands]
 
     def add_modification_lists(self, colours, left_angles, right_angles):
