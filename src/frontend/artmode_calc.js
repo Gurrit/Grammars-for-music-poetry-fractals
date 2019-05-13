@@ -1,4 +1,5 @@
-isPianoMode = false;
+let isPianoMode = false;
+
 function sendNotes() {
   let optionIter1 = getOption("selectIter1");
   let optionFracs = [getOption("selectFractal1"), getOption("selectFractal2")];
