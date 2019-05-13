@@ -1,3 +1,4 @@
+isPianoMode = false;
 function sendNotes() {
   let optionIter1 = getOption("selectIter1");
   let optionFracs = [getOption("selectFractal1"), getOption("selectFractal2")];
@@ -6,6 +7,7 @@ function sendNotes() {
     document.getElementById("canvas2")
   ];
   let type = "draw";
+  isPianoMode = false;
   let value = "";
   for (canvas in canvases) {
     for (index in fractalList) {
@@ -17,6 +19,7 @@ function sendNotes() {
 
     if (noteArray.length !== 0) {
       type = "piano";
+      isPianoMode = true;
     }
     let msg = toJson(canvas, noteArray, value, type, optionIter1.value);
     sendMessage(msg);
@@ -60,7 +63,10 @@ function sendCursorPosition(canvas, event) {
     toFractal.fractal
   );
   console.log("koordinatmeddelandet" + message);
-  sendMessage(message);
+
+  if (!isPianoMode) {
+    sendMessage(message);
+  }
 }
 
 function getCursorPosition(canvas, event, transformation) {
