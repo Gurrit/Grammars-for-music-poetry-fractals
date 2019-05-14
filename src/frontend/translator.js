@@ -1,4 +1,4 @@
-function drawNewFractal(lines, drawer, fractal, iteration) {
+function drawNewFractal(lines, drawer, fractal, iteration, modified) {
 
     drawer.reset();
     let len = lines.length;
@@ -9,7 +9,7 @@ function drawNewFractal(lines, drawer, fractal, iteration) {
         drawer.saveNewLine(coordinate1, coordinate2, color);
     }
     drawer.scaleToSize();
-    drawer.saveFractal(fractal, iteration);
+    drawer.saveFractal(fractal, iteration, modified);
 }
 
 function translateFractal(lines, drawer, newColor) {
