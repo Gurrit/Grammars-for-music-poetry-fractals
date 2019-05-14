@@ -41,7 +41,8 @@ class TreeFiller:
         self.forward_condition = ["F", "A", "B"]
         self.turn_right_condition = ["r"]
         self.turn_left_condition = ["l"]
-
+        self.new_layer_condition = ["(N"]
+        self.finished_layer_condition = [")"]
         # For changing the appearance of the drawn fractal,
         self.colour_list = []
         self.left_angle_list = []
@@ -55,9 +56,7 @@ class TreeFiller:
         self.current_right_angle = 0
         self.current_left_angle = 0
 
-    # This method is really slow. Takes over 100 seconds on the server to run on sierpinski 7
-    # self, commands, turtle, filler, iteration):
-    def generate_nodes(self, commands, turtle, iteration):
+    def generate_nodes(self, commands, turtle, iterations):
         self.coordinate_stack.append(turtle.coordinate.clone())
         n_condition_map = map_list_values(
             self.forward_condition, get_commands(commands, self.forward_condition))
@@ -65,10 +64,15 @@ class TreeFiller:
                                           get_commands(commands, self.turn_left_condition), n_condition_map)
         n_condition_map = map_list_values(self.turn_right_condition,
                                           get_commands(commands, self.turn_right_condition), n_condition_map)
+        fractal_depth = 0
+        fractals = [[] for x in range(iterations)]     # keeps track of each sublist in each iteration
+
         for command in commands:
+            if is_any_condition_in_command(command, self.new_layer_condition):
+                fractal_depth += 1
             if is_any_condition_in_command(command, self.forward_condition):
                 self.create_node(turtle, n_condition_map.get(
-                    self.forward_condition[0]))
+                    self.forward_condition[0]), fractal_depth, fractals)
                 self.draw_counter += 1
             if is_any_condition_in_command(command, self.turn_left_condition):
                 self.turn_left(turtle, n_condition_map.get(
@@ -78,6 +82,12 @@ class TreeFiller:
                 self.turn_right(turtle, n_condition_map.get(
                     self.turn_right_condition[0]))
                 self.right_turn_counter += 1
+            if is_any_condition_in_command(command, self.finished_layer_condition):
+                for i in range(command.count(")", 0, len(command))):
+                    fractal_depth -= 1
+                    self.tree.treeLists[fractal_depth].append(fractals[fractal_depth])
+                    fractals[fractal_depth] = []
+                    '''
         for i in range(self.tree.depth):
             if i != 0:
                 children = []
@@ -92,11 +102,10 @@ class TreeFiller:
                         if self.duration_sum > self.max_duration * 4:
                             self.duration_sum = 0
                             parent.value.new_track = True
-                        children = []
+                        children = []'''
         self.tree.treeLists.reverse()
 
-    # Performance wise, this is by far worst right now.
-    def create_node(self, turtle, commands_length):
+    def create_node(self, turtle, commands_length, iters, fractals):
         colour = self.get_node_colour(commands_length)
         turtle.forward(Config.step)
         v = LineSegment(self.coordinate_stack.pop().clone(),
@@ -106,7 +115,8 @@ class TreeFiller:
             self.duration_sum = 0
             v.new_track = True
         n = Node(v, None)
-        self.tree.treeLists[0].append(n)
+        for i in range(iters):
+            fractals[i].append(n)
         self.coordinate_stack.append(turtle.coordinate.clone())
 
     def get_node_colour(self, forward_commands_length):
@@ -129,12 +139,9 @@ class TreeFiller:
         if number_of_right_angles != 0:
             left_angle_steps = math.floor(
                 commands_length / number_of_right_angles) + commands_length % number_of_right_angles
-            # print("LEFTANGLESTEPS: " + str(leftAngleSteps) + "TURN COUNTER: " + str(self.left_turn_counter))
             if (self.left_turn_counter % left_angle_steps == 0) and (len(self.left_angle_list) != 0):
-                # print("Left loop inside")
                 self.left_angle_index += 1
             self.current_left_angle = self.left_angle_list[self.left_angle_index]
-            # print("CURRENT LEFT ANGLE: " + str(self.current_left_angle))
         turtle.left(self.current_left_angle)
 
     def turn_right(self, turtle, commands_length):
@@ -144,12 +151,9 @@ class TreeFiller:
         if numberOfRightAngles != 0:
             rightAngleSteps = math.floor(
                 commands_length / numberOfRightAngles) + commands_length % numberOfRightAngles
-            # print("RIGHTANGLESTEPS: " + str(rightAngleSteps) + "TURN COUNTER: " + str(self.right_turn_counter))
             if (self.right_turn_counter % rightAngleSteps == 0) and (len(self.right_angle_list) != 0):
-                # print("RIGHT loop inside")
                 self.right_angle_index += 1
             self.current_right_angle = self.right_angle_list[self.right_angle_index]
-            # print("CURRENT RIGHT ANGLE: " + str(self.current_right_angle))
         turtle.right(self.current_right_angle)
 
     def add_tree_layer(self, i):

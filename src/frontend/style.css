@@ -119,10 +119,18 @@ body {
 }
 
 #selectScale1,
+
 #selectScale2 {
   background-color: #a196cc;
   color: white;
   width: 13vw;
+}
+#selectTranslationIteration{
+  background-color: #a196cc;
+  color: white;
+  width: 13vw;
+  left: 45%;
+  right: 45%;
 }
 
 #selectNote1,

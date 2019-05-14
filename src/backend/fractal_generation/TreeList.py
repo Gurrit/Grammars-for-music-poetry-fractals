@@ -49,7 +49,9 @@ class Layer:
 
     def to_string(self):
         if len(self.nodes) != 0:
-            s = "[(" + str(self.nodes[0].value.coordinate_1.x) + ", " + str(self.nodes[0].value.coordinate_1.y) + ")"
+            print(self.nodes)
+            print("[(" + str(self.nodes[0][0].value.coordinate_1.x) + ", " + str(self.nodes[0][0].value.coordinate_1.y) + ")")
+            s = ""
             for node in self.nodes:
                 s += ", (" + str(node.value.coordinate_2.x) + ", " + str(node.value.coordinate_2.y) + ")"
             s += "]"

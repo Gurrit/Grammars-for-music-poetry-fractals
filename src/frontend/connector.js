@@ -11,7 +11,6 @@ function connectToServer(canvases) {
     settings.drawers[canvas] = getTurtle(canvases[canvas].canvasen);
   }
   socket.onmessage = function(event) {
-    console.log(event.data);
     if (event.data instanceof Blob) {
       // Checks if type is of blob, then it is an image.
       setFileURL(event.data);
@@ -34,7 +33,6 @@ function map_messages(message) {
       );
       break;
     case "translation":
-      console.log(message);
       translateFractal(
         message.lines,
         settings.drawers[message.canvas],

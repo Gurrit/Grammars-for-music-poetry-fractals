@@ -27,19 +27,26 @@ function toJson(canvasNumber, notes, fractal, mode, iterations) {
       "}";
 }
 
-function coordinateToJson(coordinate, fromFractal, iteration, toFractal) {
+function coordinateToJson(coordinate, fromFractal, iteration, toFractal, translationIteration) {
   return (
     "{" +
     '"mode":"coordinate", ' +
-    '"coordinate":"' +
-    coordinate +
-    '", ' +
+    '"coordinate":{' +
+    '"x":' +
+    coordinate.x +
+    ', ' +
+    '"y":' +
+    coordinate.y +
+    '}, ' +
     '"type":"' +
     fromFractal +
     '", ' +
     '"iteration":"' +
     iteration +
     '", ' +
+    '"translation_iteration":' +
+    translationIteration +
+    ', ' +
     '"to":"' +
     toFractal +
     '"' +
