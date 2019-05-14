@@ -29,13 +29,12 @@ def get_commands(commands, conditions):
 
 class TreeFiller:
 
-    def __init__(self, tree, angle, kids, max_duration=8):
+    def __init__(self, tree, angle, max_duration=8):
         self.current_position = Coordinate(0, 0)
         self.coordinate_stack = []
         self.objectStack = []
         self.tree = tree
         self.angle = angle
-        self.kids = kids
         self.max_duration = max_duration
         self.duration_sum = 0
         self.forward_condition = ["F", "A", "B"]
@@ -87,22 +86,6 @@ class TreeFiller:
                     fractal_depth -= 1
                     self.tree.treeLists[fractal_depth].append(fractals[fractal_depth])
                     fractals[fractal_depth] = []
-                    '''
-        for i in range(self.tree.depth):
-            if i != 0:
-                children = []
-                self.duration_sum = 0
-                for node in self.tree.treeLists[i - 1].nodes:
-                    children.append(node)
-                    if len(children) == self.kids:
-                        parent = Node(LineSegment(children[0].value.coordinate_1.clone(),
-                                                  children[self.kids - 1].value.coordinate_2.clone()), children)
-                        self.tree.treeLists[i].append(parent)
-                        self.duration_sum += parent.value.duration
-                        if self.duration_sum > self.max_duration * 4:
-                            self.duration_sum = 0
-                            parent.value.new_track = True
-                        children = []'''
         self.tree.treeLists.reverse()
 
     def create_node(self, turtle, commands_length, iters, fractals):

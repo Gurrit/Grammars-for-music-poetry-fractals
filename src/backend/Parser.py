@@ -33,9 +33,7 @@ class Parser:
             self.tree.add_new_iteration(int(commands[0].split(":")[1]))
         if "ang" in commands[1]:
             self.angle = int(commands[1].split(":")[1])
-        if "kids" in commands[2]:
-            self.kids = int(commands[2].split(":")[1])
-        filler = TreeFiller(self.tree, self.angle, self.kids)
+        filler = TreeFiller(self.tree, self.angle)
         filler.add_modification_lists(
             self.colours, self.left_angles, self.right_angles)
         filler.generate_nodes(commands, turtle, int(commands[0].split(":")[1]))

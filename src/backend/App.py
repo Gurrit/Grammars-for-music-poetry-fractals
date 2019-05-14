@@ -7,7 +7,7 @@ from fractal_generation.Piano import Piano
 from utils.GFFileReader import *
 from utils.SerializeUtils import *
 
-fractals = {"Sierpinski", "Dragon", "Koch", "Gosper"}
+fractals = {"Sierpinski", "Dragon", "Koch", "Gosper", "Hilbert"}
 piano = Piano()
 
 
