@@ -45,6 +45,7 @@ function startPianoUI() {
 
 function sendCursorPosition(canvas, event) {
   //should probably not be hardcoded
+  let translationIteration = getOption("selectTranslationIteration");
   let drawer = canvasTurtleList[0].turtlen;
   let fromFractal = canvasTurtleList[0].turtlen.fractal;
   let toFractal = canvasTurtleList[1].turtlen.fractal;
@@ -57,7 +58,8 @@ function sendCursorPosition(canvas, event) {
     coordinate,
     fromFractal.fractal,
     fromFractal.iteration,
-    toFractal.fractal
+    toFractal.fractal,
+    translationIteration.value
   );
   console.log("koordinatmeddelandet" + message);
   sendMessage(message);
@@ -74,8 +76,6 @@ function getCursorPosition(canvas, event, transformation) {
     transformation.position.y;
   console.log(x);
   console.log(y);
-  let str = "x:" + x + "," + "y:" + y;
 
-  console.log("'{" + str + "}'");
-  return "'{" + str + "}'";
+  return new Coordinate(x, y);
 }

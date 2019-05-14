@@ -40,7 +40,8 @@ class LineSegment:
         y = point.y
         y1 = self.coordinate_1.y
         y2 = self.coordinate_2.y
-
+      #  print("x1 = " + str(x1) + " x2 = " + str(x2) + " y1 = " + str(y1) + " y2 = " + str(y2))
+      #  print("x = " + str(x) + " y = " + str(y))
         if (y1 - y2) == 0 and x < max(x1, x2) and x > min(x1, x2):
             return abs(y - y1)
         elif (y1 - y2) != 0 and (
