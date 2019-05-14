@@ -29,7 +29,8 @@ function map_messages(message) {
         message.lines,
         settings.drawers[message.canvas],
         message.type,
-        message.iteration
+        message.iteration,
+        message.modified
       );
       break;
     case "translation":

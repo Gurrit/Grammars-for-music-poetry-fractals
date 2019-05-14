@@ -5,7 +5,7 @@ def serialize_coords(coordinate):
     return {'x': coordinate.x, 'y': coordinate.y}
 
 
-def create_draw_json(lines, canvas, fractal, iteration):
+def create_draw_json(lines, canvas, fractal, iteration, modified):
     ser_val = json.dumps({'mode': "draw",
                           'lines': [{'coordinate1': serialize_coords(line.coordinate_1),
                                      'coordinate2': serialize_coords(line.coordinate_2),
@@ -13,6 +13,7 @@ def create_draw_json(lines, canvas, fractal, iteration):
                                      } for line in lines],
                           'canvas': canvas,
                           'type': fractal,
+                          'modified': modified,
                           'iteration': iteration}, sort_keys=True, indent=2, separators=(',', ': '))
     # List comprehension, effective way of getting all coords and color in one loop.
 

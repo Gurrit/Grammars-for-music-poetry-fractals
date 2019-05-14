@@ -9,6 +9,8 @@ function createFractalList() {
   fractalList.push(gosper);
   let koch = new optionValue("Square Koch Snowflake", "Koch", 5);
   fractalList.push(koch);
+  let hilbert = new optionValue("Hilbert Curve", "Hilbert", 8);
+  fractalList.push(hilbert);
 }
 
 function selected() {

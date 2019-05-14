@@ -5,7 +5,7 @@ concrete Gosper of Graftal = {
     lin z = {a = A; b = B} ;
     lin s x = {a = x.a ++ L ++ x.b ++ L ++ L ++ x.b ++ R ++ x.a ++ R ++ R ++ x.a ++ x.a ++ R ++ x.b ++ L; 
     b = R ++ x.a ++ L ++ x.b ++ x.b ++ L ++ L ++ x.b ++ L ++ x.a ++ R ++ R ++ x.a ++ R ++ x.b} ;
-    lin c x = {s = "ang:60" ++ "kids:7" ++ x.a} ;
+    lin c x = {s = "ang:60" ++ x.a} ;
 
     oper A : Str = "A" ;
     oper B : Str = "B" ;

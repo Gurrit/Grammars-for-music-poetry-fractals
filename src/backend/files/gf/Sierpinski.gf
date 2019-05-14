@@ -4,7 +4,7 @@ concrete Sierpinski of Graftal = {
 
     lin z = {a = A; b = B} ;
     lin s x = {a = x.b ++ L ++ x.a ++ L ++ x.b; b = x.a ++ R ++ x.b ++ R ++ x.a} ;
-    lin c x = {s = "ang:60" ++ "kids:3" ++ x.a} ;
+    lin c x = {s = "ang:60" ++ x.a} ;
 
     oper A : Str = "A" ;
     oper B : Str = "B" ;
