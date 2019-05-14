@@ -106,7 +106,7 @@
           <p class="boxtext">
             Choose Iteration:
           </h8>
-            <select id="selectIter1" class="fractalbox form-control" 
+            <select id="selectIter1" class="fractalbox form-control" onclick="selectedIter(id)"
             data-toggle="tooltip" data-placement="right" title="The higher iteration, the more complex fractal">
               <option value="1">1</option>
               <option value="2">2</option>
@@ -271,22 +271,18 @@
         </ul>
 
       </div>
-      <div class="centerdiv ">
-        <h9>
-          Which iteration to translate to
-        </h9>
+    </div>
+
+    <div class="centerdiv">
+        <p>
+          Choose iteration to check translation:
+        </h8>
         <select
               id="selectTranslationIteration"
               class="fractalbox form-control align-middle"
               data-toggle="tooltip" data-placement="top" title="Chooses which iteration of the fractal that should be translated">
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
         </select>
       </div>
-    </div>
     <div class="resetcontainer">
       <div id="playedNotes" class="left">
         <p id="notesText"></p>
