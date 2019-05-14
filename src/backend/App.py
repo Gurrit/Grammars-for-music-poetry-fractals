@@ -11,7 +11,7 @@ fractals = {"Sierpinski", "Dragon", "Koch", "Gosper"}
 piano = Piano()
 
 
-async def message_receiver(websocket, path):    # path needed to match documentation
+async def message_receiver(websocket, path):  # path needed to match documentation
     async for message in websocket:
         data = json.loads(message)
         await map_to_function(websocket, data)
@@ -52,7 +52,7 @@ async def generate_fractal(data, websocket):
             generate_new_fractal_file(data)
         web = parser.parse_for_web((data['type']) + str(data['iteration']),
                                    generate_file_name(data['type'], str(data['iteration'])), False)
-        await websocket.send(create_draw_json(web, data['index'], data['type'], data['iteration']))
+        await websocket.send(create_draw_json(web, data['index'], data['type'], data['iteration'], False))
 
 
 async def generate_piano_fractal(data, websocket):  # This should probably have code moved.
@@ -69,12 +69,15 @@ async def generate_piano_fractal(data, websocket):  # This should probably have 
         piano.colorArray, piano.leftAngleArray, piano.rightAngleArray)
     web = parser.parse_for_web((data['type']) + str(data['iteration']) + "_modified",
                                generate_file_name(data['type'], str(data['iteration'])), True)
-    await websocket.send(create_draw_json(web, data['index'], data['type'], data['iteration']))
+    await websocket.send(create_draw_json(web, data['index'], data['type'], data['iteration'], True))
 
 
 async def generate_translation(data, websocket):
-    [to_lines, from_lines] = parser.find_iteration((data['type']) + str(data['iteration']), data['coordinate'],
-                                  (data['to']) + str(data['iteration']), data['translation_iteration'])
+    modifed = ""
+    if data['modified']:
+        modifed = "_modified"
+    [to_lines, from_lines] = parser.find_iteration((data['type']) + str(data['iteration']) + modifed, data['coordinate'],
+                                                   data['to'] + str(data['iteration']) + modifed, data['translation_iteration'])
     await websocket.send(create_translation_json(to_lines, 1))
     await websocket.send(create_translation_json(from_lines, 0))
 

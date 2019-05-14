@@ -87,8 +87,8 @@ function CreateDrawer(canvas) {
     finishedLoadingBtn();
   };
 
-  self.saveFractal = function(name, iteration) {
-    self.fractal = new Fractal(name, iteration);
+  self.saveFractal = function(name, iteration, modified) {
+    self.fractal = new Fractal(name, iteration, modified);
   };
 
   self.saveNewTranslatedLine = function (coordinate1, coordinate2, color) {
@@ -107,10 +107,11 @@ class Line {
 
 class Fractal {
   // This should maybe contain all drawings aswell.
-  constructor(fractal, iteration) {
+  constructor(fractal, iteration, modified) {
     let self = this;
     self.fractal = fractal;
     self.iteration = iteration;
+    self.modified = modified;
   }
 }
 class Transformation {
