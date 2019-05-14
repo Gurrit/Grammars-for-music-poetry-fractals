@@ -27,12 +27,13 @@ class MIDIGenerator:
         self.new_midi(data)
         if "iteration" in data:
             iteration = data['iteration']
-        tree.visualise()
-        old = tree.get_layer(iteration).nodes[0].value
-        for node in tree.get_layer(iteration).nodes:
-            new = node.value
-            self.add_to_track(old, new)
-            old = node.value
+        for index in range(len(tree.get_layer(iteration).nodes[0])):
+            old = tree.get_layer(iteration).nodes[0][index].value
+        for l in tree.get_layer(iteration).nodes:
+            for node in l:
+                new = node.value
+                self.add_to_track(old, new)
+                old = node.value
 
 
 # ======================================== HELP METHODS ======================================== #
