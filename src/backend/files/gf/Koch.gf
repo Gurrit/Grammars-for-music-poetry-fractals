@@ -4,5 +4,5 @@ concrete Koch of Graftal = open Operations in {
 
     lin z = {f = F} ;
     lin s x = {f = x.f ++ R ++ x.f ++ L ++ x.f ++ L ++ x.f ++ R ++ x.f} ;
-    lin c x = {s = "ang:90" ++ "kids:5" ++ x.f} ;
+    lin c x = {s = "ang:90" ++ x.f} ;
 }

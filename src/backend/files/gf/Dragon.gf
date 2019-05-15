@@ -4,5 +4,5 @@ concrete Dragon of Graftal = open Operations in {
 
     lin z = {a = ""; b = ""} ;
     lin s x = {a = x.a ++ L ++ x.b ++ F ++ L; b = R ++ F ++ x.a ++ R ++ x.b} ;
-    lin c x = {s = "ang:90" ++ "kids:2" ++ F ++ x.a } ;
+    lin c x = {s = "ang:90" ++ F ++ x.a } ;
 }
