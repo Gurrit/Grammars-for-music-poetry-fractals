@@ -93,7 +93,7 @@ class MIDIGenerator:
 
     def fit_pitch(self, allowed_tones=range(12)):
         i = 0
-        while ((self.pitch - i - self.key) % 12) not in allowed_tones:
+        while ((self.pitch - self.key) % 12) not in allowed_tones:
             if ((self.pitch - (i+1) - self.key) % 12) in allowed_tones:
                 self.pitch -= i+1
             elif ((self.pitch + (i+1) - self.key) % 12) in allowed_tones:
