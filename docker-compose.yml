@@ -7,8 +7,6 @@ services:
       dockerfile: Dockerfile
     ports:
       - 8765:8765
-    volumes:
-      - ./src/backend/:/app/
   frontend:
     build:
       context: ./src/frontend
