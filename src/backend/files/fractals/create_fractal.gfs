@@ -1,2 +1,2 @@
 import ./files/gf/Dragon.gf 
- l -bracket c( s(s(s(s(s(s( z))))))) | wf -file=files/fractals/Dragon6.txt
+ l -bracket c( s(s(s(s( z))))) | wf -file=files/fractals/Dragon4.txt

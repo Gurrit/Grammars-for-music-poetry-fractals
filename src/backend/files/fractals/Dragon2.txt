@@ -1,0 +1,1 @@
+(S:3 ang:90 F (N:2 (N:1 l F l) l (N:1 r F r) F l))
