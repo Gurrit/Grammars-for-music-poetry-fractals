@@ -86,7 +86,6 @@ class TreeFiller:
                     fractal_depth -= 1
                     self.tree.treeLists[fractal_depth].append(fractals[fractal_depth])
                     fractals[fractal_depth] = []
-        print("------------------------------")
         self.tree.treeLists.reverse()
 
     def create_node(self, turtle, commands_length, iters, fractals):
@@ -99,8 +98,6 @@ class TreeFiller:
             self.duration_sum = 0
             v.new_track = True
         n = Node(v, None)
-        print(iters)
-        print(fractals)
         for i in range(iters):
             fractals[i].append(n)
         self.coordinate_stack.append(turtle.coordinate.clone())
