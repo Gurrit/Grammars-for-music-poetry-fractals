@@ -30,7 +30,7 @@ class Parser:
         self.tree = TreeList()
         commands = read_gf_file(filename)
         if "S" in commands[0]:  # Fix this to not be hardcoded
-            self.tree.add_new_iteration(int(commands[0].split(":")[1]))
+            self.tree.add_new_iteration(int(commands[0].split(":")[1]) + 1)
         if "ang" in commands[1]:
             self.angle = int(commands[1].split(":")[1])
         filler = TreeFiller(self.tree, self.angle)

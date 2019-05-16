@@ -63,8 +63,8 @@ class TreeFiller:
                                           get_commands(commands, self.turn_left_condition), n_condition_map)
         n_condition_map = map_list_values(self.turn_right_condition,
                                           get_commands(commands, self.turn_right_condition), n_condition_map)
-        fractal_depth = 0
-        fractals = [[] for x in range(iterations)]     # keeps track of each sublist in each iteration
+        fractal_depth = 1
+        fractals = [[] for x in range(iterations+1)]     # keeps track of each sublist in each iteration
 
         for command in commands:
             if is_any_condition_in_command(command, self.new_layer_condition):
@@ -86,6 +86,7 @@ class TreeFiller:
                     fractal_depth -= 1
                     self.tree.treeLists[fractal_depth].append(fractals[fractal_depth])
                     fractals[fractal_depth] = []
+        print("------------------------------")
         self.tree.treeLists.reverse()
 
     def create_node(self, turtle, commands_length, iters, fractals):
@@ -98,6 +99,8 @@ class TreeFiller:
             self.duration_sum = 0
             v.new_track = True
         n = Node(v, None)
+        print(iters)
+        print(fractals)
         for i in range(iters):
             fractals[i].append(n)
         self.coordinate_stack.append(turtle.coordinate.clone())
