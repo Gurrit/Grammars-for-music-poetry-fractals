@@ -1,1 +1,0 @@
-(S:2 ang:60 kids:3 (N:1 (N:0 B) l (N:0 A) l (N:0 B)))

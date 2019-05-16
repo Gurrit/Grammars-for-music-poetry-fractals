@@ -1,5 +1,11 @@
 # -Grammars-for-music-poetry-fractals-
 Github Repo for Bachelors assignment
 
-## Prototype
-Now the Prototype should work as expected. Click on the piano to fill in the "notes" form, then enter an integer in the next form. Click "Run code". The next problem is how to increase the size of the Turtle Canvas, for another day.
+## Setup
+Download [Docker](https://docs.docker.com/install/overview/), and [docker-compose](https://docs.docker.com/compose/)
+
+Run `docker-compose up --build` in the project root
+
+The project should now be up and running on port `80`, with the backend webserver taking connections on port `8765`
+
+## If you want to access the project without setting it up, visit https://bachelor.engsmyre.xyz/artmode.html

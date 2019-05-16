@@ -27,12 +27,13 @@ class MIDIGenerator:
         self.new_midi(data)
         if "iteration" in data:
             iteration = data['iteration']
-        tree.visualise()
-        old = tree.get_layer(iteration).nodes[0].value
-        for node in tree.get_layer(iteration).nodes:
-            new = node.value
-            self.add_to_track(old, new)
-            old = node.value
+        for index in range(len(tree.get_layer(iteration).nodes[0])):
+            old = tree.get_layer(iteration).nodes[0][index].value
+        for l in tree.get_layer(iteration).nodes:
+            for node in l:
+                new = node.value
+                self.add_to_track(old, new)
+                old = node.value
 
 
 # ======================================== HELP METHODS ======================================== #
@@ -92,7 +93,7 @@ class MIDIGenerator:
 
     def fit_pitch(self, allowed_tones=range(12)):
         i = 0
-        while ((self.pitch - i - self.key) % 12) not in allowed_tones:
+        while ((self.pitch - self.key) % 12) not in allowed_tones:
             if ((self.pitch - (i+1) - self.key) % 12) in allowed_tones:
                 self.pitch -= i+1
             elif ((self.pitch + (i+1) - self.key) % 12) in allowed_tones:
