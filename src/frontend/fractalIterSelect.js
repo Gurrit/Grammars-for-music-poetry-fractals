@@ -17,6 +17,7 @@ function selected() {
   //om man valt en viss fraktal ska den med lägst iterationer visas i dropdownmenyn
   let option2 = getOption("selectFractal2");
   let option1 = getOption("selectFractal1");
+  let option3 = getOption("selectIter1");
   let opt1iter = 0;
   let opt2iter = 0;
   let selectID = "";
@@ -38,6 +39,23 @@ function selected() {
     selectID = option1.value;
   }
   addIterOptions(selectID, "selectIter1");
+}
+
+function selectedIter(id) {
+  select = document.getElementById(id);
+  addMaxIterOptions(select.value, "selectTranslationIteration");
+}
+
+function addMaxIterOptions(selectiterID, iterID) {
+  //adding the iteration options corresponding to the fractal
+  let max = selectiterID;
+  console.log(max);
+  let select = document.getElementById(iterID);
+  select.options.length = 0;
+
+  for (i = 1; i < max; i++) {
+    select.options[select.options.length] = new Option(i);
+  }
 }
 
 function optionValue(text, jsonFractal, maxIter) {

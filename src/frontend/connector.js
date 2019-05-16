@@ -1,5 +1,5 @@
 const settings = {
-  url: "ws://localhost:8765",
+  url: "ws://192.168.99.100:8765",
   socket: null,
   drawers: []
 };
@@ -34,9 +34,11 @@ function map_messages(message) {
       );
       break;
     case "translation":
-      translateFractal(message.lines,
-          settings.drawers[message.canvas],
-          "#ff0017");
+      translateFractal(
+        message.lines,
+        settings.drawers[message.canvas],
+        "#ff0017"
+      );
       break;
   }
 }

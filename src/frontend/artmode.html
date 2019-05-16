@@ -73,11 +73,6 @@
           >Resources<span class="sr-only"></span
         ></a>
       </li>
-      <li class="nav-item navfont" style="float: right;">
-          <a class="nav-link navfont" onclick="showhelp()"
-            >How does it work? <span class="sr-only"></span></a
-          >
-        </li>
     </ul>
   </div>
 </nav>
@@ -105,14 +100,14 @@
               id="selectFractal1"
               class="fractalbox form-control"
               onchange="selected(id)"
-              data-toggle="tooltip" data-placement="right" title="Choose a fractal to draw in the left canvas."
+              data-toggle="tooltip" data-placement="right" title="Choose a fractal to draw in the left canvas"
             >
             </select>
           <p class="boxtext">
             Choose Iteration:
           </h8>
-            <select id="selectIter1" class="fractalbox form-control" 
-            data-toggle="tooltip" data-placement="right" title="The higher iteration, the more complex fractal.">
+            <select id="selectIter1" class="fractalbox form-control" onclick="selectedIter(id)"
+            data-toggle="tooltip" data-placement="right" title="The higher iteration, the more complex fractal">
               <option value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
@@ -134,7 +129,7 @@
             <select
                 id="selectNote1"
                 class="fractalbox form-control"
-                data-toggle="tooltip" data-placement="right" title="Decides the overall notes of the generated music.">
+                data-toggle="tooltip" data-placement="right" title="Decides the overall notes of the generated music">
               >
                 <option value="c">c</option>
                 <option value="c#">c#</option>
@@ -153,7 +148,7 @@
                 Choose scale:
               </h8>
               <select id="selectScale1" class="fractalbox form-control"
-              data-toggle="tooltip" data-placement="right" title="Decides what scale the generated music will be played in.">
+              data-toggle="tooltip" data-placement="right" title="Decides what scale the generated music will be played in">
                 <option value="major">Major</option>
                 <option value="minor">Minor</option>
                 <option value="minor_harmonic">Minor Harmonic</option>
@@ -200,7 +195,7 @@
             id="selectFractal2"
             class="fractalbox form-control"
             onchange="selected(id)"
-            data-toggle="tooltip" data-placement="left" title="Choose a fractal to draw in the right canvas."
+            data-toggle="tooltip" data-placement="left" title="Choose a fractal to draw in the right canvas"
           >
           </select>
         </div>
@@ -213,7 +208,7 @@
             <select
                 id="selectNote2"
                 class="fractalbox form-control"
-                data-toggle="tooltip" data-placement="left" title="Decides the overall notes of the generated music."
+                data-toggle="tooltip" data-placement="left" title="Decides the overall notes of the generated music"
               >
                 <option value="c">c</option>
                 <option value="c#">c#</option>
@@ -234,7 +229,7 @@
               <select
                 id="selectScale2"
                 class="fractalbox form-control"
-                data-toggle="tooltip" data-placement="left" title="Decides what scale the generated music will be played in."
+                data-toggle="tooltip" data-placement="left" title="Decides what scale the generated music will be played in"
               >
                 <option value="major">Major</option>
                 <option value="minor">Minor</option>
@@ -276,14 +271,16 @@
         </ul>
 
       </div>
-      <div class="centerdiv ">
-        <h9>
-          Which iteration to translate to
-        </h9>
+    </div>
+
+    <div class="centerdiv">
+        <p style="font-size: 12px;">
+          Choose order of phrase:
+        </h8>
         <select
               id="selectTranslationIteration"
               class="fractalbox form-control align-middle"
-              data-toggle="tooltip" data-placement="middle" title="Chooses which iteration of the fractal that should be translated">
+              data-toggle="tooltip" data-placement="left" title="Chooses the iteration used to translate between when clicking on the left canvas">
           <option value="1">1</option>
           <option value="2">2</option>
           <option value="3">3</option>
@@ -291,7 +288,6 @@
           <option value="5">5</option>
         </select>
       </div>
-    </div>
     <div class="resetcontainer">
       <div id="playedNotes" class="left">
         <p id="notesText"></p>
@@ -301,13 +297,13 @@
         Reset
       </button>
       <button id="infobtn"  type="button"
-      class="btn" onclick="showorhidepic()">i</button>
+      class="btn" onclick="showorhidepic()" data-toggle="tooltip" data-placement="top" title="How to play the piano">i</button>
     </div>
     <div class="row no-gutters">
       <div class="col-md-2"></div>
       <div class="col-md-8">
         <div class="piano-content" style="position: absolute; z-index: 1;">
-          <img id="pianohelp" src="./images/pianomedbok.png" style="position: absolute; z-index: 5; width:850px; height:104px; display: none;">
+          <img id="pianohelp" src="./images/pianomedbok.png" style="position: absolute; z-index: 5; width:839px; height:104px; display: none;">
           <div id="content-inner">
             <div class="pianoclass" id="piano"></div>
           </div>
@@ -334,16 +330,6 @@
   </script>
 
 </body>
-<footer>
-  <div style="margin-top: 120px">
-    <h5>
-      <a href="https://github.com/Gurr1/Grammars-for-music-poetry-fractals"
-         target="_blank"
-         style="color: #53bccf;" >
-          view on<img src="images/github.jpg" height="70px"></a>
-    </h5>
-  </div>
-</footer>
 <script src="jquery-1.7.1.min.js"></script>
 <script src="audio.js"></script>
 <script src="piano.js"></script>
