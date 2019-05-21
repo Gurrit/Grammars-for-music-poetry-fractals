@@ -1,2 +1,6 @@
 import ./files/gf/Dragon.gf 
+<<<<<<< Updated upstream
  l -bracket c( s(s(s(s( z))))) | wf -file=files/fractals/Dragon4.txt
+=======
+ l -bracket c( s( z)) | wf -file=files/fractals/Dragon1.txt
+>>>>>>> Stashed changes
