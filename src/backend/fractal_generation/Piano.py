@@ -25,11 +25,11 @@ class Piano:
             elif note == "e":
                 self.rightAngleArray.append(self.rightAngle + 1)
             elif note == "f":
-                self.colorArray.append("#FFFF00")  # yellow
+                self.colorArray.append("#b7a416")  # yellow
             elif note == "f#":
                 self.leftAngleArray.append(self.leftAngle + 1)
             elif note == "g":
-                self.colorArray.append("#80FF00")  # bright green
+                self.colorArray.append("#276629")  # bright green
             elif note == "g#":
                 self.rightAngleArray.append(self.rightAngle - 2)
             elif note == "a":
@@ -37,7 +37,7 @@ class Piano:
             elif note == "a#":
                 self.leftAngleArray.append(self.leftAngle - 2)
             elif note == "b":
-                self.colorArray.append("#00FF80")  # turqouise
+                self.colorArray.append("#00FFF0")  # turqouise
             if note == "highc":
                 self.rightAngleArray.append(self.rightAngle + 2)
             elif note == "highc#":
