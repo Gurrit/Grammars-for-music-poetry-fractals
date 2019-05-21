@@ -29,7 +29,7 @@ def get_commands(commands, conditions):
 
 class TreeFiller:
 
-    def __init__(self, tree, angle, max_duration=8):
+    def __init__(self, tree, angle, max_duration=16):
         self.current_position = Coordinate(0, 0)
         self.coordinate_stack = []
         self.objectStack = []
@@ -95,7 +95,7 @@ class TreeFiller:
                         turtle.coordinate.clone(), colour)
         self.duration_sum += v.duration
         if self.duration_sum > self.max_duration * 4:
-            self.duration_sum = 0
+            self.duration_sum = v.duration
             v.new_track = True
         n = Node(v, None)
         for i in range(iters):

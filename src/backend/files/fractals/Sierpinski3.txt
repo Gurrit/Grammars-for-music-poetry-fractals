@@ -1,0 +1,1 @@
+(S:4 ang:60 (N:3 (N:2 (N:1 (N:0 F) l (N:0 F) l (N:0 F)) r (N:1 (N:0 F) r (N:0 F) r (N:0 F)) r (N:1 (N:0 F) l (N:0 F) l (N:0 F))) l (N:2 (N:1 (N:0 F) r (N:0 F) r (N:0 F)) l (N:1 (N:0 F) l (N:0 F) l (N:0 F)) l (N:1 (N:0 F) r (N:0 F) r (N:0 F))) l (N:2 (N:1 (N:0 F) l (N:0 F) l (N:0 F)) r (N:1 (N:0 F) r (N:0 F) r (N:0 F)) r (N:1 (N:0 F) l (N:0 F) l (N:0 F)))))

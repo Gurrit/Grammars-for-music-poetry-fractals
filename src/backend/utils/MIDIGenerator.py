@@ -42,17 +42,17 @@ class MIDIGenerator:
 
     def new_midi(self, data):
         self.set_scale(data)
-        self.pitch = self.reference
         self.MyMIDI = MIDIFile(80)
         self.begin_track(0)
 
     def begin_track(self, track):
         self.time = 0
+        self.pitch = self.reference
         self.track = track
         self.MyMIDI.addTempo(track, self.time, self.tempo) 
 
     def add_to_track(self, old_lineSegment, new_lineSegment):
-        delta = new_lineSegment.angle - old_lineSegment.angle
+        delta = round(new_lineSegment.angle - old_lineSegment.angle)
         if abs(delta) > 180:
             delta -= 360 * delta / abs(delta)
         self.pitch += int((delta)/30)
