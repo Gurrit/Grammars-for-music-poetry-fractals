@@ -81,9 +81,7 @@ var noteArray = [];
         sounds[curSound].pause();
         try {
           sounds[curSound].currentTime = 0.001; //HACK - was for mobile safari, but sort of doesn't matter...
-        } catch (x) {
-          console.log(x);
-        }
+        } catch (x) {}
         sounds[curSound].play();
         curSound = ++curSound % sounds.length;
 
@@ -102,12 +100,6 @@ var noteArray = [];
         class: "key" + blackKeyClass(i),
         "data-key": i,
         mousedown: function(evt) {
-          console.log(
-              "Key pressed by mouse, index: " +
-              i +
-              "NOTE: " +
-              intToNotes[i + mouseOffset]
-          );
           noteArray.push(intToNotes[i + mouseOffset]);
           document.getElementById("notesText").innerHTML = noteArray;
           $keys.trigger("note-" + i + ".play");
@@ -206,7 +198,7 @@ var noteArray = [];
     /*o*/ o: 111, // a
     /*0*/ "0": 48, // a#
     /*p*/ p: 112, // b
-    /* Control */ Control : 1000
+    /* Control */ Control: 1000
   };
 
   const keyNotes = {
@@ -247,8 +239,8 @@ var noteArray = [];
       const keyTone = evt.key;
       const keyCode = keyToCodes[keyTone];
 
-      if(keyTone === "Control"){
-        ctrlDown = 1
+      if (keyTone === "Control") {
+        ctrlDown = 1;
       }
 
       if (!downKeys[keyCode] && !ctrlDown) {
@@ -275,8 +267,8 @@ var noteArray = [];
       const keyTone = evt.key;
       const keyCode = keyToCodes[keyTone];
 
-      if(keyTone === "Control"){
-        ctrlDown = 0
+      if (keyTone === "Control") {
+        ctrlDown = 0;
       }
 
       delete downKeys[keyCode];
@@ -289,7 +281,7 @@ var noteArray = [];
   const $help = $(".help");
 
   let qTimeout,
-      qCanToggle = true;
+    qCanToggle = true;
   $(window).keypress(function(evt) {
     // trigger help when ? is pressed, but make sure it doesn't repeat crazy
     if (evt.which === 63 || evt.which === 48) {

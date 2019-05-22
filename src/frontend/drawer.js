@@ -13,7 +13,6 @@ function CreateDrawer(canvas) {
   self.draw = function(coordinate1, coordinate2, color) {
     if (color !== self.color) {
       // optimizes drawing with different colors.
-      console.log("switching to " + color);
       self.context.stroke();
       self.context.beginPath();
       self.context.strokeStyle = color;
@@ -44,7 +43,6 @@ function CreateDrawer(canvas) {
   self.redraw = function() {
     self.context.lineWidth = self.penWidth;
     let dr = self.drawings.slice().concat(self.tempDrawings);
-    console.log(dr);
     for (let drawing in dr) {
       let c1 = dr[drawing].c1;
       let c2 = dr[drawing].c2;
@@ -83,7 +81,6 @@ function CreateDrawer(canvas) {
       scale,
       new Coordinate(-centerX, -centerY)
     );
-    console.log("has drawn the image");
     finishedLoadingBtn();
   };
 
@@ -91,7 +88,7 @@ function CreateDrawer(canvas) {
     self.fractal = new Fractal(name, iteration, modified);
   };
 
-  self.saveNewTranslatedLine = function (coordinate1, coordinate2, color) {
+  self.saveNewTranslatedLine = function(coordinate1, coordinate2, color) {
     self.tempDrawings.push(new Line(coordinate1, coordinate2, color));
   };
   return self;

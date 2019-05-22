@@ -24,7 +24,6 @@ function sendNotes() {
     }
     let msg = toJson(canvas, noteArray, value, type, optionIter1.value);
     sendMessage(msg);
-    console.log(msg);
   }
   noteArray = [];
 }
@@ -66,7 +65,6 @@ function sendCursorPosition(canvas, event) {
     translationIteration.value,
     fromFractal.modified
   );
-  console.log("koordinatmeddelandet" + message);
 
   if (!isPianoMode) {
     sendMessage(message);
@@ -82,8 +80,6 @@ function getCursorPosition(canvas, event, transformation) {
   let y =
     (event.clientY - rect.top - rect.height / 2) / transformation.scale -
     transformation.position.y;
-  console.log(x);
-  console.log(y);
 
   return new Coordinate(x, y);
 }

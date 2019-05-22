@@ -30,7 +30,6 @@ function selected() {
       opt2iter = fractalList[i].maxIter;
     }
   }
-  console.log("Max för vänstra:" + opt1iter);
   if (opt1iter > opt2iter) {
     selectID = option2.value;
   } else if (opt1iter < opt2iter) {
@@ -49,7 +48,6 @@ function selectedIter(id) {
 function addMaxIterOptions(selectiterID, iterID) {
   //adding the iteration options corresponding to the fractal
   let max = selectiterID;
-  console.log(max);
   let select = document.getElementById(iterID);
   select.options.length = 0;
 
@@ -80,7 +78,6 @@ function findFractalInSelect(fractoption) {
   for (let index in fractalList) {
     if (fractalList[index].text === fractoption.value) {
       value = fractalList[index].jsonFractal;
-      console.log("The fractal value: " + value);
       break;
     }
   }

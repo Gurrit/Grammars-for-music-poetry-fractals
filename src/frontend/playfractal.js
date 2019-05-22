@@ -1,7 +1,6 @@
 function setFileURL(eventdata) {
   //creates the URL for the sent wav file
   let objectURL = URL.createObjectURL(eventdata);
-  console.log("Objecturl:" + objectURL.toString());
   finishedmusic();
   playsong(objectURL);
 }
@@ -28,7 +27,6 @@ function sendFiles(id) {
     return;
   }
 
-  console.log(iteropt.value);
   if (iteropt.value === "Select iteration") {
     alert("You have not selected an iteration.");
     return;
@@ -36,17 +34,13 @@ function sendFiles(id) {
 
   let scale = groundnote.value + " " + data.value;
 
-  console.log("Skalan: " + data.value);
-
   let msg = toJson(0, scale, value, "play", iteropt.value);
-  console.log("Musikmeddelandet:" + msg);
 
   sendMessage(msg);
 }
 
 function playsong(src) {
   //play the song
-  console.log(src);
   const audio = new Audio(src);
   audio.play();
 }
