@@ -1,4 +1,3 @@
-let isPianoMode = false;
 
 function sendNotes() {
   let optionIter1 = getOption("selectIter1");
@@ -8,7 +7,6 @@ function sendNotes() {
     document.getElementById("canvas2")
   ];
   let type = "draw";
-  isPianoMode = false;
   let value = "";
   for (canvas in canvases) {
     for (index in fractalList) {
@@ -20,7 +18,6 @@ function sendNotes() {
 
     if (noteArray.length !== 0) {
       type = "piano";
-      isPianoMode = true;
     }
     let msg = toJson(canvas, noteArray, value, type, optionIter1.value);
     sendMessage(msg);
@@ -66,9 +63,7 @@ function sendCursorPosition(canvas, event) {
     fromFractal.modified
   );
 
-  if (!isPianoMode) {
     sendMessage(message);
-  }
 }
 
 function getCursorPosition(canvas, event, transformation) {
